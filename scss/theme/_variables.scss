@@ -1,0 +1,23 @@
+//    Font Family
+
+$primary-font	: 'Plus Jakarta Sans',
+    sans-serif;
+$title-font : 'Plus Jakarta Sans',
+sans-serif;
+/*--------------------------- Color variations ----------------------*/
+
+$primary-color	: #33DF92;
+$primary-color2	: #0AC07D;
+$primary-color3	: #9982b3;
+$title-color	: #222222;
+$text-color		: #777777;
+$baseColor: #c5322d;
+$dip: #222222;
+$pfont: #777777;
+$white			: #fff;
+$black			: #000;
+$offwhite: #fcfcfc;
+
+/*--------------------------- Fonts ----------------------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
