@@ -94,17 +94,16 @@
 							<div class="col-lg-5 col-md-6">
 								<div class="banner-content">
 									<h1>Iphone 14 New <br>Collection!</h1>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+									<p>Một bước tiến nhảy vọt. Khẳng định lại vị thế. Nâng tầm giá trị sống.</p>
 									<div class="add-bag d-flex align-items-center">
 										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
-										<span class="add-text text-uppercase">Add to Bag</span>
+										<span class="add-text text-uppercase">Tìm hiểu thêm</span>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-7">
 								<div class="banner-img">
-									<img class="img-fluid" src="img/banner/orange.png" alt="">
+									<img class="img-fluid" src="img/banner/iphone_14.png" alt="">
 								</div>
 							</div>
 						</div>
@@ -113,17 +112,16 @@
 							<div class="col-lg-5">
 								<div class="banner-content">
 									<h1>Iphone 14 New <br>Collection!</h1>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+									<p>Một bước tiến nhảy vọt. Khẳng định lại vị thế. Nâng tầm giá trị sống.</p>
 									<div class="add-bag d-flex align-items-center">
 										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
-										<span class="add-text text-uppercase">Add to Bag</span>
+										<span class="add-text text-uppercase">Tìm hiểu thêm</span>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-7">
 								<div class="banner-img">
-									<img class="img-fluid" src="img/banner/orange.png" alt="">
+									<img class="img-fluid" src="img/banner/iphone_14_2.png" alt="">
 								</div>
 							</div>
 						</div>
@@ -921,9 +919,8 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
 					<div class="section-title">
-						<h1>Deals of the Week</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-							magna aliqua.</p>
+						<h1>Deal hot của tuần</h1>
+						<p>Tham khảo một số deal hot của tuần qua của chúng tôi.</p>
 					</div>
 				</div>
 			</div>
@@ -1123,7 +1120,7 @@
 			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
 				<p class="footer-text m-0">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;
+					Copyright &copy; by <span class="text-primary">Colorlib</span>. Remake by <span class="text-primary">3TN Store</span>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
 			</div>

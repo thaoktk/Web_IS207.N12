@@ -4,14 +4,15 @@
 
 .mapBox {
     height: 420px;
-	margin-top: 80px;
-	margin-bottom: 100px;
+    margin-top: 80px;
+    margin-bottom: 100px;
 }
 
 .contact_info {
     .info_item {
         position: relative;
         padding-left: 45px;
+
         i {
             position: absolute;
             left: 0;
@@ -21,6 +22,7 @@
             color: $primary-color;
             font-weight: 600;
         }
+
         h6 {
             font-size: 16px;
             line-height: 24px;
@@ -28,10 +30,12 @@
             font-weight: bold;
             margin-bottom: 0px;
             color: $title-color;
+
             a {
                 color: $title-color;
             }
         }
+
         p {
             font-size: 14px;
             line-height: 24px;
@@ -43,6 +47,7 @@
 .contact_form {
     .form-group {
         margin-bottom: 10px;
+
         .form-control {
             font-size: 13px;
             line-height: 26px;
@@ -51,21 +56,26 @@
             font-family: $primary-font;
             border-radius: 0px;
             padding-left: 20px;
+
             &:focus {
                 box-shadow: none;
                 outline: none;
             }
+
             @include placeholder {
                 color: #999;
             }
         }
+
         textarea {
             resize: none;
+
             &.form-control {
                 height: 134px;
             }
         }
     }
+
     .primary-btn {
         background: $primary-color;
         color: #fff;
@@ -87,6 +97,7 @@
         margin: 0px;
         max-width: 500px;
         width: 100%;
+
         .modal-content {
             .modal-header {
                 text-align: center;
@@ -94,6 +105,7 @@
                 border-bottom: none;
                 padding-top: 50px;
                 padding-bottom: 50px;
+
                 .close {
                     position: absolute;
                     right: -15px;
@@ -103,6 +115,7 @@
                     opacity: 1;
                     cursor: pointer;
                 }
+
                 h2 {
                     display: block;
                     text-align: center;
@@ -110,6 +123,7 @@
                     padding-bottom: 10px;
                     font-family: $primary-font;
                 }
+
                 p {
                     display: block;
                 }
@@ -120,3 +134,9 @@
 
 /* End Contact Success and error Area css
 ============================================================================================ */
+
+.map {
+    padding: 50px 0;
+    width: 100%;
+    height: 500px;
+}
