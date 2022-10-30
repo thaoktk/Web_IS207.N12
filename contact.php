@@ -34,51 +34,51 @@
 
 	<!-- Start Header Area -->
 	<header class="header_area sticky-header">
-        <div class="main_menu">
-            <nav class="navbar navbar-expand-lg navbar-light main_box">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.php"><img src="img/phone/logo.png" alt="" width="50" height="50"></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
-                            <li class="nav-item">
-                                <a href="category.php" class="nav-link">Shop</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="blog.php" class="nav-link">Blog</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="nav-item">
-                                <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-                            </li>
-                            <li class="nav-item"><a href="cart.php" class=""><span class="ti-bag"></span></a></li>
-                            <li class="nav-item">
-                                <a href="login.php" class=""><span class="ti-user"></span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div class="search_input" id="search_input_box">
-            <div class="container">
-                <form class="d-flex justify-content-between">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                    <button type="submit" class="btn"></button>
-                    <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-                </form>
-            </div>
-        </div>
-    </header>
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a class="navbar-brand logo_h" href="index.php"><img src="img/phone/logo.png" alt="" width="50" height="50"></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+							<li class="nav-item">
+								<a href="category.php" class="nav-link">Shop</a>
+							</li>
+							<li class="nav-item">
+								<a href="blog.php" class="nav-link">Blog</a>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="nav-item">
+								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+							</li>
+							<li class="nav-item"><a href="cart.php" class=""><span class="ti-bag"></span></a></li>
+							<li class="nav-item">
+								<a href="login.php" class=""><span class="ti-user"></span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="search_input" id="search_input_box">
+			<div class="container">
+				<form class="d-flex justify-content-between">
+					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
+					<button type="submit" class="btn"></button>
+					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+				</form>
+			</div>
+		</div>
+	</header>
 	<!-- End Header Area -->
 
 	<!-- Start Banner Area -->
@@ -86,10 +86,10 @@
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Contact Us</h1>
+					<h1>Liên vệ với chúng tôi</h1>
 					<nav class="d-flex align-items-center">
-						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-						<a href="category.html">Contact</a>
+						<a href="index.html">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+						<a href="category.html">Liên hệ</a>
 					</nav>
 				</div>
 			</div>
@@ -100,48 +100,47 @@
 	<!--================Contact Area =================-->
 	<section class="contact_area section_gap_bottom">
 		<div class="container">
-			<div id="mapBox" class="mapBox" data-lat="40.701083" data-lon="-74.1522848" data-zoom="13" data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia." data-mlat="40.701083" data-mlon="-74.1522848">
-			</div>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.231240378142!2d106.80086005094218!3d10.870008892220035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527587e9ad5bf%3A0xafa66f9c8be3c91!2sUniversity%20of%20Information%20Technology%20-%20VNUHCM!5e0!3m2!1sen!2s!4v1667109562347!5m2!1sen!2s" class="map" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-4">
 					<div class="contact_info">
 						<div class="info_item">
 							<i class="lnr lnr-home"></i>
-							<h6>California, United States</h6>
-							<p>Santa monica bullevard</p>
+							<h6>P, Thủ Đức, Thành phố Hồ Chí Minh, Vietnam</h6>
+							<p>Đường Hàn Thuyên, khu phố 6 </p>
 						</div>
 						<div class="info_item">
 							<i class="lnr lnr-phone-handset"></i>
-							<h6><a href="#">00 (440) 9865 562</a></h6>
-							<p>Mon to Fri 9am to 6 pm</p>
+							<h6><a href="#">01234324567</a></h6>
+							<p>Từ thứ 2 đến thứ 7, 8:00 sáng đến 9:00 tối</p>
 						</div>
 						<div class="info_item">
 							<i class="lnr lnr-envelope"></i>
-							<h6><a href="#">support@colorlib.com</a></h6>
-							<p>Send us your query anytime!</p>
+							<h6><a href="#">batenostore@gmail.com</a></h6>
+							<p>Gửi câu hỏi cho chúng tôi bất cứ lúc nào!</p>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-9">
+				<div class="col-lg-8">
 					<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
 						<div class="col-md-6">
 							<div class="form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'">
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+								<input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'">
+								<input type="text" class="form-control" id="subject" name="subject" placeholder="Nhập tiêu đề" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"></textarea>
+								<textarea class="form-control" name="message" id="message" rows="1" placeholder="Nhập lời nhắn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"></textarea>
 							</div>
 						</div>
 						<div class="col-md-12 text-right">
-							<button type="submit" value="submit" class="primary-btn">Send Message</button>
+							<button type="submit" value="submit" class="primary-btn">Gửi câu hỏi</button>
 						</div>
 					</form>
 				</div>
