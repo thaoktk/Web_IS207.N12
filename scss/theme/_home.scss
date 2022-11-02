@@ -86,7 +86,21 @@
 /* start category area css
 ============================================================================================ */
 
-.category-area {}
+.category-area {
+	.img-fluid {
+		width: 100%;
+		height: 200px;
+		object-fit: contain;
+	}
+
+	.img-fluid-last {
+		height: 430px;
+
+		@media (max-width: 991px) {
+			height: auto;
+		}
+	}
+}
 
 .single-deal {
 	position: relative;

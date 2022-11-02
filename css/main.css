@@ -1207,6 +1207,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.logo-text {
+  font-weight: 700;
+}
+
 .header_area {
   position: absolute;
   width: 100%;
@@ -1696,6 +1700,20 @@ h1, h2, h3, h4, h5, h6 {
 ============================================================================================ */
 /* start category area css
 ============================================================================================ */
+.category-area .img-fluid {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+.category-area .img-fluid-last {
+  height: 430px;
+}
+@media (max-width: 991px) {
+  .category-area .img-fluid-last {
+    height: auto;
+  }
+}
+
 .single-deal {
   position: relative;
   margin-bottom: 30px;

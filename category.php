@@ -38,7 +38,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.php"><img src="img/phone/logo.png" alt="" width="50" height="50"></a>
+					<a class="navbar-brand logo_h" href="index.php"><img src="img/phone/logo.png" alt="" width="50" height="50"><span class="logo-text">3TN Store</span></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -210,10 +210,9 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p1.jpg" alt="">
+								<img class="img-fluid" src="img/product/orange.png" alt="">
 								<div class="product-details">
-									<h6>addidas New Hammer sole
-										for Sports person</h6>
+									<h6>Iphone 14 Pro Max</h6>
 									<div class="price">
 										<h6>$150.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -222,19 +221,15 @@
 
 										<a href="" class="social-info">
 											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
+											<p class="hover-text">Mua ngay</p>
 										</a>
 										<a href="" class="social-info">
 											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
+											<p class="hover-text">Yêu thích</p>
 										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
+										<a href="single-product.php" class="social-info">
 											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
+											<p class="hover-text">Chi tiết</p>
 										</a>
 									</div>
 								</div>
@@ -243,10 +238,9 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p2.jpg" alt="">
+								<img class="img-fluid" src="img/product/orange.png" alt="">
 								<div class="product-details">
-									<h6>addidas New Hammer sole
-										for Sports person</h6>
+									<h6>Iphone 14 Pro Max</h6>
 									<div class="price">
 										<h6>$150.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -255,19 +249,15 @@
 
 										<a href="" class="social-info">
 											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
+											<p class="hover-text">Mua ngay</p>
 										</a>
 										<a href="" class="social-info">
 											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
+											<p class="hover-text">Yêu thích</p>
 										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
+										<a href="single-product.php" class="social-info">
 											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
+											<p class="hover-text">Chi tiết</p>
 										</a>
 									</div>
 								</div>
@@ -276,10 +266,9 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p3.jpg" alt="">
+								<img class="img-fluid" src="img/product/orange.png" alt="">
 								<div class="product-details">
-									<h6>addidas New Hammer sole
-										for Sports person</h6>
+									<h6>Iphone 14 Pro Max</h6>
 									<div class="price">
 										<h6>$150.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -288,19 +277,15 @@
 
 										<a href="" class="social-info">
 											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
+											<p class="hover-text">Mua ngay</p>
 										</a>
 										<a href="" class="social-info">
 											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
+											<p class="hover-text">Yêu thích</p>
 										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
+										<a href="single-product.php" class="social-info">
 											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
+											<p class="hover-text">Chi tiết</p>
 										</a>
 									</div>
 								</div>
@@ -309,10 +294,9 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p4.jpg" alt="">
+								<img class="img-fluid" src="img/product/orange.png" alt="">
 								<div class="product-details">
-									<h6>addidas New Hammer sole
-										for Sports person</h6>
+									<h6>Iphone 14 Pro Max</h6>
 									<div class="price">
 										<h6>$150.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -321,19 +305,15 @@
 
 										<a href="" class="social-info">
 											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
+											<p class="hover-text">Mua ngay</p>
 										</a>
 										<a href="" class="social-info">
 											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
+											<p class="hover-text">Yêu thích</p>
 										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
+										<a href="single-product.php" class="social-info">
 											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
+											<p class="hover-text">Chi tiết</p>
 										</a>
 									</div>
 								</div>
@@ -342,10 +322,9 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p5.jpg" alt="">
+								<img class="img-fluid" src="img/product/orange.png" alt="">
 								<div class="product-details">
-									<h6>addidas New Hammer sole
-										for Sports person</h6>
+									<h6>Iphone 14 Pro Max</h6>
 									<div class="price">
 										<h6>$150.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -354,19 +333,15 @@
 
 										<a href="" class="social-info">
 											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
+											<p class="hover-text">Mua ngay</p>
 										</a>
 										<a href="" class="social-info">
 											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
+											<p class="hover-text">Yêu thích</p>
 										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
+										<a href="single-product.php" class="social-info">
 											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
+											<p class="hover-text">Chi tiết</p>
 										</a>
 									</div>
 								</div>
@@ -375,10 +350,9 @@
 						<!-- single product -->
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
-								<img class="img-fluid" src="img/product/p6.jpg" alt="">
+								<img class="img-fluid" src="img/product/orange.png" alt="">
 								<div class="product-details">
-									<h6>addidas New Hammer sole
-										for Sports person</h6>
+									<h6>Iphone 14 Pro Max</h6>
 									<div class="price">
 										<h6>$150.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -387,19 +361,15 @@
 
 										<a href="" class="social-info">
 											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
+											<p class="hover-text">Mua ngay</p>
 										</a>
 										<a href="" class="social-info">
 											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
+											<p class="hover-text">Yêu thích</p>
 										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
+										<a href="single-product.php" class="social-info">
 											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
+											<p class="hover-text">Chi tiết</p>
 										</a>
 									</div>
 								</div>
@@ -431,9 +401,8 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
 					<div class="section-title">
-						<h1>Deals of the Week</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-							magna aliqua.</p>
+						<h1>Deal hot của tuần</h1>
+						<p>Khám phá ngay những ưu đãi hot trong tuần của chúng tôi.</p>
 					</div>
 				</div>
 			</div>
@@ -442,9 +411,9 @@
 					<div class="row">
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r1.jpg" alt=""></a>
+								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="single-product.php" class="title">MacBook Pro 2021</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -454,9 +423,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r2.jpg" alt=""></a>
+								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="single-product.php" class="title">MacBook Pro 2021</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -466,9 +435,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r3.jpg" alt=""></a>
+								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="single-product.php" class="title">MacBook Pro 2021</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -478,9 +447,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r5.jpg" alt=""></a>
+								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="single-product.php" class="title">MacBook Pro 2021</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -490,9 +459,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r6.jpg" alt=""></a>
+								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="single-product.php" class="title">MacBook Pro 2021</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -502,9 +471,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r7.jpg" alt=""></a>
+								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="single-product.php" class="title">MacBook Pro 2021</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -514,9 +483,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r9.jpg" alt=""></a>
+								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="single-product.php" class="title">MacBook Pro 2021</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -526,9 +495,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r10.jpg" alt=""></a>
+								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="single-product.php" class="title">MacBook Pro 2021</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -538,9 +507,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r11.jpg" alt=""></a>
+								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="single-product.php" class="title">MacBook Pro 2021</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -552,7 +521,7 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="ctg-right">
-						<a href="#" target="_blank">
+						<a href="" target="_blank">
 							<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
 						</a>
 					</div>
@@ -568,24 +537,23 @@
 			<div class="row">
 				<div class="col-lg-3  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>About Us</h6>
+						<h6>Về chúng tôi</h6>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-							magna aliqua.
+							Cửa hàng 3TN Store chuyên cung cấp các mặt hàng về hệ sinh thái Apple.
 						</p>
 					</div>
 				</div>
 				<div class="col-lg-4  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>Newsletter</h6>
-						<p>Stay update with our latest</p>
+						<h6>Bản tin</h6>
+						<p>Cập nhật thông tin mới nhất của chúng tôi</p>
 						<div class="" id="mc_embed_signup">
 
 							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
 
 								<div class="d-flex flex-row">
 
-									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+									<input class="form-control" name="EMAIL" placeholder="Nhập email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
 
 
 									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
@@ -619,8 +587,8 @@
 				</div>
 				<div class="col-lg-2 col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
+						<h6>Theo dõi chúng tôi</h6>
+						<p>Hãy theo dõi đi nào!</p>
 						<div class="footer-social d-flex align-items-center">
 							<a href="#"><i class="fa fa-facebook"></i></a>
 							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -632,18 +600,14 @@
 			</div>
 			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
 				<p class="footer-text m-0">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;<script>
-						document.write(new Date().getFullYear());
-					</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy; by <span class="text-primary">Colorlib</span>. Remake by <span class="text-primary">3TN Store</span>
 				</p>
 			</div>
 		</div>
 	</footer>
 	<!-- End footer Area -->
 
-	<!-- Modal Quick Product View -->
+	<!-- Modal Quick Product View
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="container relative">
@@ -708,7 +672,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 
 

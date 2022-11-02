@@ -38,7 +38,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.php"><img src="img/phone/logo.png" alt="" width="50" height="50"></a>
+					<a class="navbar-brand logo_h" href="index.php"><img src="img/phone/logo.png" alt="" width="50" height="50"><span class="logo-text">3TN Store</span></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -100,27 +100,27 @@
 	<!--================Order Details Area =================-->
 	<section class="order_details section_gap">
 		<div class="container">
-			<h3 class="title_confirmation">Thank you. Your order has been received.</h3>
+			<h3 class="title_confirmation">Cảm ơn bạn. Đơn hàng của bạn đang được chuyển đi.</h3>
 			<div class="row order_d_inner">
 				<div class="col-lg-4">
 					<div class="details_item">
-						<h4>Order Info</h4>
+						<h4>Thông tin đơn hàng</h4>
 						<ul class="list">
-							<li><a href="#"><span>Order number</span> : 60235</a></li>
-							<li><a href="#"><span>Date</span> : Los Angeles</a></li>
-							<li><a href="#"><span>Total</span> : USD 2210</a></li>
-							<li><a href="#"><span>Payment method</span> : Check payments</a></li>
+							<li><span class="mr-3">Mã đơn: </span> 60235</li>
+							<li><span class="mr-3">Ngày đặt: </span> 20/10/2022</li>
+							<li><span class="mr-3">Tổng tiền: </span> USD 2210</li>
+							<li><span class="mr-3">Thanh toán: </span> Qua thẻ</li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="details_item">
-						<h4>Billing Address</h4>
+						<h4>Địa chỉ shop</h4>
 						<ul class="list">
-							<li><a href="#"><span>Street</span> : 56/8</a></li>
-							<li><a href="#"><span>City</span> : Los Angeles</a></li>
-							<li><a href="#"><span>Country</span> : United States</a></li>
-							<li><a href="#"><span>Postcode </span> : 36952</a></li>
+							<li><span class="mr-3">Đường: </span> Lê Quang Định</li>
+							<li><span class="mr-3">Phường: </span> 11</li>
+							<li><span class="mr-3">Quận: </span> Bình Thạnh</li>
+							<li><span class="mr-3">Thành phố: </span> Hồ Chí Minh</li>
 						</ul>
 					</div>
 				</div>
@@ -128,43 +128,31 @@
 					<div class="details_item">
 						<h4>Shipping Address</h4>
 						<ul class="list">
-							<li><a href="#"><span>Street</span> : 56/8</a></li>
-							<li><a href="#"><span>City</span> : Los Angeles</a></li>
-							<li><a href="#"><span>Country</span> : United States</a></li>
-							<li><a href="#"><span>Postcode </span> : 36952</a></li>
+							<li><span class="mr-3">Địa chỉ: </span> 1, Nguyễn Ái Quốc</li>
+							<li><span class="mr-3">Thành phố: </span> Biên Hòa</li>
+							<li><span class="mr-3">Tỉnh: </span> Đồng Nai</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="order_details_table">
-				<h2>Order Details</h2>
+				<h2>Chi tiết đơn hàng</h2>
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">Product</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Total</th>
+								<th scope="col">Sản phẩm</th>
+								<th scope="col">Số lượng</th>
+								<th scope="col">Giá tiền</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
-									<p>Pixelstore fresh Blackberry</p>
+									<p>Iphone 14 Pro</p>
 								</td>
 								<td>
-									<h5>x 02</h5>
-								</td>
-								<td>
-									<p>$720.00</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<p>Pixelstore fresh Blackberry</p>
-								</td>
-								<td>
-									<h5>x 02</h5>
+									<h5>x 01</h5>
 								</td>
 								<td>
 									<p>$720.00</p>
@@ -172,10 +160,10 @@
 							</tr>
 							<tr>
 								<td>
-									<p>Pixelstore fresh Blackberry</p>
+									<p>MacBook Air 2020</p>
 								</td>
 								<td>
-									<h5>x 02</h5>
+									<h5>x 01</h5>
 								</td>
 								<td>
 									<p>$720.00</p>
@@ -183,7 +171,18 @@
 							</tr>
 							<tr>
 								<td>
-									<h4>Subtotal</h4>
+									<p>AirPods Pro</p>
+								</td>
+								<td>
+									<h5>x 01</h5>
+								</td>
+								<td>
+									<p>$720.00</p>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<h4>Tổng</h4>
 								</td>
 								<td>
 									<h5></h5>
@@ -194,18 +193,18 @@
 							</tr>
 							<tr>
 								<td>
-									<h4>Shipping</h4>
+									<h4>Vận chuyển</h4>
 								</td>
 								<td>
 									<h5></h5>
 								</td>
 								<td>
-									<p>Flat rate: $50.00</p>
+									<p>Thường: $50.00</p>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<h4>Total</h4>
+									<h4>Thành tiền</h4>
 								</td>
 								<td>
 									<h5></h5>
@@ -228,24 +227,23 @@
 			<div class="row">
 				<div class="col-lg-3  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>About Us</h6>
+						<h6>Về chúng tôi</h6>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-							magna aliqua.
+							Cửa hàng 3TN Store chuyên cung cấp các mặt hàng về hệ sinh thái Apple.
 						</p>
 					</div>
 				</div>
 				<div class="col-lg-4  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>Newsletter</h6>
-						<p>Stay update with our latest</p>
+						<h6>Bản tin</h6>
+						<p>Cập nhật thông tin mới nhất của chúng tôi</p>
 						<div class="" id="mc_embed_signup">
 
 							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
 
 								<div class="d-flex flex-row">
 
-									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+									<input class="form-control" name="EMAIL" placeholder="Nhập email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
 
 
 									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
@@ -279,24 +277,20 @@
 				</div>
 				<div class="col-lg-2 col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
+						<h6>Theo dõi chúng tôi</h6>
+						<p>Hãy theo dõi đi nào!</p>
 						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
+							<a href="#"><i class="fa fa-facebook"></i>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-dribbble"></i></a>
+								<a href="#"><i class="fa fa-behance"></i></a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
 				<p class="footer-text m-0">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;<script>
-						document.write(new Date().getFullYear());
-					</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy; by <span class="text-primary">Colorlib</span>. Remake by <span class="text-primary">3TN Store</span>
 				</p>
 			</div>
 		</div>

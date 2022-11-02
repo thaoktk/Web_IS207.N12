@@ -40,7 +40,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.php"><img src="img/phone/logo.png" alt="" width="50" height="50"></a>
+					<a class="navbar-brand logo_h" href="index.php"><img src="img/phone/logo.png" alt="" width="50" height="50"> <span class="logo-text">3TN Store</span></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -93,7 +93,7 @@
 						<div class="row single-slide align-items-center d-flex">
 							<div class="col-lg-5 col-md-6">
 								<div class="banner-content">
-									<h1>Iphone 14 New <br>Collection!</h1>
+									<h1>Bộ sưu tập Iphone 14 mới</h1>
 									<p>Một bước tiến nhảy vọt. Khẳng định lại vị thế. Nâng tầm giá trị sống.</p>
 									<div class="add-bag d-flex align-items-center">
 										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
@@ -111,7 +111,7 @@
 						<div class="row single-slide">
 							<div class="col-lg-5">
 								<div class="banner-content">
-									<h1>Iphone 14 New <br>Collection!</h1>
+									<h1>Bộ sưu tập Iphone 14 mới</h1>
 									<p>Một bước tiến nhảy vọt. Khẳng định lại vị thế. Nâng tầm giá trị sống.</p>
 									<div class="add-bag d-flex align-items-center">
 										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
@@ -188,10 +188,10 @@
 				<div class="col-lg-8 col-md-12">
 					<div class="row">
 						<div class="col-lg-8 col-md-8">
-							<div class="single-deal">
+							<div class="single-deal bg-dark">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="img/category/c1.jpg" alt="">
-								<a href="img/category/c1.jpg" class="img-pop-up" target="_blank">
+								<img class="img-fluid w-100" src="img/category/iphone.png" alt="">
+								<a href="category.php" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">Iphone 14 Series</h6>
 									</div>
@@ -199,10 +199,10 @@
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-4">
-							<div class="single-deal">
+							<div class="single-deal bg-dark">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="img/category/c2.jpg" alt="">
-								<a href="img/category/c2.jpg" class="img-pop-up" target="_blank">
+								<img class="img-fluid w-100" src="img/category/macbook.png" alt="">
+								<a href="category.php" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">MacBook Air Series</h6>
 									</div>
@@ -210,10 +210,10 @@
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-4">
-							<div class="single-deal">
+							<div class="single-deal bg-dark">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="img/category/c3.jpg" alt="">
-								<a href="img/category/c3.jpg" class="img-pop-up" target="_blank">
+								<img class="img-fluid w-100" src="img/category/ipads.jpg" alt="">
+								<a href="category.php" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">Ipad Series</h6>
 									</div>
@@ -221,10 +221,10 @@
 							</div>
 						</div>
 						<div class="col-lg-8 col-md-8">
-							<div class="single-deal">
+							<div class="single-deal bg-dark">
 								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="img/category/c4.jpg" alt="">
-								<a href="img/category/c4.jpg" class="img-pop-up" target="_blank">
+								<img class="img-fluid w-100" src="img/category/airpods.png" alt="">
+								<a href="category.php" class="img-pop-up" target="_blank">
 									<div class="deal-details">
 										<h6 class="deal-title">AirPods Series</h6>
 									</div>
@@ -234,12 +234,12 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
-					<div class="single-deal">
+					<div class="single-deal bg-dark">
 						<div class="overlay"></div>
-						<img class="img-fluid w-100" src="img/category/c5.jpg" alt="">
-						<a href="img/category/c5.jpg" class="img-pop-up" target="_blank">
+						<img class="img-fluid img-fluid-last w-100" src="img/category/watch.png" alt="">
+						<a href="category.php" class="img-pop-up" target="_blank">
 							<div class="deal-details">
-								<h6 class="deal-title">Card</h6>
+								<h6 class="deal-title">Apple Watch</h6>
 							</div>
 						</a>
 					</div>
@@ -257,10 +257,8 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-6 text-center">
 						<div class="section-title">
-							<h1>Sản phẩm mới nhất</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore
-								magna aliqua.</p>
+							<h1>Sản phẩm bán chạy</h1>
+							<p>Những sản phẩm bán chạy nhất của cửa hàng chúng tôi.</p>
 						</div>
 					</div>
 				</div>
@@ -270,29 +268,23 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 13 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
 								</div>
 								<div class="prd-bottom">
-
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -303,8 +295,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 13 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -313,19 +304,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -336,8 +323,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 13 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -345,19 +331,15 @@
 								<div class="prd-bottom">
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -368,8 +350,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 13 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -378,19 +359,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -401,8 +378,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 13 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -411,19 +387,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -434,8 +406,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 13 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -444,19 +415,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -467,8 +434,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 13 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -477,19 +443,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -500,8 +462,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 13 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -510,19 +471,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -538,9 +495,7 @@
 					<div class="col-lg-6 text-center">
 						<div class="section-title">
 							<h1>Sản phẩm sắp tới</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore
-								magna aliqua.</p>
+							<p>Những sản phẩm sắp lên kệ tại cửa hàng chúng tôi</p>
 						</div>
 					</div>
 				</div>
@@ -550,8 +505,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 14</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -560,19 +514,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -583,8 +533,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 14</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -593,19 +542,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -616,8 +561,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 14 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -626,19 +570,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -649,8 +589,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 14</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -659,19 +598,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -682,8 +617,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 14 Pro</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -692,19 +626,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -715,8 +645,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 14</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -725,19 +654,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -748,8 +673,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 14 Pro Max</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -758,19 +682,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -781,8 +701,7 @@
 						<div class="single-product">
 							<img class="img-fluid" src="img/product/orange.png" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>Iphone 14</h6>
 								<div class="price">
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
@@ -791,19 +710,15 @@
 
 									<a href="" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">Mua ngay</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
+										<p class="hover-text">Yêu thích</p>
 									</a>
 									<a href="" class="social-info">
 										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">Chi tiết</p>
 									</a>
 								</div>
 							</div>
@@ -823,7 +738,7 @@
 					<div class="row clock_sec clockdiv" id="clockdiv">
 						<div class="col-lg-12">
 							<h1>Đếm ngược ngày đến deal Hot!</h1>
-							<p>Who are in extremely love with eco friendly system.</p>
+							<p>Điều hấp dẫn gì sẽ xảy ra?</p>
 						</div>
 						<div class="col-lg-12">
 							<div class="row clock-wrap">
@@ -858,11 +773,10 @@
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
 								</div>
-								<h4>addidas New Hammer sole
-									for Sports person</h4>
+								<h4>Iphone 14 Pro</h4>
 								<div class="add-bag d-flex align-items-center justify-content-center">
 									<a class="add-btn" href=""><span class="ti-bag"></span></a>
-									<span class="add-text text-uppercase">Add to Bag</span>
+									<span class="add-text text-uppercase">Thêm vào giỏ hàng</span>
 								</div>
 							</div>
 						</div>
@@ -874,11 +788,10 @@
 									<h6>$150.00</h6>
 									<h6 class="l-through">$210.00</h6>
 								</div>
-								<h4>addidas New Hammer sole
-									for Sports person</h4>
+								<h4>Iphone 13 Pro Max</h4>
 								<div class="add-bag d-flex align-items-center justify-content-center">
 									<a class="add-btn" href=""><span class="ti-bag"></span></a>
-									<span class="add-text text-uppercase">Add to Bag</span>
+									<span class="add-text text-uppercase">Thêm vào giỏ hàng</span>
 								</div>
 							</div>
 						</div>
@@ -889,38 +802,14 @@
 	</section>
 	<!-- End exclusive deal Area -->
 
-	<!-- Start brand Area -->
-	<section class="brand-area section_gap">
-		<div class="container">
-			<div class="row">
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/1.png" alt="">
-				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/2.png" alt="">
-				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/3.png" alt="">
-				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/4.png" alt="">
-				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="img/brand/5.png" alt="">
-				</a>
-			</div>
-		</div>
-	</section>
-	<!-- End brand Area -->
-
 	<!-- Start related-product Area -->
-	<section class="related-product-area section_gap_bottom">
+	<section class="mt-5 related-product-area section_gap_bottom">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
 					<div class="section-title">
 						<h1>Deal hot của tuần</h1>
-						<p>Tham khảo một số deal hot của tuần qua của chúng tôi.</p>
+						<p>Tham khảo một số deal hot trong tuần qua của chúng tôi.</p>
 					</div>
 				</div>
 			</div>
@@ -929,9 +818,9 @@
 					<div class="row">
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r1.jpg" alt=""></a>
+								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="#" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -941,9 +830,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r2.jpg" alt=""></a>
+								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="#" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -953,9 +842,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r3.jpg" alt=""></a>
+								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="#" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -965,9 +854,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r5.jpg" alt=""></a>
+								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="#" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -977,9 +866,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r6.jpg" alt=""></a>
+								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="#" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -989,9 +878,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r7.jpg" alt=""></a>
+								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="#" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -1001,9 +890,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r9.jpg" alt=""></a>
+								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="#" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -1013,9 +902,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r10.jpg" alt=""></a>
+								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="#" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -1025,9 +914,9 @@
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-6">
 							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/r11.jpg" alt=""></a>
+								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Black lace Heels</a>
+									<a href="#" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -1055,24 +944,23 @@
 			<div class="row">
 				<div class="col-lg-3  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>About Us</h6>
+						<h6>Về chúng tôi</h6>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-							magna aliqua.
+							Cửa hàng 3TN Store chuyên cung cấp các mặt hàng về hệ sinh thái Apple.
 						</p>
 					</div>
 				</div>
 				<div class="col-lg-4  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>Newsletter</h6>
-						<p>Stay update with our latest</p>
+						<h6>Bản tin</h6>
+						<p>Cập nhật thông tin mới nhất của chúng tôi</p>
 						<div class="" id="mc_embed_signup">
 
 							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
 
 								<div class="d-flex flex-row">
 
-									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+									<input class="form-control" name="EMAIL" placeholder="Nhập email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
 
 
 									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
@@ -1081,8 +969,8 @@
 									</div>
 
 									<!-- <div class="col-lg-4 col-md-4">
-												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
-											</div>  -->
+													<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+												</div>  -->
 								</div>
 								<div class="info"></div>
 							</form>
@@ -1106,8 +994,8 @@
 				</div>
 				<div class="col-lg-2 col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
+						<h6>Theo dõi chúng tôi</h6>
+						<p>Hãy theo dõi đi nào!</p>
 						<div class="footer-social d-flex align-items-center">
 							<a href="#"><i class="fa fa-facebook"></i></a>
 							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -1119,9 +1007,7 @@
 			</div>
 			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
 				<p class="footer-text m-0">
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					Copyright &copy; by <span class="text-primary">Colorlib</span>. Remake by <span class="text-primary">3TN Store</span>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
 			</div>
 		</div>
