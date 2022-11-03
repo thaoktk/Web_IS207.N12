@@ -274,7 +274,7 @@
 									<h6 class="l-through">$210.00</h6>
 								</div>
 								<div class="prd-bottom">
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -282,7 +282,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -302,7 +302,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -310,7 +310,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -329,7 +329,7 @@
 									<h6 class="l-through">$210.00</h6>
 								</div>
 								<div class="prd-bottom">
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -337,35 +337,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 13 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -385,7 +357,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -393,7 +365,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -413,7 +385,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -421,7 +393,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -441,7 +413,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -449,7 +421,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -469,7 +441,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -477,7 +449,35 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
+									<a href="single-product.php" class="social-info">
+										<span class="lnr lnr-move"></span>
+										<p class="hover-text">Chi tiết</p>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- single product -->
+					<div class="col-lg-3 col-md-6">
+						<div class="single-product">
+							<img class="img-fluid" src="img/product/orange.png" alt="">
+							<div class="product-details">
+								<h6>Iphone 13 Pro Max</h6>
+								<div class="price">
+									<h6>$150.00</h6>
+									<h6 class="l-through">$210.00</h6>
+								</div>
+								<div class="prd-bottom">
+
+									<a href="cart.php" class="social-info">
+										<span class="ti-bag"></span>
+										<p class="hover-text">Mua ngay</p>
+									</a>
 									<a href="" class="social-info">
+										<span class="lnr lnr-heart"></span>
+										<p class="hover-text">Yêu thích</p>
+									</a>
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -512,7 +512,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -520,7 +520,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -540,7 +540,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -548,7 +548,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -568,7 +568,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -576,7 +576,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -596,7 +596,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -604,7 +604,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -624,7 +624,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -632,7 +632,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -652,7 +652,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -660,7 +660,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -680,7 +680,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -688,7 +688,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -708,7 +708,7 @@
 								</div>
 								<div class="prd-bottom">
 
-									<a href="" class="social-info">
+									<a href="cart.php" class="social-info">
 										<span class="ti-bag"></span>
 										<p class="hover-text">Mua ngay</p>
 									</a>
@@ -716,7 +716,7 @@
 										<span class="lnr lnr-heart"></span>
 										<p class="hover-text">Yêu thích</p>
 									</a>
-									<a href="" class="social-info">
+									<a href="single-product.php" class="social-info">
 										<span class="lnr lnr-move"></span>
 										<p class="hover-text">Chi tiết</p>
 									</a>
@@ -775,7 +775,7 @@
 								</div>
 								<h4>Iphone 14 Pro</h4>
 								<div class="add-bag d-flex align-items-center justify-content-center">
-									<a class="add-btn" href=""><span class="ti-bag"></span></a>
+									<a class="add-btn" href="single-product.php"><span class="ti-bag"></span></a>
 									<span class="add-text text-uppercase">Thêm vào giỏ hàng</span>
 								</div>
 							</div>
@@ -790,7 +790,7 @@
 								</div>
 								<h4>Iphone 13 Pro Max</h4>
 								<div class="add-bag d-flex align-items-center justify-content-center">
-									<a class="add-btn" href=""><span class="ti-bag"></span></a>
+									<a class="add-btn" href="single-product.php"><span class="ti-bag"></span></a>
 									<span class="add-text text-uppercase">Thêm vào giỏ hàng</span>
 								</div>
 							</div>
@@ -820,7 +820,7 @@
 							<div class="single-related-product d-flex">
 								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Iphone 14 Pro Max</a>
+									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -832,7 +832,7 @@
 							<div class="single-related-product d-flex">
 								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Iphone 14 Pro Max</a>
+									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -844,7 +844,7 @@
 							<div class="single-related-product d-flex">
 								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Iphone 14 Pro Max</a>
+									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -856,7 +856,7 @@
 							<div class="single-related-product d-flex">
 								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Iphone 14 Pro Max</a>
+									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -868,7 +868,7 @@
 							<div class="single-related-product d-flex">
 								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Iphone 14 Pro Max</a>
+									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -880,7 +880,7 @@
 							<div class="single-related-product d-flex">
 								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Iphone 14 Pro Max</a>
+									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -892,7 +892,7 @@
 							<div class="single-related-product d-flex">
 								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Iphone 14 Pro Max</a>
+									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -904,7 +904,7 @@
 							<div class="single-related-product d-flex">
 								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Iphone 14 Pro Max</a>
+									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>
@@ -916,7 +916,7 @@
 							<div class="single-related-product d-flex">
 								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
 								<div class="desc">
-									<a href="#" class="title">Iphone 14 Pro Max</a>
+									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
 									<div class="price">
 										<h6>$189.00</h6>
 										<h6 class="l-through">$210.00</h6>

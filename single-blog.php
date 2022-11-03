@@ -48,14 +48,14 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="index.php">Trang chủ</a></li>
                             <li class="nav-item">
                                 <a href="category.php" class="nav-link">Shop</a>
                             </li>
                             <li class="nav-item">
                                 <a href="blog.php" class="nav-link">Blog</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact.php">Liên hệ</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item">
@@ -87,10 +87,10 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Blog Page</h1>
+                    <h1>Chi tiết blog</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Blog</a>
+                        <a href="index.php">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="#">Chi tiết</a>
                     </nav>
                 </div>
             </div>

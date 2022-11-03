@@ -48,14 +48,14 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+							<li class="nav-item active"><a class="nav-link" href="index.php">Trang chủ</a></li>
 							<li class="nav-item">
 								<a href="category.php" class="nav-link">Shop</a>
 							</li>
 							<li class="nav-item">
 								<a href="blog.php" class="nav-link">Blog</a>
 							</li>
-							<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact.php">Liên hệ</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item">
@@ -126,8 +126,21 @@
 						</ul>
 						<p>Mill Oil is an innovative oil filled radiator with the most modern technology. If you are looking for
 							something that can make your interior look awesome, and at the same time give you the pleasant warm feeling
-							during the winter.</p>
-						<div class="product_count">
+							during the winter.
+						</p>
+						<div class="d-flex align-items-center product_ram">
+							<button class="genric-btn primary-border mr-4">256GB</button>
+							<button class="genric-btn default-border mr-4">128GB</button>
+							<button class="genric-btn default-border">64GB</button>
+						</div>
+						<div class="mt-4 d-flex flex-wrap align-items-center product_color">
+							<button class="genric-btn primary-border mr-4">Đen</button>
+							<button class="genric-btn default-border mr-4">Vàng</button>
+							<button class="genric-btn default-border mr-4">Hồng</button>
+							<button class="genric-btn default-border mr-4">Xanh</button>
+							<button class="genric-btn default-border mt-4">Tím</button>
+						</div>
+						<div class="mt-5 product_count">
 							<label for="qty">Quantity:</label>
 							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
 							<button class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
@@ -135,7 +148,6 @@
 						</div>
 						<div class="card_area d-flex align-items-center">
 							<a class="primary-btn" href="#">Thêm vào giỏ hàng</a>
-							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
 						</div>
 					</div>
@@ -692,9 +704,9 @@
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<!--gmaps Js-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="js/gmaps.min.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/store/product.js"></script>
 
 </body>
 

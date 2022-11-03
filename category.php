@@ -47,14 +47,14 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+							<li class="nav-item active"><a class="nav-link" href="index.php">Trang chủ</a></li>
 							<li class="nav-item">
 								<a href="category.php" class="nav-link">Shop</a>
 							</li>
 							<li class="nav-item">
 								<a href="blog.php" class="nav-link">Blog</a>
 							</li>
-							<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact.php">Liên hệ</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item">
@@ -134,9 +134,6 @@
 						</li>
 						<li class="main-nav-list"><a data-toggle="collapse" href="#homeClean" aria-expanded="false" aria-controls="homeClean"><span class="lnr lnr-arrow-right"></span>Apple Watch<span class="number">(53)</span></a>
 							<ul class="collapse" id="homeClean" data-toggle="collapse" aria-expanded="false" aria-controls="homeClean">
-								<li class="main-nav-list child"><a href="#">Apple Watch S3<span class="number">(13)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Apple Watch SE<span class="number">(09)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Apple Watch S5<span class="number">(17)</span></a></li>
 								<li class="main-nav-list child"><a href="#">Apple Watch S6<span class="number">(01)</span></a></li>
 								<li class="main-nav-list child"><a href="#">Apple Watch S7<span class="number">(11)</span></a></li>
 								<li class="main-nav-list child"><a href="#">Apple Watch S8<span class="number">(11)</span></a></li>

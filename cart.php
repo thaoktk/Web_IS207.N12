@@ -47,14 +47,14 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="index.php">Trang chủ</a></li>
                             <li class="nav-item">
                                 <a href="category.php" class="nav-link">Shop</a>
                             </li>
                             <li class="nav-item">
                                 <a href="blog.php" class="nav-link">Blog</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact.php">Liên hệ</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item">
@@ -86,10 +86,10 @@
         <div class="container">
             <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
                 <div class="col-first">
-                    <h1>Shopping Cart</h1>
+                    <h1>Giỏ hàng</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Cart</a>
+                        <a href="index.php">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="#">Giỏ hàng</a>
                     </nav>
                 </div>
             </div>
@@ -105,10 +105,11 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col"></th>
+                                <th scope="col">Giá</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Tổng tiền</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,22 +120,25 @@
                                             <img src="img/cart.jpg" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <p>Minimalistic shop for multipurpose use</p>
+                                            <p>Iphone 14 Pro Max</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$360.00</h5>
+                                    <button class="btn-delete ml-3 genric-btn default-border small">Xóa</button>
+                                </td>
+                                <td>
+                                    <h5 class="product-price">$ <span>360.00</span></h5>
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                        <button class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                        <input type="text" name="qty" data-id="1" value="1" title="Quantity:" class="input-text qty">
+                                        <button class="increase items-count" data-id="1" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                        <button class="reduced items-count" data-id="1" type="button"><i class="lnr lnr-chevron-down"></i></button>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$720.00</h5>
+                                    <h5 class="product-cost">$<span>360</span></h5>
                                 </td>
                             </tr>
                             <tr>
@@ -144,22 +148,25 @@
                                             <img src="img/cart.jpg" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <p>Minimalistic shop for multipurpose use</p>
+                                            <p>MacBook Pro 2021</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$360.00</h5>
+                                    <button class="btn-delete ml-3 genric-btn default-border small">Xóa</button>
+                                </td>
+                                <td>
+                                    <h5 class="product-price">$ <span>360.00</span></h5>
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                        <button class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                        <input type="text" name="qty" data-id="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+                                        <button class="increase items-count" data-id="2" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                        <button class="reduced items-count" data-id="2" type="button"><i class="lnr lnr-chevron-down"></i></button>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$720.00</h5>
+                                    <h5 class="product-cost">$<span>360</span></h5>
                                 </td>
                             </tr>
                             <tr>
@@ -169,39 +176,41 @@
                                             <img src="img/cart.jpg" alt="">
                                         </div>
                                         <div class="media-body">
-                                            <p>Minimalistic shop for multipurpose use</p>
+                                            <p>Ipad Mini 2020</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$360.00</h5>
+                                    <button class="btn-delete ml-3 genric-btn default-border small">Xóa</button>
+                                </td>
+                                <td>
+                                    <h5 class="product-price">$ <span>360.00</span></h5>
                                 </td>
                                 <td>
                                     <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                        <button class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                                        <input type="text" name="qty" data-id="3" value="1" title="Quantity:" class="input-text qty">
+                                        <button class="increase items-count" data-id="3" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                                        <button class="reduced items-count" data-id="3" type="button"><i class="lnr lnr-chevron-down"></i></button>
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$720.00</h5>
+                                    <h5 class="product-cost">$<span>360</span></h5>
                                 </td>
                             </tr>
                             <tr class="bottom_button">
                                 <td>
-                                    <a class="gray_btn" href="#">Update Cart</a>
                                 </td>
                                 <td>
-
                                 </td>
                                 <td>
-
+                                </td>
+                                <td>
                                 </td>
                                 <td>
                                     <div class="cupon_text d-flex align-items-center">
-                                        <input type="text" placeholder="Coupon Code">
-                                        <a class="primary-btn" href="#">Apply</a>
-                                        <a class="gray_btn" href="#">Close Coupon</a>
+                                        <input type="text" placeholder="Mã giảm giá">
+                                        <a class="primary-btn" href="#">Dùng</a>
+                                        <a class="gray_btn" href="#">Xóa</a>
                                     </div>
                                 </td>
                             </tr>
@@ -213,10 +222,10 @@
 
                                 </td>
                                 <td>
-                                    <h5>Subtotal</h5>
+                                    <h5>Tổng tiền</h5>
                                 </td>
                                 <td>
-                                    <h5>$2160.00</h5>
+                                    <h5 id="total-cost">$<span>2160</span></h5>
                                 </td>
                             </tr>
                             <tr class="shipping_area">
@@ -227,17 +236,14 @@
 
                                 </td>
                                 <td>
-                                    <h5>Shipping</h5>
+                                    <h5>Vận chuyển</h5>
                                 </td>
                                 <td>
                                     <div class="shipping_box">
                                         <ul class="list">
-                                            <li><a href="#">Flat Rate: $5.00</a></li>
-                                            <li><a href="#">Free Shipping</a></li>
-                                            <li><a href="#">Flat Rate: $10.00</a></li>
-                                            <li class="active"><a href="#">Local Delivery: $2.00</a></li>
+                                            <li><a href="#">30000 đồng</a></li>
                                         </ul>
-                                        <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
+                                        <h6>Phí vận chuyển <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
                                         <select class="shipping_select">
                                             <option value="1">Bangladesh</option>
                                             <option value="2">India</option>
@@ -248,8 +254,6 @@
                                             <option value="2">Select a State</option>
                                             <option value="4">Select a State</option>
                                         </select>
-                                        <input type="text" placeholder="Postcode/Zipcode">
-                                        <a class="gray_btn" href="#">Update Details</a>
                                     </div>
                                 </td>
                             </tr>
@@ -265,8 +269,8 @@
                                 </td>
                                 <td>
                                     <div class="checkout_btn_inner d-flex align-items-center">
-                                        <a class="gray_btn" href="#">Continue Shopping</a>
-                                        <a class="primary-btn" href="#">Proceed to checkout</a>
+                                        <a class="gray_btn" href="#">Tiếp tục shopping</a>
+                                        <a class="primary-btn" href="#">Đi đến thanh toán</a>
                                     </div>
                                 </td>
                             </tr>
@@ -347,14 +351,14 @@
             </div>
             <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
                 <p class="footer-text m-0">
-                Copyright &copy; by <span class="text-primary">Colorlib</span>. Remake by <span class="text-primary">3TN Store</span>
+                    Copyright &copy; by <span class="text-primary">Colorlib</span>. Remake by <span class="text-primary">3TN Store</span>
                 </p>
             </div>
         </div>
     </footer>
     <!-- End footer Area -->
-
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/jquery.ajaxchimp.min.js"></script>
@@ -364,9 +368,9 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <!--gmaps Js-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
     <script src="js/gmaps.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/store/cart.js"></script>
 </body>
 
 </html>
