@@ -217,6 +217,25 @@
 					line-height: 80px;
 					font-weight: 500;
 				}
+
+				.nav-cart {
+					position: relative;
+
+					.cart-qty {
+						position: absolute;
+						top: -10px;
+						right: -10px;
+						width: 20px;
+						height: 20px;
+						background-color: $baseColor;
+						border-radius: 50%;
+						color: #ffffff;
+						text-align: center;
+						line-height: 1.5;
+					}
+				}
+
+
 			}
 
 			.search {

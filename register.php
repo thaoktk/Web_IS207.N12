@@ -56,16 +56,19 @@
 					<div class="login_box_img">
 						<img class="img-fluid" src="img/login.jpg" alt="">
 						<div class="hover">
-							<h4>Chưa có tài khoản?</h4>
-							<p>Tạo tài khoản để có thêm nhiều tính năng với trang web của chúng tôi!</p>
-							<a class="primary-btn" href="register.php">Tạo tài khoản</a>
+							<h4>Đã có tài khoản?</h4>
+							<p>Đăng nhập vào website của chúng tôi!</p>
+							<a class="primary-btn" href="login.php">Đăng nhập</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="login_form_inner">
-						<h3>Đăng nhập vào trang web</h3>
-						<form class="row login_form" action="" method="post" id="login" novalidate="novalidate">
+						<h3>Đăng ký vào trang web</h3>
+						<form class="row login_form" action="" method="post" id="sign-up" novalidate="novalidate">
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="username" name="username" placeholder="Tên đăng nhập" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+							</div>
 							<div class="col-md-12 form-group">
 								<input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
 							</div>
@@ -74,15 +77,8 @@
 							</div>
 							<div class="mt-4 col-md-12 form-group">
 								<button type="submit" value="submit" class="primary-btn">Đăng ký</button>
-								<a href="#">Quên mật khẩu?</a>
 							</div>
 						</form>
-						<hr>
-						<div>
-							<h5 class="text-center">-Hoặc-</h5>
-							<button class="btn-login-social genric-btn success-border">Đăng nhập với Google</button>
-							<button class="btn-login-social genric-btn success-border">Đăng nhập với Facebook</button>
-						</div>
 					</div>
 				</div>
 			</div>

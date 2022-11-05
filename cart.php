@@ -60,7 +60,9 @@
                             <li class="nav-item">
                                 <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
                             </li>
-                            <li class="nav-item"><a href="cart.php" class=""><span class="ti-bag"></span></a></li>
+                            <li class="nav-item"><a href="cart.php" class=" nav-cart"><span class="ti-bag"></span>
+                                    <div class="cart-qty">0</div>
+                                </a></li>
                             <li class="nav-item">
                                 <a href="login.php" class=""><span class="ti-user"></span></a>
                             </li>
@@ -117,10 +119,11 @@
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                            <img src="img/cart.jpg" alt="">
+                                            <img src="img/orange.png" with="200" height="100" alt="">
                                         </div>
                                         <div class="media-body">
                                             <p>Iphone 14 Pro Max</p>
+                                            <p>Trắng, 256GB</p>
                                         </div>
                                     </div>
                                 </td>
@@ -145,10 +148,11 @@
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                            <img src="img/cart.jpg" alt="">
+                                            <img src="img/orange.png" with="200" height="100" alt="">
                                         </div>
                                         <div class="media-body">
                                             <p>MacBook Pro 2021</p>
+                                            <p>Trắng, 256GB</p>
                                         </div>
                                     </div>
                                 </td>
@@ -173,10 +177,11 @@
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
-                                            <img src="img/cart.jpg" alt="">
+                                            <img src="img/orange.png" with="200" height="100" alt="">
                                         </div>
                                         <div class="media-body">
                                             <p>Ipad Mini 2020</p>
+                                            <p>Trắng, 256GB</p>
                                         </div>
                                     </div>
                                 </td>
@@ -240,9 +245,7 @@
                                 </td>
                                 <td>
                                     <div class="shipping_box">
-                                        <ul class="list">
-                                            <li><a href="#">30000 đồng</a></li>
-                                        </ul>
+                                        <div>30000 đồng</div>
                                         <h6>Phí vận chuyển <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
                                         <select class="shipping_select">
                                             <option value="1">Bangladesh</option>
@@ -368,8 +371,8 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <!--gmaps Js-->
-    <script src="js/gmaps.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/store/common.js"></script>
     <script src="js/store/cart.js"></script>
 </body>
 

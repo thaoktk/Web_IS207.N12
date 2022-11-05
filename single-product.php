@@ -61,7 +61,9 @@
 							<li class="nav-item">
 								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
 							</li>
-							<li class="nav-item"><a href="cart.php" class=""><span class="ti-bag"></span></a></li>
+							<li class="nav-item"><a href="cart.php" class=" nav-cart"><span class="ti-bag"></span>
+									<div class="cart-qty">0</div>
+								</a></li>
 							<li class="nav-item">
 								<a href="login.php" class=""><span class="ti-user"></span></a>
 							</li>
@@ -141,13 +143,13 @@
 							<button class="genric-btn default-border mt-4">Tím</button>
 						</div>
 						<div class="mt-5 product_count">
-							<label for="qty">Quantity:</label>
+							<label for="qty">Số lượng:</label>
 							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
 							<button class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
 							<button class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
 						</div>
 						<div class="card_area d-flex align-items-center">
-							<a class="primary-btn" href="#">Thêm vào giỏ hàng</a>
+							<a class="primary-btn add-to-cart" href="#">Thêm vào giỏ hàng</a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
 						</div>
 					</div>
@@ -440,33 +442,20 @@
 							<div class="review_box">
 								<h4>Để lại đánh giá</h4>
 								<p>Đánh giá của bạn:</p>
-								<ul class="list">
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-									<li><a href="#"><i class="fa fa-star"></i></a></li>
-								</ul>
-								<p>Quá tuyệt vời</p>
+								<div class="d-flex align-items-center">
+									<div class="con mr-3">
+										<i class="fa fa-star rating" aria-hidden="true" id="st1"></i>
+										<i class="fa fa-star rating" aria-hidden="true" id="st2"></i>
+										<i class="fa fa-star rating" aria-hidden="true" id="st3"></i>
+										<i class="fa fa-star rating" aria-hidden="true" id="st4"></i>
+										<i class="fa fa-star rating" aria-hidden="true" id="st5"></i>
+									</div>
+									<p id="rating-text"></p>
+								</div>
 								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
 									<div class="col-md-12">
 										<div class="form-group">
-											<input type="text" class="form-control" id="name" name="name" placeholder="Tên của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Full name'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="number" name="number" placeholder="Số điện thoại" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Đánh giá" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Review'"></textarea></textarea>
+											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Đánh giá" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Đánh giá'"></textarea></textarea>
 										</div>
 									</div>
 									<div class="col-md-12 text-right">

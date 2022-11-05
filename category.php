@@ -60,7 +60,9 @@
 							<li class="nav-item">
 								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
 							</li>
-							<li class="nav-item"><a href="cart.php" class=""><span class="ti-bag"></span></a></li>
+							<li class="nav-item"><a href="cart.php" class=" nav-cart"><span class="ti-bag"></span>
+									<div class="cart-qty">0</div>
+								</a></li>
 							<li class="nav-item">
 								<a href="login.php" class=""><span class="ti-user"></span></a>
 							</li>
@@ -151,14 +153,26 @@
 				<div class="sidebar-filter mt-50">
 					<div class="top-filter-head">Bộ lọc sản phẩm</div>
 					<div class="common-filter">
-						<div class="head">Brands</div>
+						<div class="head">Ram</div>
 						<form action="#">
 							<ul>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="apple" name="brand"><label for="apple">Apple<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="asus" name="brand"><label for="asus">Asus<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="gionee" name="brand"><label for="gionee">Gionee<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="micromax" name="brand"><label for="micromax">Micromax<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="samsung" name="brand"><label for="samsung">Samsung<span>(19)</span></label></li>
+								<li class="filter-list"><input class="pixel-radio" id="2GB" type="radio" name="brand"><label for="2GB">2GB</label></li>
+								<li class="filter-list"><input class="pixel-radio" id="4GB" type="radio" name="brand"><label for="4GB">4GB</label></li>
+								<li class="filter-list"><input class="pixel-radio" id="8GB" type="radio" name="brand"><label for="8GB">8GB</label></li>
+								<li class="filter-list"><input class="pixel-radio" id="12GB" type="radio" name="brand"><label for="12GB">12GB</label></li>
+								<li class="filter-list"><input class="pixel-radio" id="16GB" type="radio" name="brand"><label for="16GB">16GB</label></li>
+							</ul>
+						</form>
+					</div>
+					<div class="common-filter">
+						<div class="head">Dung lượng lưu trữ</div>
+						<form action="#">
+							<ul>
+								<li class="filter-list"><input class="pixel-radio" id="32GB" type="radio" name="brand"><label for="32GB">32GB</label></li>
+								<li class="filter-list"><input class="pixel-radio" id="64GB" type="radio" name="brand"><label for="64GB">64GB</label></li>
+								<li class="filter-list"><input class="pixel-radio" id="128GB" type="radio" name="brand"><label for="128GB">128GB</label></li>
+								<li class="filter-list"><input class="pixel-radio" id="256GB" type="radio" name="brand"><label for="256GB">256GB</label></li>
+								<li class="filter-list"><input class="pixel-radio" id="512GB" type="radio" name="brand"><label for="512GB">512GB</label></li>
 							</ul>
 						</form>
 					</div>
@@ -167,10 +181,10 @@
 						<form action="#">
 							<ul>
 								<li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Đen <span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="balckleather" name="color"><label for="balckleather">Vàng <span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="blackred" name="color"><label for="blackred">Tím <span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="gold" name="color"><label for="gold">Hồng <span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="spacegrey" name="color"><label for="spacegrey">Xanh <span>(19)</span></label></li>
+								<li class="filter-list"><input class="pixel-radio" type="radio" id="yellow" name="color"><label for="yellow">Vàng <span>(29)</span></label></li>
+								<li class="filter-list"><input class="pixel-radio" type="radio" id="purple" name="color"><label for="purple">Tím <span>(19)</span></label></li>
+								<li class="filter-list"><input class="pixel-radio" type="radio" id="pink" name="color"><label for="pink">Hồng <span>(19)</span></label></li>
+								<li class="filter-list"><input class="pixel-radio" type="radio" id="blue" name="color"><label for="blue">Xanh <span>(19)</span></label></li>
 							</ul>
 						</form>
 					</div>
@@ -216,7 +230,7 @@
 									</div>
 									<div class="prd-bottom">
 
-										<a href="" class="social-info">
+										<a href="cart.php" class="social-info">
 											<span class="ti-bag"></span>
 											<p class="hover-text">Mua ngay</p>
 										</a>
@@ -244,7 +258,7 @@
 									</div>
 									<div class="prd-bottom">
 
-										<a href="" class="social-info">
+										<a href="cart.php" class="social-info">
 											<span class="ti-bag"></span>
 											<p class="hover-text">Mua ngay</p>
 										</a>
@@ -272,7 +286,7 @@
 									</div>
 									<div class="prd-bottom">
 
-										<a href="" class="social-info">
+										<a href="cart.php" class="social-info">
 											<span class="ti-bag"></span>
 											<p class="hover-text">Mua ngay</p>
 										</a>
@@ -300,7 +314,7 @@
 									</div>
 									<div class="prd-bottom">
 
-										<a href="" class="social-info">
+										<a href="cart.php" class="social-info">
 											<span class="ti-bag"></span>
 											<p class="hover-text">Mua ngay</p>
 										</a>
@@ -328,7 +342,7 @@
 									</div>
 									<div class="prd-bottom">
 
-										<a href="" class="social-info">
+										<a href="cart.php" class="social-info">
 											<span class="ti-bag"></span>
 											<p class="hover-text">Mua ngay</p>
 										</a>
@@ -356,7 +370,7 @@
 									</div>
 									<div class="prd-bottom">
 
-										<a href="" class="social-info">
+										<a href="cart.php" class="social-info">
 											<span class="ti-bag"></span>
 											<p class="hover-text">Mua ngay</p>
 										</a>
@@ -683,9 +697,8 @@
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<!--gmaps Js-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="js/gmaps.min.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/store/common.js"></script>
 </body>
 
 </html>

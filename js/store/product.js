@@ -23,4 +23,30 @@ $(document).ready(function () {
         }
         $(".input-text.qty").val(value)
     })
+
+    $("#st1").click(function () {
+        $(".fa-star.rating").css("color", "#777777");
+        $("#st1").css("color", "#fbd600");
+        $("#rating-text").text("Quá tệ!")
+    });
+    $("#st2").click(function () {
+        $(".fa-star.rating").css("color", "#777777");
+        $("#st1, #st2").css("color", "#fbd600");
+        $("#rating-text").text("Tệ!")
+    });
+    $("#st3").click(function () {
+        $(".fa-star.rating").css("color", "#777777")
+        $("#st1, #st2, #st3").css("color", "#fbd600");
+        $("#rating-text").text("Bình thường")
+    });
+    $("#st4").click(function () {
+        $(".fa-star.rating").css("color", "#777777");
+        $("#st1, #st2, #st3, #st4").css("color", "#fbd600");
+        $("#rating-text").text("Tốt!")
+    });
+    $("#st5").click(function () {
+        $(".fa-star.rating").css("color", "#777777");
+        $("#st1, #st2, #st3, #st4, #st5").css("color", "#fbd600");
+        $("#rating-text").text("Tuyệt vời!")
+    });
 })

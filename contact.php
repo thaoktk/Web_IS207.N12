@@ -60,7 +60,9 @@
 							<li class="nav-item">
 								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
 							</li>
-							<li class="nav-item"><a href="cart.php" class=""><span class="ti-bag"></span></a></li>
+							<li class="nav-item"><a href="cart.php" class=" nav-cart"><span class="ti-bag"></span>
+									<div class="cart-qty">0</div>
+								</a></li>
 							<li class="nav-item">
 								<a href="login.php" class=""><span class="ti-user"></span></a>
 							</li>
@@ -267,10 +269,8 @@
 	<script src="js/nouislider.min.js"></script>
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
-	<!--gmaps Js-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-	<script src="js/gmaps.min.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/store/common.js"></script>
 </body>
 
 </html>
