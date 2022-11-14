@@ -251,10 +251,21 @@
 
 	img {
 		margin-bottom: 20px;
-		width: 100%;
+		width: 255px;
+		height: 255px;
+		object-fit: contain;
 	}
 
+	.star-rv {
+		color: orange;
+	}
+	
 	.product-details {
+		.name {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 		h6 {
 			font-size: 16px;
 			text-transform: uppercase;
@@ -262,7 +273,7 @@
 
 		.price {
 			h6 {
-				font-size: 14px;
+				font-size: 12px;
 				display: inline-block;
 				padding-right: 15px;
 				margin: 0;
@@ -496,6 +507,9 @@
 			}
 
 			.single-exclusive-slider {
+				.star-rv {
+					color: orange;
+				}
 				@media (max-width: 991px) {
 					padding-bottom: 80px;
 
@@ -573,11 +587,26 @@
 //--------- start related product  -------------//
 
 .single-related-product {
+	max-width: 285px ;
 	margin-bottom: 30px;
 	@include transition();
 
+	img {
+		width: 60px;
+		height: 60px;
+		object-fit: contain;
+	}
+
 	.desc {
 		margin: 10px 0px 10px 15px;
+
+		.title {
+			display: block;
+			width:150px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
 	}
 
 	.price {

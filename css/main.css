@@ -1890,14 +1890,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 .single-product img {
   margin-bottom: 20px;
-  width: 100%;
+  width: 255px;
+  height: 255px;
+  object-fit: contain;
+}
+.single-product .star-rv {
+  color: orange;
+}
+.single-product .product-details .name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .single-product .product-details h6 {
   font-size: 16px;
   text-transform: uppercase;
 }
 .single-product .product-details .price h6 {
-  font-size: 14px;
+  font-size: 12px;
   display: inline-block;
   padding-right: 15px;
   margin: 0;
@@ -2123,6 +2133,9 @@ h1, h2, h3, h4, h5, h6 {
   left: auto;
   right: 5%;
 }
+.exclusive-deal-area .exclusive-right .active-exclusive-product-slider .single-exclusive-slider .star-rv {
+  color: orange;
+}
 @media (max-width: 991px) {
   .exclusive-deal-area .exclusive-right .active-exclusive-product-slider .single-exclusive-slider {
     padding-bottom: 80px;
@@ -2181,14 +2194,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .single-related-product {
+  max-width: 285px;
   margin-bottom: 30px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
+.single-related-product img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
 .single-related-product .desc {
   margin: 10px 0px 10px 15px;
+}
+.single-related-product .desc .title {
+  display: block;
+  width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .single-related-product .price h6 {
   font-size: 14px;

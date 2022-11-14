@@ -34,6 +34,8 @@
 
 <body>
 
+<?php include('./templates/promo-list.php');
+	include("./templates/product.php");?>
 <?php include("./templates/header.php")?>
 
 	<!-- start banner Area -->
@@ -210,234 +212,43 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-6 text-center">
 						<div class="section-title">
-							<h1>Sản phẩm bán chạy</h1>
-							<p>Những sản phẩm bán chạy nhất của cửa hàng chúng tôi.</p>
+							<h1>Sản phẩm mới</h1>
+							<p>Những sản phẩm mới nhất của cửa hàng chúng tôi.</p>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 13 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
+					<?php
+					foreach ($list_new as $item) {
+						$rating = addStar($item['SoDanhGia'], $item['SoSao']);
+						echo "<div class='col-lg-3 col-md-6'>
+						<div class='single-product'>
+							<img class='img-fluid' src=". $item['HinhAnh'] ." alt=''>
+							<div class='product-details'>
+								<h6 class='name'>". $item['TenSP'] ."</h6>
+								<div class='price'>
+									<h6>". number_format($item['GiaTien']) ." VNĐ</h6>
+									<h6 class='l-through'>". number_format($item['GiaGoc']) ." VNĐ</h6>
 								</div>
-								<div class="prd-bottom">
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
+								<div class='mt-2 d-flex align-items-center'>". $rating ."</div>
+								<div class='prd-bottom'>
+									<a href='cart.php' class='social-info'>
+										<span class='ti-bag'></span>
+										<p class='hover-text'>Mua ngay</p>
 									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
+									<a href='' class='social-info add-btn'>
+										<span class='lnr lnr-heart'></span>
+										<p class='hover-text'>Yêu thích</p>
 									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 13 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
+									<a href='single-product.php' class='social-info'>
+										<span class='lnr lnr-move'></span>
+										<p class='hover-text'>Chi tiết</p>
 									</a>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 13 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 13 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 13 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 13 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 13 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 13 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					</div>";
+					} ?>
 				</div>
 			</div>
 		</div>
@@ -447,236 +258,43 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-6 text-center">
 						<div class="section-title">
-							<h1>Sản phẩm sắp tới</h1>
-							<p>Những sản phẩm sắp lên kệ tại cửa hàng chúng tôi</p>
+							<h1>Sản phẩm hot</h1>
+							<p>Những sản phẩm bán chạy nhất tại cửa hàng chúng tôi</p>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 14</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
+					<?php
+					foreach ($list_hot as $item) {
+						$rating = addStar($item['SoDanhGia'], $item['SoSao']);
+						echo "<div class='col-lg-3 col-md-6'>
+						<div class='single-product'>
+							<img class='img-fluid' src=". $item['HinhAnh'] ." alt=''>
+							<div class='product-details'>
+								<h6 class='name'>". $item['TenSP'] ."</h6>
+								<div class='price'>
+									<h6>". number_format($item['GiaTien']) ." VNĐ</h6>
+									<h6 class='l-through'>". number_format($item['GiaGoc']) ." VNĐ</h6>
 								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
+								<div class='mt-2 d-flex align-items-center'>". $rating ."</div>
+								<div class='prd-bottom'>
+									<a href='cart.php' class='social-info'>
+										<span class='ti-bag'></span>
+										<p class='hover-text'>Mua ngay</p>
 									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
+									<a href='' class='social-info add-btn'>
+										<span class='lnr lnr-heart'></span>
+										<p class='hover-text'>Yêu thích</p>
 									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 14</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
+									<a href='single-product.php' class='social-info'>
+										<span class='lnr lnr-move'></span>
+										<p class='hover-text'>Chi tiết</p>
 									</a>
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 14 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 14</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 14 Pro</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 14</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 14 Pro Max</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- single product -->
-					<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<h6>Iphone 14</h6>
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<div class="prd-bottom">
-
-									<a href="cart.php" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Mua ngay</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Yêu thích</p>
-									</a>
-									<a href="single-product.php" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">Chi tiết</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					</div>";
+					} ?>
 				</div>
 			</div>
 		</div>
@@ -718,36 +336,26 @@
 				</div>
 				<div class="col-lg-6 no-padding exclusive-right">
 					<div class="active-exclusive-product-slider">
-						<!-- single exclusive carousel -->
-						<div class="single-exclusive-slider">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<h4>Iphone 14 Pro</h4>
-								<div class="add-bag d-flex align-items-center justify-content-center">
-									<a class="add-btn" href="single-product.php"><span class="ti-bag"></span></a>
-									<span class="add-text text-uppercase">Thêm vào giỏ hàng</span>
-								</div>
+					<?php 
+					foreach ($list_dealHot as $item) { 
+						$rating = addStar($item['SoDanhGia'], $item['SoSao']);
+						echo "<div class='single-exclusive-slider'>
+						<img class='img-fluid' src=". $item['HinhAnh'] ." alt=''>
+						<div class='product-details'>
+							<div class='price'>
+								<h6>". number_format($item['GiaTien']) ." VNĐ</h6>
+								<h6 class='l-through'>". number_format($item['GiaGoc']) ." VNĐ</h6>
+							</div>
+							<h4>". $item['TenSP'] ."</h4>
+							<div class='d-flex align-items-center justify-content-center'>". $rating ."</div>
+							<div class='add-bag d-flex align-items-center justify-content-center'>
+								<a class='add-btn' href='single-product.php'><span class='ti-bag'></span></a>
+								<span class='add-text text-uppercase'>Thêm vào giỏ hàng</span>
 							</div>
 						</div>
-						<!-- single exclusive carousel -->
-						<div class="single-exclusive-slider">
-							<img class="img-fluid" src="img/product/orange.png" alt="">
-							<div class="product-details">
-								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
-								</div>
-								<h4>Iphone 13 Pro Max</h4>
-								<div class="add-bag d-flex align-items-center justify-content-center">
-									<a class="add-btn" href="single-product.php"><span class="ti-bag"></span></a>
-									<span class="add-text text-uppercase">Thêm vào giỏ hàng</span>
-								</div>
-							</div>
-						</div>
+					</div>";
+					}
+					?>
 					</div>
 				</div>
 			</div>
@@ -769,114 +377,22 @@
 			<div class="row">
 				<div class="col-lg-9">
 					<div class="row">
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
+					<?php 
+						foreach ($list_dealHot2 as $item) {
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							<div class='single-related-product d-flex'>
+								<a href='single-product.php'><img src=". $item['HinhAnh'] ." alt=''></a>
+								<div class='desc'>
+									<a href='single-product.php' class='title'>". $item['TenSP'] ."</a>
+									<div class='price'>
+										<h6>". number_format($item['GiaTien']) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format(($item['GiaGoc'])) ." VNĐ</h6>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/orange.png" alt="" width="60" height="60"></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">Iphone 14 Pro Max</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
+						</div>";
+						}
+						?>
 					</div>
 				</div>
 				<div class="col-lg-3">

@@ -56,6 +56,13 @@ class DB_business extends DB_driver
         return $this->get_row($sql);
     }
 
+     // hàm select theo query
+     function select_by_query($select, $query, $limit)
+     {
+         $sql = "select $select from " . $this->_table_name . " where " . $query . " limit $limit";
+         return $this->get_list($sql);
+     }
+
     // hàm get all
     function select_all()
     {

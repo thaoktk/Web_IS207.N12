@@ -56,15 +56,6 @@ class LoaiSanPhamBUS extends DB_business
     }
 }
 
-// Lớp chi tiết sản phẩm
-class ChiTietSanPhamBUS extends DB_business
-{
-    function __construct()
-    {
-        $this->setTable("ChiTietSanPham", "MaSP");
-    }
-}
-
 // Lớp người dùng
 class NguoiDungBUS extends DB_business
 {
