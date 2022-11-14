@@ -34,7 +34,7 @@ $(document).ready(function () {
         if (activePage.includes($(this).attr("href"))) {
             $(".menu_nav .nav-item.active").removeClass("active")
             $(this).parent().addClass("active")
-        } 
+        }
     })
 
     $(".navbar-right .nav-item a").each(function () {
@@ -43,8 +43,10 @@ $(document).ready(function () {
         }
     })
 
-    $(".add-to-cart").click(function() {
-        
+    $(".add-to-cart").click(function () {
+        cartQty = parseInt($(".cart-qty").text())
+        cartQty++;
+        $(".cart-qty").text(cartQty)
     })
 
 })
