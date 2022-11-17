@@ -33,6 +33,15 @@
 
 <body>
 
+<?php include "./templates/connect.php"; 
+	  include "./templates/product.php";
+	  
+	  $idSP = isset($_GET['idSP']) ? $_GET['idSP'] : "";
+	  $result = mysqli_query($connect,"SELECT * FROM sanpham WHERE MaSP = $idSP");
+	  $row = $result->fetch_row();
+	  $series = $row[3];
+	  $listProductRelated = mysqli_query($connect,"SELECT * FROM sanpham WHERE TenSeries = '$series' limit 9");
+ ?>
 <?php include("./templates/header.php")?>
 
 	<!-- Start Banner Area -->
@@ -70,40 +79,32 @@
 					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">
-					<div class="s_product_text">
-						<h3>Iphone 14 Pro Max 256 GB</h3>
-						<h2>$149.99</h2>
-						<ul class="list">
-							<li><a class="active" href="#"><span>Phân loại</span> : Iphone 14</a></li>
-							<li><a href="#"><span>Tình trạng</span> : Còn hàng</a></li>
+					<?php 
+						$tinhTrang = $row[14] == 1 ? "Còn hàng" : "Hết hàng"; 
+						echo "<div class='s_product_text'>
+						<h3>$row[2]</h3>
+						<div class='d-flex align-items-baseline '>
+						<h2>". number_format($row[6]) ." VNĐ</h2>
+						<h3 class='ml-3 l-through'>". number_format($row[5]) ." VNĐ</h3>
+						</div>
+						<ul class='list'>
+							<li><a class='active' href='#'><span>Phân loại</span> : $row[3]</a></li>
+							<li><a href='#'><span>Tình trạng</span> : $tinhTrang</a></li>
 						</ul>
-						<p>Mill Oil is an innovative oil filled radiator with the most modern technology. If you are looking for
-							something that can make your interior look awesome, and at the same time give you the pleasant warm feeling
-							during the winter.
+						<p>$row[9]
 						</p>
-						<div class="d-flex align-items-center product_ram">
-							<button class="genric-btn primary-border mr-4">256GB</button>
-							<button class="genric-btn default-border mr-4">128GB</button>
-							<button class="genric-btn default-border">64GB</button>
+						<div class='mt-5 product_count'>
+							<label for='qty'>Số lượng:</label>
+							<input type='text' name='qty' id='sst' maxlength='12' value='1' title='Quantity:' class='input-text qty'>
+							<button class='increase items-count' type='button'><i class='lnr lnr-chevron-up'></i></button>
+							<button class='reduced items-count' type='button'><i class='lnr lnr-chevron-down'></i></button>
 						</div>
-						<div class="mt-4 d-flex flex-wrap align-items-center product_color">
-							<button class="genric-btn primary-border mr-4">Đen</button>
-							<button class="genric-btn default-border mr-4">Vàng</button>
-							<button class="genric-btn default-border mr-4">Hồng</button>
-							<button class="genric-btn default-border mr-4">Xanh</button>
-							<button class="genric-btn default-border mt-4">Tím</button>
+						<div class='card_area d-flex align-items-center'>
+							<a type='button' class='primary-btn add-to-cart text-white'>Thêm vào giỏ hàng</a>
+							<a class='icon_btn'><i class='lnr lnr lnr-heart'></i></a>
 						</div>
-						<div class="mt-5 product_count">
-							<label for="qty">Số lượng:</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-							<button class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-							<button class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-						</div>
-						<div class="card_area d-flex align-items-center">
-							<a type="button" class="primary-btn add-to-cart text-white">Thêm vào giỏ hàng</a>
-							<a class="icon_btn"><i class="lnr lnr lnr-heart"></i></a>
-						</div>
-					</div>
+					</div>";
+					?>
 				</div>
 			</div>
 		</div>
@@ -129,100 +130,11 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-					<p>Beryl Cook is one of Britain’s most talented and amusing artists .Beryl’s pictures feature women of all shapes
-						and sizes enjoying themselves .Born between the two world wars, Beryl Cook eventually left Kendrick School in
-						Reading at the age of 15, where she went to secretarial school and then into an insurance office. After moving to
-						London and then Hampton, she eventually married her next door neighbour from Reading, John Cook. He was an
-						officer in the Merchant Navy and after he left the sea in 1956, they bought a pub for a year before John took a
-						job in Southern Rhodesia with a motor company. Beryl bought their young son a box of watercolours, and when
-						showing him how to use it, she decided that she herself quite enjoyed painting. John subsequently bought her a
-						child’s painting set for her birthday and it was with this that she produced her first significant work, a
-						half-length portrait of a dark-skinned lady with a vacant expression and large drooping breasts. It was aptly
-						named ‘Hangover’ by Beryl’s husband and</p>
-					<p>It is often frustrating to attempt to plan meals that are designed for one. Despite this fact, we are seeing
-						more and more recipe books and Internet websites that are dedicated to the act of cooking for one. Divorce and
-						the death of spouses or grown children leaving for college are all reasons that someone accustomed to cooking for
-						more than one would suddenly need to learn how to adjust all the cooking practices utilized before into a
-						streamlined plan of cooking that is more efficient for one person creating less</p>
+					<?php echo "<p>$row[9]</p>"; ?>
 				</div>
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<div class="table-responsive">
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>
-										<h5>Màn hình:</h5>
-									</td>
-									<td>
-										<h5>IPS LCD6.1", Liquid Retina</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Hệ điều hành:</h5>
-									</td>
-									<td>
-										<h5>iOS 15</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Camera sau:</h5>
-									</td>
-									<td>
-										<h5>2 camera 12 MP</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Camera trước:</h5>
-									</td>
-									<td>
-										<h5>12 MP</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Chip:</h5>
-									</td>
-									<td>
-										<h5>Apple A13 Bionic</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>RAM:</h5>
-									</td>
-									<td>
-										<h5>4 GB</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Dung lượng lưu trữ:</h5>
-									</td>
-									<td>
-										<h5>128 GB</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>SIM:</h5>
-									</td>
-									<td>
-										<h5>1 Nano SIM & 1 eSIM, Hỗ trợ 4G</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<h5>Pin, Sạc:</h5>
-									</td>
-									<td>
-										<h5>3110 mAh, 18 W</h5>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+						<?php echo $row[4] ?>
 					</div>
 				</div>
 				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -315,24 +227,19 @@
 								<div class="col-6">
 									<div class="box_total">
 										<h5>Tổng quan</h5>
-										<h4>4.0</h4>
-										<h6>(03 đánh giá)</h6>
+										<h4><?php echo $row[12] ?>.0</h4>
+										<h6>(<?php echo $row[13] ?> đánh giá)</h6>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="rating_list">
-										<h3>Dựa trên 3 đánh giá</h3>
-										<ul class="list">
-											<li><a href="#">5 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">4 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">3 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">2 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-											<li><a href="#">1 Star <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> 01</a></li>
-										</ul>
+										<h3>Dựa trên <?php echo $row[13] ?> đánh giá</h3>
+										<?php $rating = addStar($row[13], $row[12]);
+										echo "<div >$rating</div>"; ?>
 									</div>
 								</div>
 							</div>
-							<div class="review_list">
+							<div class="mt-2 review_list">
 								<div class="review_item">
 									<div class="media">
 										<div class="d-flex">
@@ -436,121 +343,27 @@
 			<div class="row">
 				<div class="col-lg-9">
 					<div class="row">
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
+					<?php 
+						while($row=$listProductRelated->fetch_row())  {
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							<div class='single-related-product d-flex'>
+								<a href='single-product.php?idSP=$row[0]'><img src=". $row[8] ." alt=''></a>
+								<div class='desc'>
+									<a href='single-product.php?idSP=$row[0]' class='title'>". $row[2] ."</a>
+									<div class='price'>
+										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format(($row[5])) ." VNĐ</h6>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="#" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
+						</div>";
+						}
+						?>
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="ctg-right">
-						<a href="#" target="_blank">
-							<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
-						</a>
+						<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
 					</div>
 				</div>
 			</div>

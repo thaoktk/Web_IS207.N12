@@ -277,6 +277,10 @@
 				display: inline-block;
 				padding-right: 15px;
 				margin: 0;
+
+				&.cost {
+					font-weight: bold;
+				}
 			}
 
 			.l-through {
@@ -591,6 +595,20 @@
 	margin-bottom: 30px;
 	@include transition();
 
+	&.category {
+		.desc {
+			margin: 0px 0px 10px 15px;
+	
+			.title {
+				display: block;
+				width: 100%;
+				max-width: 200px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+		}
+	}
 	img {
 		width: 60px;
 		height: 60px;
@@ -598,11 +616,11 @@
 	}
 
 	.desc {
-		margin: 10px 0px 10px 15px;
+		margin: 0px 10px 15px;
 
 		.title {
 			display: block;
-			width:150px;
+			width: 150px;
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			overflow: hidden;

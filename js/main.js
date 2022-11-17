@@ -176,7 +176,7 @@ $(document).ready(function () {
     });
   });
 
-
+  $("#sorting").niceSelect()
 
 
   $(document).ready(function () {
@@ -255,14 +255,21 @@ $(document).ready(function () {
       noUiSlider.create(nonLinearSlider, {
         connect: true,
         behaviour: 'tap',
-        start: [500, 4000],
+        start: [10000000, 50000000],
         range: {
           // Starting at 500, step the value by 500,
           // until 4000 is reached. From there, step by 1000.
           'min': [0],
-          '10%': [500, 500],
-          '50%': [4000, 1000],
-          'max': [10000]
+          '10%': [10000000, 20000000],
+          '20%': [20000000, 30000000],
+          '30%': [30000000, 40000000],
+          '40%': [40000000, 50000000],
+          '50%': [50000000, 60000000],
+          '60%': [60000000, 70000000],
+          '70%': [70000000, 80000000],
+          '80%': [80000000, 90000000],
+          '90%': [90000000, 100000000],
+          'max': [100000000]
         }
       });
 

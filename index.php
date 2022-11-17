@@ -34,9 +34,9 @@
 
 <body>
 
-<?php include('./templates/promo-list.php');
-	include("./templates/product.php");?>
-<?php include("./templates/header.php")?>
+<?php include("./templates/product.php")?>
+<?php include("./templates/header.php") 
+?>
 
 	<!-- start banner Area -->
 	<section class="banner-area">
@@ -219,36 +219,40 @@
 				</div>
 				<div class="row">
 					<?php
-					foreach ($list_new as $item) {
-						$rating = addStar($item['SoDanhGia'], $item['SoSao']);
+					while($row=$list_new->fetch_row())
+					{
+						$rating = addStar($row[13], $row[12]);
 						echo "<div class='col-lg-3 col-md-6'>
-						<div class='single-product'>
-							<img class='img-fluid' src=". $item['HinhAnh'] ." alt=''>
-							<div class='product-details'>
-								<h6 class='name'>". $item['TenSP'] ."</h6>
-								<div class='price'>
-									<h6>". number_format($item['GiaTien']) ." VNĐ</h6>
-									<h6 class='l-through'>". number_format($item['GiaGoc']) ." VNĐ</h6>
-								</div>
-								<div class='mt-2 d-flex align-items-center'>". $rating ."</div>
-								<div class='prd-bottom'>
-									<a href='cart.php' class='social-info'>
-										<span class='ti-bag'></span>
-										<p class='hover-text'>Mua ngay</p>
-									</a>
-									<a href='' class='social-info add-btn'>
-										<span class='lnr lnr-heart'></span>
-										<p class='hover-text'>Yêu thích</p>
-									</a>
-									<a href='single-product.php' class='social-info'>
-										<span class='lnr lnr-move'></span>
-										<p class='hover-text'>Chi tiết</p>
-									</a>
+							<div class='single-product'>
+								<img class='img-fluid' src='$row[8]' alt=''>
+								<div class='product-details'>
+									<h6 class='name'>$row[2]</h6>
+									<div class='price'>
+										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format($row[5]) ." VNĐ</h6>
+									</div>
+									<div class='mt-2 d-flex align-items-center'>
+										<div>". $rating ."</div>
+										<span class='ml-2'>". $row[13] ." đánh giá</span>
+									</div>
+									<div class='prd-bottom'>
+										<a href='cart.php' class='social-info'>
+											<span class='ti-bag'></span>
+											<p class='hover-text'>Mua ngay</p>
+										</a>
+										<a href='' class='social-info add-btn'>
+											<span class='lnr lnr-heart'></span>
+											<p class='hover-text'>Yêu thích</p>
+										</a>
+										<a href='single-product.php?idSP=$row[0]' class='social-info'>
+											<span class='lnr lnr-move'></span>
+											<p class='hover-text'>Chi tiết</p>
+										</a>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>";
-					} ?>
+						</div>";
+					}?>
 				</div>
 			</div>
 		</div>
@@ -265,36 +269,40 @@
 				</div>
 				<div class="row">
 					<?php
-					foreach ($list_hot as $item) {
-						$rating = addStar($item['SoDanhGia'], $item['SoSao']);
+					while($row=$list_hot->fetch_row())
+					{
+						$rating = addStar($row[13], $row[12]);
 						echo "<div class='col-lg-3 col-md-6'>
-						<div class='single-product'>
-							<img class='img-fluid' src=". $item['HinhAnh'] ." alt=''>
-							<div class='product-details'>
-								<h6 class='name'>". $item['TenSP'] ."</h6>
-								<div class='price'>
-									<h6>". number_format($item['GiaTien']) ." VNĐ</h6>
-									<h6 class='l-through'>". number_format($item['GiaGoc']) ." VNĐ</h6>
-								</div>
-								<div class='mt-2 d-flex align-items-center'>". $rating ."</div>
-								<div class='prd-bottom'>
-									<a href='cart.php' class='social-info'>
-										<span class='ti-bag'></span>
-										<p class='hover-text'>Mua ngay</p>
-									</a>
-									<a href='' class='social-info add-btn'>
-										<span class='lnr lnr-heart'></span>
-										<p class='hover-text'>Yêu thích</p>
-									</a>
-									<a href='single-product.php' class='social-info'>
-										<span class='lnr lnr-move'></span>
-										<p class='hover-text'>Chi tiết</p>
-									</a>
+							<div class='single-product'>
+								<img class='img-fluid' src='$row[8]' alt=''>
+								<div class='product-details'>
+									<h6 class='name'>$row[2]</h6>
+									<div class='price'>
+										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format($row[5]) ." VNĐ</h6>
+									</div>
+									<div class='mt-2 d-flex align-items-center'>
+										<div>". $rating ."</div>
+										<span class='ml-2'>". $row[13] ." đánh giá</span>
+									</div>
+									<div class='prd-bottom'>
+										<a href='cart.php' class='social-info'>
+											<span class='ti-bag'></span>
+											<p class='hover-text'>Mua ngay</p>
+										</a>
+										<a href='' class='social-info add-btn'>
+											<span class='lnr lnr-heart'></span>
+											<p class='hover-text'>Yêu thích</p>
+										</a>
+										<a href='single-product.php?idSP=$row[0]' class='social-info'>
+											<span class='lnr lnr-move'></span>
+											<p class='hover-text'>Chi tiết</p>
+										</a>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>";
-					} ?>
+						</div>";
+					}?>
 				</div>
 			</div>
 		</div>
@@ -332,24 +340,27 @@
 							</div>
 						</div>
 					</div>
-					<a href="" class="primary-btn">Shop Now</a>
+					<a href="" class="primary-btn">Khám phá</a>
 				</div>
 				<div class="col-lg-6 no-padding exclusive-right">
 					<div class="active-exclusive-product-slider">
 					<?php 
-					foreach ($list_dealHot as $item) { 
-						$rating = addStar($item['SoDanhGia'], $item['SoSao']);
+					while($row=$list_dealHot->fetch_row()) { 
+						$rating = addStar($row[13], $row[12]);
 						echo "<div class='single-exclusive-slider'>
-						<img class='img-fluid' src=". $item['HinhAnh'] ." alt=''>
+						<img class='img-fluid' src=". $row[8] ." alt=''>
 						<div class='product-details'>
 							<div class='price'>
-								<h6>". number_format($item['GiaTien']) ." VNĐ</h6>
-								<h6 class='l-through'>". number_format($item['GiaGoc']) ." VNĐ</h6>
+								<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
+								<h6 class='l-through'>". number_format($row[5]) ." VNĐ</h6>
 							</div>
-							<h4>". $item['TenSP'] ."</h4>
-							<div class='d-flex align-items-center justify-content-center'>". $rating ."</div>
+							<h4>". $row[2] ."</h4>
+							<div class='mt-2 w-100 d-flex align-items-center justify-content-center'>
+									<div>". $rating ."</div>
+									<span class='ml-2'>". $row[13] ." đánh giá</span>
+							</div>
 							<div class='add-bag d-flex align-items-center justify-content-center'>
-								<a class='add-btn' href='single-product.php'><span class='ti-bag'></span></a>
+								<a class='add-btn'><span class='ti-bag'></span></a>
 								<span class='add-text text-uppercase'>Thêm vào giỏ hàng</span>
 							</div>
 						</div>
@@ -378,15 +389,15 @@
 				<div class="col-lg-9">
 					<div class="row">
 					<?php 
-						foreach ($list_dealHot2 as $item) {
+						while($row=$list_dealHot2->fetch_row())  {
 							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
 							<div class='single-related-product d-flex'>
-								<a href='single-product.php'><img src=". $item['HinhAnh'] ." alt=''></a>
+								<a href='single-product.php?idSP=$row[0]'><img src=". $row[8] ." alt=''></a>
 								<div class='desc'>
-									<a href='single-product.php' class='title'>". $item['TenSP'] ."</a>
+									<a href='single-product.php?idSP=$row[0]' class='title'>". $row[2] ."</a>
 									<div class='price'>
-										<h6>". number_format($item['GiaTien']) ." VNĐ</h6>
-										<h6 class='l-through'>". number_format(($item['GiaGoc'])) ." VNĐ</h6>
+										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format(($row[5])) ." VNĐ</h6>
 									</div>
 								</div>
 							</div>

@@ -1,22 +1,18 @@
-<?php
-    require_once('./BackEnd/ConnectionDB/DB_classes.php');
+<?php 
+    include "connect.php";
 
     if(!isset($_POST['request']) && !isset($_GET['request'])) die(null);
 
     switch ($_POST['request']) {
     	// lấy tất cả sản phẩm
     	case 'getall':
-				$dssp = (new SanPhamBUS())->select_all();
-                for($i = 0; $i < sizeof($dssp); $i++) {
-                    // thêm thông tin hãng
-                    $dssp[$i]["LSP"] = (new LoaiSanPhamBUS())->select_by_id('*', $dssp[$i]['MaLSP']);
-                }
-		    	die (json_encode($dssp));
+            getAll($connect);
     		break;
+        case 'pagination' :
+            pagination($connect);
+            break;
         case 'getbyid':
             $sp = (new SanPhamBUS())->select_by_id("*", $_POST['id']);
-            // thêm thông tin khuyến mãi và hãng
-            $sp["LSP"] = (new LoaiSanPhamBUS())->select_by_id('*', $sp['MaLSP']);
 
             die (json_encode($sp));
             break;
@@ -219,5 +215,89 @@
         ); 
         
         die (json_encode($spBUS->add_new($sanphamArr)));
+    }
+
+    function getAll($connect) {
+        echo $_GET['page'];
+        $itemsPerPage = 9;
+        if(isset($_GET['page'])){
+            $currentPage=$_GET['page'];
+        }
+        else{
+                $currentPage=1;
+        }  
+        $offset = ($currentPage - 1) * $itemsPerPage ;
+        $sql = "SELECT * FROM sanpham limit 9 offset $offset";
+        $results = $connect->query($sql);
+        while($row=$results->fetch_row()) {
+            $rating = addStar($row[13], $row[12]);
+            echo "<div class='col-lg-4 col-md-6'>
+            <div class='single-product'>
+                <img class='img-fluid' src='". $row[8] ."' alt=''>
+                <div class='product-details'>
+                    <h6 class='title'>". $row[2] ."</h6>
+                    <div class='price'>
+                        <h6>". number_format(($row[6])) ." VNĐ</h6>
+                        <h6 class='l-through'>". number_format(($row[5])) ." VNĐ</h6>
+                    </div>
+                    <div class='mt-2 d-flex align-items-center'>
+                        <div>". $rating ."</div>
+                        <span class='ml-2'>". $row[13] ." đánh giá</span>
+                    </div>
+                    <div class='prd-bottom'>
+                        <a href='cart.php' class='social-info'>
+                            <span class='ti-bag'></span>
+                            <p class='hover-text'>Mua ngay</p>
+                        </a>
+                        <a href='' class='social-info'>
+                            <span class='lnr lnr-heart'></span>
+                            <p class='hover-text'>Yêu thích</p>
+                        </a>
+                        <a href='single-product.php' class='social-info'>
+                            <span class='lnr lnr-move'></span>
+                            <p class='hover-text'>Chi tiết</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>";
+        }
+    }
+
+    function pagination($connect) {
+        $itemsPerPage = 9;
+        if(isset($_GET['page'])){
+            $currentPage=$_GET['page'];
+        }
+        else{
+                $currentPage=1;
+        }  
+        $totalRecords = mysqli_query($connect, "SELECT * FROM sanpham");
+        $totalRows = $totalRecords->num_rows;
+        $totalPages = ceil($totalRows / $itemsPerPage);
+
+
+        for ($i = 1; $i <= $totalPages; $i++) {
+            if ($i != $currentPage) {
+                echo "<a href='category.php?page=$i'>$i</a>";
+            } else {
+                echo "<a href='category.php?page=$i' class='active'>$i</a>";
+            }
+        }
+    }
+
+    function addStar($review, $star) {
+        $rating = '';
+        if ($review >= 0) {
+            for ($i = 1; $i <= 5; $i++) {
+                if ($i <= $star) {
+                    $rating .= "<i class='fa fa-star star-rv'></i>";
+                } else {
+                    $rating .= "<i class='fa fa-star-o star-rv'></i>";
+                }
+            }
+        }
+    
+        return $rating;
     }
 ?>

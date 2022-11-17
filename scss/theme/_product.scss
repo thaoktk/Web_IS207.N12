@@ -513,7 +513,7 @@
 			&.blank {
 				a {
 					background: transparent;
-					color: #cccccc;
+					color: #000;
 					border: none;
 				}
 			}
@@ -542,6 +542,35 @@
 .product_image_area {
 	padding-top: 120px;
 
+}
+
+.single-product {
+	.title {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.price {
+		h6 {
+			font-weight: bold;
+		}
+	}
+}
+
+.not-found {
+	width: 100%;
+	height: 500px !important;
+	
+	span {
+		font-size: 18px;
+		font-weight: bold;
+		text-align: center;
+	}
+}
+
+i.star-rv {
+	color: orange;
 }
 
 .s_product_inner {}
@@ -583,6 +612,11 @@
 		font-weight: 500;
 		color: $title-color;
 		margin-bottom: 10px;
+	}
+
+	.l-through {
+		text-decoration: line-through;
+		color: #cccccc;
 	}
 
 	h2 {

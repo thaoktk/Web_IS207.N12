@@ -31,8 +31,59 @@
 </head>
 
 <body id="category">
-
 <?php include("./templates/header.php")?>
+<?php include "./templates/connect.php"; 
+	  include "./templates/product.php";
+
+	$param = "";
+	$paramSort = "";
+	$orderCondition = "";
+	$where = "";
+	$filterCategory = "";
+	$search = isset($_GET['search']) ? $_GET['search'] : "";
+	$orderSort = isset($_GET['sort']) ? $_GET['sort'] : "";
+	$category = isset($_GET['category']) ? $_GET['category'] : "";
+
+	if ($search) {
+		$where = "WHERE TenSP LIKE '%$search%'";
+		$param .= "&search=". $search;
+		$paramSort .= "&search=". $search;
+	}
+	if ($orderSort) {
+		$orderCondition = "ORDER BY `sanpham`.`GiaTien` $orderSort";
+		$param .= "&sort=". $orderSort;
+	}
+	if ($category) {
+		$filterCategory = "WHERE TenSeries LIKE '%$category%'";
+		$param .= "&category=". $category;
+		$paramSort .= "&category=". $category;
+	}
+
+	$itemsPerPage = 9;
+	if(isset($_GET['page'])){
+		$currentPage=$_GET['page'];
+	}
+	else{
+			$currentPage=1;
+	}  
+
+	$offset = ($currentPage - 1) * $itemsPerPage;
+
+	if ($search) {
+		$results = mysqli_query($connect,"SELECT * FROM sanpham $where $orderCondition limit 9 offset $offset");
+		$totalRecords = mysqli_query($connect, "SELECT * FROM sanpham $where");
+	} else if ($category) {
+		$results = mysqli_query($connect,"SELECT * FROM sanpham $filterCategory $orderCondition limit 9 offset $offset");
+		$totalRecords = mysqli_query($connect, "SELECT * FROM sanpham $filterCategory");
+	} else {
+		$results = mysqli_query($connect,"SELECT * FROM sanpham $orderCondition limit 9 offset $offset");
+		$totalRecords = mysqli_query($connect, "SELECT * FROM sanpham");
+	}
+
+	$totalRows = $totalRecords->num_rows;
+	$totalPages = ceil($totalRows / $itemsPerPage);
+	$connect->close();
+	?>
 
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
@@ -55,48 +106,56 @@
 				<div class="sidebar-categories">
 					<div class="head">Phân loại</div>
 					<ul class="main-categories">
-						<li class="main-nav-list"><a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable"><span class="lnr lnr-arrow-right"></span>Iphone<span class="number">(53)</span></a>
+						<li class="main-nav-list"><a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable"><span class="lnr lnr-arrow-right"></span>Iphone</a>
 							<ul class="collapse" id="fruitsVegetable" data-toggle="collapse" aria-expanded="false" aria-controls="fruitsVegetable">
-								<li class="main-nav-list child"><a href="#">Iphone 10<span class="number">(13)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Iphone 11<span class="number">(09)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Iphone 12<span class="number">(17)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Iphone 13<span class="number">(01)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Iphone 14<span class="number">(11)</span></a></li>
+								<?php 
+								while ($row = $list_SeriesIphone->fetch_row()) {
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+								}
+								?>
 							</ul>
 						</li>
 
-						<li class="main-nav-list"><a data-toggle="collapse" href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span class="lnr lnr-arrow-right"></span>MacBook<span class="number">(53)</span></a>
+						<li class="main-nav-list"><a data-toggle="collapse" href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span class="lnr lnr-arrow-right"></span>MacBook</a>
 							<ul class="collapse" id="meatFish" data-toggle="collapse" aria-expanded="false" aria-controls="meatFish">
-								<li class="main-nav-list child"><a href="#">MacBook Air<span class="number">(13)</span></a></li>
-								<li class="main-nav-list child"><a href="#">MacBook Pro<span class="number">(09)</span></a></li>
+							<?php 
+								while ($row = $list_SeriesMacBook->fetch_row()) {
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+								}
+								?>
 							</ul>
 						</li>
-						<li class="main-nav-list"><a data-toggle="collapse" href="#cooking" aria-expanded="false" aria-controls="cooking"><span class="lnr lnr-arrow-right"></span>Ipad<span class="number">(53)</span></a>
+						<li class="main-nav-list"><a data-toggle="collapse" href="#cooking" aria-expanded="false" aria-controls="cooking"><span class="lnr lnr-arrow-right"></span>Ipad</a>
 							<ul class="collapse" id="cooking" data-toggle="collapse" aria-expanded="false" aria-controls="cooking">
-								<li class="main-nav-list child"><a href="#">Ipad Pro<span class="number">(13)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Ipad Air<span class="number">(09)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Ipad Mini<span class="number">(17)</span></a></li>
+							<?php 
+								while ($row = $list_SeriesIpad->fetch_row()) {
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+								}
+								?>
 							</ul>
 						</li>
-						<li class="main-nav-list"><a data-toggle="collapse" href="#beverages" aria-expanded="false" aria-controls="beverages"><span class="lnr lnr-arrow-right"></span>AirPods<span class="number">(24)</span></a>
+						<li class="main-nav-list"><a data-toggle="collapse" href="#beverages" aria-expanded="false" aria-controls="beverages"><span class="lnr lnr-arrow-right"></span>AirPods</a>
 							<ul class="collapse" id="beverages" data-toggle="collapse" aria-expanded="false" aria-controls="beverages">
-								<li class="main-nav-list child"><a href="#">AirPods Pro<span class="number">(13)</span></a></li>
-								<li class="main-nav-list child"><a href="#">AirPods Max<span class="number">(09)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Apple MMTN2<span class="number">(17)</span></a></li>
+							<?php 
+								while ($row = $list_SeriesAirPods->fetch_row()) {
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+								}
+								?>
 							</ul>
 						</li>
-						<li class="main-nav-list"><a data-toggle="collapse" href="#homeClean" aria-expanded="false" aria-controls="homeClean"><span class="lnr lnr-arrow-right"></span>Apple Watch<span class="number">(53)</span></a>
+						<li class="main-nav-list"><a data-toggle="collapse" href="#homeClean" aria-expanded="false" aria-controls="homeClean"><span class="lnr lnr-arrow-right"></span>Apple Watch</a>
 							<ul class="collapse" id="homeClean" data-toggle="collapse" aria-expanded="false" aria-controls="homeClean">
-								<li class="main-nav-list child"><a href="#">Apple Watch S6<span class="number">(01)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Apple Watch S7<span class="number">(11)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Apple Watch S8<span class="number">(11)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Apple Watch Ultra<span class="number">(11)</span></a></li>
+							<?php 
+								while ($row = $list_SeriesWatch->fetch_row()) {
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+								}
+								?>
 							</ul>
 						</li>
-						<li class="main-nav-list"><a data-toggle="collapse" href="#officeProduct" aria-expanded="false" aria-controls="officeProduct"><span class="lnr lnr-arrow-right"></span>Phụ kiện Laptop<span class="number">(77)</span></a>
+						<li class="main-nav-list"><a data-toggle="collapse" href="#officeProduct" aria-expanded="false" aria-controls="officeProduct"><span class="lnr lnr-arrow-right"></span>Phụ kiện Laptop</a>
 							<ul class="collapse" id="officeProduct" data-toggle="collapse" aria-expanded="false" aria-controls="officeProduct">
-								<li class="main-nav-list child"><a href="#">Chuột Apple<span class="number">(13)</span></a></li>
-								<li class="main-nav-list child"><a href="#">Bàn phím Magic<span class="number">(09)</span></a></li>
+								<li class="main-nav-list child"><a href="?category=Chuột Apple">Chuột Apple</a></li>
+								<li class="main-nav-list child"><a href="?category=Bàn phím Magic">Bàn phím Magic</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -143,13 +202,13 @@
 						<div class="head">Giá</div>
 						<div class="price-range-area">
 							<div id="price-range"></div>
-							<div class="value-wrapper d-flex">
+							<div class="value-wrapper d-flex flex-wrap">
 								<div class="price">Giá:</div>
-								<span>$</span>
 								<div id="lower-value"></div>
+								<span>VNĐ</span>
 								<div class="to">từ</div>
-								<span>$</span>
 								<div id="upper-value"></div>
+								<span>VNĐ</span>
 							</div>
 						</div>
 					</div>
@@ -157,283 +216,89 @@
 			</div>
 			<div class="col-xl-9 col-lg-8 col-md-7">
 				<!-- Start Filter Bar -->
-				<div class="filter-bar d-flex flex-wrap align-items-center">
-					<div class="sorting">
-						<select>
-							<option value="1">Giá thấp đến cao</option>
-							<option value="1">Giá cao đến thấp</option>
-						</select>
+				<div class="filter-bar d-flex flex-wrap align-items-center justify-content-between">
+					<select id="sorting" name="sorting" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+						<option value="">Sắp xếp giá</option>
+						<option <?php if (isset($_GET['sort']) && $_GET['sort'] == "asc") { ?> selected <?php }?> value="?sort=asc<?=$paramSort?>">Giá thấp đến cao</option>
+						<option <?php if (isset($_GET['sort']) && $_GET['sort'] == "desc") { ?> selected <?php }?> value="?sort=desc<?=$paramSort?>">Giá cao đến thấp</option>
+					</select>
+					<div>
+						<a href="category.php" class="genric-btn default">Làm mới</a>
 					</div>
 				</div>
 				<!-- End Filter Bar -->
 				<!-- Start Best Seller -->
 				<section class="lattest-product-area pb-40 category-list">
-					<div class="row">
-						<!-- single product -->
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/orange.png" alt="">
-								<div class="product-details">
-									<h6>Iphone 14 Pro Max</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
+					<div class="row" id="list-product">
+						<?php 
+						while($row=$results->fetch_row()) {
+							$rating = addStar($row[13], $row[12]);
+							echo "<div class='col-lg-4 col-md-6' title='$row[2]'>
+							<div class='single-product'>
+								<img class='img-fluid' src='". $row[8] ."' alt=''>
+								<div class='product-details'>
+									<h6 class='title'>". $row[2] ."</h6>
+									<div class='price'>
+										<h6>". number_format(($row[6])) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format(($row[5])) ." VNĐ</h6>
 									</div>
-									<div class="prd-bottom">
-
-										<a href="cart.php" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Mua ngay</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Yêu thích</p>
-										</a>
-										<a href="single-product.php" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Chi tiết</p>
-										</a>
+									<div class='mt-2 d-flex align-items-center'>
+										<div>". $rating ."</div>
+										<span class='ml-2'>". $row[13] ." đánh giá</span>
 									</div>
-								</div>
-							</div>
-						</div>
-						<!-- single product -->
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/orange.png" alt="">
-								<div class="product-details">
-									<h6>Iphone 14 Pro Max</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-
-										<a href="cart.php" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Mua ngay</p>
+									<div class='prd-bottom'>
+										<a href='cart.php' class='social-info'>
+											<span class='ti-bag'></span>
+											<p class='hover-text'>Mua ngay</p>
 										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Yêu thích</p>
+										<a href='' class='social-info'>
+											<span class='lnr lnr-heart'></span>
+											<p class='hover-text'>Yêu thích</p>
 										</a>
-										<a href="single-product.php" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Chi tiết</p>
+										<a href='single-product.php?idSP=$row[0]' class='social-info'>
+											<span class='lnr lnr-move'></span>
+											<p class='hover-text'>Chi tiết</p>
 										</a>
 									</div>
 								</div>
 							</div>
-						</div>
-						<!-- single product -->
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/orange.png" alt="">
-								<div class="product-details">
-									<h6>Iphone 14 Pro Max</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
+						</div>";
+						}
 
-										<a href="cart.php" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Mua ngay</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Yêu thích</p>
-										</a>
-										<a href="single-product.php" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Chi tiết</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- single product -->
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/orange.png" alt="">
-								<div class="product-details">
-									<h6>Iphone 14 Pro Max</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-
-										<a href="cart.php" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Mua ngay</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Yêu thích</p>
-										</a>
-										<a href="single-product.php" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Chi tiết</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- single product -->
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/orange.png" alt="">
-								<div class="product-details">
-									<h6>Iphone 14 Pro Max</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-
-										<a href="cart.php" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Mua ngay</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Yêu thích</p>
-										</a>
-										<a href="single-product.php" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Chi tiết</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- single product -->
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/orange.png" alt="">
-								<div class="product-details">
-									<h6>Iphone 14 Pro Max</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-
-										<a href="cart.php" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Mua ngay</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Yêu thích</p>
-										</a>
-										<a href="single-product.php" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Chi tiết</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- single product -->
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/orange.png" alt="">
-								<div class="product-details">
-									<h6>Iphone 14 Pro Max</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-
-										<a href="cart.php" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Mua ngay</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Yêu thích</p>
-										</a>
-										<a href="single-product.php" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Chi tiết</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- single product -->
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/orange.png" alt="">
-								<div class="product-details">
-									<h6>Iphone 14 Pro Max</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-
-										<a href="cart.php" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Mua ngay</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Yêu thích</p>
-										</a>
-										<a href="single-product.php" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Chi tiết</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- single product -->
-						<div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/orange.png" alt="">
-								<div class="product-details">
-									<h6>Iphone 14 Pro Max</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-
-										<a href="cart.php" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">Mua ngay</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Yêu thích</p>
-										</a>
-										<a href="single-product.php" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">Chi tiết</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
+						if ($results->num_rows <= 0) {
+							echo "<div class='w-100 h-100 not-found d-flex align-items-center justify-content-center'>
+							<span>Không tìm thấy sản phẩm nào!</span>
+							</div>";
+						}
+						?>
 					</div>
 				</section>
 				<!-- End Best Seller -->
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
 					<div class="pagination ml-auto">
-						<a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-						<a href="#" class="active">1</a>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#" class="dot-dot"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-						<a href="#">6</a>
-						<a href="#" class="next-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+						<?php if ($currentPage <= 1) {
+							echo "<a type='button' class='prev-arrow'><i class='fa fa-long-arrow-left' aria-hidden='true'></i></a>";
+						}  else {
+							echo "<a type='button' href='?page=" . ($currentPage - 1) ."$param' class='prev-arrow'><i class='fa fa-long-arrow-left' aria-hidden='true'></i></a>";
+						}?>
+						<?php
+						for ($i = 1; $i <= $totalPages; $i++) {
+							if ($i != $currentPage) {
+								if ($i > $currentPage - 3 && $i < $currentPage + 3) {
+									echo "<a href='?page=$i$param'>$i</a>";
+								}
+							} else {
+								echo "<a class='active'>$i</a>";
+							}
+						}
+						?>
+						<?php if ($currentPage >= $totalPages) {
+							echo "<a type='button' class='next-arrow'><i class='fa fa-long-arrow-right' aria-hidden='true'></i></a>";
+						} else {
+							echo "<a type='button' href='?page=" . ($currentPage + 1) ."$param' class='next-arrow'><i class='fa fa-long-arrow-right' aria-hidden='true'></i></a>";
+						}?>
+						
 					</div>
 				</div>
 				<!-- End Filter Bar -->
@@ -453,123 +318,25 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-9">
+				<div class="col-lg-12">
 					<div class="row">
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
+					<?php 
+						while($row=$list_dealHot2->fetch_row())  {
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							<div class='single-related-product category d-flex align-items-start'>
+								<a href='single-product.php'><img src=". $row[8] ." alt=''></a>
+								<div class='desc'>
+									<a href='single-product.php' class='title'>". $row[2] ."</a>
+									<div class='price'>
+										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format(($row[5])) ." VNĐ</h6>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4 col-sm-6">
-							<div class="single-related-product d-flex">
-								<a href="single-product.php"><img src="img/product/macbook-pro.jpg" width="80" height="60" alt=""></a>
-								<div class="desc">
-									<a href="single-product.php" class="title">MacBook Pro 2021</a>
-									<div class="price">
-										<h6>$189.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-								</div>
-							</div>
-						</div>
+						</div>";
+						}
+						?>
 					</div>
-				</div>
-				<div class="col-lg-3">
-					<div class="ctg-right">
-						<a href="" target="_blank">
-							<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
-						</a>
 					</div>
 				</div>
 			</div>
@@ -660,6 +427,7 @@
 	<!--gmaps Js-->
 	<script src="js/main.js"></script>
 	<script src="js/store/common.js"></script>
+	<script src="js/store/explore.js"></script>
 </body>
 
 </html>

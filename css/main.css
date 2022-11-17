@@ -1912,6 +1912,9 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 15px;
   margin: 0;
 }
+.single-product .product-details .price h6.cost {
+  font-weight: bold;
+}
 .single-product .product-details .price .l-through {
   text-decoration: line-through;
   color: #cccccc;
@@ -2201,13 +2204,24 @@ h1, h2, h3, h4, h5, h6 {
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
+.single-related-product.category .desc {
+  margin: 0px 0px 10px 15px;
+}
+.single-related-product.category .desc .title {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .single-related-product img {
   width: 60px;
   height: 60px;
   object-fit: contain;
 }
 .single-related-product .desc {
-  margin: 10px 0px 10px 15px;
+  margin: 0px 10px 15px;
 }
 .single-related-product .desc .title {
   display: block;
@@ -3919,7 +3933,7 @@ label {
 }
 
 .filter-bar {
-  padding: 0px 20px 10px 20px;
+  padding: 10px 20px 10px 20px;
   background: #9982b3;
 }
 .filter-bar a,
@@ -4830,7 +4844,7 @@ label {
 }
 .cat_page .pagination li.blank a {
   background: transparent;
-  color: #cccccc;
+  color: #000;
   border: none;
 }
 .cat_page .pagination li:hover a, .cat_page .pagination li.active a {
@@ -4849,6 +4863,29 @@ label {
 ============================================================================================ */
 .product_image_area {
   padding-top: 120px;
+}
+
+.single-product .title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.single-product .price h6 {
+  font-weight: bold;
+}
+
+.not-found {
+  width: 100%;
+  height: 500px !important;
+}
+.not-found span {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+i.star-rv {
+  color: orange;
 }
 
 .s_Product_carousel .owl-dots {
@@ -4884,6 +4921,10 @@ label {
   font-weight: 500;
   color: #222222;
   margin-bottom: 10px;
+}
+.s_product_text .l-through {
+  text-decoration: line-through;
+  color: #cccccc;
 }
 .s_product_text h2 {
   font-size: 24px;
