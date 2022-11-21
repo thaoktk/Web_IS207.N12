@@ -16,6 +16,7 @@ function addStar($review, $star) {
     return $rating;
 }
 
+
 $list_new = mysqli_query($connect, "SELECT * FROM sanpham where New = 1 limit 8");
 
 $list_hot = mysqli_query($connect, "SELECT * FROM sanpham where Hot = 1 limit 8");

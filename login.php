@@ -32,48 +32,77 @@
 
 <body>
 
-	<!-- Start Banner Area -->
+<?php session_start(); 
+?>
+
+	<!-- End Banner Area -->
+	<?php
+	include "./templates/connect.php";
+	
+	
+	if (isset($_POST['submit']) && $_POST['submit'] == 'Đăng nhập') {
+		$result = mysqli_query($connect, "SELECT MaND, Ho, Ten, SDT, Email, TaiKhoan, MaQuyen from `nguoidung` WHERE TaiKhoan = '". $_POST['username'] ."' and MatKhau = MD5('". $_POST['password'] ."');");
+		$user = mysqli_fetch_assoc($result);
+		$_SESSION['current-user'] = $user;
+
+		if ($result->num_rows == 0) {
+			echo "<div class='mt-5 w-100'>
+			<h1 class='text-center'>Thông báo</h1>
+			<h4 class='mt-4 text-center'>Thông tin đăng nhập không chính xác!</h4>
+		</div>";
+			}
+	} ?>
+		<?php if (empty($_SESSION['current-user'])) { ?>
+				<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Đăng nhập / Đăng ký</h1>
+					<h1><?php if (!empty($_SESSION['current-user'])) {
+						echo "Xin chào ". $_SESSION['current-user']['TaiKhoan'] ." ";
+					} else {
+						echo "Đăng nhập / Đăng ký";
+					} ?></h1>
 					<nav class="d-flex align-items-center">
 						<a href="index.php">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
-						<a href="#">Đăng nhập / Đăng ký</a>
-					</nav>
+						<a href="#">
+							<?php if (!empty($_SESSION['current-user'])) {
+								echo "Cài đặt";
+							} else {
+								echo "Đăng nhập / Đăng ký";
+							} ?>
+						</a>
+						</nav>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- End Banner Area -->
-
-	<!--================Login Box Area =================-->
-	<section class="login_box_area section_gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="login_box_img">
-						<img class="img-fluid" src="img/login.jpg" alt="">
-						<div class="hover">
-							<h4>Chưa có tài khoản?</h4>
-							<p>Tạo tài khoản để có thêm nhiều tính năng với trang web của chúng tôi!</p>
-							<a class="primary-btn" href="register.php">Tạo tài khoản</a>
+		<!--================Login Box Area =================-->
+		<section class="login_box_area section_gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="login_box_img">
+							<img class="img-fluid" src="img/login.jpg" alt="">
+							<div class="hover">
+								<h4>Chưa có tài khoản?</h4>
+								<p>Tạo tài khoản để có thêm nhiều tính năng với trang web của chúng tôi!</p>
+								<a class="primary-btn" href="register.php">Tạo tài khoản</a>
+							</div>
 						</div>
 					</div>
-				</div>
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Đăng nhập vào trang web</h3>
-						<form class="row login_form" action="" method="post" id="login" novalidate="novalidate">
+						<form class="row login_form" action="" method="post" id="login">
 							<div class="col-md-12 form-group">
-								<input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								<input type="text" required class="form-control" id="username" name="username" placeholder="Tên đăng nhập" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tên đăng nhập'">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="password" name="password" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<input type="password" required class="form-control" id="password" name="password" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'">
 							</div>
 							<div class="mt-4 col-md-12 form-group">
-								<button type="submit" value="submit" class="primary-btn">Đăng ký</button>
+								<input type="submit" value="Đăng nhập" name="submit" class="primary-btn"/>
 								<a href="#">Quên mật khẩu?</a>
 							</div>
 						</form>
@@ -88,6 +117,15 @@
 			</div>
 		</div>
 	</section>
+	<?php }  else {
+		$currentUser = $_SESSION['current-user'];
+		if ($currentUser['MaQuyen'] == 1) {
+			header("Location: admin/pages/dashboard.php");
+		} else {
+			header("Location: index.php");
+
+		}
+	}?>
 	<!--================End Login Box Area =================-->
 
 

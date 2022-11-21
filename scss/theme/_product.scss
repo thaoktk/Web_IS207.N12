@@ -927,6 +927,16 @@ i.star-rv {
 	.media {
 		position: relative;
 
+		.avatar {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #e2e2e2;
+		}
+
 		.d-flex {
 			padding-right: 15px;
 		}
@@ -944,7 +954,7 @@ i.star-rv {
 			}
 
 			i {
-				color: #fbd600;
+				color: orange;
 			}
 
 			h5 {
@@ -1902,7 +1912,7 @@ i.star-rv {
 	box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.07);
 	height: 100%;
 	text-align: center;
-	padding-top: 100px;
+	padding-top: 50px;
 
 	h3 {
 		color: $title-color;

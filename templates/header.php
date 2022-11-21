@@ -1,4 +1,5 @@
 <!-- Start Header Area -->
+
 <header class="header_area sticky-header">
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light main_box">
@@ -22,7 +23,7 @@
                             </li>
                             <li class="nav-item"><a class="nav-link" href="contact.php">Liên hệ</a></li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-right d-flex flex-row align-items-center justify-content-between">
                             <li class="nav-item">
                                 <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
                             </li>
@@ -30,7 +31,12 @@
                                     <div class="cart-qty">0</div>
                                 </a></li>
                             <li class="nav-item">
-                                <a href="login.php" class=""><span class="ti-user"></span></a>
+                                <a href="<?php
+                                 if (isset($_SESSION['current-user'])) {
+                                    echo "setting.php";
+                                }  else {
+                                    echo "login.php";
+                                }?>" class=""><span class="ti-user"></span></a>
                             </li>
                         </ul>
                     </div>

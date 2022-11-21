@@ -34,6 +34,7 @@
 
 <?php include("./templates/header.php")?>
 
+
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
@@ -49,7 +50,7 @@
 		</div>
 	</section>
 	<!-- End Banner Area -->
-
+	
 	<!--================Contact Area =================-->
 	<section class="contact_area section_gap_bottom">
 		<div class="container">
@@ -75,31 +76,27 @@
 					</div>
 				</div>
 				<div class="col-lg-8">
-					<?php if (isset($_GET['action']) && $_GET['action'] == 'send') {
-						echo "đang chạy send email";
-					} else {?>
-						<form class="row contact_form" action="?action=send" method="POST" id="contactForm">
-							<div class="col-md-6">
-								<div class="form-group">
-									<input type="text" required class="form-control" id="name" name="name" placeholder="Nhập tên của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'">
-								</div>
-								<div class="form-group">
-									<input type="email" required class="form-control" id="email" name="email" placeholder="Nhập email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-								</div>
-								<div class="form-group">
-									<input type="text" required class="form-control" id="subject" name="subject" placeholder="Nhập tiêu đề" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<textarea class="form-control" name="message" id="message" rows="1" placeholder="Nhập lời nhắn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"></textarea>
-								</div>
-							</div>
-							<div class="col-md-12 text-right">
-								<button type="submit" value="submit" class="primary-btn">Gửi câu hỏi</button>
-							</div>
-						</form>
-					<?php } ?>
+				<form class="row contact_form" action="contact_process.php" method="POST" id="contactForm">
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" required class="form-control" id="name" name="name" placeholder="Nhập tên của bạn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'">
+						</div>
+						<div class="form-group">
+							<input type="email" required class="form-control" id="email" name="email" placeholder="Nhập email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+						</div>
+						<div class="form-group">
+							<input type="text" required class="form-control" id="subject" name="subject" placeholder="Nhập tiêu đề" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<textarea class="form-control" required name="message" id="message" rows="1" placeholder="Nhập lời nhắn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"></textarea>
+						</div>
+					</div>
+					<div class="col-md-12 text-right">
+						<button type="submit" value="submit" class="primary-btn">Gửi câu hỏi</button>
+					</div>
+				</form>
 				</div>
 			</div>
 		</div>

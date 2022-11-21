@@ -5167,6 +5167,15 @@ i.star-rv {
 .review_item .media {
   position: relative;
 }
+.review_item .media .avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e2e2e2;
+}
 .review_item .media .d-flex {
   padding-right: 15px;
 }
@@ -5182,7 +5191,7 @@ i.star-rv {
   margin-bottom: 8px;
 }
 .review_item .media .media-body i {
-  color: #fbd600;
+  color: orange;
 }
 .review_item .media .media-body h5 {
   font-size: 13px;
@@ -5963,7 +5972,7 @@ i.star-rv {
   box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.07);
   height: 100%;
   text-align: center;
-  padding-top: 100px;
+  padding-top: 50px;
 }
 .login_form_inner h3 {
   color: #222222;

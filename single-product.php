@@ -40,7 +40,10 @@
 	  $result = mysqli_query($connect,"SELECT * FROM sanpham WHERE MaSP = $idSP");
 	  $row = $result->fetch_row();
 	  $series = $row[3];
-	  $listProductRelated = mysqli_query($connect,"SELECT * FROM sanpham WHERE TenSeries = '$series' limit 9");
+	  $listProductRelated = mysqli_query($connect,"SELECT * FROM sanpham WHERE TenSeries = '$series' and MaSP != $idSP  limit 9");
+      $reviews = mysqli_query($connect, "SELECT * FROM danhgia WHERE MaSP = $idSP");
+	  $comments = mysqli_query($connect, "SELECT * FROM binhluan WHERE MaSP = $idSP");
+	   
  ?>
 <?php include("./templates/header.php")?>
 
@@ -66,21 +69,13 @@
 		<div class="container">
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
-					<div class="s_Product_carousel">
 						<div class="single-prd-item">
-							<img class="img-fluid" src="img/category/iphone_14.png" alt="">
+							<img class="img-fluid" src="<?=$row[8]?>" alt="">
 						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="img/category/iphone_14.png" alt="">
-						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="img/category/iphone_14.png" alt="">
-						</div>
-					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<?php 
-						$tinhTrang = $row[14] == 1 ? "Còn hàng" : "Hết hàng"; 
+						$tinhTrang = $row[7] > 0 ? "Còn hàng" : "Hết hàng"; 
 						echo "<div class='s_product_text'>
 						<h3>$row[2]</h3>
 						<div class='d-flex align-items-baseline '>
@@ -141,40 +136,31 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="comment_list">
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-1.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<h5>12th Feb, 2018 at 05:56 pm</h5>
-											<a class="reply_btn" href="#">Trả lời</a>
-										</div>
+							<?php 
+							while ($rowCmt = $comments->fetch_row()) {
+								$userCmt = mysqli_query($connect, "SELECT * FROM nguoidung WHERE MaND = $rowCmt[3]");
+								$resultUserCmt = $userCmt->fetch_row();
+								$words = explode(' ', $resultUserCmt[2]);
+								$name = !empty($words[1][0]) ? $words[1][0] : $words[0][0];
+								echo "<div class='review_item'>
+								<div class='media'>
+									<div class='d-flex'>
+									<span class='avatar'>$name</span>
 									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
+									<div class='media-body'>
+										<h4>$resultUserCmt[1] $resultUserCmt[2]</h4>
+										<h5>$rowCmt[6]</h5>
+										<a class='reply_btn' href='#'>Trả lời</a>
+									</div>
+									</div>
+									<p>$rowCmt[4]</p>
+								</div>";
+							}
+							?>
 								<div class="review_item reply">
 									<div class="media">
 										<div class="d-flex">
 											<img src="img/product/review-2.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<h5>12th Feb, 2018 at 05:56 pm</h5>
-											<a class="reply_btn" href="#">Trả lời</a>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-3.png" alt="">
 										</div>
 										<div class="media-body">
 											<h4>Blake Ruiz</h4>
@@ -239,64 +225,32 @@
 									</div>
 								</div>
 							</div>
-							<div class="mt-2 review_list">
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-1.png" alt="">
+							<div class="mt-4 review_list">
+								<?php 
+								while ($rowRv = $reviews->fetch_row()) {
+									$user = mysqli_query($connect, "SELECT * FROM nguoidung WHERE MaND = $rowRv[1]");
+	  								$resultUser = $user->fetch_row();
+									$rating = addStar(1, $rowRv[2]);
+									$words = explode(' ', $resultUser[2]);
+									$name = !empty($words[1][0]) ? $words[1][0] : $words[0][0];
+									echo "<div class='review_item'>
+										<div class='media'>
+											<div class='d-flex'>
+												<span class='avatar'>$name</span>
+											</div>
+											<div class='media-body'>
+												<h4>$resultUser[1] $resultUser[2]</h4>
+												$rating
+												<h5 class='mt-2'>$rowRv[4]</h5>
+											</div>
 										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-2.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
-								<div class="review_item">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-3.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
+										<p>$rowRv[3]</p>
+									</div>";
+								}
+								?>
 							</div>
 						</div>
-						<div class="col-lg-6">
+						<div class="mt-md-0 mt-4 col-lg-6">
 							<div class="review_box">
 								<h4>Để lại đánh giá</h4>
 								<p>Đánh giá của bạn:</p>
@@ -345,7 +299,7 @@
 					<div class="row">
 					<?php 
 						while($row=$listProductRelated->fetch_row())  {
-							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20' id='$row[0]'>
 							<div class='single-related-product d-flex'>
 								<a href='single-product.php?idSP=$row[0]'><img src=". $row[8] ." alt=''></a>
 								<div class='desc'>

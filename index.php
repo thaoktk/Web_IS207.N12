@@ -35,7 +35,9 @@
 <body>
 
 <?php include("./templates/product.php")?>
-<?php include("./templates/header.php") 
+<?php 
+session_start(); 
+include("./templates/header.php");
 ?>
 
 	<!-- start banner Area -->
