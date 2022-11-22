@@ -1,14 +1,4 @@
 $(document).ready(function () {
-    $(".product_ram button").click(function (e) {
-        $(".product_ram").find(".primary-border").addClass("default-border").removeClass("primary-border")
-        $(this).addClass("primary-border").removeClass("default-border")
-    })
-
-    $(".product_color button").click(function (e) {
-        $(".product_color").find(".primary-border").addClass("default-border").removeClass("primary-border")
-        $(this).addClass("primary-border").removeClass("default-border")
-    })
-
     $(".increase").click(function () {
         value = $(".input-text.qty").val()
         value++;
@@ -49,4 +39,25 @@ $(document).ready(function () {
         $("#st1, #st2, #st3, #st4, #st5").css("color", "orange");
         $("#rating-text").text("Tuyệt vời!")
     });
+
+    $(".icon_btn").click(function () {
+        idSP = parseInt($(this).data("product"))
+        idND = parseInt($(this).data("user"))
+        $.ajax({
+            type: "POST",
+            url: "templates/request.php",
+            dataType: "json",
+            data: {
+                request: "insert_fav",
+                idSP: idSP,
+                idND: idND
+            },
+            success: function (data, status, xhr) {
+                alert("Thêm thành công sản phẩm vào yêu thích!")
+            },
+            error: function (e) {
+                alert("Bạn đã thêm sản phẩm này vào yêu thích rồi!")
+            }
+        })
+    })
 })

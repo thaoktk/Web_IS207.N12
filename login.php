@@ -34,26 +34,6 @@
 
 <?php session_start(); 
 ?>
-
-	<!-- End Banner Area -->
-	<?php
-	include "./templates/connect.php";
-	
-	
-	if (isset($_POST['submit']) && $_POST['submit'] == 'Đăng nhập') {
-		$result = mysqli_query($connect, "SELECT MaND, Ho, Ten, SDT, Email, TaiKhoan, MaQuyen from `nguoidung` WHERE TaiKhoan = '". $_POST['username'] ."' and MatKhau = MD5('". $_POST['password'] ."');");
-		$user = mysqli_fetch_assoc($result);
-		$_SESSION['current-user'] = $user;
-
-		if ($result->num_rows == 0) {
-			echo "<div class='mt-5 w-100'>
-			<h1 class='text-center'>Thông báo</h1>
-			<h4 class='mt-4 text-center'>Thông tin đăng nhập không chính xác!</h4>
-		</div>";
-			}
-	} ?>
-		<?php if (empty($_SESSION['current-user'])) { ?>
-				<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
@@ -77,6 +57,26 @@
 			</div>
 		</div>
 	</section>
+	<!-- End Banner Area -->
+	<?php
+	include "./templates/connect.php";
+	
+	
+	if (isset($_POST['submit']) && $_POST['submit'] == 'Đăng nhập') {
+		$result = mysqli_query($connect, "SELECT MaND, Ho, Ten, SDT, Email, TaiKhoan, MaQuyen from `nguoidung` WHERE TaiKhoan = '". $_POST['username'] ."' and MatKhau = MD5('". $_POST['password'] ."');");
+		$user = mysqli_fetch_assoc($result);
+		$_SESSION['current-user'] = $user;
+
+		if ($result->num_rows == 0) {
+			echo "<div class='mt-5 w-100'>
+			<h1 class='text-center'>Thông báo</h1>
+			<h4 class='mt-4 text-center'>Thông tin đăng nhập không chính xác!</h4>
+		</div>";
+			}
+	} ?>
+		<?php if (empty($_SESSION['current-user'])) { ?>
+				<!-- Start Banner Area -->
+
 		<!--================Login Box Area =================-->
 		<section class="login_box_area section_gap">
 			<div class="container">
@@ -125,6 +125,8 @@
 			header("Location: index.php");
 
 		}
+
+		$connect->close();
 	}?>
 	<!--================End Login Box Area =================-->
 

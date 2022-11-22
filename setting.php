@@ -43,6 +43,7 @@ function hideMessage(id) {
 <body>
 
 <?php 
+include "./templates/product.php";
 include "./templates/connect.php";
 session_start(); 
 ?>
@@ -80,6 +81,7 @@ session_start();
         
     } 
 	$user = $_SESSION['current-user'];
+	$favorites = mysqli_query($connect, "SELECT * FROM yeuthich WHERE MaND = '". $user['MaND'] ."'");
     ?>
 	<?php include("./templates/header.php")?>
 	<section class="banner-area organic-breadcrumb">
@@ -136,13 +138,53 @@ session_start();
 					</div>
 				</div>
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="table-responsive">
-						
+					<div class="table-responsive d-flex flex-wrap align-items-center">
+						<?php 
+						while($rowFav=$favorites->fetch_row()) {
+							$product = mysqli_query($connect, "SELECT * FROM sanpham WHERE MaSP = '$rowFav[0]'");
+							
+							while ($rowProduct = $product->fetch_row()) {
+								$rating = addStar($rowProduct[13], $rowProduct[12]);
+								echo "<div class='col-lg-4 col-md-6' title='$rowProduct[2]'>
+										<div class='single-product'>
+											<img class='img-fluid' src='". $rowProduct[8] ."' alt=''>
+											<div class='product-details'>
+												<h6 class='title'>". $rowProduct[2] ."</h6>
+												<div class='price'>
+													<h6>". number_format(($rowProduct[6])) ." VNĐ</h6>
+													<h6 class='l-through'>". number_format(($rowProduct[5])) ." VNĐ</h6>
+												</div>
+												<div class='mt-2 d-flex align-items-center'>
+													<div>". $rating ."</div>
+													<span class='ml-2'>". $rowProduct[13] ." đánh giá</span>
+												</div>
+												<div class='prd-bottom'>
+													<a href='cart.php' class='social-info'>
+														<span class='ti-bag'></span>
+														<p class='hover-text'>Mua ngay</p>
+													</a>
+													<a class='social-info delete-fav' data-product='$rowProduct[0]' data-user='". $user['MaND'] ."'>
+														<span class='fa fa-trash'></span>
+														<p class='hover-text'>Xóa</p>
+													</a>
+													<a href='single-product.php?idSP=$rowProduct[0]' class='social-info'>
+														<span class='lnr lnr-move'></span>
+														<p class='hover-text'>Chi tiết</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>";
+								}
+						}
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+
+	<?php $connect->close(); ?>
 	<!--================End Login Box Area =================-->
 
 
@@ -158,6 +200,31 @@ session_start();
 	<!--gmaps Js-->
 	<script src="js/store/common.js"></script>
 	<script src="js/main.js"></script>
+	<script>
+		$(document).ready(function(){
+       $(".delete-fav").click(function() {
+			idSP = parseInt($(this).data("product"))
+			idND = parseInt($(this).data("user"))
+			$.ajax({
+				type: "POST",
+				url: "templates/request.php",
+				dataType: "json",
+				data: {
+					request: "delete_fav",
+					idSP: idSP,
+					idND: idND
+				},
+				success: function(data, status, xhr) {
+					alert("Xóa thành công sản phẩm khỏi yêu thích!")
+					window.location.reload();
+				},
+				error: function(e) {
+					alert("Đã xảy ra lỗi!")
+				}
+			})
+	   })
+    });  
+	</script>
 </body>
 
 </html>

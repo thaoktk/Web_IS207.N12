@@ -36,8 +36,9 @@
 
 <?php include("./templates/product.php")?>
 <?php 
-session_start(); 
-include("./templates/header.php");
+	session_start(); 
+	include("./templates/header.php");
+	$idUser = $_SESSION['current-user']['MaND'];
 ?>
 
 	<!-- start banner Area -->
@@ -242,7 +243,7 @@ include("./templates/header.php");
 											<span class='ti-bag'></span>
 											<p class='hover-text'>Mua ngay</p>
 										</a>
-										<a href='' class='social-info add-btn'>
+										<a class='social-info add-fav-btn' data-product='$row[0]' data-user='$idUser'>
 											<span class='lnr lnr-heart'></span>
 											<p class='hover-text'>Yêu thích</p>
 										</a>
@@ -292,7 +293,7 @@ include("./templates/header.php");
 											<span class='ti-bag'></span>
 											<p class='hover-text'>Mua ngay</p>
 										</a>
-										<a href='' class='social-info add-btn'>
+										<a class='social-info add-fav-btn' data-product='$row[0]' data-user='$idUser'>
 											<span class='lnr lnr-heart'></span>
 											<p class='hover-text'>Yêu thích</p>
 										</a>
@@ -433,7 +434,6 @@ include("./templates/header.php");
 	<script src="js/countdown.js"></script>
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
-	<!--gmaps Js-->
 	<script src="js/main.js"></script>
 	<script src="js/store/common.js"></script>
 </body>

@@ -53,7 +53,7 @@
 
 <?php
 	include "connect.php";
-    // session_start(); 
+    session_start(); 
 	if (isset($_POST['submit']) && $_POST['submit'] == 'Đăng nhập') {
 		$result = mysqli_query($connect, "SELECT MaND, Ho, Ten, SDT, Email, TaiKhoan, MaQuyen from `nguoidung` WHERE TaiKhoan = '". $_POST['username'] ."' and MatKhau = MD5('". $_POST['password'] ."');");
 		$currentUserAdmin = mysqli_fetch_assoc($result);
@@ -123,7 +123,7 @@
     </main>
     <?php }  else {
 		$currentUserAdmin = $_SESSION['admin-user'];
-		header("Location: dashboard.php");
+		// header("Location: dashboard.php");
 	}?>
 <!-- Core -->
 <script src="../vendor/@popperjs/core/dist/umd/popper.min.js"></script>

@@ -1,25 +1,3 @@
-// import {
-//     initializeApp
-// } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
-
-// import { getAuth } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js";
-// // TODO: Add SDKs for Firebase products that you want to use
-// // https://firebase.google.com/docs/web/setup#available-libraries
-
-// // Your web app's Firebase configuration
-// const firebaseConfig = {
-//     apiKey: "AIzaSyA-x0OO0H8oSlzmAOBrvif1NS6f9ihObKc",
-//     authDomain: "tn-store-45be0.firebaseapp.com",
-//     projectId: "tn-store-45be0",
-//     storageBucket: "tn-store-45be0.appspot.com",
-//     messagingSenderId: "140748362487",
-//     appId: "1:140748362487:web:b0bb0293e53b3d4530f9f2"
-// };
-
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const auth = getAuth(app)
-
 
 $(document).ready(function () {
     $("#sign-up").click(function (e) {
@@ -43,10 +21,24 @@ $(document).ready(function () {
         }
     })
 
-    $(".add-to-cart").click(function () {
-        cartQty = parseInt($(".cart-qty").text())
-        cartQty++;
-        $(".cart-qty").text(cartQty)
+    $(".add-fav-btn").click(function () {
+        idSP = parseInt($(this).data("product"))
+        idND = parseInt($(this).data("user"))
+        $.ajax({
+            type: "POST",
+            url: "templates/request.php",
+            dataType: "json",
+            data: {
+                request: "insert_fav",
+                idSP: idSP,
+                idND: idND
+            },
+            success: function (data, status, xhr) {
+                alert("Thêm thành công sản phẩm vào yêu thích!")
+            },
+            error: function (e) {
+                alert("Bạn đã thêm sản phẩm này vào yêu thích rồi!")
+            }
+        })
     })
-
 })

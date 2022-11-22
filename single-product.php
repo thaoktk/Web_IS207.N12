@@ -35,6 +35,8 @@
 
 <?php include "./templates/connect.php"; 
 	  include "./templates/product.php";
+	  session_start();
+	  $idUser = $_SESSION['current-user']['MaND'];
 	  
 	  $idSP = isset($_GET['idSP']) ? $_GET['idSP'] : "";
 	  $result = mysqli_query($connect,"SELECT * FROM sanpham WHERE MaSP = $idSP");
@@ -43,7 +45,6 @@
 	  $listProductRelated = mysqli_query($connect,"SELECT * FROM sanpham WHERE TenSeries = '$series' and MaSP != $idSP  limit 9");
       $reviews = mysqli_query($connect, "SELECT * FROM danhgia WHERE MaSP = $idSP");
 	  $comments = mysqli_query($connect, "SELECT * FROM binhluan WHERE MaSP = $idSP");
-	   
  ?>
 <?php include("./templates/header.php")?>
 
@@ -88,7 +89,8 @@
 						</ul>
 						<p>$row[9]
 						</p>
-						<div class='mt-5 product_count'>
+						<h5 class='mt-5 '>Còn lại: $row[7]</h5>
+						<div class='product_count'>
 							<label for='qty'>Số lượng:</label>
 							<input type='text' name='qty' id='sst' maxlength='12' value='1' title='Quantity:' class='input-text qty'>
 							<button class='increase items-count' type='button'><i class='lnr lnr-chevron-up'></i></button>
@@ -96,7 +98,7 @@
 						</div>
 						<div class='card_area d-flex align-items-center'>
 							<a type='button' class='primary-btn add-to-cart text-white'>Thêm vào giỏ hàng</a>
-							<a class='icon_btn'><i class='lnr lnr lnr-heart'></i></a>
+							<a class='icon_btn' data-product='$row[0]' data-user='$idUser'><i class='lnr lnr lnr-heart'></i></a>
 						</div>
 					</div>";
 					?>
@@ -178,21 +180,6 @@
 							<div class="review_box">
 								<h4>Để lại bình luận</h4>
 								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="name" name="name" placeholder="Tên của bạn">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="email" class="form-control" id="email" name="email" placeholder="Email">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="number" name="number" placeholder="Số điện thoại">
-										</div>
-									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Bình luận"></textarea>
@@ -326,7 +313,8 @@
 	<!-- End related-product Area -->
 
 	<?php include("./templates/footer.php")?>
-
+	<?php $connect->close(); ?>
+	
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
@@ -341,7 +329,6 @@
 	<script src="js/main.js"></script>
 	<script src="js/store/product.js"></script>
 	<script src="js/store/common.js"></script>
-
 </body>
 
 </html>
