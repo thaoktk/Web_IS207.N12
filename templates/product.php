@@ -34,4 +34,8 @@ $list_SeriesIpad = mysqli_query($connect, "SELECT DISTINCT(TenSeries) FROM sanph
 $list_SeriesAirPods = mysqli_query($connect, "SELECT DISTINCT(TenSeries) FROM sanpham WHERE TenSeries LIKE '%AirPods%' ORDER by TenSeries");
 
 $list_SeriesWatch = mysqli_query($connect, "SELECT DISTINCT(TenSeries) FROM sanpham WHERE TenSeries LIKE '%Apple Watch%' ORDER by TenSeries");
+
+$list_VoucherFreeShip = mysqli_query($connect, "SELECT * FROM khuyenmai WHERE MaLoaiKM = '1' and SoLuong > 0");
+
+$list_VoucherDiscount = mysqli_query($connect, "SELECT * FROM khuyenmai WHERE MaLoaiKM = '2' and SoLuong > 0");
 ?>

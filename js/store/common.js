@@ -41,4 +41,15 @@ $(document).ready(function () {
             }
         })
     })
+
+    $('.copy-btn').click(function () {
+        copyText = $(this).parent().find("h5").text()
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val(copyText).select();
+        document.execCommand("copy");
+        $temp.remove();
+
+        alert("Đã lấy mã giảm giá: " + copyText);
+    })
 })

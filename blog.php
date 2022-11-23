@@ -32,6 +32,7 @@
 
 <body>
 
+    <?php session_start();  ?>
     <?php include("./templates/header.php")?>
 
     <!-- Start Banner Area -->
@@ -226,7 +227,7 @@
                         </aside>
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
-                            <h4>Charlie Barber</h4>
+                            <h4>Ba Tê Nờ</h4>
                             <p>Admin</p>
                             <div class="social_icon">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -234,9 +235,7 @@
                                 <a href="#"><i class="fa fa-github"></i></a>
                                 <a href="#"><i class="fa fa-behance"></i></a>
                             </div>
-                            <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get. Boot camps have itssuppor
-                                ters andits detractors.</p>
+                            <p>Bất lực sinh tích cực.</p>
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget popular_post_widget">

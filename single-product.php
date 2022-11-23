@@ -36,15 +36,16 @@
 <?php include "./templates/connect.php"; 
 	  include "./templates/product.php";
 	  session_start();
-	  $idUser = $_SESSION['current-user']['MaND'];
+	  $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
 	  
 	  $idSP = isset($_GET['idSP']) ? $_GET['idSP'] : "";
 	  $result = mysqli_query($connect,"SELECT * FROM sanpham WHERE MaSP = $idSP");
 	  $row = $result->fetch_row();
 	  $series = $row[3];
 	  $listProductRelated = mysqli_query($connect,"SELECT * FROM sanpham WHERE TenSeries = '$series' and MaSP != $idSP  limit 9");
-      $reviews = mysqli_query($connect, "SELECT * FROM danhgia WHERE MaSP = $idSP");
-	  $comments = mysqli_query($connect, "SELECT * FROM binhluan WHERE MaSP = $idSP");
+      $reviews = mysqli_query($connect, "SELECT * FROM danhgia WHERE MaSP = $idSP order by NgayLap desc");
+	  $comments = mysqli_query($connect, "SELECT * FROM binhluan WHERE MaSP = $idSP order by NgayLap desc");
+
  ?>
 <?php include("./templates/header.php")?>
 
@@ -89,16 +90,16 @@
 						</ul>
 						<p>$row[9]
 						</p>
-						<h5 class='mt-5 '>Còn lại: $row[7]</h5>
-						<div class='product_count'>
+						<h5 class='mt-5 quantity-product'>Còn lại: <span>$row[7]</span></h5>
+						<div class='mt-2 product_count'>
 							<label for='qty'>Số lượng:</label>
-							<input type='text' name='qty' id='sst' maxlength='12' value='1' title='Quantity:' class='input-text qty'>
+							<input type='text' name='qty' id='sst' maxlength='12' value='1' title='Số lượng:' class='input-text qty'>
 							<button class='increase items-count' type='button'><i class='lnr lnr-chevron-up'></i></button>
 							<button class='reduced items-count' type='button'><i class='lnr lnr-chevron-down'></i></button>
 						</div>
 						<div class='card_area d-flex align-items-center'>
-							<a type='button' class='primary-btn add-to-cart text-white'>Thêm vào giỏ hàng</a>
-							<a class='icon_btn' data-product='$row[0]' data-user='$idUser'><i class='lnr lnr lnr-heart'></i></a>
+							<a type='button' class='primary-btn add-to-cart text-white' data-product='$idSP'>Mua ngay</a>
+							<a class='icon_btn' data-product='$idSP' data-user='$idUser'><i class='lnr lnr lnr-heart'></i></a>
 						</div>
 					</div>";
 					?>
@@ -119,10 +120,10 @@
 					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Cấu hình</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Bình luận</a>
+					<a class="nav-link active" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Bình luận</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Đánh giá</a>
+					<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Đánh giá</a>
 				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
@@ -134,7 +135,7 @@
 						<?php echo $row[4] ?>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+				<div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="comment_list">
@@ -152,48 +153,58 @@
 									<div class='media-body'>
 										<h4>$resultUserCmt[1] $resultUserCmt[2]</h4>
 										<h5>$rowCmt[6]</h5>
-										<a class='reply_btn' href='#'>Trả lời</a>
+										<button type='button' class='reply_btn' data-comment='$rowCmt[0]' data-user='$idUser'>Trả lời</button>
 									</div>
 									</div>
-									<p>$rowCmt[4]</p>
-								</div>";
-							}
-							?>
-								<div class="review_item reply">
-									<div class="media">
-										<div class="d-flex">
-											<img src="img/product/review-2.png" alt="">
-										</div>
-										<div class="media-body">
-											<h4>Blake Ruiz</h4>
-											<h5>12th Feb, 2018 at 05:56 pm</h5>
-											<a class="reply_btn" href="#">Trả lời</a>
-										</div>
-									</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo</p>
-								</div>
+									<p>$rowCmt[4]</p>" ?>
+									<?php 
+									$replyCmts = mysqli_query($connect, "SELECT * FROM traloibinhluan WHERE MaBL = $rowCmt[0] order by NgayLap desc");
+									while ($rowReplyCmt = $replyCmts->fetch_row()) {
+										$userReplyCmt = mysqli_query($connect, "SELECT * FROM nguoidung WHERE MaND = $rowReplyCmt[2]");
+										$resultUserReplyCmt = $userReplyCmt->fetch_row();
+										$words2 = explode(' ', $resultUserReplyCmt[2]);
+										$nameReply = !empty($words2[1][0]) ? $words2[1][0] : $words2[0][0];
+										$admin = $resultUserReplyCmt[7] == 1 ? "<span class='mx-2 text-warning'>Admin</span>" : "";
+										echo "<div class='mt-3 review_item reply'>
+												<div class='media'>
+													<div class='d-flex'>
+														<span class='avatar'>$nameReply</span>
+													</div>
+													<div class='media-body'>
+														<h4>$resultUserReplyCmt[1] $resultUserReplyCmt[2] $admin</h4>
+														<h5>$rowReplyCmt[5]</h5>
+													</div>
+													</div>
+												<p>$rowReplyCmt[3]</p>
+											</div>";
+									}
+									?>
+								<?php echo "</div>"; }
+								
+								if ($comments->num_rows <= 0) {
+									echo "<div class='text-center'>Chưa có bình luận nào!</div>";
+								}
+								?>
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="review_box">
 								<h4>Để lại bình luận</h4>
-								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+								<form class="row contact_form" method="POST" >
 									<div class="col-md-12">
 										<div class="form-group">
-											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Bình luận"></textarea>
+											<textarea class="form-control cmt-input" name="message-comment" required rows="1" placeholder="Bình luận"></textarea>
 										</div>
 									</div>
 									<div class="col-md-12 text-right">
-										<button type="submit" value="submit" class="btn primary-btn">Gửi ngay</button>
+										<input type="submit" value="Gửi ngay" name="submit-comment" class="btn primary-btn" id="submit-comment" data-product='<?=$idSP?>' data-user='<?=$idUser?>' >
 									</div>
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+				<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="row total_rate">
@@ -276,13 +287,76 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-6 text-center">
 					<div class="section-title">
+						<h1>Voucher hiện có</h1>
+						<p>Có lẽ bạn sẽ cần đó nha. Nhanh tay nào, số lượng có hạn!</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<h4 class="text-center">Voucher free ship</h4>
+					<div class="mt-4 row">
+					<?php 
+						while($row=$list_VoucherFreeShip->fetch_row())  {
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							<div class='single-related-product d-flex'>
+								<div class='desc'>
+									<div class='d-flex'>
+										<h5 class='text-primary'>$row[1]</h5>
+										<button type='button' class='mx-4 copy-btn'>Copy</button>
+									</div>
+									<div class='price'>
+										<h6 class='cost'>Số lượng: $row[4]</h6>
+										<h6>Trị giá: <span class='text-warning'>$row[3]</span> VNĐ</h6>
+									</div>
+								</div>
+							</div>
+						</div>";
+						}
+						?>
+					</div>
+				</div>
+				<div class="col-md-6">
+				<h4 class="text-center">Voucher giảm giá</h4>
+						<div class="mt-4 row">
+					<?php 
+						while($row=$list_VoucherDiscount->fetch_row())  {
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							<div class='single-related-product d-flex'>
+								<div class='desc'>
+									<div class='d-flex'>
+										<h5 class='text-primary'>$row[1]</h5>
+										<button type='button' class='mx-4 copy-btn'>Copy</button>
+									</div>
+									<div class='price'>
+										<h6 class='cost'>Số lượng: $row[4]</h6>
+										<h6>Trị giá: <span class='text-warning'>$row[3]</span> VNĐ</h6>
+									</div>
+								</div>
+							</div>
+						</div>";
+						}
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End related-product Area -->
+
+	<!-- Start related-product Area -->
+	<section class="related-product-area section_gap_bottom">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 text-center">
+					<div class="section-title">
 						<h1>Các sản phẩm tương tự</h1>
 						<p>Khám phá các sản phẩm tương tự của cửa hàng chúng tôi.</p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-9">
+				<div class="col-lg-12">
 					<div class="row">
 					<?php 
 						while($row=$listProductRelated->fetch_row())  {
@@ -300,11 +374,6 @@
 						</div>";
 						}
 						?>
-					</div>
-				</div>
-				<div class="col-lg-3">
-					<div class="ctg-right">
-						<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
 					</div>
 				</div>
 			</div>

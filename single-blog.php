@@ -32,7 +32,7 @@
 </head>
 
 <body>
-
+<?php session_start();  ?>
 <?php include("./templates/header.php")?>
 
     <!-- Start Banner Area -->

@@ -33,6 +33,9 @@
 
 <body>
 
+    <?php include "./templates/product.php";
+    session_start();
+    ?>
     <?php include("./templates/header.php")?>
 
     <!-- Start Banner Area -->
@@ -165,14 +168,16 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <div class="cupon_text d-flex align-items-center">
+                                    <div class="cupon_text d-flex align-items-center justify-content-end">
                                         <input type="text" placeholder="Mã giảm giá">
                                         <a class="primary-btn">Dùng</a>
-                                        <a class="gray_btn">Xóa</a>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
+                                <td>
+
+                                </td>
                                 <td>
 
                                 </td>
@@ -197,6 +202,9 @@
 
                                 </td>
                                 <td>
+
+                                </td>
+                                <td>
                                     <div class="checkout_btn_inner d-flex align-items-center">
                                         <a class="gray_btn" href="#">Tiếp tục shopping</a>
                                         <a class="primary-btn" href="checkout.php">Đi đến thanh toán</a>
@@ -210,6 +218,69 @@
         </div>
     </section>
     <!--================End Cart Area =================-->
+
+    	<!-- Start related-product Area -->
+	<section class="related-product-area section_gap_bottom">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 text-center">
+					<div class="section-title">
+						<h1>Voucher hiện có</h1>
+						<p>Có lẽ bạn sẽ cần đó nha. Nhanh tay nào, số lượng có hạn!</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<h4 class="text-center">Voucher free ship</h4>
+					<div class="mt-4 row">
+					<?php 
+						while($row=$list_VoucherFreeShip->fetch_row())  {
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							<div class='single-related-product d-flex'>
+								<div class='desc'>
+									<div class='d-flex'>
+										<h5 class='text-primary'>$row[1]</h5>
+										<button type='button' class='mx-4 copy-btn'>Copy</button>
+									</div>
+									<div class='price'>
+										<h6 class='cost'>Số lượng: $row[4]</h6>
+										<h6>Trị giá: <span class='text-warning'>$row[3]</span> VNĐ</h6>
+									</div>
+								</div>
+							</div>
+						</div>";
+						}
+						?>
+					</div>
+				</div>
+				<div class="col-lg-6">
+				<h4 class="text-center">Voucher giảm giá</h4>
+						<div class="mt-4 row">
+					<?php 
+						while($row=$list_VoucherDiscount->fetch_row())  {
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							<div class='single-related-product d-flex'>
+								<div class='desc'>
+									<div class='d-flex'>
+										<h5 class='text-primary'>$row[1]</h5>
+										<button type='button' class='mx-4 copy-btn'>Copy</button>
+									</div>
+									<div class='price'>
+										<h6 class='cost'>Số lượng: $row[4]</h6>
+										<h6>Trị giá: <span class='text-warning'>$row[3]</span> VNĐ</h6>
+									</div>
+								</div>
+							</div>
+						</div>";
+						}
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End related-product Area -->
 
     <?php include("./templates/footer.php")?>
     

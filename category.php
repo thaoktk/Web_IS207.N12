@@ -31,10 +31,12 @@
 </head>
 
 <body id="category">
-<?php include("./templates/header.php")?>
+<?php
+session_start();
+include("./templates/header.php")?>
 <?php include "./templates/connect.php"; 
 	  include "./templates/product.php";
-
+	
 	$param = "";
 	$paramSort = "";
 	$orderCondition = "";

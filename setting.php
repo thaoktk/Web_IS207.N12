@@ -138,7 +138,14 @@ session_start();
 					</div>
 				</div>
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="table-responsive d-flex flex-wrap align-items-center">
+					<?php
+						if ($favorites->num_rows > 0) {
+							echo "<button class='genric-btn primary delete-all' data-user='".$user['MaND']."'>Xóa hết</button>";
+						} else {
+							echo "<div class='text-center'>Không có sản phẩm nào trong danh sách yêu thích</div>";
+						}
+					?>
+					<div class="mt-5 table-responsive d-flex flex-wrap align-items-center">
 						<?php 
 						while($rowFav=$favorites->fetch_row()) {
 							$product = mysqli_query($connect, "SELECT * FROM sanpham WHERE MaSP = '$rowFav[0]'");
@@ -202,27 +209,47 @@ session_start();
 	<script src="js/main.js"></script>
 	<script>
 		$(document).ready(function(){
-       $(".delete-fav").click(function() {
-			idSP = parseInt($(this).data("product"))
-			idND = parseInt($(this).data("user"))
-			$.ajax({
-				type: "POST",
-				url: "templates/request.php",
-				dataType: "json",
-				data: {
-					request: "delete_fav",
-					idSP: idSP,
-					idND: idND
-				},
-				success: function(data, status, xhr) {
-					alert("Xóa thành công sản phẩm khỏi yêu thích!")
-					window.location.reload();
-				},
-				error: function(e) {
-					alert("Đã xảy ra lỗi!")
-				}
+			$(".delete-fav").click(function() {
+				idSP = parseInt($(this).data("product"))
+				idND = parseInt($(this).data("user"))
+				$.ajax({
+					type: "POST",
+					url: "templates/request.php",
+					dataType: "json",
+					data: {
+						request: "delete_fav",
+						idSP: idSP,
+						idND: idND
+					},
+					success: function(data, status, xhr) {
+						alert("Xóa thành công sản phẩm khỏi yêu thích!")
+						window.location.reload();
+					},
+					error: function(e) {
+						alert("Đã xảy ra lỗi!")
+					}
+				})
 			})
-	   })
+
+			$(".delete-all").click(function() {
+				idND = parseInt($(this).data("user"))
+				$.ajax({
+					type: "POST",
+					url: "templates/request.php",
+					dataType: "json",
+					data: {
+						request: "delete_all_fav",
+						idND: idND
+					},
+					success: function(data, status, xhr) {
+						alert("Xóa thành công tất cả sản phẩm khỏi yêu thích!")
+						window.location.reload();
+					},
+					error: function(e) {
+						alert("Đã xảy ra lỗi!")
+					}
+				})
+			})
     });  
 	</script>
 </body>

@@ -38,7 +38,7 @@
 <?php 
 	session_start(); 
 	include("./templates/header.php");
-	$idUser = $_SESSION['current-user']['MaND'];
+	$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
 ?>
 
 	<!-- start banner Area -->
@@ -100,8 +100,8 @@
 						<div class="f-icon">
 							<img src="img/features/f-icon1.png" alt="">
 						</div>
-						<h6>Miễn phí vẫn chuyển</h6>
-						<p>Miễn phí tất cả các đơn</p>
+						<h6>Vận chuyển toàn quốc</h6>
+						<p>Hỗ trợ mọi vùng miền</p>
 					</div>
 				</div>
 				<!-- single features -->
@@ -239,10 +239,6 @@
 										<span class='ml-2'>". $row[13] ." đánh giá</span>
 									</div>
 									<div class='prd-bottom'>
-										<a href='cart.php' class='social-info'>
-											<span class='ti-bag'></span>
-											<p class='hover-text'>Mua ngay</p>
-										</a>
 										<a class='social-info add-fav-btn' data-product='$row[0]' data-user='$idUser'>
 											<span class='lnr lnr-heart'></span>
 											<p class='hover-text'>Yêu thích</p>
@@ -289,10 +285,6 @@
 										<span class='ml-2'>". $row[13] ." đánh giá</span>
 									</div>
 									<div class='prd-bottom'>
-										<a href='cart.php' class='social-info'>
-											<span class='ti-bag'></span>
-											<p class='hover-text'>Mua ngay</p>
-										</a>
 										<a class='social-info add-fav-btn' data-product='$row[0]' data-user='$idUser'>
 											<span class='lnr lnr-heart'></span>
 											<p class='hover-text'>Yêu thích</p>
@@ -363,8 +355,8 @@
 									<span class='ml-2'>". $row[13] ." đánh giá</span>
 							</div>
 							<div class='add-bag d-flex align-items-center justify-content-center'>
-								<a class='add-btn'><span class='ti-bag'></span></a>
-								<span class='add-text text-uppercase'>Thêm vào giỏ hàng</span>
+								<a href='single-product.php?idSP=$row[0]' class='social-info add-btn'><span class='lnr lnr-move'></span></a>
+								<span class='add-text text-uppercase'>Chi tiết</span>
 							</div>
 						</div>
 					</div>";
@@ -414,6 +406,69 @@
 						<a href="#" target="_blank">
 							<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
 						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End related-product Area -->
+
+	<!-- Start related-product Area -->
+	<section class="related-product-area section_gap_bottom">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 text-center">
+					<div class="section-title">
+						<h1>Voucher hiện có</h1>
+						<p>Có lẽ bạn sẽ cần đó nha. Nhanh tay nào, số lượng có hạn!</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<h4 class="text-center">Voucher free ship</h4>
+					<div class="mt-4 row">
+					<?php 
+						while($row=$list_VoucherFreeShip->fetch_row())  {
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							<div class='single-related-product d-flex'>
+								<div class='desc'>
+									<div class='d-flex'>
+										<h5 class='text-primary'>$row[1]</h5>
+										<button type='button' class='mx-4 copy-btn'>Copy</button>
+									</div>
+									<div class='price'>
+										<h6 class='cost'>Số lượng: $row[4]</h6>
+										<h6>Trị giá: <span class='text-warning'>$row[3]</span> VNĐ</h6>
+									</div>
+								</div>
+							</div>
+						</div>";
+						}
+						?>
+					</div>
+				</div>
+				<div class="col-lg-6">
+				<h4 class="text-center">Voucher giảm giá</h4>
+						<div class="mt-4 row">
+					<?php 
+						while($row=$list_VoucherDiscount->fetch_row())  {
+							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
+							<div class='single-related-product d-flex'>
+								<div class='desc'>
+									<div class='d-flex'>
+										<h5 class='text-primary'>$row[1]</h5>
+										<button type='button' class='mx-4 copy-btn'>Copy</button>
+									</div>
+									<div class='price'>
+										<h6 class='cost'>Số lượng: $row[4]</h6>
+										<h6>Trị giá: <span class='text-warning'>$row[3]</span> VNĐ</h6>
+									</div>
+								</div>
+							</div>
+						</div>";
+						}
+						?>
 					</div>
 				</div>
 			</div>

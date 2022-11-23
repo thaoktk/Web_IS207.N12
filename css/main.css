@@ -5158,6 +5158,12 @@ i.star-rv {
   border-top: 0px;
 }
 
+.copy-btn {
+  padding: 1px 3px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
 .review_item {
   margin-bottom: 15px;
 }
