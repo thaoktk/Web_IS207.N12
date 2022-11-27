@@ -88,6 +88,13 @@ $(document).ready(function () {
         }
     })
 
+    $(".reply_btn").each(function () {
+        $(this).click(function () {
+            idCmtReply = $(this).data("comment")
+            $("#submit-comment").attr("data-cmtReply", idCmtReply)
+        })
+    })
+
     $(".reply_btn").click(function () {
         $(".cmt-input").focus()
         $(".cmt-input").attr("placeholder", "Trả lời bình luận");
@@ -100,7 +107,7 @@ $(document).ready(function () {
         if (idND) {
             if (cmt.trim() !== "") {
                 if ($(".cmt-input").attr("placeholder") == "Trả lời bình luận") {
-                    idBL = parseInt($(".reply_btn").data("comment"))
+                    idBL = $("#submit-comment").attr("data-cmtReply")
                     $.ajax({
                         type: "POST",
                         url: "templates/request.php",
@@ -148,7 +155,7 @@ $(document).ready(function () {
     $(".add-to-cart").click(function () {
         quantity = parseInt($(".input-text.qty").val())
         idSP = parseInt($(this).data("product"))
-        
+
         // $.ajax({
         //     type: "POST",
         //     url: 'templates/request.php',

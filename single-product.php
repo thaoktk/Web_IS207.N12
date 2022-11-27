@@ -158,7 +158,7 @@
 									</div>
 									<p>$rowCmt[4]</p>" ?>
 									<?php 
-									$replyCmts = mysqli_query($connect, "SELECT * FROM traloibinhluan WHERE MaBL = $rowCmt[0] order by NgayLap desc");
+									$replyCmts = mysqli_query($connect, "SELECT * FROM traloibinhluan WHERE MaBL = $rowCmt[0] order by NgayLap asc");
 									while ($rowReplyCmt = $replyCmts->fetch_row()) {
 										$userReplyCmt = mysqli_query($connect, "SELECT * FROM nguoidung WHERE MaND = $rowReplyCmt[2]");
 										$resultUserReplyCmt = $userReplyCmt->fetch_row();
