@@ -33,8 +33,17 @@
 
 <body>
 
-    <?php include "./templates/product.php";
+    <?php
+    include "./templates/connect.php"; 
+    include "./templates/product.php";
     session_start();
+    if (!isset($_SESSION["cart"])) {
+        $_SESSION["cart"] = array();
+    }
+
+    if (!empty($_SESSION["cart"])) {
+        $products = mysqli_query($connect, "SELECT * FROM `sanpham` WHERE `MaSP` IN (" . implode(",", array_keys($_SESSION["cart"])) . ")");
+    }
     ?>
     <?php include("./templates/header.php")?>
 
@@ -70,7 +79,43 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <?php
+                            if (!empty($products)) {
+                                $total = 0;
+                                $num = 1;
+                                while ($row = mysqli_fetch_array($products)) {
+                                    echo "<tr>
+                                    <td>
+                                        <div class='media'>
+                                            <div class='d-flex'>
+                                                <img src='$row[8]' class='img-product' >
+                                            </div>
+                                            <div class='media-body'>
+                                                <p>$row[2]</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class='btn-delete ml-3 genric-btn default-border small'>Xóa</button>
+                                    </td>
+                                    <td>
+                                        <h5 class='product-price'><span>". number_format(($row[6])) ." VNĐ</span></h5>
+                                    </td>
+                                    <td>
+                                        <div class='product_count'>
+                                            <input type='text' name='qty' data-id='1' value='". $_SESSION['cart'][$row[0]] ."' title='Số lượng mua:' class='input-text qty'>
+                                            <button class='increase items-count' data-id='1' type='button'><i class='lnr lnr-chevron-up'></i></button>
+                                            <button class='reduced items-count' data-id='1' type='button'><i class='lnr lnr-chevron-down'></i></button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5 class='product-cost'><span>". number_format($row[6] * $_SESSION["cart"][$row[0]]) ." VNĐ</span></h5>
+                                    </td>
+                                </tr>";
+                                }
+                            }
+                            ?>
+                            <!-- <tr>
                                 <td>
                                     <div class="media">
                                         <div class="d-flex">
@@ -98,65 +143,7 @@
                                 <td>
                                     <h5 class="product-cost">$<span>360</span></h5>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/orange.png" with="200" height="100" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>MacBook Pro 2021</p>
-                                            <p>Trắng, 256GB</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn-delete ml-3 genric-btn default-border small">Xóa</button>
-                                </td>
-                                <td>
-                                    <h5 class="product-price">$ <span>360.00</span></h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" data-id="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                        <button class="increase items-count" data-id="2" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button class="reduced items-count" data-id="2" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="product-cost">$<span>360</span></h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/orange.png" with="200" height="100" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>Ipad Mini 2020</p>
-                                            <p>Trắng, 256GB</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn-delete ml-3 genric-btn default-border small">Xóa</button>
-                                </td>
-                                <td>
-                                    <h5 class="product-price">$ <span>360.00</span></h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" data-id="3" value="1" title="Quantity:" class="input-text qty">
-                                        <button class="increase items-count" data-id="3" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button class="reduced items-count" data-id="3" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="product-cost">$<span>360</span></h5>
-                                </td>
-                            </tr>
+                            </tr> -->
                             <tr class="bottom_button">
                                 <td>
                                     <a class="gray_btn">Xóa hết</a>

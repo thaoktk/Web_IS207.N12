@@ -544,6 +544,12 @@
 
 }
 
+.img-product {
+	width: 100px;
+	height: 50px;
+	object-fit: contain;
+}
+
 .single-product {
 	.title {
 		white-space: nowrap;
@@ -923,6 +929,16 @@ i.star-rv {
 	border-radius: 3px;
 }
 
+.avatar {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #e2e2e2;
+}
+
 .review_item {
 	margin-bottom: 15px;
 
@@ -933,15 +949,7 @@ i.star-rv {
 	.media {
 		position: relative;
 
-		.avatar {
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			background-color: #e2e2e2;
-		}
+		
 
 		.d-flex {
 			padding-right: 15px;

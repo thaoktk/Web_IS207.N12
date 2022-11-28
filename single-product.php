@@ -152,7 +152,7 @@
 									</div>
 									<div class='media-body'>
 										<h4>$resultUserCmt[1] $resultUserCmt[2]</h4>
-										<h5>$rowCmt[6]</h5>
+										<h5>$rowCmt[5]</h5>
 										<button type='button' class='reply_btn' data-comment='$rowCmt[0]' data-user='$idUser'>Trả lời</button>
 									</div>
 									</div>

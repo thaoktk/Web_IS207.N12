@@ -156,23 +156,23 @@ $(document).ready(function () {
         quantity = parseInt($(".input-text.qty").val())
         idSP = parseInt($(this).data("product"))
 
-        // $.ajax({
-        //     type: "POST",
-        //     url: 'templates/request.php',
-        //     data: {
-        //         request: "update_cart",
-        //         idSP: idSP,
-        //         quantity: quantity
-        //     },
-        //     success: function (response) {
-        //         response = JSON.parse(response);
-        //         if (response.status == 0) { //Có lỗi
-        //             alert(response.message);
-        //         } else { //Mua thành công
-        //             alert(response.message);
-        //             //                                    location.reload();
-        //         }
-        //     }
-        // });
+        $.ajax({
+            type: "POST",
+            url: 'templates/request.php',
+            data: {
+                request: "update_cart",
+                idSP: idSP,
+                quantity: quantity
+            },
+            success: function (response) {
+                response = JSON.parse(response);
+                if (response.status == 0) { //Có lỗi
+                    alert(response.message);
+                } else { //Mua thành công
+                    alert(response.message);
+                    window.location.reload();
+                }
+            }
+        });
     })
 })

@@ -4865,6 +4865,12 @@ label {
   padding-top: 120px;
 }
 
+.img-product {
+  width: 100px;
+  height: 50px;
+  object-fit: contain;
+}
+
 .single-product .title {
   white-space: nowrap;
   overflow: hidden;
@@ -5164,6 +5170,16 @@ i.star-rv {
   border-radius: 3px;
 }
 
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e2e2e2;
+}
+
 .review_item {
   margin-bottom: 15px;
 }
@@ -5172,15 +5188,6 @@ i.star-rv {
 }
 .review_item .media {
   position: relative;
-}
-.review_item .media .avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #e2e2e2;
 }
 .review_item .media .d-flex {
   padding-right: 15px;

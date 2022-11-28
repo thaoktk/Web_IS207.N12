@@ -476,7 +476,7 @@
 	</section>
 	<!-- End related-product Area -->
 	
-
+	<?php $connect->close(); ?>
 	<?php include("./templates/footer.php")?>
 
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>

@@ -32,7 +32,25 @@
 </head>
 
 <body>
-<?php session_start();  ?>
+    <?php 
+    include "./templates/connect.php"; 
+    session_start();
+    $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+
+    $idBlog = isset($_GET['idBlog']) ? $_GET['idBlog'] : "";
+    $result = mysqli_query($connect,"SELECT * FROM tintuc WHERE MaTin = $idBlog");
+    $row = $result->fetch_row();
+
+    $resultPrevPost = mysqli_query($connect,"SELECT * FROM tintuc WHERE MaTin = ". (int)$idBlog - 1 ."");
+    $rowPrevPost = $resultPrevPost->fetch_row();
+
+    $resultNextPost = mysqli_query($connect,"SELECT * FROM tintuc WHERE MaTin = ". (int)$idBlog + 1 ."");
+    $rowNextPost = $resultNextPost->fetch_row();
+
+    $comments = mysqli_query($connect, "SELECT * FROM binhluan WHERE MaTin = $idBlog order by NgayLap desc");
+    $time = date_create()->format('Y-m-d H:i:s');
+    $resultsPopular = mysqli_query($connect,"SELECT * FROM tintuc WHERE NgayDang <= '$time' and MaTin != $idBlog limit 4");
+    ?>
 <?php include("./templates/header.php")?>
 
     <!-- Start Banner Area -->
@@ -43,6 +61,7 @@
                     <h1>Chi tiết blog</h1>
                     <nav class="d-flex align-items-center">
                         <a href="index.php">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="blog.php">BLog<span class="lnr lnr-arrow-right"></span></a>
                         <a href="#">Chi tiết</a>
                     </nav>
                 </div>
@@ -59,125 +78,81 @@
                     <div class="single-post row">
                         <div class="col-lg-12">
                             <div class="feature-img">
-                                <img class="img-fluid" src="img/blog/feature-img1.jpg" alt="">
+                                <img class="img-fluid" src="<?=$row[4]?>" alt="">
                             </div>
                         </div>
                         <div class="col-lg-3  col-md-3">
                             <div class="blog_info text-right">
                                 <ul class="blog_meta list">
-                                    <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                    <li><a href="#">12 Dec, 2018<i class="lnr lnr-calendar-full"></i></a></li>
+                                    <li><a href="#"><?=$row[5]?><i class="lnr lnr-user"></i></a></li>
+                                    <li><a href="#"><?=$row[7]?><i class="lnr lnr-calendar-full"></i></a></li>
                                     <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
                                     <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9 blog_details">
-                            <h2>Astronomy Binoculars A Great Alternative</h2>
-                            <p class="excert">
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand
-                                why you should have to spend money on boot camp when you can get the MCSE study
-                                materials yourself at a fraction.
-                            </p>
-                            <p>
-                                Boot camps have its supporters and its detractors. Some people do not understand why
-                                you should have to spend money on boot camp when you can get the MCSE study materials
-                                yourself at a fraction of the camp price. However, who has the willpower to actually
-                                sit through a self-imposed MCSE training. who has the willpower to actually sit through
-                                a self-imposed
-                            </p>
-                            <p>
-                                Boot camps have its supporters and its detractors. Some people do not understand why
-                                you should have to spend money on boot camp when you can get the MCSE study materials
-                                yourself at a fraction of the camp price. However, who has the willpower to actually
-                                sit through a self-imposed MCSE training. who has the willpower to actually sit through
-                                a self-imposed
-                            </p>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="quotes">
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand
-                                why you should have to spend money on boot camp when you can get the MCSE study
-                                materials yourself at a fraction of the camp price. However, who has the willpower to
-                                actually sit through a self-imposed MCSE training.
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <img class="img-fluid" src="img/blog/post-img1.jpg" alt="">
-                                </div>
-                                <div class="col-6">
-                                    <img class="img-fluid" src="img/blog/post-img2.jpg" alt="">
-                                </div>
-                                <div class="col-lg-12 mt-25">
-                                    <p>
-                                        MCSE boot camps have its supporters and its detractors. Some people do not
-                                        understand why you should have to spend money on boot camp when you can get the
-                                        MCSE study materials yourself at a fraction of the camp price. However, who has
-                                        the willpower.
-                                    </p>
-                                    <p>
-                                        MCSE boot camps have its supporters and its detractors. Some people do not
-                                        understand why you should have to spend money on boot camp when you can get the
-                                        MCSE study materials yourself at a fraction of the camp price. However, who has
-                                        the willpower.
-                                    </p>
-                                </div>
-                            </div>
+                            <h2 class="mb-4"><?=$row[1]?></h2>
+                            <?=$row[3]?>
                         </div>
                     </div>
                     <div class="navigation-area">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                                <div class="thumb">
-                                    <a href="#"><img class="img-fluid" src="img/blog/prev.jpg" alt=""></a>
+                            <?php if (isset($rowPrevPost)) {
+                                echo "<div class='thumb'>
+                                    <a href='single-blog.php?idBlog=$rowPrevPost[0]'><img class='img-fluid' width='80' height='40' style='object-fit:contain;' src='$rowPrevPost[4]' alt=''></a>
                                 </div>
-                                <div class="arrow">
-                                    <a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
-                                </div>
-                                <div class="detials">
-                                    <p>Prev Post</p>
-                                    <a href="#">
-                                        <h4>Space The Final Frontier</h4>
-                                    </a>
-                                </div>
+                                <div class='detials'>
+                                    <p>Bài trước</p>
+                                    <a href='single-blog.php?idBlog=$rowPrevPost[0]' title='$rowPrevPost[1]'>
+                                    <h4>". substr($rowPrevPost[1], 0, 25) ."...</h4></a>
+                                </div>"; } ?>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                                <div class="detials">
-                                    <p>Next Post</p>
-                                    <a href="#">
-                                        <h4>Telescopes 101</h4>
+                            <?php if (isset($rowNextPost)) {
+                               echo  "<div class='detials'>
+                                    <p>Bài tiếp</p>
+                                    <a href='single-blog.php?idBlog=$rowNextPost[0]' title='$rowNextPost[1]'>
+                                        <h4>". substr($rowNextPost[1], 0, 25) ."...</h4>
                                     </a>
-                                </div>
-                                <div class="arrow">
-                                    <a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
-                                </div>
-                                <div class="thumb">
-                                    <a href="#"><img class="img-fluid" src="img/blog/next.jpg" alt=""></a>
-                                </div>
+                                    </div>
+                                    <div class='thumb'>
+                                        <a href='single-blog.php?idBlog=$rowNextPost[0]'><img class='img-fluid'  width='80' height='40' style='object-fit:contain;'  src='$rowNextPost[4]' alt=''></a>
+                                    </div>";
+                            } ?>
                             </div>
                         </div>
                     </div>
                     <div class="comments-area">
-                        <h4>05 Comments</h4>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c1.jpg" alt="">
+                        <h4>05 Bình luận</h4>
+                        <?php
+                        while ($rowCmt = $comments->fetch_row()) {
+                            $userCmt = mysqli_query($connect, "SELECT * FROM nguoidung WHERE MaND = $rowCmt[3]");
+                            $resultUserCmt = $userCmt->fetch_row();
+                            $words = explode(' ', $resultUserCmt[2]);
+                            $name = !empty($words[1][0]) ? $words[1][0] : $words[0][0];
+                            echo "<div class='comment-list'>
+                            <div class='single-comment justify-content-between d-flex'>
+                                <div class='user justify-content-between d-flex'>
+                                    <div class='thumb'>
+                                        <span class='avatar'>$name</span>
                                     </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Emilly Blunt</a></h5>
-                                        <p class="date">December 4, 2018 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
+                                    <div class='desc'>
+                                        <h5>$resultUserCmt[1] $resultUserCmt[2]</h5>
+                                        <p class='date'>$rowCmt[5]</p>
+                                        <p class='comment'>
+                                            $rowCmt[4]
                                         </p>
                                     </div>
                                 </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
+                                <div class='reply-btn'>
+                                    <button class='btn-reply text-uppercase' data-comment='$rowCmt[0]' data-user='$idUser'>Trả lời</button>
                                 </div>
                             </div>
-                        </div>
+                        </div>";
+                        }
+                        ?>
                         <div class="comment-list left-padding">
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
@@ -197,82 +172,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="comment-list left-padding">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c3.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Annie Stephens</a></h5>
-                                        <p class="date">December 4, 2018 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c4.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Maria Luna</a></h5>
-                                        <p class="date">December 4, 2018 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c5.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Ina Hayes</a></h5>
-                                        <p class="date">December 4, 2018 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="comment-form">
-                        <h4>Leave a Reply</h4>
-                        <form>
-                            <div class="form-group form-inline">
-                                <div class="form-group col-lg-6 col-md-6 name">
-                                    <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-                                </div>
-                                <div class="form-group col-lg-6 col-md-6 email">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-                                </div>
-                            </div>
+                        <h4>Để lại bình luận</h4>
+                        <form method="POST">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
+                                <textarea id="comment" class="form-control mb-10 cmt-input" rows="5" name="message" placeholder="Bình luận" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Bình luận'" required></textarea>
                             </div>
-                            <div class="form-group">
-                                <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                            </div>
-                            <a href="#" class="primary-btn submit_btn">Post Comment</a>
+                            <input type="submit" name="submit" value="Gửi bình luận" class="primary-btn submit_btn" data-blog='<?=$idBlog?>' data-user='<?=$idUser?>'>
                         </form>
                     </div>
                 </div>
@@ -280,7 +187,7 @@
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search Posts" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Posts'">
+                                <input type="text" class="form-control" placeholder="Search Posts" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tìm kiếm'">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
                                 </span>
@@ -289,57 +196,32 @@
                         </aside>
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
-                            <h4>Charlie Barber</h4>
-                            <p>Senior blog writer</p>
+                            <h4>Ba Tê Nờ</h4>
+                            <p>Admin</p>
                             <div class="social_icon">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-github"></i></a>
                                 <a href="#"><i class="fa fa-behance"></i></a>
                             </div>
-                            <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get. Boot camps have itssuppor
-                                ters andits detractors.</p>
+                            <p>Bất lực sinh tích cực.</p>
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Popular Posts</h3>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post1.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Space The Final Frontier</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post2.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post3.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post4.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
+                            <h3 class="widget_title">Bài viết phổ biến</h3>
+                            <?php 
+                             while ($row = $resultsPopular->fetch_row()) {
+                                echo "<div class='media post_item'>
+                                        <img src='$row[4]' alt='post' width='100' height='70' style='object-fit:contain;'>
+                                        <div class='media-body'>
+                                            <a href='single-blog.php?idBlog=$row[0]'>
+                                                <h3>". substr($row[1], 0, 50) ."...</h3>
+                                            </a>
+                                            <p>$row[7]</p>
+                                        </div>
+                                    </div>";
+                             }
+                            ?>
                         </aside>
                     </div>
                 </div>
@@ -351,6 +233,7 @@
     <?php include("./templates/footer.php")?>
 
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/jquery.ajaxchimp.min.js"></script>
@@ -361,6 +244,11 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/store/common.js"></script>
+    <!-- <script type="text/javascript">
+       bkLib.onDomLoaded(function() {
+        new nicEditor({fullPanel : true}).panelInstance('comment');
+  });
+    </script> -->
 </body>
 
 </html>
