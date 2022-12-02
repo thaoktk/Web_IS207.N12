@@ -6924,7 +6924,7 @@ i.star-rv {
   color: #222222;
 }
 .comments-area .comment-list {
-  padding-bottom: 48px;
+  padding-bottom: 20px;
 }
 .comments-area .comment-list:last-child {
   padding-bottom: 0px;

@@ -84,6 +84,7 @@
                                 $total = 0;
                                 $num = 1;
                                 while ($row = mysqli_fetch_array($products)) {
+                                    $total += $row[6] * $_SESSION["cart"][$row[0]];
                                     echo "<tr>
                                     <td>
                                         <div class='media'>
@@ -115,35 +116,6 @@
                                 }
                             }
                             ?>
-                            <!-- <tr>
-                                <td>
-                                    <div class="media">
-                                        <div class="d-flex">
-                                            <img src="img/orange.png" with="200" height="100" alt="">
-                                        </div>
-                                        <div class="media-body">
-                                            <p>Iphone 14 Pro Max</p>
-                                            <p>Trắng, 256GB</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn-delete ml-3 genric-btn default-border small">Xóa</button>
-                                </td>
-                                <td>
-                                    <h5 class="product-price">$ <span>360.00</span></h5>
-                                </td>
-                                <td>
-                                    <div class="product_count">
-                                        <input type="text" name="qty" data-id="1" value="1" title="Quantity:" class="input-text qty">
-                                        <button class="increase items-count" data-id="1" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button class="reduced items-count" data-id="1" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5 class="product-cost">$<span>360</span></h5>
-                                </td>
-                            </tr> -->
                             <tr class="bottom_button">
                                 <td>
                                     <a class="gray_btn">Xóa hết</a>
@@ -175,7 +147,8 @@
                                     <h5>Tổng tiền</h5>
                                 </td>
                                 <td>
-                                    <h5 id="total-cost">$<span>2160</span></h5>
+
+                                    <h5 id="total-cost"><span><?=number_format($total)?></span> VNĐ</h5>
                                 </td>
                             </tr>
                             <tr class="out_button_area">

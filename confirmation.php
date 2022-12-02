@@ -32,7 +32,9 @@
 
 <body>
 
-<?php include("./templates/header.php")?>
+<?php 
+session_start();
+include("./templates/header.php")?>
 
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">

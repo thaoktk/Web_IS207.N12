@@ -113,7 +113,7 @@
                                 <div class='blog_post'>
                                     <img src='$row[4]' alt=''>
                                     <div class='blog_details'>
-                                        <a href='single-blog.php'>
+                                        <a href='single-blog.php?idBlog=$row[0]'>
                                             <h2>$row[1]</h2>
                                         </a>
                                         <p>$row[2]</p>

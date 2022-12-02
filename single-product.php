@@ -88,8 +88,13 @@
 							<li><a class='active' href='#'><span>Phân loại</span> : $row[3]</a></li>
 							<li><a href='#'><span>Tình trạng</span> : $tinhTrang</a></li>
 						</ul>
-						<p>$row[9]
+						<p>". substr($row[9], 0, 260) ."...
 						</p>
+						<ul>
+							<li><span class='lnr lnr-sync p-1'></span> Hư gì đổi nấy <strong>12 tháng</strong> tại 30 siêu thị toàn quốc (miễn phí tháng đầu)</li>
+							<li><span class='lnr lnr-checkmark-circle p-1'></span> Bảo hành chính hãng <strong>1 năm</strong> tại các trung tâm bảo hành hãng</li>
+							<li><span class='lnr lnr-inbox p-1'></span> Bộ sản phẩm gồm: <strong>Hộp, Sách hướng dẫn, Cáp Lightning - Type C, ...</strong></li>
+						</ul>
 						<h5 class='mt-5 quantity-product'>Còn lại: <span>$row[7]</span></h5>
 						<div class='mt-2 product_count'>
 							<label for='qty'>Số lượng:</label>

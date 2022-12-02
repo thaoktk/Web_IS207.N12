@@ -27,7 +27,7 @@
             $idND = $_POST['idND'];
             $message = $_POST['message'];
             $time = date_create()->format('Y-m-d H:i:s');
-            $result = mysqli_query($connect, "INSERT INTO `binhluan` (`MaBL`, `MaSP`, `MaTin`, `MaND`, `BinhLuan`, `LuotThich`, `NgayLap`) VALUES (NULL, '$idSP', NULL, '$idND', '$message', '0', '$time')");
+            $result = mysqli_query($connect, "INSERT INTO `binhluan` (`MaBL`, `MaSP`, `MaTin`, `MaND`, `BinhLuan`, `NgayLap`) VALUES (NULL, '$idSP', NULL, '$idND', '$message', '$time')");
             die (json_encode($result));
             break;
         case "insert_reply_comment":
@@ -35,7 +35,15 @@
             $idND = $_POST['idND'];
             $message = $_POST['message'];
             $time = date_create()->format('Y-m-d H:i:s');
-            $result = mysqli_query($connect, "INSERT INTO `traloibinhluan` (`MaTLBL`, `MaBL`, `MaND`, `BinhLuan`, `LuotThich`, `NgayLap`) VALUES (NULL, '$idBL', '$idND', '$message', '0', '$time')");
+            $result = mysqli_query($connect, "INSERT INTO `traloibinhluan` (`MaTLBL`, `MaBL`, `MaND`, `BinhLuan`, `NgayLap`) VALUES (NULL, '$idBL', '$idND', '$message', '$time')");
+            die (json_encode($result));
+            break;
+        case "insert_comment_blog":
+            $idBlog = $_POST['idBlog'];
+            $idND = $_POST['idND'];
+            $message = $_POST['message'];
+            $time = date_create()->format('Y-m-d H:i:s');
+            $result = mysqli_query($connect, "INSERT INTO `binhluan` (`MaBL`, `MaSP`, `MaTin`, `MaND`, `BinhLuan`, `NgayLap`) VALUES (NULL, NULL, '$idBlog', '$idND', '$message', '$time')");
             die (json_encode($result));
             break;
         case "update_cart":
@@ -70,28 +78,8 @@
 //                $GLOBALS['changed_cart'] = true;
 //            }
         }
-    //     foreach ($_POST['quantity'] as $id => $quantity) {
-    //         if ($quantity == 0) {
-    //             unset($_SESSION["cart"][$id]);
-    //         } else {
-    //             if (!isset($_SESSION["cart"][$id])) {
-    //                 $_SESSION["cart"][$id] = 0;
-    //             }
-    //             if ($add) {
-    //                 $_SESSION["cart"][$id] += $quantity;
-    //             } else {
-    //                 $_SESSION["cart"][$id] = $quantity;
-    //             }
-    //             //Kiểm tra số lượng sản phẩm tồn kho
-    // //            $addProduct = mysqli_query($con, "SELECT `quantity` FROM `product` WHERE `id` = " . $id);
-    // //            $addProduct = mysqli_fetch_assoc($addProduct);
-    // //            if ($_SESSION["cart"][$id] > $addProduct['quantity']) {
-    // //                $_SESSION["cart"][$id] = $addProduct['quantity'];
-    // //                $GLOBALS['changed_cart'] = true;
-    // //            }
-    //         }
-    //     }
         return true;
     }
+    
     
 ?>

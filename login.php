@@ -59,8 +59,21 @@
 	</section>
 	<!-- End Banner Area -->
 	<?php
+	require_once( 'Facebook/autoload.php' );
+	$fb = new Facebook\Facebook([
+	  'app_id' => '1021828652544328',
+	  'app_secret' => '34b4b98e6a0a3ac0e8c01b7881efb673',
+	  'default_graph_version' => 'v15.0',
+	  ]);
+	$helper = $fb->getRedirectLoginHelper();
+	$permissions = ['email'];
+	$loginUrl = $helper->getLoginUrl('http://localhost/doan/templates/fbCallback.php', $permissions);
+	?>
+	<?php
+	include "templates/gg-source.php";
+	?>
+	<?php
 	include "./templates/connect.php";
-	
 	
 	if (isset($_POST['submit']) && $_POST['submit'] == 'Đăng nhập') {
 		$result = mysqli_query($connect, "SELECT MaND, Ho, Ten, SDT, Email, TaiKhoan, MaQuyen from `nguoidung` WHERE TaiKhoan = '". $_POST['username'] ."' and MatKhau = MD5('". $_POST['password'] ."');");
@@ -68,7 +81,7 @@
 		$_SESSION['current-user'] = $user;
 
 		if ($result->num_rows == 0) {
-			echo "<div class='mt-5 w-100'>
+			echo "<div class='mt-5 w-100' id='login-fail'>
 			<h1 class='text-center'>Thông báo</h1>
 			<h4 class='mt-4 text-center'>Thông tin đăng nhập không chính xác!</h4>
 		</div>";
@@ -109,8 +122,10 @@
 						<hr>
 						<div>
 							<h5 class="text-center">-Hoặc-</h5>
-							<button class="btn-login-social genric-btn success-border">Đăng nhập với Google</button>
-							<button class="btn-login-social genric-btn success-border">Đăng nhập với Facebook</button>
+							<?php if(isset($authUrl)){ ?>
+							<a href="<?=$authUrl?>" type="button" class="btn-login-social genric-btn success-border">Đăng nhập với Google</a>
+							<?php } ?>
+							<a href="<?=$loginUrl?>" type="button"  class="btn-login-social genric-btn success-border">Đăng nhập với Facebook</a>
 						</div>
 					</div>
 				</div>
@@ -143,6 +158,16 @@
 	<!--gmaps Js-->
 	<script src="js/store/common.js"></script>
 	<script src="js/main.js"></script>
+	<script>
+		$(document).ready(function() {
+			loginFail = $("#login-fail")
+			if (loginFail) {
+				setTimeout(() => {
+					loginFail.remove()
+				}, 5000)
+			}
+		})
+	</script>
 </body>
 
 </html>

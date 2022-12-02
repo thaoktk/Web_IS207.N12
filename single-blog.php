@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="comments-area">
-                        <h4>05 Bình luận</h4>
+                        <h4><?=$comments->num_rows?> Bình luận</h4>
                         <?php
                         while ($rowCmt = $comments->fetch_row()) {
                             $userCmt = mysqli_query($connect, "SELECT * FROM nguoidung WHERE MaND = $rowCmt[3]");
@@ -147,53 +147,54 @@
                                     </div>
                                 </div>
                                 <div class='reply-btn'>
-                                    <button class='btn-reply text-uppercase' data-comment='$rowCmt[0]' data-user='$idUser'>Trả lời</button>
+                                    <button class='btn-reply text-uppercase reply_btn' data-comment='$rowCmt[0]' data-user='$idUser'>Trả lời</button>
                                 </div>
-                            </div>
-                        </div>";
-                        }
-                        ?>
-                        <div class="comment-list left-padding">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c2.jpg" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <h5><a href="#">Elsie Cunningham</a></h5>
-                                        <p class="date">December 4, 2018 at 3:12 pm </p>
-                                        <p class="comment">
-                                            Never say goodbye till the end comes!
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
-                            </div>
-                        </div>
+                            </div>" ?>
+                            <?php 
+									$replyCmts = mysqli_query($connect, "SELECT * FROM traloibinhluan WHERE MaBL = $rowCmt[0] order by NgayLap asc");
+									while ($rowReplyCmt = $replyCmts->fetch_row()) {
+										$userReplyCmt = mysqli_query($connect, "SELECT * FROM nguoidung WHERE MaND = $rowReplyCmt[2]");
+										$resultUserReplyCmt = $userReplyCmt->fetch_row();
+										$words2 = explode(' ', $resultUserReplyCmt[2]);
+										$nameReply = !empty($words2[1][0]) ? $words2[1][0] : $words2[0][0];
+										$admin = $resultUserReplyCmt[7] == 1 ? "<span class='mx-2 text-warning'>Admin</span>" : "";
+										echo "<div class='mt-3 comment-list left-padding'>
+                                            <div class='single-comment justify-content-between d-flex'>
+                                                <div class='user justify-content-between d-flex'>
+                                                    <div class='thumb'>
+                                                        <span class='avatar'>$nameReply</span>
+                                                    </div>
+                                                    <div class='desc'>
+                                                        <h5>$resultUserReplyCmt[1] $resultUserReplyCmt[2] $admin</h5>
+                                                        <p class='date'>$rowReplyCmt[5]</p>
+                                                        <p class='comment'>
+                                                            $rowReplyCmt[3]
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>";
+									}
+									?>
+								<?php echo "</div>"; }
+								
+								if ($comments->num_rows <= 0) {
+									echo "<div class='text-center'>Chưa có bình luận nào!</div>";
+								}
+								?>
                     </div>
                     <div class="comment-form">
                         <h4>Để lại bình luận</h4>
                         <form method="POST">
                             <div class="form-group">
-                                <textarea id="comment" class="form-control mb-10 cmt-input" rows="5" name="message" placeholder="Bình luận" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Bình luận'" required></textarea>
+                                <textarea id="comment" class="form-control mb-10 cmt-input" rows="5" name="message" placeholder="Bình luận" required></textarea>
                             </div>
-                            <input type="submit" name="submit" value="Gửi bình luận" class="primary-btn submit_btn" data-blog='<?=$idBlog?>' data-user='<?=$idUser?>'>
+                            <input type="submit" name="submit" value="Gửi bình luận" class="primary-btn submit_btn" id="submit-comment" data-blog='<?=$idBlog?>' data-user='<?=$idUser?>'>
                         </form>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
-                        <aside class="single_sidebar_widget search_widget">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search Posts" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tìm kiếm'">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
-                                </span>
-                            </div><!-- /input-group -->
-                            <div class="br"></div>
-                        </aside>
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
                             <h4>Ba Tê Nờ</h4>
@@ -244,6 +245,7 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/store/common.js"></script>
+    <script src="js/store/blog.js"></script>
     <!-- <script type="text/javascript">
        bkLib.onDomLoaded(function() {
         new nicEditor({fullPanel : true}).panelInstance('comment');

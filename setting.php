@@ -77,6 +77,7 @@ session_start();
     <?php
     if (isset($_GET['action']) && $_GET['action'] == 'logout') {
         unset($_SESSION['current-user']);
+		unset($_SESSION['access_token']);
 		header("Location: login.php");
         
     } 
@@ -89,7 +90,8 @@ session_start();
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
 					<h1><?php if (!empty($_SESSION['current-user'])) {
-						echo "Xin chào ". $_SESSION['current-user']['TaiKhoan'] ." ";
+						$hello = isset($_SESSION['current-user']['TaiKhoan']) ? $_SESSION['current-user']['TaiKhoan'] : $_SESSION['current-user']['Ten'];
+						echo "Xin chào ". $hello ." ";
 					} else {
 						echo "Đăng nhập / Đăng ký";
 					} ?></h1>
@@ -119,6 +121,7 @@ session_start();
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<?php if ($user['TaiKhoan'] !== NULL) { ?>
 					<form class="row login_form d-flex flex-column align-items-center" action="" method="post">
                         <input type="hidden" name="id" value="<?=$user['MaND']?>">
 						<div class="col-md-6 form-group">
@@ -133,6 +136,7 @@ session_start();
 						</div>
 					</form>
 					<hr>
+					<?php } ?>
 					<div class="mt-5 d-flex align-items-center justify-content-center">
 						<a href="?action=logout" type="button" class="btn primary-btn text-white">Đăng xuất</a>
 					</div>

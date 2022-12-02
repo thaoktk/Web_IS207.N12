@@ -84,6 +84,8 @@ include("./templates/header.php")?>
 
 	$totalRows = $totalRecords->num_rows;
 	$totalPages = ceil($totalRows / $itemsPerPage);
+
+	$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
 	$connect->close();
 	?>
 
@@ -249,11 +251,7 @@ include("./templates/header.php")?>
 										<span class='ml-2'>". $row[13] ." đánh giá</span>
 									</div>
 									<div class='prd-bottom'>
-										<a href='cart.php' class='social-info'>
-											<span class='ti-bag'></span>
-											<p class='hover-text'>Mua ngay</p>
-										</a>
-										<a href='' class='social-info'>
+										<a class='social-info add-fav-btn' data-product='$row[0]' data-user='$idUser'>
 											<span class='lnr lnr-heart'></span>
 											<p class='hover-text'>Yêu thích</p>
 										</a>

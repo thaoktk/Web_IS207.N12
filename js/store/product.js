@@ -92,13 +92,11 @@ $(document).ready(function () {
         $(this).click(function () {
             idCmtReply = $(this).data("comment")
             $("#submit-comment").attr("data-cmtReply", idCmtReply)
+            $(".cmt-input").focus()
+            $(".cmt-input").attr("placeholder", "Trả lời bình luận");
         })
     })
 
-    $(".reply_btn").click(function () {
-        $(".cmt-input").focus()
-        $(".cmt-input").attr("placeholder", "Trả lời bình luận");
-    })
 
     $("#submit-comment").click(function (e) {
         e.preventDefault();
