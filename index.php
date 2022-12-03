@@ -224,19 +224,19 @@
 					<?php
 					while($row=$list_new->fetch_row())
 					{
-						$rating = addStar($row[13], $row[12]);
+						$rating = addStar($row[15], $row[14]);
 						echo "<div class='col-lg-3 col-md-6'>
 							<div class='single-product'>
-								<img class='img-fluid' src='$row[8]' alt=''>
+								<img class='img-fluid' src='$row[10]' alt=''>
 								<div class='product-details'>
 									<h6 class='name'>$row[2]</h6>
 									<div class='price'>
-										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
-										<h6 class='l-through'>". number_format($row[5]) ." VNĐ</h6>
+										<h6 class='cost'>". number_format($row[8]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format($row[7]) ." VNĐ</h6>
 									</div>
 									<div class='mt-2 d-flex align-items-center'>
 										<div>". $rating ."</div>
-										<span class='ml-2'>". $row[13] ." đánh giá</span>
+										<span class='ml-2'>". $row[15] ." đánh giá</span>
 									</div>
 									<div class='prd-bottom'>
 										<a class='social-info add-fav-btn' data-product='$row[0]' data-user='$idUser'>
@@ -270,19 +270,19 @@
 					<?php
 					while($row=$list_hot->fetch_row())
 					{
-						$rating = addStar($row[13], $row[12]);
+						$rating = addStar($row[15], $row[14]);
 						echo "<div class='col-lg-3 col-md-6'>
 							<div class='single-product'>
-								<img class='img-fluid' src='$row[8]' alt=''>
+								<img class='img-fluid' src='$row[10]' alt=''>
 								<div class='product-details'>
 									<h6 class='name'>$row[2]</h6>
 									<div class='price'>
-										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
-										<h6 class='l-through'>". number_format($row[5]) ." VNĐ</h6>
+										<h6 class='cost'>". number_format($row[8]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format($row[7]) ." VNĐ</h6>
 									</div>
 									<div class='mt-2 d-flex align-items-center'>
 										<div>". $rating ."</div>
-										<span class='ml-2'>". $row[13] ." đánh giá</span>
+										<span class='ml-2'>". $row[15] ." đánh giá</span>
 									</div>
 									<div class='prd-bottom'>
 										<a class='social-info add-fav-btn' data-product='$row[0]' data-user='$idUser'>
@@ -341,18 +341,18 @@
 					<div class="active-exclusive-product-slider">
 					<?php 
 					while($row=$list_dealHot->fetch_row()) { 
-						$rating = addStar($row[13], $row[12]);
+						$rating = addStar($row[15], $row[14]);
 						echo "<div class='single-exclusive-slider'>
-						<img class='img-fluid' src=". $row[8] ." alt=''>
+						<img class='img-fluid' src=". $row[10] ." alt=''>
 						<div class='product-details'>
 							<div class='price'>
-								<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
-								<h6 class='l-through'>". number_format($row[5]) ." VNĐ</h6>
+								<h6 class='cost'>". number_format($row[8]) ." VNĐ</h6>
+								<h6 class='l-through'>". number_format($row[7]) ." VNĐ</h6>
 							</div>
 							<h4>". $row[2] ."</h4>
 							<div class='mt-2 w-100 d-flex align-items-center justify-content-center'>
 									<div>". $rating ."</div>
-									<span class='ml-2'>". $row[13] ." đánh giá</span>
+									<span class='ml-2'>". $row[15] ." đánh giá</span>
 							</div>
 							<div class='add-bag d-flex align-items-center justify-content-center'>
 								<a href='single-product.php?idSP=$row[0]' class='social-info add-btn'><span class='lnr lnr-move'></span></a>
@@ -387,12 +387,12 @@
 						while($row=$list_dealHot2->fetch_row())  {
 							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
 							<div class='single-related-product d-flex'>
-								<a href='single-product.php?idSP=$row[0]'><img src=". $row[8] ." alt=''></a>
+								<a href='single-product.php?idSP=$row[0]'><img src=". $row[10] ." alt=''></a>
 								<div class='desc'>
 									<a href='single-product.php?idSP=$row[0]' class='title'>". $row[2] ."</a>
 									<div class='price'>
-										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
-										<h6 class='l-through'>". number_format(($row[5])) ." VNĐ</h6>
+										<h6 class='cost'>". number_format($row[8]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format(($row[7])) ." VNĐ</h6>
 									</div>
 								</div>
 							</div>

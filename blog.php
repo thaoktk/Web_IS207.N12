@@ -55,10 +55,10 @@
     $offset = ($currentPage - 1) * $itemsPerPage;
 
 	if ($searchPost) {
-		$results = mysqli_query($connect,"SELECT * FROM tintuc $where limit 4 offset $offset");
+		$results = mysqli_query($connect,"SELECT * FROM tintuc $where order by NgayDang desc limit 4 offset $offset");
 		$totalRecords = mysqli_query($connect, "SELECT * FROM tintuc $where");
 	} else {
-		$results = mysqli_query($connect,"SELECT * FROM tintuc limit 4 offset $offset");
+		$results = mysqli_query($connect,"SELECT * FROM tintuc order by NgayDang desc limit 4 offset $offset");
 		$totalRecords = mysqli_query($connect, "SELECT * FROM tintuc");
 	}
 
@@ -68,7 +68,7 @@
     $time = date_create()->format('Y-m-d H:i:s');
     $resultsPopular = mysqli_query($connect,"SELECT * FROM tintuc WHERE NgayDang <= '$time' limit 4");
 
-    $connect->close();
+    // $connect->close();
     ?>
     <?php include("./templates/header.php")?>
 
@@ -98,6 +98,8 @@
                     <div class="blog_left_sidebar">
                         <?php
                         while($row=$results->fetch_row()) {
+                            $resultsComment = mysqli_query($connect,"SELECT * FROM binhluan WHERE MaTin = '$row[0]'");
+                            $rowsCmt = $resultsComment->num_rows;
                             echo "<article class='row blog_item'>
                             <div class='col-md-3'>
                                 <div class='blog_info text-right'>
@@ -105,7 +107,7 @@
                                         <li><a>$row[5]<i class='lnr lnr-user'></i></a></li>
                                         <li><a class='d-flex align-items-center'>$row[7]<i class='lnr lnr-calendar-full'></i></a></li>
                                         <li><a>1.2M Views<i class='lnr lnr-eye'></i></a></li>
-                                        <li><a>06 bình luận<i class='lnr lnr-bubble'></i></a></li>
+                                        <li><a>$rowsCmt bình luận<i class='lnr lnr-bubble'></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -164,8 +166,8 @@
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget author_widget">
-                            <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
-                            <h4>Ba Tê Nờ</h4>
+                            <img class="author_img rounded-circle" src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/09/08/thumbs/800x531/142774.jpg" width="100" height="100" style="object-fit:cover;" alt="">
+                            <h4>Tươi Phạm</h4>
                             <p>Admin</p>
                             <div class="social_icon">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -177,7 +179,7 @@
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Bài viết phổ biến</h3>
+                            <h3 class="widget_title">Bài viết gần đây</h3>
                             <?php 
                              while ($row = $resultsPopular->fetch_row()) {
                                 echo "<div class='media post_item'>

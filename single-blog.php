@@ -50,6 +50,8 @@
     $comments = mysqli_query($connect, "SELECT * FROM binhluan WHERE MaTin = $idBlog order by NgayLap desc");
     $time = date_create()->format('Y-m-d H:i:s');
     $resultsPopular = mysqli_query($connect,"SELECT * FROM tintuc WHERE NgayDang <= '$time' and MaTin != $idBlog limit 4");
+    $resultsComment = mysqli_query($connect,"SELECT * FROM binhluan WHERE MaTin = $idBlog");
+    $rowsCmt = $resultsComment->num_rows;
     ?>
 <?php include("./templates/header.php")?>
 
@@ -85,9 +87,9 @@
                             <div class="blog_info text-right">
                                 <ul class="blog_meta list">
                                     <li><a href="#"><?=$row[5]?><i class="lnr lnr-user"></i></a></li>
-                                    <li><a href="#"><?=$row[7]?><i class="lnr lnr-calendar-full"></i></a></li>
+                                    <li><a href="#" class='d-flex align-items-center'><?=$row[7]?><i class="lnr lnr-calendar-full"></i></a></li>
                                     <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                    <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                                    <li><a href="#"><?=$rowsCmt?> bình luận<i class="lnr lnr-bubble"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -196,8 +198,8 @@
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget author_widget">
-                            <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
-                            <h4>Ba Tê Nờ</h4>
+                            <img class="author_img rounded-circle" src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/09/08/thumbs/800x531/142774.jpg" width="100" height="100" style="object-fit:cover;" alt="">
+                            <h4>Tươi Phạm</h4>
                             <p>Admin</p>
                             <div class="social_icon">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -209,7 +211,7 @@
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Bài viết phổ biến</h3>
+                            <h3 class="widget_title">Bài viết gần đây</h3>
                             <?php 
                              while ($row = $resultsPopular->fetch_row()) {
                                 echo "<div class='media post_item'>

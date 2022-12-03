@@ -72,30 +72,30 @@
 			<div class="row s_product_inner">
 				<div class="col-lg-6">
 						<div class="single-prd-item">
-							<img class="img-fluid" src="<?=$row[8]?>" alt="">
+							<img class="img-fluid" src="<?=$row[10]?>" alt="">
 						</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<?php 
-						$tinhTrang = $row[7] > 0 ? "Còn hàng" : "Hết hàng"; 
+						$tinhTrang = $row[9] > 0 ? "Còn hàng" : "Hết hàng"; 
 						echo "<div class='s_product_text'>
 						<h3>$row[2]</h3>
 						<div class='d-flex align-items-baseline '>
-						<h2>". number_format($row[6]) ." VNĐ</h2>
-						<h3 class='ml-3 l-through'>". number_format($row[5]) ." VNĐ</h3>
+						<h2>". number_format($row[8]) ." VNĐ</h2>
+						<h3 class='ml-3 l-through'>". number_format($row[7]) ." VNĐ</h3>
 						</div>
 						<ul class='list'>
 							<li><a class='active' href='#'><span>Phân loại</span> : $row[3]</a></li>
 							<li><a href='#'><span>Tình trạng</span> : $tinhTrang</a></li>
 						</ul>
-						<p>". substr($row[9], 0, 260) ."...
+						<p>". substr($row[11], 0, 260) ."...
 						</p>
 						<ul>
 							<li><span class='lnr lnr-sync p-1'></span> Hư gì đổi nấy <strong>12 tháng</strong> tại 30 siêu thị toàn quốc (miễn phí tháng đầu)</li>
 							<li><span class='lnr lnr-checkmark-circle p-1'></span> Bảo hành chính hãng <strong>1 năm</strong> tại các trung tâm bảo hành hãng</li>
 							<li><span class='lnr lnr-inbox p-1'></span> Bộ sản phẩm gồm: <strong>Hộp, Sách hướng dẫn, Cáp Lightning - Type C, ...</strong></li>
 						</ul>
-						<h5 class='mt-5 quantity-product'>Còn lại: <span>$row[7]</span></h5>
+						<h5 class='mt-5 quantity-product'>Còn lại: <span>$row[9]</span></h5>
 						<div class='mt-2 product_count'>
 							<label for='qty'>Số lượng:</label>
 							<input type='text' name='qty' id='sst' maxlength='12' value='1' title='Số lượng:' class='input-text qty'>
@@ -133,11 +133,11 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-					<?php echo "<p>$row[9]</p>"; ?>
+					<?php echo "<p>$row[11]</p>"; ?>
 				</div>
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 					<div class="table-responsive">
-						<?php echo $row[4] ?>
+						<?php echo $row[6] ?>
 					</div>
 				</div>
 				<div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -216,14 +216,14 @@
 								<div class="col-6">
 									<div class="box_total">
 										<h5>Tổng quan</h5>
-										<h4><?php echo $row[12] ?>.0</h4>
-										<h6>(<?php echo $row[13] ?> đánh giá)</h6>
+										<h4><?php echo $row[14] ?>.0</h4>
+										<h6>(<?php echo $row[15] ?> đánh giá)</h6>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="rating_list">
-										<h3>Dựa trên <?php echo $row[13] ?> đánh giá</h3>
-										<?php $rating = addStar($row[13], $row[12]);
+										<h3>Dựa trên <?php echo $row[15] ?> đánh giá</h3>
+										<?php $rating = addStar($row[15], $row[14]);
 										echo "<div >$rating</div>"; ?>
 									</div>
 								</div>
@@ -367,12 +367,12 @@
 						while($row=$listProductRelated->fetch_row())  {
 							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20' id='$row[0]'>
 							<div class='single-related-product d-flex'>
-								<a href='single-product.php?idSP=$row[0]'><img src=". $row[8] ." alt=''></a>
+								<a href='single-product.php?idSP=$row[0]'><img src=". $row[10] ." alt=''></a>
 								<div class='desc'>
 									<a href='single-product.php?idSP=$row[0]' class='title'>". $row[2] ."</a>
 									<div class='price'>
-										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
-										<h6 class='l-through'>". number_format(($row[5])) ." VNĐ</h6>
+										<h6 class='cost'>". number_format($row[8]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format(($row[7])) ." VNĐ</h6>
 									</div>
 								</div>
 							</div>

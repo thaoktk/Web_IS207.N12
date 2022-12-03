@@ -33,18 +33,30 @@
 <body id="category">
 <?php
 session_start();
-include("./templates/header.php")?>
+include("./templates/header.php")
+?>
 <?php include "./templates/connect.php"; 
 	  include "./templates/product.php";
 	
 	$param = "";
 	$paramSort = "";
+	$paramRam = "";
+	$paramRom = "";
+	$paramColor = "";
+	$paramCategory = "";
 	$orderCondition = "";
 	$where = "";
+	$filter = "WHERE";
 	$filterCategory = "";
+	$filterRam = "";
+	$filterRom = "";
+	$filterColor = "";
 	$search = isset($_GET['search']) ? $_GET['search'] : "";
 	$orderSort = isset($_GET['sort']) ? $_GET['sort'] : "";
 	$category = isset($_GET['category']) ? $_GET['category'] : "";
+	$ram = isset($_GET['ram']) ? $_GET['ram'] : "";
+	$rom = isset($_GET['rom']) ? $_GET['rom'] : "";
+	$color = isset($_GET['color']) ? $_GET['color'] : "";
 
 	if ($search) {
 		$where = "WHERE TenSP LIKE '%$search%'";
@@ -54,11 +66,62 @@ include("./templates/header.php")?>
 	if ($orderSort) {
 		$orderCondition = "ORDER BY `sanpham`.`GiaTien` $orderSort";
 		$param .= "&sort=". $orderSort;
+		$paramRam .= "&sort=". $orderSort;
+		$paramRom .= "&sort=". $orderSort;
+		$paramColor .= "&sort=". $orderSort;
+		$paramCategory .= "&sort=". $orderSort;
 	}
 	if ($category) {
-		$filterCategory = "WHERE TenSeries LIKE '%$category%'";
+		if ($filter == "WHERE") {
+			$filter .= " TenSeries LIKE '$category'";
+		} else {
+			$filter .= " and TenSeries LIKE '$category'";
+		}
 		$param .= "&category=". $category;
 		$paramSort .= "&category=". $category;
+		$paramRam .= "&sort=". $orderSort;
+		$paramRom .= "&category=". $category;
+		$paramColor .= "&category=". $category;
+	}
+	if ($ram) {
+		if ($filter == "WHERE") {
+			$filter .= " Ram = '$ram'";
+		} else {
+			$filter .= " and Ram = '$ram'";
+		}
+		$param .= "&ram=". $ram;
+		$paramSort .= "&ram=". $ram;
+		$paramRom .= "&ram=". $ram;
+		$paramColor .= "&ram=". $ram;
+		$paramCategory .= "&ram=". $ram;
+	}
+	if ($rom) {
+		if ($filter == "WHERE") {
+			$filter .= " Rom = '$rom'";
+		} else {
+			$filter .= " and Rom = '$rom'";
+		}
+		$param .= "&rom=". $rom;
+		$paramSort .= "&rom=". $rom;
+		$paramRam .= "&rom=". $rom;
+		$paramColor .= "&rom=". $rom;
+		$paramCategory .= "&rom=". $rom;
+	}
+	if ($color) {
+		if ($filter == "WHERE") {
+			$filter .= " TenSP LIKE '%$color%'";
+		} else {
+			$filter .= " and TenSP LIKE '%$color%'";
+		}
+		$param .= "&color=". $color;
+		$paramSort .= "&color=". $color;
+		$paramRam .= "&color=". $color;
+		$paramRom .= "&color=". $color;
+		$paramCategory .= "&color=". $color;
+	}
+
+	if (!$category && !$ram && !$rom && !$color) {
+		$filter = '';
 	}
 
 	$itemsPerPage = 9;
@@ -74,18 +137,16 @@ include("./templates/header.php")?>
 	if ($search) {
 		$results = mysqli_query($connect,"SELECT * FROM sanpham $where $orderCondition limit 9 offset $offset");
 		$totalRecords = mysqli_query($connect, "SELECT * FROM sanpham $where");
-	} else if ($category) {
-		$results = mysqli_query($connect,"SELECT * FROM sanpham $filterCategory $orderCondition limit 9 offset $offset");
-		$totalRecords = mysqli_query($connect, "SELECT * FROM sanpham $filterCategory");
 	} else {
-		$results = mysqli_query($connect,"SELECT * FROM sanpham $orderCondition limit 9 offset $offset");
-		$totalRecords = mysqli_query($connect, "SELECT * FROM sanpham");
+		$results = mysqli_query($connect,"SELECT * FROM sanpham $filter $orderCondition limit 9 offset $offset");
+		$totalRecords = mysqli_query($connect, "SELECT * FROM sanpham $filter");
 	}
 
 	$totalRows = $totalRecords->num_rows;
 	$totalPages = ceil($totalRows / $itemsPerPage);
 
 	$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+
 	$connect->close();
 	?>
 
@@ -114,7 +175,7 @@ include("./templates/header.php")?>
 							<ul class="collapse" id="fruitsVegetable" data-toggle="collapse" aria-expanded="false" aria-controls="fruitsVegetable">
 								<?php 
 								while ($row = $list_SeriesIphone->fetch_row()) {
-									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]$paramCategory'>$row[0]</a></li>";
 								}
 								?>
 							</ul>
@@ -124,7 +185,7 @@ include("./templates/header.php")?>
 							<ul class="collapse" id="meatFish" data-toggle="collapse" aria-expanded="false" aria-controls="meatFish">
 							<?php 
 								while ($row = $list_SeriesMacBook->fetch_row()) {
-									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]$paramCategory'>$row[0]</a></li>";
 								}
 								?>
 							</ul>
@@ -133,7 +194,7 @@ include("./templates/header.php")?>
 							<ul class="collapse" id="cooking" data-toggle="collapse" aria-expanded="false" aria-controls="cooking">
 							<?php 
 								while ($row = $list_SeriesIpad->fetch_row()) {
-									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]$paramCategory'>$row[0]</a></li>";
 								}
 								?>
 							</ul>
@@ -142,7 +203,7 @@ include("./templates/header.php")?>
 							<ul class="collapse" id="beverages" data-toggle="collapse" aria-expanded="false" aria-controls="beverages">
 							<?php 
 								while ($row = $list_SeriesAirPods->fetch_row()) {
-									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]$paramCategory'>$row[0]</a></li>";
 								}
 								?>
 							</ul>
@@ -151,7 +212,7 @@ include("./templates/header.php")?>
 							<ul class="collapse" id="homeClean" data-toggle="collapse" aria-expanded="false" aria-controls="homeClean">
 							<?php 
 								while ($row = $list_SeriesWatch->fetch_row()) {
-									echo "<li class='main-nav-list child'><a href='?category=$row[0]'>$row[0]</a></li>";
+									echo "<li class='main-nav-list child'><a href='?category=$row[0]$paramCategory'>$row[0]</a></li>";
 								}
 								?>
 							</ul>
@@ -168,13 +229,19 @@ include("./templates/header.php")?>
 					<div class="top-filter-head">Bộ lọc sản phẩm</div>
 					<div class="common-filter">
 						<div class="head">Ram</div>
-						<form action="#">
+						<form>
 							<ul>
-								<li class="filter-list"><input class="pixel-radio" id="2GB" type="radio" name="brand"><label for="2GB">2GB</label></li>
-								<li class="filter-list"><input class="pixel-radio" id="4GB" type="radio" name="brand"><label for="4GB">4GB</label></li>
-								<li class="filter-list"><input class="pixel-radio" id="8GB" type="radio" name="brand"><label for="8GB">8GB</label></li>
-								<li class="filter-list"><input class="pixel-radio" id="12GB" type="radio" name="brand"><label for="12GB">12GB</label></li>
-								<li class="filter-list"><input class="pixel-radio" id="16GB" type="radio" name="brand"><label for="16GB">16GB</label></li>
+								<?php
+								while ($rowRam = $list_Ram->fetch_row()) {
+									$checked = isset($_GET['ram']) && $_GET['ram'] == $rowRam[0] ? 'checked' : null;
+									echo "<li class='filter-list'>
+									<input 
+									$checked
+									onchange='this.value && (window.location = this.value);' class='pixel-radio' value='?ram=$rowRam[0]$paramRam' id='$rowRam[0]' type='radio' name='ram'>
+									<label for='$rowRam[0]'>$rowRam[0]</label>
+								</li>";
+								}
+								?>
 							</ul>
 						</form>
 					</div>
@@ -182,11 +249,16 @@ include("./templates/header.php")?>
 						<div class="head">Dung lượng lưu trữ</div>
 						<form action="#">
 							<ul>
-								<li class="filter-list"><input class="pixel-radio" id="32GB" type="radio" name="brand"><label for="32GB">32GB</label></li>
-								<li class="filter-list"><input class="pixel-radio" id="64GB" type="radio" name="brand"><label for="64GB">64GB</label></li>
-								<li class="filter-list"><input class="pixel-radio" id="128GB" type="radio" name="brand"><label for="128GB">128GB</label></li>
-								<li class="filter-list"><input class="pixel-radio" id="256GB" type="radio" name="brand"><label for="256GB">256GB</label></li>
-								<li class="filter-list"><input class="pixel-radio" id="512GB" type="radio" name="brand"><label for="512GB">512GB</label></li>
+							<?php
+								while ($rowRom = $list_Rom->fetch_row()) {
+									$checked = isset($_GET['rom']) && $_GET['rom'] == $rowRom[0] ? 'checked' : null;
+									echo "<li class='filter-list'>
+									<input
+									$checked
+									onchange='this.value && (window.location = this.value);'  
+									 value='?rom=$rowRom[0]$paramRom' class='pixel-radio' id='$rowRom[0]' type='radio' name='rom'><label for='$rowRom[0]'>$rowRom[0]</label></li>";
+								}
+								?>
 							</ul>
 						</form>
 					</div>
@@ -194,11 +266,51 @@ include("./templates/header.php")?>
 						<div class="head">Màu sắc</div>
 						<form action="#">
 							<ul>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="black" name="color"><label for="black">Đen</label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="yellow" name="color"><label for="yellow">Vàng</label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="purple" name="color"><label for="purple">Tím</label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="pink" name="color"><label for="pink">Hồng</label></li>
-								<li class="filter-list"><input class="pixel-radio" type="radio" id="blue" name="color"><label for="blue">Xanh</label></li>
+								<li class="filter-list">
+									<input
+									<?php if (isset($_GET['color']) && $_GET['color'] == "đen") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?color=đen<?=$paramColor?>" class="pixel-radio" type="radio" id="black" name="color"><label for="black">Đen</label></li>
+								<li class="filter-list">
+									<input
+									<?php if (isset($_GET['color']) && $_GET['color'] == "vàng") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?color=vàng<?=$paramColor?>" class="pixel-radio" type="radio" id="yellow" name="color"><label for="yellow">Vàng</label></li>
+								<li class="filter-list">
+									<input
+									<?php if (isset($_GET['color']) && $_GET['color'] == "tím") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?color=tím<?=$paramColor?>" class="pixel-radio" type="radio" id="purple" name="color"><label for="purple">Tím</label></li>
+								<li class="filter-list">
+									<input
+									<?php if (isset($_GET['color']) && $_GET['color'] == "đỏ") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?color=đỏ<?=$paramColor?>" class="pixel-radio" type="radio" id="red" name="color"><label for="red">Đỏ</label></li>
+								<li class="filter-list">
+									<input
+									<?php if (isset($_GET['color']) && $_GET['color'] == "hồng") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?color=hồng<?=$paramColor?>" class="pixel-radio" type="radio" id="pink" name="color"><label for="pink">Hồng</label></li>
+								<li class="filter-list">
+									<input
+									<?php if (isset($_GET['color']) && $_GET['color'] == "xanh") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?color=xanh<?=$paramColor?>" class="pixel-radio" type="radio" id="blue" name="color"><label for="blue">Xanh</label></li>
+								<li class="filter-list">
+									<input
+									<?php if (isset($_GET['color']) && $_GET['color'] == "bạc") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?color=bạc<?=$paramColor?>" class="pixel-radio" type="radio" id="silver" name="color"><label for="silver">Bạc</label></li>
+								<li class="filter-list">
+									<input
+									<?php if (isset($_GET['color']) && $_GET['color'] == "xám") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?color=xám<?=$paramColor?>" class="pixel-radio" type="radio" id="gray" name="color"><label for="gray">Xám</label></li>
+								<li class="filter-list">
+									<input
+									<?php if (isset($_GET['color']) && $_GET['color'] == "trắng") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?color=trắng<?=$paramColor?>" class="pixel-radio" type="radio" id="white" name="color"><label for="white">Trắng</label></li>
 							</ul>
 						</form>
 					</div>
@@ -236,19 +348,19 @@ include("./templates/header.php")?>
 					<div class="row" id="list-product">
 						<?php 
 						while($row=$results->fetch_row()) {
-							$rating = addStar($row[13], $row[12]);
+							$rating = addStar($row[15], $row[14]);
 							echo "<div class='col-lg-4 col-md-6' title='$row[2]'>
 							<div class='single-product'>
-								<img class='img-fluid' src='". $row[8] ."' alt=''>
+								<img class='img-fluid' src='". $row[10] ."' alt=''>
 								<div class='product-details'>
 									<h6 class='title'>". $row[2] ."</h6>
 									<div class='price'>
-										<h6>". number_format(($row[6])) ." VNĐ</h6>
-										<h6 class='l-through'>". number_format(($row[5])) ." VNĐ</h6>
+										<h6>". number_format(($row[8])) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format(($row[7])) ." VNĐ</h6>
 									</div>
 									<div class='mt-2 d-flex align-items-center'>
 										<div>". $rating ."</div>
-										<span class='ml-2'>". $row[13] ." đánh giá</span>
+										<span class='ml-2'>". $row[15] ." đánh giá</span>
 									</div>
 									<div class='prd-bottom'>
 										<a class='social-info add-fav-btn' data-product='$row[0]' data-user='$idUser'>
@@ -324,12 +436,12 @@ include("./templates/header.php")?>
 						while($row=$list_dealHot2->fetch_row())  {
 							echo "<div class='col-lg-4 col-md-4 col-sm-6 mb-20'>
 							<div class='single-related-product category d-flex align-items-start'>
-								<a href='single-product.php'><img src=". $row[8] ." alt=''></a>
+								<a href='single-product.php'><img src=". $row[10] ." alt=''></a>
 								<div class='desc'>
 									<a href='single-product.php' class='title'>". $row[2] ."</a>
 									<div class='price'>
-										<h6 class='cost'>". number_format($row[6]) ." VNĐ</h6>
-										<h6 class='l-through'>". number_format(($row[5])) ." VNĐ</h6>
+										<h6 class='cost'>". number_format($row[8]) ." VNĐ</h6>
+										<h6 class='l-through'>". number_format(($row[7])) ." VNĐ</h6>
 									</div>
 								</div>
 							</div>

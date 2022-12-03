@@ -38,4 +38,8 @@ $list_SeriesWatch = mysqli_query($connect, "SELECT DISTINCT(TenSeries) FROM sanp
 $list_VoucherFreeShip = mysqli_query($connect, "SELECT * FROM khuyenmai WHERE MaLoaiKM = '1' and SoLuong > 0");
 
 $list_VoucherDiscount = mysqli_query($connect, "SELECT * FROM khuyenmai WHERE MaLoaiKM = '2' and SoLuong > 0");
+
+$list_Ram = mysqli_query($connect, "SELECT DISTINCT(Ram) FROM sanpham where Ram != 'NULL' order by Ram * 1");
+
+$list_Rom = mysqli_query($connect, "SELECT DISTINCT(Rom) FROM sanpham where Rom != 'NULL' order by Rom * 1");
 ?>
