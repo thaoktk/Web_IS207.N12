@@ -3899,6 +3899,16 @@ progress {
     object-fit: contain;
 }
 
+.text-ellipse {
+    max-width: 200px;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
 @media (max-width: 575.98px) {
     .table-responsive-sm {
         overflow-x: auto;
@@ -30174,6 +30184,10 @@ article .h6 {
 
 .datepicker-dropdown {
     z-index: 9999;
+}
+
+.nicEdit-main {
+    width: 100%;
 }
 
 /*# sourceMappingURL=volt.css.map */

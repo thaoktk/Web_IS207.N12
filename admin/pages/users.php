@@ -48,7 +48,7 @@
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
     <?php 
-    include "connect.php";
+    include "templates/connect.php";
     $result = mysqli_query($connect, "SELECT * FROM nguoidung");
     
     ?>
@@ -175,6 +175,16 @@
         $result = mysqli_query($connect,"SELECT * FROM `nguoidung` $where");
 	}
     ?>
+
+<?php 
+  session_start(); 
+  $currentUserAdmin = $_SESSION['admin-user'];
+  if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    unset($_SESSION['admin-user']);
+    header("Location: sign-in.php");
+    } 
+
+  if ($currentUserAdmin['MaQuyen'] == 1) { ?>
 
     <?php include "./components/header.php" ?>
 
@@ -453,6 +463,17 @@
         </div>
     </div>
     <!-- End of Modal Content -->
+    <?php } else {
+    echo "<main class=''>
+    <div class='mt-5 w-100 h-100'>
+    <h1 class='text-center'>Thông báo</h1>
+    <h4 class='mt-4 text-center'>Bạn không có quyền vào trang này!</h4>
+    <div class='mt-4 d-flex justify-content-center'>
+      <a href='sign-in.php' class='btn btn-primary'>Quay lại</a>
+    </div>
+  </div>
+    </main>";
+   }?>
 
     <!-- Core -->
     

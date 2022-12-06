@@ -51,13 +51,14 @@
 
   <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
-  <?php include "connect.php" ?>
+  <?php include "templates/connect.php" ?>
   <?php 
   session_start(); 
-  $currentUserAdmin = $_SESSION['current-user'];
-//   if (!empty($currentUserAdmin)) {
-//     header("Location: ../../login.php");
-// }
+  $currentUserAdmin = $_SESSION['admin-user'];
+  if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    unset($_SESSION['admin-user']);
+    header("Location: sign-in.php");
+    } 
 
   if ($currentUserAdmin['MaQuyen'] == 1) { ?>
     

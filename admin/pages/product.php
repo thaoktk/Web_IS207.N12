@@ -48,7 +48,7 @@
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
     <?php 
-    include "connect.php";
+    include "templates/connect.php";
     $result = mysqli_query($connect, "SELECT * FROM sanpham");
     
     ?>
@@ -166,6 +166,14 @@
         $result = mysqli_query($connect,"SELECT * FROM `sanpham` $where");
 	}
     ?>
+    <?php 
+  session_start(); 
+  $currentUserAdmin = $_SESSION['admin-user'];
+//   if (!empty($currentUserAdmin)) {
+//     header("Location: ../../login.php");
+// }
+
+  if ($currentUserAdmin['MaQuyen'] == 1) { ?>
 
     <?php include "./components/header.php" ?>
 
@@ -238,7 +246,7 @@
                                 $TenLSP = $resultTenLSP->fetch_column();
                                 $trangThai = "";
                                 $styleActive = "";
-                                if ($row[7] > 0) {
+                                if ($row[9] > 0) {
                                     $trangThai = "Còn hàng";
                                     $styleActive = "text-success";
                                 } else {
@@ -250,11 +258,11 @@
                                 <tr>
                                 <td>$row[0]</td>
                                 <td>$TenLSP</td>
-                                <td><img src='$row[8]' class='img-table'/></td>
+                                <td><img src='$row[10]' class='img-table'/></td>
                                 <td>$row[2]</td>
                                 <td>$row[3]</td>
-                                <td>$row[6]</td>
-                                <td>$row[7]</td>
+                                <td>$row[8]</td>
+                                <td>$row[9]</td>
                                 <td class='$styleActive'>$trangThai</td>
                                 <td>"?>
                                 <div>
@@ -283,45 +291,45 @@
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Chi tiết</label>
-                                                        <textarea rows="4" cols="50" class='form-control' name='detail-edit'><?=$row[4]?></textarea>
+                                                        <textarea rows="4" cols="50" class='form-control' name='detail-edit'><?=$row[6]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Giá gốc</label>
-                                                        <input type='number' value="<?=$row[5]?>" class='form-control' name='price-first-edit'>
+                                                        <input type='number' value="<?=$row[7]?>" class='form-control' name='price-first-edit'>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Giá tiền</label>
-                                                        <input type='number' value="<?=$row[6]?>" class='form-control' name='price-sec-edit'>
+                                                        <input type='number' value="<?=$row[8]?>" class='form-control' name='price-sec-edit'>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Số lượng</label>
-                                                        <input type='number' value="<?=$row[7]?>" class='form-control' name='quantity-edit'>
+                                                        <input type='number' value="<?=$row[9]?>" class='form-control' name='quantity-edit'>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Hình ảnh</label>
-                                                        <input type='text' value="<?=$row[8]?>" class='form-control' name='image-edit'>
+                                                        <input type='text' value="<?=$row[10]?>" class='form-control' name='image-edit'>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Mô tả</label>
-                                                        <textarea rows="4" cols="50" class='form-control' name='desc-edit'><?=$row[9]?></textarea>
+                                                        <textarea rows="4" cols="50" class='form-control' name='desc-edit'><?=$row[11]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Là sản phẩm mới?</label>
-                                                        <input type='number' value="<?=$row[10]?>" class='form-control' name='new-edit'>
+                                                        <input type='number' value="<?=$row[12]?>" class='form-control' name='new-edit'>
                                                         <small class="form-text text-muted">Nhập vào số: 1 là mới, 0 là không mới.</small>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Là sản phẩm hot?</label>
-                                                        <input type='number' value="<?=$row[11]?>" class='form-control' name='hot-edit'>
+                                                        <input type='number' value="<?=$row[13]?>" class='form-control' name='hot-edit'>
                                                         <small class="form-text text-muted">Nhập vào số: 1 là mới, 0 là không hot.</small>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Số sao</label>
-                                                        <input type='number' value="<?=$row[12]?>" class='form-control' name='star-edit'>
+                                                        <input type='number' value="<?=$row[14]?>" class='form-control' name='star-edit'>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Số đánh giá</label>
-                                                        <input type='number' value="<?=$row[13]?>" class='form-control' name='review-edit'>
+                                                        <input type='number' value="<?=$row[15]?>" class='form-control' name='review-edit'>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <input type='submit' class='form-control w-100 btn btn-tertiary' name='submit-edit' value="Lưu">
@@ -335,7 +343,7 @@
                                     </div>
                                 </div>
                                 
-                                <?php "</div>
+                                <?php "
                                 </td>
                             </tr>";
                             }
@@ -487,6 +495,17 @@
     <!-- End of Modal Content -->
 
     <!-- Core -->
+    <?php } else {
+    echo "<main class=''>
+    <div class='mt-5 w-100 h-100'>
+    <h1 class='text-center'>Thông báo</h1>
+    <h4 class='mt-4 text-center'>Bạn không có quyền vào trang này!</h4>
+    <div class='mt-4 d-flex justify-content-center'>
+      <a href='sign-in.php' class='btn btn-primary'>Quay lại</a>
+    </div>
+  </div>
+    </main>";
+   }?>
     
     <script src="../vendor/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
