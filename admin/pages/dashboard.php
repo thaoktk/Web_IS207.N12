@@ -1,20 +1,4 @@
-<!--
 
-=========================================================
-* Volt Free - Bootstrap 5 Dashboard
-=========================================================
-
-* Product Page: https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard
-* Copyright 2021 Themesberg (https://www.themesberg.com)
-* License (https://themesberg.com/licensing)
-
-* Designed and coded by https://themesberg.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal.
-
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,8 +74,8 @@
           </div>
           <!-- Navbar links -->
           <div class="nav-item  ms-lg-3">
-            <a class="nav-link pt-1 px-0" href="#" role="button" aria-expanded="false">
-            <span class="mb-0 font-small fw-bold text-gray-900">Logout</span>
+            <a class="nav-link pt-1 px-0" href="?action=logout" role="button" aria-expanded="false">
+            <span class="mb-0 font-small fw-bold text-gray-900">Đăng xuất</span>
             </a>
           </div>
         </div>

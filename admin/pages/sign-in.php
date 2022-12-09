@@ -57,7 +57,8 @@
 	if (isset($_POST['submit']) && $_POST['submit'] == 'Đăng nhập') {
 		$result = mysqli_query($connect, "SELECT MaND, Ho, Ten, SDT, Email, TaiKhoan, MaQuyen from `nguoidung` WHERE TaiKhoan = '". $_POST['username'] ."' and MatKhau = MD5('". $_POST['password'] ."');");
 		$currentUserAdmin = mysqli_fetch_assoc($result);
-        if ($currentUserAdmin['MaQuyen'] == 1) {
+        print_r($result->fetch_array());
+        if ($currentUserAdmin && $currentUserAdmin['MaQuyen'] == 1) {
             $_SESSION['admin-user'] = $currentUserAdmin;
         }
 
@@ -67,7 +68,7 @@
 			<h4 class='mt-4 text-center'>Thông tin đăng nhập không chính xác!</h4>
 		</div>";
 			}
-        if ($currentUserAdmin['MaQuyen'] != 1) {
+        if ($currentUserAdmin && $currentUserAdmin['MaQuyen'] != 1) {
             echo "<div class='mt-5 w-100'>
             <h1 class='text-center'>Thông báo</h1>
             <h4 class='mt-4 text-center'>Bạn không có quyền đăng nhập vào trang này!</h4>

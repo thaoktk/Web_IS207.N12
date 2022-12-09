@@ -100,19 +100,6 @@
           </div>
         </li>
         <li class="nav-item ">
-          <a href="report.php" class="nav-link">
-            <span class="sidebar-icon">
-              <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                  clip-rule="evenodd"></path>
-                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
-              </svg>
-            </span>
-            <span class="sidebar-text">Báo cáo</span>
-          </a>
-        </li>
-        <li class="nav-item ">
           <a href="statistic.php" class="nav-link">
             <span class="sidebar-icon">
               <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -122,19 +109,6 @@
               </svg>
             </span>
             <span class="sidebar-text">Cài đặt</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="statistic.php" class="nav-link">
-            <span class="sidebar-icon">
-              <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
-                <path fill-rule="evenodd"
-                  d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </span>
-            <span class="sidebar-text">Hỗ trợ khách hàng</span>
           </a>
         </li>
       </ul>

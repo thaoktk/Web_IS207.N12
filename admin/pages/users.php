@@ -212,8 +212,8 @@
                         <!-- / Search form -->
                     </div>
                     <div class="nav-item  ms-lg-3">
-                        <a class="nav-link pt-1 px-0" href="#" role="button" aria-expanded="false">
-                        <span class="mb-0 font-small fw-bold text-gray-900">Logout</span>
+                        <a class="nav-link pt-1 px-0" href="?action=logout" role="button" aria-expanded="false">
+                        <span class="mb-0 font-small fw-bold text-gray-900">Đăng xuất</span>
                         </a>
                     </div>
                 </div>

@@ -39,7 +39,7 @@
 
     <!-- Volt CSS -->
     <link type="text/css" href="../css/volt.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.26.0/ui/trumbowyg.min.css" integrity="sha512-Zi7Hb6P4D2nWzFhzFeyk4hzWxBu/dttyPIw/ZqvtIkxpe/oCAYXs7+tjVhIDASEJiU3lwSkAZ9szA3ss3W0Vug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
 </head>
@@ -61,6 +61,16 @@
         $result = mysqli_query($connect,"SELECT * FROM `tintuc` $where");
 	}
     ?>
+
+<?php 
+  session_start(); 
+  $currentUserAdmin = $_SESSION['admin-user'];
+  if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    unset($_SESSION['admin-user']);
+    header("Location: sign-in.php");
+    } 
+
+  if ($currentUserAdmin['MaQuyen'] == 1) { ?>
 
     <?php include "./components/header.php" ?>
 
@@ -89,8 +99,8 @@
                         <!-- / Search form -->
                     </div>
                     <div class="nav-item  ms-lg-3">
-                        <a class="nav-link pt-1 px-0" href="#" role="button" aria-expanded="false">
-                        <span class="mb-0 font-small fw-bold text-gray-900">Logout</span>
+                        <a class="nav-link pt-1 px-0" href="?action=logout" role="button" aria-expanded="false">
+                        <span class="mb-0 font-small fw-bold text-gray-900">Đăng xuất</span>
                         </a>
                     </div>
                 </div>
@@ -231,8 +241,20 @@
             </div>
         </div>
     <!-- Core -->
+
+    <?php } else {
+    echo "<main class=''>
+    <div class='mt-5 w-100 h-100'>
+    <h1 class='text-center'>Thông báo</h1>
+    <h4 class='mt-4 text-center'>Bạn không có quyền vào trang này!</h4>
+    <div class='mt-4 d-flex justify-content-center'>
+      <a href='../../index.php' class='btn btn-primary'>Quay lại</a>
+    </div>
+  </div>
+    </main>";
+   }?>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="https://cdn.tiny.cloud/1/ogpb1phg5t4l0schyim0425vsp9sg2so05zk2c29ktprw3v8/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.26.0/trumbowyg.min.js" integrity="sha512-ZfWLe+ZoWpbVvORQllwYHfi9jNHUMvXR4QhjL1I6IRPXkab2Rquag6R0Sc1SWUYTj20yPEVqmvCVkxLsDC3CRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../vendor/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -296,17 +318,14 @@
                 })
             })
 
-            tinymce.init({
-                selector: 'textarea.content-blog',
-                plugins: 'codesample image link searchreplace wordcount casechange formatpainter linkchecker tinymcespellchecker permanentpen powerpaste advcode tableofcontents autocorrect',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | addcomment showcomments | align lineheight | checklist numlist bullist indent outdent | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ]
-                });
+            $('.content-blog').trumbowyg({
+            btns: [
+                ['viewHTML'],
+                ['undo', 'redo'], // Only supported in Blink browsers
+                ],
+            });
+
+            $(".content-blog").css("min-height", "300px");
         })
     </script>
 

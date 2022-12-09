@@ -30186,8 +30186,13 @@ article .h6 {
     z-index: 9999;
 }
 
-.nicEdit-main {
-    width: 100%;
+/* .trumbowyg-box,
+.trumbowyg-editor {
+    min-height: 250px !important;
 }
+
+.form-control .content-blog .trumbowyg-textarea {
+    min-height: 250px !important;
+} */
 
 /*# sourceMappingURL=volt.css.map */

@@ -91,15 +91,15 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </span>
-                                <input type="text" class="form-control" id="topbarInputIconLeft" placeholder="Tìm kiếm"
-                                    aria-label="Search" aria-describedby="topbar-addon">
+                                <input type="text" class="form-control" id="topbarInputIconLeft" name="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : "" ?>" placeholder="Tìm kiếm"
+                                    >
                             </div>
                         </form>
                         <!-- / Search form -->
                     </div>
                     <div class="nav-item  ms-lg-3">
-                        <a class="nav-link pt-1 px-0" href="#" role="button" aria-expanded="false">
-                        <span class="mb-0 font-small fw-bold text-gray-900">Logout</span>
+                        <a class="nav-link pt-1 px-0" href="?action=logout" role="button" aria-expanded="false">
+                        <span class="mb-0 font-small fw-bold text-gray-900">Đăng xuất</span>
                         </a>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
                                     $list_LoaiKM = mysqli_query($connect, "SELECT MaLoaiKM, TenLoaiKM FROM loaikhuyenmai");
                                     ?>
                                     <a href='#edit<?=$row[0]?>' data-bs-toggle='modal'><button class='btn btn-sm btn-primary' type='button'>Sửa</button></a>
-                                    <a href="?idDel=<?=$row[0]?>" type="button" class='btn btn-sm btn-primary'>Xóa</a>
+                                    <a type="button" class='btn btn-sm btn-primary btn-delete' data-voucher="<?=$row[0]?>">Xóa</a>
                                     <div class='modal fade' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
                                     <div class='modal-dialog modal-dialog-centered' role='document'>
                                         <div class='modal-content'>
@@ -181,32 +181,33 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                             <div class='modal-body'>
-                                            <form action='?idEdit=<?=$row[0]?>' method='POST'>
+                                            <form id="voucher-edit-<?=$row[0]?>">
                                                     <div class='mb-4'>
                                                         <label class="d-block">Loại KM</label>
                                                         <select name="type-voucher-edit" id="">
                                                             <?php 
                                                             while ($rowLoaiKM = mysqli_fetch_array($list_LoaiKM)) {
-                                                                echo "<option value='$rowLoaiKM[0]'>$rowLoaiKM[1]</option>";
+                                                                $selected = $row[2] == $rowLoaiKM[0] ? "selected" : "";
+                                                                echo "<option value='$rowLoaiKM[0]' $selected>$rowLoaiKM[1]</option>";
                                                             }
                                                             ?>
                                                         </select>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Giá trị</label>
-                                                        <input type='number' value="<?=$row[3]?>" class='form-control' name='price-first-edit'>
+                                                        <input type='number' value="<?=$row[3]?>" class='form-control' name='price-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Số lượng</label>
-                                                        <input type='number' value="<?=$row[4]?>" class='form-control' name='price-sec-edit'>
+                                                        <input type='number' value="<?=$row[4]?>" class='form-control' name='qty-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
-                                                        <input type='submit' class='form-control w-100 btn btn-tertiary' name='submit-edit' value="Lưu">
+                                                        <input type='submit' class='form-control w-100 btn btn-tertiary btn-edit' name='submit-edit' value="Lưu"  data-voucher="<?=$row[0]?>">
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class='modal-footer'>
-                                                <button type='button' class='btn btn-link text-gray-600 ms-auto' data-bs-dismiss='modal'>Hủy</button>
+                                                <button type='button' class='btn btn-link text-gray-600 ms-auto ' data-bs-dismiss='modal'>Hủy</button>
                                             </div>
                                         </div>
                                     </div>
@@ -235,7 +236,7 @@
                         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                     </div>
                     <div class='modal-body'>
-                    <form method='POST'>
+                    <form class="form-create">
                             <div class='mb-4'>
                                 <label class="d-block">Loại KM</label>
                                 <select name="type-voucher-create" id="">
@@ -248,19 +249,19 @@
                             </div>
                             <div class='mb-4'>
                                 <label>Code</label>
-                                <input type="text" maxlength="10" class='form-control code-voucher' name='code-create'>
+                                <input type="text" maxlength="10" class='form-control code-voucher' name='code-create' required>
                                 <button class="mt-3 btn btn-secondary generator" type="button">Tạo code</button>
                             </div>
                             <div class='mb-4'>
                                 <label>Giá trị</label>
-                                <input type='number'class='form-control' name='price-create'>
+                                <input type='number'class='form-control' name='price-create' required>
                             </div>
                             <div class='mb-4'>
                                 <label>Số lượng</label>
-                                <input type='number' class='form-control' name='qty-create'>
+                                <input type='number' class='form-control' name='qty-create' required>
                             </div>
                             <div class='mb-4'>
-                                <input type='submit' class='form-control w-100 btn btn-tertiary' name='submit-create' value="Lưu">
+                                <input type='submit' class='form-control w-100 btn btn-tertiary btn-create' name='submit-create' value="Lưu">
                             </div>
                         </form>
                     </div>
@@ -351,6 +352,84 @@
         $("#create").on('hidden.bs.modal', function () {
             $(".code-voucher").val("");
         });
+
+        $(".btn-edit").each(function() {
+            $(this).click(function() {
+                parent = $(this).parent().parent().attr("id")
+                loaiKM = $(`#${parent} select[name="type-voucher-edit"]`).val()
+                giaTri = $(`#${parent} input[name="price-edit"]`).val()
+                sluong = $(`#${parent} input[name="qty-edit"]`).val()
+                idKM = $(this).data("voucher")
+                $.ajax({
+                        type: "POST",
+                        url: "templates/request.php",
+                        dataType: "json",
+                        data: {
+                            request: "update_voucher",
+                            idKM: idKM,
+                            loaiKM: loaiKM,
+                            giaTri: giaTri,
+                            sluong: sluong
+                        },
+                        success: function () {
+                            alert("Cập nhật khuyến mãi thành công!")
+                            window.location.reload();
+                        },
+                        error: function (e) {
+                            alert("Đã xảy ra lỗi!")
+                        }
+                    })
+            })
+        })
+
+        $(".btn-create").click(function(e) {
+            loaiKM = $(`select[name="type-voucher-create"]`).val()
+            giaTri = $(`input[name="price-create"]`).val()
+            sluong = $(`input[name="qty-create"]`).val()
+            code = $(`input[name="code-create"]`).val()
+            $.ajax({
+                        type: "POST",
+                        url: "templates/request.php",
+                        dataType: "json",
+                        data: {
+                            request: "insert_voucher",
+                            code: code,
+                            loaiKM: loaiKM,
+                            giaTri: giaTri,
+                            sluong: sluong
+                        },
+                        success: function () {
+                            alert("Tạo khuyến mãi mới thành công!")
+                            window.location.reload();
+                        },
+                        error: function (e) {
+                            alert("Đã xảy ra lỗi!")
+                        }
+                    })
+        })
+
+        $(".btn-delete").each(function() {
+            $(this).click(function() {
+                idKM = $(this).data("voucher")
+                $.ajax({
+                        type: "POST",
+                        url: "templates/request.php",
+                        dataType: "json",
+                        data: {
+                            request: "delete_voucher",
+                            idKM: idKM,
+                        },
+                        success: function () {
+                            alert("Xóa khuyến mãi thành công!")
+                            window.location.reload();
+                        },
+                        error: function (e) {
+                            alert("Đã xảy ra lỗi!")
+                            
+                        }
+                    })
+            })
+        })
     </script>
 
 </body>

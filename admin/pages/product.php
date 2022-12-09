@@ -38,8 +38,7 @@
 
     <!-- Volt CSS -->
     <link type="text/css" href="../css/volt.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.26.0/ui/trumbowyg.min.css" integrity="sha512-Zi7Hb6P4D2nWzFhzFeyk4hzWxBu/dttyPIw/ZqvtIkxpe/oCAYXs7+tjVhIDASEJiU3lwSkAZ9szA3ss3W0Vug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
 </head>
@@ -52,111 +51,6 @@
     $result = mysqli_query($connect, "SELECT * FROM sanpham");
     
     ?>
-
-    <?php
-    $error = false;
-    if (isset($_POST['submit-edit']) && $_POST['submit-edit'] == 'Lưu') { 
-        $id = $_GET['idEdit'];
-        try {
-            $resultEdit = mysqli_query($connect, "UPDATE `sanpham` SET `MaLSP` = '" . $_POST['type-edit'] . "', `TenSP` = '" . $_POST['name-edit'] . "', `TenSeries` = '" . $_POST['name-series-edit'] . "', `ChiTiet` = '" . $_POST['detail-edit'] . "', `GiaGoc` = '" . $_POST['price-first-edit'] . "', `GiaTien` = '" . $_POST['price-sec-edit'] . "', `SoLuong` = '" . $_POST['quantity-edit'] . "', `HinhAnh` = '" . $_POST['image-edit'] . "', `MoTa` = '" . $_POST['desc-edit'] . "', `New` = '" . $_POST['new-edit'] . "', `Hot` = '" . $_POST['hot-edit'] . "', `SoSao` = '" . $_POST['star-edit'] . "', `SoDanhGia` = '" . $_POST['review-edit'] . "' WHERE `sanpham`.`MaSP` = $id");
-            echo "<script>
-            $(document).ready(function(){
-            $('#edit-success').modal('show')
-            });
-            </script>
-            <div class='container'>
-                <div class='modal' id='edit-success' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog'>
-                        <div class='modal-content'>
-                            <div class='modal-header'>
-                                <h4 class='modal-title' id='myModalLabel'>Thành công</h4>
-                            </div>
-                            <div class='modal-body'>
-                                <p>Cập nhật thành công!</p>
-                            </div>
-                            <div class='modal-footer'>
-                                <a href='product.php' type='button' class='btn btn-default' >OK</a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div>";
-        } catch (exception $e) {
-            echo "<script>
-            $(document).ready(function(){
-            $('#edit-fail').modal('show')
-            });
-            </script>
-            <div class='container'>
-                <div class='modal' id='edit-fail' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog'>
-                        <div class='modal-content'>
-                            <div class='modal-header'>
-                                <h4 class='modal-title' id='myModalLabel'>Thất bại</h4>
-                            </div>
-                            <div class='modal-body'>
-                                <p>Sản phẩm đã tồn tại. Hãy nhập lại</p>
-                            </div>
-                            <div class='modal-footer'>
-                                <a href='product.php' type='button' class='btn btn-default' >OK</a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div>";
-        }} ?>
-   
-    <?php
-    $error = false;
-    if (isset($_GET['idDel'])) { 
-        try {
-            $resultDelete = mysqli_query($connect, "DELETE FROM `sanpham` WHERE `MaSP` = " . $_GET['idDel']);
-            echo "<script>
-            $(document).ready(function(){
-            $('#del-success').modal('show')
-            });
-            </script>
-            <div class='container'>
-                <div class='modal' id='del-success' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog'>
-                        <div class='modal-content'>
-                            <div class='modal-header'>
-                                <h4 class='modal-title' id='myModalLabel'>Thành công</h4>
-                            </div>
-                            <div class='modal-body'>
-                                <p>Xóa thành công!</p>
-                            </div>
-                            <div class='modal-footer'>
-                                <a href='product.php' type='button' class='btn btn-default' >OK</a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div>";
-        } catch (exception $e) {
-            echo "<script>
-            $(document).ready(function(){
-            $('#del-fail').modal('show')
-            });
-            </script>
-            <div class='container'>
-                <div class='modal' id='del-fail' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog'>
-                        <div class='modal-content'>
-                            <div class='modal-header'>
-                                <h4 class='modal-title' id='myModalLabel'>Thất bại</h4>
-                            </div>
-                            <div class='modal-body'>
-                                <p>Lỗi!</p>
-                            </div>
-                            <div class='modal-footer'>
-                                <a href='product.php' type='button' class='btn btn-default' >OK</a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div>";
-        }} ?>
 
     <?php
     $where = "";
@@ -201,8 +95,8 @@
                         <!-- / Search form -->
                     </div>
                     <div class="nav-item  ms-lg-3">
-                        <a class="nav-link pt-1 px-0" href="#" role="button" aria-expanded="false">
-                        <span class="mb-0 font-small fw-bold text-gray-900">Logout</span>
+                        <a class="nav-link pt-1 px-0" href="?action=logout" role="button" aria-expanded="false">
+                        <span class="mb-0 font-small fw-bold text-gray-900">Đăng xuất</span>
                         </a>
                     </div>
                 </div>
@@ -266,6 +160,9 @@
                                 <td class='$styleActive'>$trangThai</td>
                                 <td>"?>
                                 <div>
+                                    <?php
+                                    $list_TenLSP = mysqli_query($connect, "SELECT MaLSP, TenLSP FROM loaisanpham");
+                                    ?>
                                     <a href='#edit<?=$row[0]?>' data-bs-toggle='modal'><button class='btn btn-sm btn-primary' type='button'>Sửa</button></a>
                                     <a href="?idDel=<?=$row[0]?>" type="button" class='btn btn-sm btn-primary'>Xóa</a>
                                     <div class='modal fade' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
@@ -278,8 +175,15 @@
                                             <div class='modal-body'>
                                             <form action='?idEdit=<?=$row[0]?>' method='POST'>
                                                     <div class='mb-4'>
-                                                        <label>Mã loại SP</label>
-                                                        <input type='number' value="<?=$row[1]?>" class='form-control' name='type-edit'>
+                                                        <label class="d-block">Tên loại SP</label>
+                                                        <select name="type-edit" id="">
+                                                            <?php 
+                                                            while ($rowTenLSP = mysqli_fetch_array($list_TenLSP)) {
+                                                                $selected = $row[1] == $rowTenLSP[0] ? "selected" : "";
+                                                                echo "<option value='$rowTenLSP[0]' $selected>$rowTenLSP[1]</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Tên SP</label>
@@ -291,7 +195,7 @@
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Chi tiết</label>
-                                                        <textarea rows="4" cols="50" class='form-control' name='detail-edit'><?=$row[6]?></textarea>
+                                                        <textarea rows="4" cols="50" class='form-control content-blog' name='detail-edit'><?=$row[6]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Giá gốc</label>
@@ -311,17 +215,21 @@
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Mô tả</label>
-                                                        <textarea rows="4" cols="50" class='form-control' name='desc-edit'><?=$row[11]?></textarea>
+                                                        <textarea rows="4" cols="50" class='form-control content-blog' name='desc-edit'><?=$row[11]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
-                                                        <label>Là sản phẩm mới?</label>
-                                                        <input type='number' value="<?=$row[12]?>" class='form-control' name='new-edit'>
-                                                        <small class="form-text text-muted">Nhập vào số: 1 là mới, 0 là không mới.</small>
+                                                        <label class="d-block">Là sản phẩm mới?</label>
+                                                        <select name="new-edit" id="">
+                                                            <option value='0' <?php if ($row[12] == '0') { ?> selected <?php }?>>Cũ</option>
+                                                            <option value='1' <?php if ($row[12] == '1') { ?> selected <?php }?>>Mới</option>
+                                                        </select>
                                                     </div>
                                                     <div class='mb-4'>
-                                                        <label>Là sản phẩm hot?</label>
-                                                        <input type='number' value="<?=$row[13]?>" class='form-control' name='hot-edit'>
-                                                        <small class="form-text text-muted">Nhập vào số: 1 là mới, 0 là không hot.</small>
+                                                        <label class="d-block">Là sản phẩm hot?</label>
+                                                        <select name="hot-edit" id="">
+                                                            <option value='0' <?php if ($row[13] == '0') { ?> selected <?php }?>>Không hot</option>
+                                                            <option value='1' <?php if ($row[13] == '1') { ?> selected <?php }?>>Hot</option>
+                                                        </select>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Số sao</label>
@@ -363,63 +271,9 @@
      <!-- Modal Content -->
      
     <!-- End of Modal Content -->
-
     <?php
-    $error = false;
-    if (isset($_POST['submit-create']) && $_POST['submit-create'] == 'Tạo') {
-        try {
-            $resultCreate = mysqli_query($connect, "INSERT INTO `sanpham` (`MaSP`, `MaLSP`, `TenSP`, `TenSeries`, `ChiTiet`, `GiaGoc`, `GiaTien`, `SoLuong`, `HinhAnh`, `MoTa`, `New`, `Hot`, `SoSao`, `SoDanhGia`) VALUES (NULL, '". $_POST['type-create'] ."', '". $_POST['name-create'] ."', '". $_POST['name-series-create'] ."', '". $_POST['detail-create'] ."', '". $_POST['price-first-create'] ."', '". $_POST['price-sec-create'] ."', '". $_POST['quantity-create'] ."', '". $_POST['image-create'] ."', '". $_POST['desc-create'] ."', '". $_POST['new-create'] ."', '". $_POST['hot-create'] ."', '0', '0');");
-            echo "<script>
-            $(document).ready(function(){
-            $('#create').modal('show')
-            });
-            </script>
-            <div class='container'>
-                <div class='modal' id='create' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog'>
-                        <div class='modal-content'>
-                            <div class='modal-header'>
-                                <h4 class='modal-title' id='myModalLabel'>Thành công</h4>
-                            </div>
-                            <div class='modal-body'>
-                                <p>Tạo sản phẩm thành công!</p>
-                            </div>
-                            <div class='modal-footer'>
-                                <a href='product.php' type='button' class='btn btn-default' >OK</a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div>";
-        } catch (exception $e) {
-            echo "<script>
-            $(document).ready(function(){
-            $('#create-fail').modal('show')
-            });
-            </script>
-            <div class='container'>
-                <div class='modal' id='create-fail' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-                    <div class='modal-dialog'>
-                        <div class='modal-content'>
-                            <div class='modal-header'>
-                                <h4 class='modal-title' id='myModalLabel'>Thất bại</h4>
-                            </div>
-                            <div class='modal-body'>
-                                <p>Sản phẩm đã tồn tại. Hãy tạo sản phẩm khác</p>
-                            </div>
-                            <div class='modal-footer'>
-                                <a href='product.php' type='button' class='btn btn-default' >OK</a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div>";
-        }} ?>
-        
-        
-        <?php 
-        $list_TenLSP = mysqli_query($connect, "SELECT MaLSP,TenLSP FROM loaisanpham");
-        ?>
+    $list_TenLSP = mysqli_query($connect, "SELECT MaLSP, TenLSP FROM loaisanpham");
+    ?>
     <!-- Modal Content -->
     <div class='modal fade' id='modal-create-product' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -429,13 +283,13 @@
                     <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                 </div>
                 <div class='modal-body'>
-                <form method='POST'>
+                <form>
                         <div class='mb-4'>
-                            <label>Loại SP</label>
+                            <label class="d-block">Loại SP</label>
                             <select name="type-create" id="">
                             <?php 
-                            while ($row = mysqli_fetch_array($list_TenLSP)) {
-                                echo "<option value='$row[0]'>$row[1]</option>";
+                            while ($rowTenLSp = mysqli_fetch_array($list_TenLSP)) {
+                                echo "<option value='$rowTenLSp[0]'>$rowTenLSp[1]</option>";
                             }
                             ?>
                             </select>
@@ -450,7 +304,7 @@
                         </div>
                         <div class='mb-4'>
                             <label>Chi tiết</label>
-                            <textarea rows="4" cols="50" class='form-control' name='detail-create'></textarea>
+                            <textarea rows="4" cols="50" class='form-control content-blog' name='detail-create'></textarea>
                         </div>
                         <div class='mb-4'>
                             <label>Giá gốc</label>
@@ -470,17 +324,21 @@
                         </div>
                         <div class='mb-4'>
                             <label>Mô tả</label>
-                            <textarea rows="4" cols="50" class='form-control' name='desc-create'></textarea>
+                            <textarea rows="4" cols="50" class='form-control content-blog' name='desc-create'></textarea>
                         </div>
                         <div class='mb-4'>
-                            <label>Là sản phẩm mới?</label>
-                            <input type='number' class='form-control' name='new-create'>
-                            <small class="form-text text-muted">Nhập vào số: 1 là mới, 0 là không mới.</small>
+                            <label class="d-block">Là sản phẩm mới?</label>
+                            <select name="new-create" id="">
+                                <option value='0'>Cũ</option>
+                                <option value='1'>Mới</option>
+                            </select>
                         </div>
                         <div class='mb-4'>
-                            <label>Là sản phẩm hot?</label>
-                            <input type='number' class='form-control' name='hot-create'>
-                            <small class="form-text text-muted">Nhập vào số: 1 là mới, 0 là không hot.</small>
+                            <label class="d-block">Là sản phẩm hot?</label>
+                            <select name="hot-create" id="">
+                                <option value='0'>Không hot</option>
+                                <option value='1'>Hot</option>
+                            </select>
                         </div>
                         <div class='mb-4'>
                             <input type='submit' class='form-control w-100 btn btn-tertiary' name='submit-create' value="Tạo">
@@ -507,6 +365,8 @@
     </main>";
    }?>
     
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.26.0/trumbowyg.min.js" integrity="sha512-ZfWLe+ZoWpbVvORQllwYHfi9jNHUMvXR4QhjL1I6IRPXkab2Rquag6R0Sc1SWUYTj20yPEVqmvCVkxLsDC3CRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../vendor/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="../vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -546,7 +406,20 @@
 
     <!-- Volt JS -->
     <script src="../assets/js/volt.js"></script>
+   <script>
+      $(document).ready(function() {
+        $('.content-blog').trumbowyg({
+            btns: [
+                ['viewHTML'],
+                ['undo', 'redo'], 
+            ],
+        });
 
+        $(".content-blog").css("min-height", "300px");
+
+        
+    });
+   </script>
 
 </body>
 
