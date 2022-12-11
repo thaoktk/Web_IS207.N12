@@ -177,6 +177,8 @@ $(document).ready(function () {
   });
 
   $("#sorting").niceSelect()
+  $("#select-voucher").niceSelect()
+
 
 
   $(document).ready(function () {

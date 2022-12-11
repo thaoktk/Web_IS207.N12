@@ -43,8 +43,10 @@
             $sluong = $_POST['sluong'];
             $moTa = $_POST['moTa'];
             $hot = $_POST['hot'];
-            $new = $_POST['new'];
-            $result = mysqli_query($connect, "INSERT INTO `sanpham` (`MaSP`, `MaLSP`, `TenSP`, `TenSeries`, `ChiTiet`, `GiaGoc`, `GiaTien`, `SoLuong`, `HinhAnh`, `MoTa`, `New`, `Hot`, `SoSao`, `SoDanhGia`) VALUES (NULL, '$loaiSP', '$tenSP', '$tenSeries', '$chiTiet', '$giaGoc', '$giaTien', '$sluong', '$hinhAnh', '$moTa', '$new', '$hot', '0', '0');");
+            $new = $_POST['New'];
+            $ram = $_POST['ram'];
+            $rom = $_POST['rom'];
+            $result = mysqli_query($connect, "INSERT INTO `sanpham` (`MaSP`, `MaLSP`, `TenSP`, `TenSeries`, `Ram`, `Rom` ,`ChiTiet`, `GiaGoc`, `GiaTien`, `SoLuong`, `HinhAnh`, `MoTa`, `New`, `Hot`, `SoSao`, `SoDanhGia`) VALUES (NULL, '$loaiSP', '$tenSP', '$tenSeries','$ram','$rom', '$chiTiet', '$giaGoc', '$giaTien', '$sluong', '$hinhAnh', '$moTa', '$new', '$hot', '0', '0');");
             die (json_encode($result));
             break;
         case "update_product":
@@ -59,15 +61,17 @@
             $sluong = $_POST['sluong'];
             $moTa = $_POST['moTa'];
             $hot = $_POST['hot'];
-            $new = $_POST['new'];
+            $new = $_POST['New'];
             $soSao = $_POST['soSao'];
             $soDanhGia = $_POST['soDanhGia'];
-            $result = mysqli_query($connect,"UPDATE `sanpham` SET `MaLSP` = '$loaiSP', `TenSP` = '$tenSP', `TenSeries` = '$tenSeries', `ChiTiet` = '$chiTiet', `GiaGoc` = '$giaGoc', `GiaTien` = '$giaTien', `SoLuong` = '$sluong', `HinhAnh` = '$hinhAnh', `MoTa` = '$moTa', `New` = '$new', `Hot` = '$hot', `SoSao` = '$soSao', `SoDanhGia` = '$soDanhGia' WHERE `sanpham`.`MaSP` = $idSP");
+            $ram = $_POST['ram'];
+            $rom = $_POST['rom'];
+            $result = mysqli_query($connect,"UPDATE sanpham SET MaLSP = '$loaiSP', TenSP = '$tenSP', TenSeries = '$tenSeries', ChiTiet = '$chiTiet', Ram = '$ram', Rom = '$rom', GiaGoc = '$giaGoc', GiaTien = '$giaTien', SoLuong = '$sluong', HinhAnh = '$hinhAnh', MoTa = '$moTa', New = '$new', Hot = '$hot', SoSao = '$soSao', SoDanhGia = '$soDanhGia' WHERE MaSP = $idSP");
             die (json_encode($result));
             break;
         case "delete_product":
-            $idKM = $_POST['idKM'];
-            $result = mysqli_query($connect, "DELETE FROM khuyenmai WHERE MaKM = $idKM");
+            $idSP = $_POST['idSP'];
+            $result = mysqli_query($connect, "DELETE FROM sanpham WHERE MaSP = $idSP");
             die (json_encode($result));
             break;
     }

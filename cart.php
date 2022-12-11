@@ -34,9 +34,10 @@
 <body>
 
     <?php
-    include "./templates/connect.php"; 
-    include "./templates/product.php";
+    include "templates/connect.php"; 
+    include "templates/product.php";
     session_start();
+    $total = 0;
     if (!isset($_SESSION["cart"])) {
         $_SESSION["cart"] = array();
     }
@@ -44,8 +45,11 @@
     if (!empty($_SESSION["cart"])) {
         $products = mysqli_query($connect, "SELECT * FROM `sanpham` WHERE `MaSP` IN (" . implode(",", array_keys($_SESSION["cart"])) . ")");
     }
+
+    $voucherFreeShip = isset($_SESSION["free-ship"]) ? $_SESSION["free-ship"] : null;
+    $voucherOrder = isset($_SESSION["order"]) ? $_SESSION["order"] : null;
     ?>
-    <?php include("./templates/header.php")?>
+
 
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
@@ -68,111 +72,152 @@
         <div class="container">
             <div class="cart_inner">
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Sản phẩm</th>
-                                <th scope="col"></th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Số lượng</th>
-                                <th scope="col">Tổng tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (!empty($products)) {
-                                $total = 0;
-                                $num = 1;
-                                while ($row = mysqli_fetch_array($products)) {
-                                    $total += $row[6] * $_SESSION["cart"][$row[0]];
-                                    echo "<tr>
-                                    <td>
-                                        <div class='media'>
-                                            <div class='d-flex'>
-                                                <img src='$row[8]' class='img-product' >
+                    <?php
+                    if (empty($products)) {
+                        echo "<div class='d-flex flex-column align-items-center justify-content-center'>
+                        <h3 class='mb-5'>Giỏ hàng của bạn đang trống</h3>
+                        <a class='gray_btn btn' href='category.php'>Tiếp tục shopping</a>
+                        </div>";
+                    } else { ?>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sản phẩm</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Tổng tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (!empty($products)) {
+                                    $num = 1;
+                                    while ($row = mysqli_fetch_array($products)) {
+                                        $total += $row[8] * $_SESSION["cart"][$row[0]];
+                                        echo "<tr>
+                                        <td>
+                                            <div class='media'>
+                                                <div class='d-flex'>
+                                                    <img src='$row[10]' class='img-product' >
+                                                </div>
+                                                <div class='media-body'>
+                                                    <p>$row[2]</p>
+                                                </div>
                                             </div>
-                                            <div class='media-body'>
-                                                <p>$row[2]</p>
+                                        </td>
+                                        <td>
+                                            <button data-id='$row[0]' class='btn-delete ml-3 genric-btn default-border small'>Xóa</button>
+                                        </td>
+                                        <td>
+                                            <h5 class='product-price' style='display: flex; gap: 3px'><span class='price'>$row[8]</span><span> VNĐ</span></h5>
+                                        </td>
+                                        <td>
+                                            <div class='product_count'>
+                                                <input type='hidden' value='$row[9]' data-id='$row[0]' class='product-qty'/>
+                                                <input type='text' name='qty' data-id='$row[0]' value='". $_SESSION['cart'][$row[0]] ."' title='Số lượng mua:' class='input-text qty'>
+                                                <button class='increase items-count' data-id='$row[0]' type='button'><i class='lnr lnr-chevron-up'></i></button>
+                                                <button class='reduced items-count' data-id='$row[0]' type='button'><i class='lnr lnr-chevron-down'></i></button>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button class='btn-delete ml-3 genric-btn default-border small'>Xóa</button>
-                                    </td>
-                                    <td>
-                                        <h5 class='product-price'><span>". number_format(($row[6])) ." VNĐ</span></h5>
-                                    </td>
-                                    <td>
-                                        <div class='product_count'>
-                                            <input type='text' name='qty' data-id='1' value='". $_SESSION['cart'][$row[0]] ."' title='Số lượng mua:' class='input-text qty'>
-                                            <button class='increase items-count' data-id='1' type='button'><i class='lnr lnr-chevron-up'></i></button>
-                                            <button class='reduced items-count' data-id='1' type='button'><i class='lnr lnr-chevron-down'></i></button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5 class='product-cost'><span>". number_format($row[6] * $_SESSION["cart"][$row[0]]) ." VNĐ</span></h5>
-                                    </td>
-                                </tr>";
+                                        </td>
+                                        <td>
+                                            <h5 class='product-cost' style='display: flex; gap: 3px'><span class='cost'>". (int)$row[8] * $_SESSION["cart"][$row[0]] ."</span><span> VNĐ</span></h5>
+                                        </td>
+                                    </tr>";
+                                    }
                                 }
-                            }
-                            ?>
-                            <tr class="bottom_button">
-                                <td>
-                                    <a class="gray_btn">Xóa hết</a>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                    <div class="cupon_text d-flex align-items-center justify-content-end">
-                                        <input type="text" placeholder="Mã giảm giá">
-                                        <a class="primary-btn">Dùng</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
+                                ?>
+                                <?php
+                                if (!empty($products)) { ?>
+                                    <tr class="bottom_button">
+                                        <td>
+                                            <a class="gray_btn btn btn-del-all">Xóa hết</a>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <div class="cupon_text d-flex align-items-center justify-content-end">
+                                                <select name="" id="select-voucher" class="mr-3">
+                                                    <option value="free-ship">Mã vận chuyển</option>
+                                                    <option value="order">Mã đơn hàng</option>
+                                                </select>
+                                                <input type="text" placeholder="Mã giảm giá" class="input-voucher">
+                                                <a class="primary-btn btn btn-voucher text-white">Dùng</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php }
+                                ?> 
+                                <tr>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
-                                    <h5>Tổng tiền</h5>
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
+                                        <h5>Tổng tiền</h5>
+                                        <?php if (isset($_SESSION["free-ship"])) {?>
+                                        <h5 class="mt-4">Giảm giá vận chuyển</h5>
+                                        <?php }?>
+                                        <?php if (isset($_SESSION["order"])) {?>
+                                        <h5 class="mt-4">Giảm giá đơn hàng</h5>
+                                        <?php }?>
+                                        <?php if (isset($_SESSION["free-ship"]) || isset($_SESSION["order"])) {?>
+                                        <h5 class="mt-4">Thành tiền</h5>
+                                        <?php }?>
+                                    </td>
+                                    <td>
+                                        <h5 id="total-cost" style="display: flex; gap: 3px"><span class="cost"><?=$total?></span> VNĐ</h5>
+                                        <?php if (isset($_SESSION["free-ship"])) {
+                                            $resultKMFreeShip = mysqli_query($connect, "SELECT GiaTriKM from khuyenmai WHERE CodeKM = '".$_SESSION["free-ship"]."'");
+                                            $resultKMFreeShip = $resultKMFreeShip->fetch_column();
+                                            ?>
+                                        <h5 class="mt-4" style="display: flex; gap: 3px" id="voucher-free-ship"><span class="ship"><?=$resultKMFreeShip?></span> VNĐ</h5>
+                                        <?php }?>
+                                        <?php if (isset($_SESSION["order"])) {
+                                            $resultKMOrder = mysqli_query($connect, "SELECT GiaTriKM from khuyenmai WHERE CodeKM = '".$_SESSION["order"]."'");
+                                            $resultKMOrder = $resultKMOrder->fetch_column();
+                                            ?>
+                                        <h5 class="mt-4" style="display: flex; gap: 3px" id="voucher-order"><span class="order"><?=$resultKMOrder?></span> VNĐ</h5>
+                                        <?php }?>
+                                        <?php if (isset($_SESSION["free-ship"]) || isset($_SESSION["order"])) {
+                                            ?>
+                                        <h5 class="mt-4" style="display: flex; gap: 3px" id="total-cost-voucher"><span class="total">0</span> VNĐ</h5>
+                                        <?php }?>
+                                    </td>
+                                </tr>
+                                <tr class="out_button_area">
+                                    <td>
 
-                                    <h5 id="total-cost"><span><?=number_format($total)?></span> VNĐ</h5>
-                                </td>
-                            </tr>
-                            <tr class="out_button_area">
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                </td>
-                                <td>
-
-                                </td>
-                                <td>
-                                    <div class="checkout_btn_inner d-flex align-items-center">
-                                        <a class="gray_btn" href="#">Tiếp tục shopping</a>
-                                        <a class="primary-btn" href="checkout.php">Đi đến thanh toán</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    </td>
+                                    <td>
+                                        <div class="checkout_btn_inner d-flex align-items-center">
+                                            <a class="gray_btn btn" href="category.php">Tiếp tục shopping</a>
+                                            <a class="primary-btn" href="checkout.php">Đi đến thanh toán</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <?php }
+                    ?>
                 </div>
             </div>
         </div>
@@ -242,7 +287,7 @@
 	</section>
 	<!-- End related-product Area -->
 
-    <?php include("./templates/footer.php")?>
+    <?php include("templates/footer.php")?>
     
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

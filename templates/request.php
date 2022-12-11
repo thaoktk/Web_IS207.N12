@@ -53,6 +53,72 @@
             'message'=>"Thêm sản phẩm thành công"
             ));
             break;
+        case "update_qty_product_cart":
+            $idSP = $_POST['idSP'];
+            $qty = $_POST['qty'];
+            $isIncrease = $_POST['isIncrease'];
+            $result = update_qty_product_cart($idSP, $qty, $isIncrease);
+            die (json_encode($result));
+            break;
+        case "delete_product_cart":
+            $idSP = $_POST['idSP'];
+            $result = delete_product_cart($idSP);
+            die (json_encode($result));
+            break;
+        case "delete_cart":
+            $result = delete_cart();
+            unset($_SESSION["free-ship"]);
+            unset($_SESSION["order"]);
+            die (json_encode($result));
+            break;
+        case "add_voucher_freeShip":
+            $code = $_POST['code'];
+            $resultKM = mysqli_query($connect, "SELECT CodeKM from khuyenmai WHERE CodeKM = '$code' and MaLoaiKM = '1'");
+            if ($resultKM->num_rows == 0) {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Mã này không phải mã giảm giá vận chuyển!"
+                    ));
+                break;
+            }
+            if (!isset($_SESSION["free-ship"]) || empty($_SESSION["free-ship"])) {
+                $result = add_voucher_freeShip($code);
+                echo json_encode(array(
+                    'status'=>$result,
+                    'message'=>"Dùng mã vận chuyển thành công!"
+                    ));
+                break;
+            } else {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Bạn đã sử dụng mã vận chuyển rồi, không thể tiếp tục dùng nữa!"
+                    ));
+                break;
+            }
+        case "add_voucher_order":
+            $code = $_POST['code'];
+            $resultKM = mysqli_query($connect, "SELECT CodeKM from khuyenmai WHERE CodeKM = '$code' and MaLoaiKM = '2'");
+            if ($resultKM->num_rows == 0) {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Mã này không phải mã giảm giá đơn hàng!"
+                    ));
+                break;
+            }
+            if (!isset($_SESSION["order"]) || empty($_SESSION["order"])) {
+                $result = add_voucher_order($code);
+                echo json_encode(array(
+                    'status'=>$result,
+                    'message'=>"Dùng mã đơn hàng thành công!"
+                    ));
+                break;
+            } else {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Bạn đã sử dụng mã đơn hàng rồi, không thể tiếp tục dùng nữa!"
+                    ));
+                break;
+            }
     }
 
 
@@ -80,6 +146,39 @@
         }
         return true;
     }
+
+    function update_qty_product_cart($idSP, $qty = 1, $isIncrease) {
+        if ($isIncrease == 1) {
+            if ($qty) {
+                $_SESSION["cart"][$idSP] = $qty;
+            } else {
+                $_SESSION["cart"][$idSP] += 1;
+            }
+        } else {
+            if ($_SESSION["cart"][$idSP] > 1) {
+                $_SESSION["cart"][$idSP] -= 1;
+            }
+        }
+        return true;
+    }
+
+    function delete_product_cart($idSP) {
+        unset($_SESSION["cart"][$idSP]);
+        return true;
+    }
+
+    function delete_cart() {
+        unset($_SESSION["cart"]);
+        return true;
+    }
     
-    
+    function add_voucher_freeShip($code) {
+        $_SESSION["free-ship"] = $code;
+        return true;
+    }
+
+    function add_voucher_order($code) {
+        $_SESSION["order"] = $code;
+        return true;
+    }
 ?>

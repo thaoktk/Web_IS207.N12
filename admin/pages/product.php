@@ -162,10 +162,12 @@
                                 <div>
                                     <?php
                                     $list_TenLSP = mysqli_query($connect, "SELECT MaLSP, TenLSP FROM loaisanpham");
+                                    $list_Ram = mysqli_query($connect, "SELECT Distinct(Ram) FROM sanpham order by Ram");
+                                    $list_Rom = mysqli_query($connect, "SELECT Distinct(Rom) FROM sanpham order by Rom");
                                     ?>
                                     <a href='#edit<?=$row[0]?>' data-bs-toggle='modal'><button class='btn btn-sm btn-primary' type='button'>Sửa</button></a>
-                                    <a href="?idDel=<?=$row[0]?>" type="button" class='btn btn-sm btn-primary'>Xóa</a>
-                                    <div class='modal fade' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
+                                    <a data-product="<?=$row[0]?>" type="button" class='btn btn-sm btn-primary btn-delete'>Xóa</a>
+                                    <div class='modal fade modal-edit' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
                                     <div class='modal-dialog modal-dialog-centered' role='document'>
                                         <div class='modal-content'>
                                             <div class='modal-header'>
@@ -173,7 +175,7 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                             <div class='modal-body'>
-                                            <form action='?idEdit=<?=$row[0]?>' method='POST'>
+                                            <form id="product-edit-<?=$row[0]?>" class="form-edit" data-product="<?=$row[0]?>">
                                                     <div class='mb-4'>
                                                         <label class="d-block">Tên loại SP</label>
                                                         <select name="type-edit" id="">
@@ -187,35 +189,57 @@
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Tên SP</label>
-                                                        <input type='text' value="<?=$row[2]?>" class='form-control' name='name-edit'>
+                                                        <input type='text' value="<?=$row[2]?>" class='form-control' name='name-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Tên Series</label>
-                                                        <input type='text' value="<?=$row[3]?>" class='form-control' name='name-series-edit'>
+                                                        <input type='text' value="<?=$row[3]?>" class='form-control' name='name-series-edit' required>
+                                                    </div>
+                                                    <div class='mb-4'>
+                                                        <label class="d-block">Ram</label>
+                                                        <select name="ram-edit" id="">
+                                                        <?php 
+                                                        while ($rowRam = mysqli_fetch_array($list_Ram)) {
+                                                            $selected = $row[4] == $rowRam[0] ? "selected" : "";
+                                                            echo "<option value='$rowRam[0]' $selected>$rowRam[0]</option>";
+                                                        }
+                                                        ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class='mb-4'>
+                                                        <label class="d-block">Rom</label>
+                                                        <select name="rom-edit" id="">
+                                                        <?php 
+                                                        while ($rowRom = mysqli_fetch_array($list_Rom)) {
+                                                            $selected = $row[5] == $rowRom[0] ? "selected" : "";
+                                                            echo "<option value='$rowRom[0]' $selected>$rowRom[0]</option>";
+                                                        }
+                                                        ?>
+                                                        </select>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Chi tiết</label>
-                                                        <textarea rows="4" cols="50" class='form-control content-blog' name='detail-edit'><?=$row[6]?></textarea>
+                                                        <textarea rows="4" cols="50" class='form-control content-blog' name='detail-edit' required><?=$row[6]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Giá gốc</label>
-                                                        <input type='number' value="<?=$row[7]?>" class='form-control' name='price-first-edit'>
+                                                        <input type='number' value="<?=$row[7]?>" class='form-control' name='price-first-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Giá tiền</label>
-                                                        <input type='number' value="<?=$row[8]?>" class='form-control' name='price-sec-edit'>
+                                                        <input type='number' value="<?=$row[8]?>" class='form-control' name='price-sec-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Số lượng</label>
-                                                        <input type='number' value="<?=$row[9]?>" class='form-control' name='quantity-edit'>
+                                                        <input type='number' value="<?=$row[9]?>" class='form-control' name='quantity-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Hình ảnh</label>
-                                                        <input type='text' value="<?=$row[10]?>" class='form-control' name='image-edit'>
+                                                        <input type='text' value="<?=$row[10]?>" class='form-control' name='image-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Mô tả</label>
-                                                        <textarea rows="4" cols="50" class='form-control content-blog' name='desc-edit'><?=$row[11]?></textarea>
+                                                        <textarea rows="4" cols="50" class='form-control content-blog' name='desc-edit' required><?=$row[11]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label class="d-block">Là sản phẩm mới?</label>
@@ -233,14 +257,14 @@
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Số sao</label>
-                                                        <input type='number' value="<?=$row[14]?>" class='form-control' name='star-edit'>
+                                                        <input type='number' value="<?=$row[14]?>" class='form-control' name='star-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Số đánh giá</label>
-                                                        <input type='number' value="<?=$row[15]?>" class='form-control' name='review-edit'>
+                                                        <input type='number' value="<?=$row[15]?>" class='form-control' name='review-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
-                                                        <input type='submit' class='form-control w-100 btn btn-tertiary' name='submit-edit' value="Lưu">
+                                                        <input type='submit' class='form-control w-100 btn btn-tertiary btn-edit' name='submit-edit' value="Lưu" data-product="<?=$row[0]?>">
                                                     </div>
                                                 </form>
                                             </div>
@@ -273,17 +297,19 @@
     <!-- End of Modal Content -->
     <?php
     $list_TenLSP = mysqli_query($connect, "SELECT MaLSP, TenLSP FROM loaisanpham");
+    $list_Ram = mysqli_query($connect, "SELECT Distinct(Ram) FROM sanpham order by Ram");
+    $list_Rom = mysqli_query($connect, "SELECT Distinct(Rom) FROM sanpham order by Rom");
     ?>
     <!-- Modal Content -->
-    <div class='modal fade' id='modal-create-product' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
+    <div class='modal fade modal-create' id='modal-create-product' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
         <div class='modal-dialog modal-dialog-centered' role='document'>
             <div class='modal-content'>
                 <div class='modal-header'>
-                    <h2 class='h6 modal-title'>Sửa sản phẩm</h2>
+                    <h2 class='h6 modal-title'>Tạo sản phẩm</h2>
                     <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                 </div>
                 <div class='modal-body'>
-                <form>
+                <form class="form-create">
                         <div class='mb-4'>
                             <label class="d-block">Loại SP</label>
                             <select name="type-create" id="">
@@ -296,35 +322,55 @@
                         </div>
                         <div class='mb-4'>
                             <label>Tên SP</label>
-                            <input type='text' class='form-control' name='name-create'>
+                            <input type='text' class='form-control' name='name-create' required>
                         </div>
                         <div class='mb-4'>
                             <label>Tên Series</label>
-                            <input type='text' class='form-control' name='name-series-create'>
+                            <input type='text' class='form-control' name='name-series-create' required>
+                        </div>
+                        <div class='mb-4'>
+                            <label class="d-block">Ram</label>
+                            <select name="ram-create" id="">
+                            <?php 
+                            while ($rowRam = mysqli_fetch_array($list_Ram)) {
+                                echo "<option value='$rowRam[0]'>$rowRam[0]</option>";
+                            }
+                            ?>
+                            </select>
+                        </div>
+                        <div class='mb-4'>
+                            <label class="d-block">Rom</label>
+                            <select name="rom-create" id="">
+                            <?php 
+                            while ($rowRom = mysqli_fetch_array($list_Rom)) {
+                                echo "<option value='$rowRom[0]'>$rowRom[0]</option>";
+                            }
+                            ?>
+                            </select>
                         </div>
                         <div class='mb-4'>
                             <label>Chi tiết</label>
-                            <textarea rows="4" cols="50" class='form-control content-blog' name='detail-create'></textarea>
+                            <textarea rows="4" cols="50" class='form-control content-blog' name='detail-create' required></textarea>
                         </div>
                         <div class='mb-4'>
                             <label>Giá gốc</label>
-                            <input type='number' class='form-control' name='price-first-create'>
+                            <input type='number' class='form-control' name='price-first-create' required>
                         </div>
                         <div class='mb-4'>
                             <label>Giá tiền</label>
-                            <input type='number' class='form-control' name='price-sec-create'>
+                            <input type='number' class='form-control' name='price-sec-create' required>
                         </div>
                         <div class='mb-4'>
                             <label>Số lượng</label>
-                            <input type='number' class='form-control' name='quantity-create'>
+                            <input type='number' class='form-control' name='quantity-create' required>
                         </div>
                         <div class='mb-4'>
                             <label>Hình ảnh</label>
-                            <input type='text' class='form-control' name='image-create'>
+                            <input type='text' class='form-control' name='image-create' required>
                         </div>
                         <div class='mb-4'>
                             <label>Mô tả</label>
-                            <textarea rows="4" cols="50" class='form-control content-blog' name='desc-create'></textarea>
+                            <textarea rows="4" cols="50" class='form-control content-blog' name='desc-create' required></textarea>
                         </div>
                         <div class='mb-4'>
                             <label class="d-block">Là sản phẩm mới?</label>
@@ -341,7 +387,7 @@
                             </select>
                         </div>
                         <div class='mb-4'>
-                            <input type='submit' class='form-control w-100 btn btn-tertiary' name='submit-create' value="Tạo">
+                            <input type='submit' class='form-control w-100 btn btn-tertiary btn-create' name='submit-create' value="Tạo">
                         </div>
                     </form>
                 </div>
@@ -417,7 +463,140 @@
 
         $(".content-blog").css("min-height", "300px");
 
-        
+        $(".modal-edit").on('hidden.bs.modal', function () {
+            $(this).find("form").trigger("reset");
+        });
+
+        $(".modal-create").on('hidden.bs.modal', function () {
+            $(this).find("form").trigger("reset");
+        });
+
+        $(".form-edit").each(function() {
+            $(this).submit(function(e) {
+                e.preventDefault()
+                idForm = $(this).attr("id")
+                loaiSP = $(`#${idForm} select[name="type-edit"]`).val()
+                tenSP = $(`#${idForm} input[name="name-edit"]`).val()
+                tenSeries = $(`#${idForm} input[name="name-series-edit"]`).val()
+                chiTiet = $(`#${idForm} textarea[name="detail-edit"]`).val()
+                giaGoc = $(`#${idForm} input[name="price-first-edit"]`).val()
+                giaTien = $(`#${idForm} input[name="price-sec-edit"]`).val()
+                sluong = $(`#${idForm} input[name="quantity-edit"]`).val()
+                hinhAnh = $(`#${idForm} input[name="image-edit"]`).val()
+                moTa = $(`#${idForm} textarea[name="desc-edit"]`).val()
+                New = $(`#${idForm} select[name="new-edit"]`).val()
+                hot = $(`#${idForm} select[name="hot-edit"]`).val()
+                soSao = $(`#${idForm} input[name="star-edit"]`).val()
+                soDanhGia = $(`#${idForm} input[name="review-edit"]`).val()
+                ram = $(`#${idForm} select[name="ram-edit"]`).val()
+                rom = $(`#${idForm} select[name="rom-edit"]`).val()
+                idSP = $(this).data("product")
+
+                if (Number(giaGoc) < Number(giaTien)) {
+                    alert("Giá gốc không được nhỏ hơn giá tiền của sản phẩm!")
+                    return;
+                }
+                $.ajax({
+                        type: "POST",
+                        url: "templates/request.php",
+                        dataType: "json",
+                        data: {
+                            request: "update_product",
+                            idSP: idSP,
+                            loaiSP: loaiSP,
+                            tenSP: tenSP,
+                            tenSeries: tenSeries,
+                            chiTiet: chiTiet,
+                            giaGoc: giaGoc,
+                            giaTien: giaTien,
+                            sluong: sluong,
+                            hinhAnh: hinhAnh,
+                            moTa: moTa,
+                            New: New,
+                            hot: hot,
+                            soSao: soSao,
+                            soDanhGia: soDanhGia,
+                            ram: ram,
+                            rom: rom,
+                        },
+                        success: function () {
+                            alert("Cập nhật sản phẩm thành công!")
+                            window.location.reload();
+                        },
+                        error: function (e) {
+                            alert("Đã xảy ra lỗi!")
+                        }
+                })
+            })
+        })
+
+        $(".form-create").submit(function(e) {
+            e.preventDefault()
+            loaiSP = $(`select[name="type-create"]`).val()
+            tenSP = $(`input[name="name-create"]`).val()
+            tenSeries = $(`input[name="name-series-create"]`).val()
+            chiTiet = $(`textarea[name="detail-create"]`).val()
+            giaGoc = $(`input[name="price-first-create"]`).val()
+            giaTien = $(`input[name="price-sec-create"]`).val()
+            sluong = $(`input[name="quantity-create"]`).val()
+            hinhAnh = $(`input[name="image-create"]`).val()
+            moTa = $(`textarea[name="desc-create"]`).val()
+            New = $(`select[name="new-create"]`).val()
+            hot = $(`select[name="hot-create"]`).val()
+            ram = $(`select[name="ram-create"]`).val()
+            rom = $(`select[name="rom-create"]`).val()
+            $.ajax({
+                    type: "POST",
+                    url: "templates/request.php",
+                    dataType: "json",
+                    data: {
+                        request: "insert_product",
+                        loaiSP: loaiSP,
+                        tenSP: tenSP,
+                        tenSeries: tenSeries,
+                        chiTiet: chiTiet,
+                        giaGoc: giaGoc,
+                        giaTien: giaTien,
+                        sluong: sluong,
+                        hinhAnh: hinhAnh,
+                        moTa: moTa,
+                        New: New,
+                        hot: hot,
+                        ram: ram,
+                        rom: rom,
+                    },
+                    success: function () {
+                        alert("Tạo mới sản phẩm thành công!")
+                        window.location.reload();
+                    },
+                    error: function (e) {
+                        alert("Đã xảy ra lỗi!")
+                    }
+            })
+        })
+
+        $(".btn-delete").each(function() {
+            $(this).click(function() {
+                idSP = $(this).data("product")
+                $.ajax({
+                        type: "POST",
+                        url: "templates/request.php",
+                        dataType: "json",
+                        data: {
+                            request: "delete_product",
+                            idSP: idSP,
+                        },
+                        success: function () {
+                            alert("Xóa sản phẩm thành công!")
+                            window.location.reload();
+                        },
+                        error: function (e) {
+                            alert("Đã xảy ra lỗi!")
+                            
+                        }
+                    })
+            })
+        })
     });
    </script>
 

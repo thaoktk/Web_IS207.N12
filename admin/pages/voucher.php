@@ -173,7 +173,7 @@
                                     ?>
                                     <a href='#edit<?=$row[0]?>' data-bs-toggle='modal'><button class='btn btn-sm btn-primary' type='button'>Sửa</button></a>
                                     <a type="button" class='btn btn-sm btn-primary btn-delete' data-voucher="<?=$row[0]?>">Xóa</a>
-                                    <div class='modal fade' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
+                                    <div class='modal fade modal-edit' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
                                     <div class='modal-dialog modal-dialog-centered' role='document'>
                                         <div class='modal-content'>
                                             <div class='modal-header'>
@@ -181,7 +181,7 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                             <div class='modal-body'>
-                                            <form id="voucher-edit-<?=$row[0]?>">
+                                            <form id="voucher-edit-<?=$row[0]?>" class="form-edit" data-voucher="<?=$row[0]?>">
                                                     <div class='mb-4'>
                                                         <label class="d-block">Loại KM</label>
                                                         <select name="type-voucher-edit" id="">
@@ -350,15 +350,19 @@
             });
 
         $("#create").on('hidden.bs.modal', function () {
-            $(".code-voucher").val("");
+            $(this).find("form").trigger("reset");
         });
 
-        $(".btn-edit").each(function() {
-            $(this).click(function() {
-                parent = $(this).parent().parent().attr("id")
-                loaiKM = $(`#${parent} select[name="type-voucher-edit"]`).val()
-                giaTri = $(`#${parent} input[name="price-edit"]`).val()
-                sluong = $(`#${parent} input[name="qty-edit"]`).val()
+        $(".modal-edit").on('hidden.bs.modal', function () {
+            $(this).find("form").trigger("reset");
+        });
+
+        $(".form-edit").each(function() {
+            $(this).submit(function() {
+                idForm = $(this).attr("id")
+                loaiKM = $(`#${idForm} select[name="type-voucher-edit"]`).val()
+                giaTri = $(`#${idForm} input[name="price-edit"]`).val()
+                sluong = $(`#${idForm} input[name="qty-edit"]`).val()
                 idKM = $(this).data("voucher")
                 $.ajax({
                         type: "POST",
@@ -382,7 +386,7 @@
             })
         })
 
-        $(".btn-create").click(function(e) {
+        $(".form-create").submit(function(e) {
             loaiKM = $(`select[name="type-voucher-create"]`).val()
             giaTri = $(`input[name="price-create"]`).val()
             sluong = $(`input[name="qty-create"]`).val()

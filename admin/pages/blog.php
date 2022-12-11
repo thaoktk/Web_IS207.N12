@@ -166,7 +166,7 @@
                                     ?>
                                     <a href='#edit<?=$row[0]?>' data-bs-toggle='modal'><button class='btn btn-sm btn-primary' type='button'>Sửa</button></a>
                                     <a href="?idDel=<?=$row[0]?>" type="button" class='btn btn-sm btn-primary'>Xóa</a>
-                                    <div class='modal fade' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
+                                    <div class='modal fade modal-edit' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
                                     <div class='modal-dialog modal-dialog-centered' role='document'>
                                         <div class='modal-content'>
                                             <div class='modal-header'>
@@ -224,7 +224,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modal-detail-blog" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal fade modal-create" id="modal-detail-blog" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -308,7 +308,6 @@
                             idBlog: idBlog
                         },
                         success: function(data) {
-                            console.log(data);
                             $(".detail-blog").html(data)
                             $('#modal-detail-blog').modal('show')
                         },
@@ -317,6 +316,14 @@
                     })
                 })
             })
+
+            $(".modal-edit").on('hidden.bs.modal', function () {
+                $(this).find("form").trigger("reset");
+            });
+
+            $(".modal-create").on('hidden.bs.modal', function () {
+                $(this).find("form").trigger("reset");
+            });
 
             $('.content-blog').trumbowyg({
             btns: [
