@@ -165,7 +165,7 @@
                                     $list_TenQuyen = mysqli_query($connect, "SELECT MaQuyen, TenQuyen FROM phanquyen");
                                     ?>
                                     <a href='#edit<?=$row[0]?>' data-bs-toggle='modal'><button class='btn btn-sm btn-primary' type='button'>Sửa</button></a>
-                                    <a type="button" class='btn btn-sm btn-primary'>Xóa</a>
+                                    <a data-user="<?=$row[0]?>" type="button" class='btn btn-sm btn-primary btn-delete'>Xóa</a>
                                     <div class='modal fade' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
                                     <div class='modal-dialog modal-dialog-centered' role='document'>
                                         <div class='modal-content'>
@@ -177,27 +177,27 @@
                                                 <form id="user-edit-<?=$row[0]?>" class="form-edit" data-user="<?=$row[0]?>">
                                                     <div class='mb-4'>
                                                         <label>Họ</label>
-                                                        <input type='text' value="<?=$row[1]?>" class='form-control' name='subname-edit'>
+                                                        <input type='text' value="<?=$row[1]?>" class='form-control' name='subname-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Tên</label>
-                                                        <input type='text' value="<?=$row[2]?>" class='form-control' name='name-edit'>
+                                                        <input type='text' value="<?=$row[2]?>" class='form-control' name='name-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>SĐT</label>
-                                                        <input type='number' value="<?=$row[3]?>" class='form-control' name='phone-number-edit'>
+                                                        <input type='number' value="<?=$row[3]?>" class='form-control' name='phone-number-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Email</label>
-                                                        <input type='email' value="<?=$row[4]?>" class='form-control' name='email-edit'>
+                                                        <input type='email' value="<?=$row[4]?>" class='form-control' name='email-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Tài khoản</label>
-                                                        <input type='text' value="<?=$row[5]?>" class='form-control' name='account-edit'>
+                                                        <input type='text' value="<?=$row[5]?>" class='form-control' name='account-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Mật khẩu</label>
-                                                        <input type='text' value="<?=$row[6]?>" class='form-control' name='pass-edit'>
+                                                        <input type='text' value="<?=$row[6]?>" class='form-control' name='pass-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label class="d-block">Mã quyền</label>
@@ -211,8 +211,11 @@
                                                         </select>
                                                     </div>
                                                     <div class='mb-4'>
-                                                        <label>Trạng thái</label>
-                                                        <input type='number' value="<?=$row[8]?>" class='form-control' name='status-edit'>
+                                                        <label class="d-block">Trạng thái</label>
+                                                        <select name='status-edit' id="">
+                                                            <option value="0" <?php if ($row[8] == '0') {echo "selected";} ?>>Block</option>
+                                                            <option value="1" <?php  if ($row[8] == '1') {echo "selected";} ?>>Kích hoạt</option>
+                                                        </select>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <input type='submit' class='form-control w-100 btn btn-tertiary' name='submit-edit' value="Lưu">
@@ -246,6 +249,9 @@
     <!-- End of Modal Content -->
 
     <!-- Modal Content -->
+    <?php 
+    $list_TenQuyen = mysqli_query($connect, "SELECT MaQuyen, TenQuyen FROM phanquyen");
+    ?>
     <div class="modal fade modal-create" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -257,35 +263,44 @@
                     <form class="form-create">
                         <div class="mb-4">
                             <label>Họ</label>
-                            <input type="text" required class="form-control" name="subname-create">
+                            <input type="text" required class="form-control" name="subname-create" required>
                         </div>
                         <div class="mb-4">
                             <label>Tên</label>
-                            <input type="text" required class="form-control" name="name-create">
+                            <input type="text" required class="form-control" name="name-create" required>
                         </div>
                         <div class="mb-4">
                             <label>SĐT</label>
-                            <input type="number" required class="form-control" name="phone-number-create">
+                            <input type="number" required class="form-control" name="phone-number-create" required>
                         </div>
                         <div class="mb-4">
                             <label>Email</label>
-                            <input type="email" required class="form-control" name="email-create">
+                            <input type="email" required class="form-control" name="email-create" required>
                         </div>
                         <div class="mb-4">
                             <label>Tài khoản</label>
-                            <input type="text" required class="form-control" name="account-create">
+                            <input type="text" required class="form-control" name="account-create" required>
                         </div>
                         <div class="mb-4">
                             <label>Mật khẩu</label>
-                            <input type="password" required class="form-control" name="pass-create">
+                            <input type="password" required class="form-control" name="pass-create" required>
                         </div>
                         <div class="mb-4">
-                            <label>Mã quyền</label>
-                            <input type="number" required class="form-control" name="privilege-create">
+                            <label class="d-block">Mã quyền</label>
+                            <select name='privilege-create' id="">
+                                <?php 
+                                while ($rowTenQuyen = mysqli_fetch_array($list_TenQuyen)) {
+                                    echo "<option value='$rowTenQuyen[0]'>$rowTenQuyen[1]</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="mb-4">
-                            <label>Trạng thái</label>
-                            <input type="number" required class="form-control" name="status-create">
+                            <label class="d-block">Trạng thái</label>
+                            <select name='status-create' id="">
+                                <option value="0">Block</option>
+                                <option value="1">Kích hoạt</option>
+                            </select>
                         </div>
                         <div class="mb-4">
                             <input type="submit" class="form-control w-100 btn btn-tertiary" name="submit-create" value="Tạo">
@@ -365,6 +380,7 @@
                     taiKhoan = $(`#${idForm} input[name="account-edit"]`).val()
                     matKhau = $(`#${idForm} input[name="pass-edit"]`).val()
                     maQuyen = $(`#${idForm} select[name="privilege-edit"]`).val()
+                    trangThai = $(`#${idForm} select[name="status-edit"]`).val()
                     idUser = $(this).data("user")
 
                     $.ajax({
@@ -381,6 +397,7 @@
                                 taiKhoan: taiKhoan,
                                 matKhau: matKhau,
                                 maQuyen: maQuyen,
+                                trangThai: trangThai
                             },
                             success: function () {
                                 alert("Cập nhật thông tin người dùng thành công!")
@@ -390,6 +407,64 @@
                                 alert("Đã xảy ra lỗi!")
                             }
                     })
+                })
+            })
+
+            $(".form-create").submit(function(e) {
+                e.preventDefault()
+                    ho = $(`input[name="subname-create"]`).val()
+                    ten = $(`input[name="name-create"]`).val()
+                    sdt = $(`input[name="phone-number-create"]`).val()
+                    email = $(`input[name="email-create"]`).val()
+                    taiKhoan = $(`input[name="account-create"]`).val()
+                    matKhau = $(`input[name="pass-create"]`).val()
+                    maQuyen = $(`select[name="privilege-create"]`).val()
+                    trangThai = $(`select[name="status-create"]`).val()
+
+                    $.ajax({
+                            type: "POST",
+                            url: "templates/request.php",
+                            dataType: "json",
+                            data: {
+                                request: "insert_user",
+                                ho: ho,
+                                ten: ten,
+                                sdt: sdt,
+                                email: email,
+                                taiKhoan: taiKhoan,
+                                matKhau: matKhau,
+                                maQuyen: maQuyen,
+                                trangThai: trangThai
+                            },
+                            success: function () {
+                                alert("Tạo mới người dùng thành công!")
+                                window.location.reload();
+                            },
+                            error: function (e) {
+                                alert("Đã xảy ra lỗi!")
+                            }
+                    })
+            })
+
+            $(".btn-delete").each(function() {
+                $(this).click(function() {
+                    idUser = $(this).data("user")
+                    $.ajax({
+                            type: "POST",
+                            url: "templates/request.php",
+                            dataType: "json",
+                            data: {
+                                request: "delete_user",
+                                idUser: idUser,
+                            },
+                            success: function () {
+                                alert("Xóa người dùng thành công!")
+                                window.location.reload();
+                            },
+                            error: function (e) {
+                                alert("Đã xảy ra lỗi!")
+                            }
+                        })
                 })
             })
     })
