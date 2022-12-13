@@ -1615,16 +1615,14 @@ i.star-rv {
 				display: block;
 				line-height: 42px;
 
-				span {
-					float: right;
-				}
-
 				.middle {
 					float: none;
-					width: 50px;
+					width: 30px;
 					text-align: right;
 					display: inline-block;
-					margin-left: 30px;
+					margin-left: 10px;
+					margin-right: 10px;
+					white-space: nowrap;
 					color: $title-color;
 				}
 			}
@@ -1632,7 +1630,7 @@ i.star-rv {
 			&:nth-child(4) {
 				a {
 					.middle {
-						margin-left: 48px;
+						// margin-left: 48px;
 					}
 				}
 			}
@@ -2178,4 +2176,8 @@ i.star-rv {
 
 .radion_btn input[type=radio]:checked~label {
 	color: #000;
+}
+
+.product-buy-checkout {
+	white-space: normal;
 }

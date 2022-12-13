@@ -116,7 +116,7 @@
         </div>
 
         <div class="mb-4">
-            <button class="btn btn-secondary" type="button" data-bs-toggle='modal' data-bs-target='#modal-create-product'>Tạo tin tức mới</button>
+            <button class="btn btn-secondary" type="button" data-bs-toggle='modal' data-bs-target='#modal-create'>Tạo tin tức mới</button>
             <a href="blog.php" class="ms-3 btn btn-tertiary" type="button">Làm mới</a>
         </div>
 
@@ -145,10 +145,10 @@
                                 <img src='$row[4]' class='img-fluid' width='100' height='80' style='object-fit:contain;'/>
                                 </td>
                                 <td>
-                                <p class='text-ellipse'>$row[1]</p>
+                                <p class='text-ellipse' title='$row[1]'>$row[1]</p>
                                 </td>
                                 <td>
-                                <p class='text-ellipse'>$row[2]</p>
+                                <p class='text-ellipse' title='$row[2]'>$row[2]</p>
                                 </td>
                                 <td>
                                 <a data-blog='$row[0]' data-bs-toggle='modal' class='btn-detail'><button class='btn btn-sm btn-primary' type='button'>Chi tiết</button></a>
@@ -157,7 +157,7 @@
                                 $row[5]
                                 </td>
                                 <td>
-                                $row[7]
+                                $row[6]
                                 </td>
                                 <td>"?>
                                 <div>
@@ -165,7 +165,7 @@
                                     $list_TenAdmin = mysqli_query($connect, "SELECT Ho, Ten FROM nguoidung where MaQuyen = '1'");
                                     ?>
                                     <a href='#edit<?=$row[0]?>' data-bs-toggle='modal'><button class='btn btn-sm btn-primary' type='button'>Sửa</button></a>
-                                    <a href="?idDel=<?=$row[0]?>" type="button" class='btn btn-sm btn-primary'>Xóa</a>
+                                    <a data-blog="<?=$row[0]?>" type="button" class='btn btn-sm btn-primary btn-delete'>Xóa</a>
                                     <div class='modal fade modal-edit' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
                                     <div class='modal-dialog modal-dialog-centered' role='document'>
                                         <div class='modal-content'>
@@ -174,29 +174,30 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                             <div class='modal-body'>
-                                            <form action='?idEdit=<?=$row[0]?>' method='POST'>
+                                            <form id="blog-edit-<?=$row[0]?>" class="form-edit" data-blog="<?=$row[0]?>">
                                                     <div class='mb-4'>
                                                         <label>Hình ảnh</label>
-                                                        <textarea rows="2" cols="50"  class='form-control' name='name-edit'><?=$row[4]?></textarea>
+                                                        <textarea rows="2" cols="50"  class='form-control' name='image-edit' required><?=$row[4]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Tiêu đề</label>
-                                                        <textarea rows="2" cols="50" class='form-control' name='detail-edit'><?=$row[1]?></textarea>
+                                                        <textarea rows="2" cols="50" class='form-control' name='label-edit' required><?=$row[1]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Mô tả</label>
-                                                        <textarea rows="2" cols="50" class='form-control' name='price-first-edit'><?=$row[2]?></textarea>
+                                                        <textarea rows="3" cols="50" class='form-control' name='desc-edit' required><?=$row[2]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Nội dung</label>
-                                                        <textarea rows="4" cols="50" class='form-control content-blog' name='price-sec-edit'><?=$row[3]?></textarea>
+                                                        <textarea rows="4" cols="50" class='form-control content-blog' name='content-edit' required><?=$row[3]?></textarea>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label class="d-block">Người tạo</label>
-                                                        <select name="user-create" id="">
+                                                        <select name="user-edit" id="">
                                                             <?php 
                                                             while ($rowTenAdmin = mysqli_fetch_array($list_TenAdmin)) {
-                                                                echo "<option value='$rowTenAdmin[0] $rowTenAdmin[1]'>$rowTenAdmin[0] $rowTenAdmin[1]</option>";
+                                                                $selected = $row[5] == $rowTenAdmin[0] . " " . $rowTenAdmin[1] ? "selected" : "";
+                                                                echo "<option value='$rowTenAdmin[0] $rowTenAdmin[1]' $selected>$rowTenAdmin[0] $rowTenAdmin[1]</option>";
                                                             }
                                                             ?>
                                                         </select>
@@ -241,6 +242,55 @@
             </div>
         </div>
     <!-- Core -->
+    <?php 
+    $list_TenAdmin = mysqli_query($connect, "SELECT Ho, Ten FROM nguoidung where MaQuyen = '1'");
+    ?>
+    <div class='modal fade modal-create' id='modal-create' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
+        <div class='modal-dialog modal-dialog-centered' role='document'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h2 class='h6 modal-title'>Tạo tin tức</h2>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                </div>
+                <div class='modal-body'>
+                <form class="form-create">
+                        <div class='mb-4'>
+                            <label>Hình ảnh</label>
+                            <textarea rows="2" cols="50"  class='form-control' name='image-create' required></textarea>
+                        </div>
+                        <div class='mb-4'>
+                            <label>Tiêu đề</label>
+                            <textarea rows="2" cols="50" class='form-control' name='label-create' required></textarea>
+                        </div>
+                        <div class='mb-4'>
+                            <label>Mô tả</label>
+                            <textarea rows="3" cols="50" class='form-control' name='desc-create' required></textarea>
+                        </div>
+                        <div class='mb-4'>
+                            <label>Nội dung</label>
+                            <textarea rows="4" cols="50" class='form-control content-blog' name='content-create' required></textarea>
+                        </div>
+                        <div class='mb-4'>
+                            <label class="d-block">Người tạo</label>
+                            <select name="user-create" id="">
+                                <?php 
+                                while ($rowTenAdmin = mysqli_fetch_array($list_TenAdmin)) {
+                                    echo "<option value='$rowTenAdmin[0] $rowTenAdmin[1]'>$rowTenAdmin[0] $rowTenAdmin[1]</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class='mb-4'>
+                            <input type='submit' class='form-control w-100 btn btn-tertiary' name='submit-create' value="Lưu">
+                        </div>
+                    </form>
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-link text-gray-600 ms-auto' data-bs-dismiss='modal'>Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php } else {
     echo "<main class=''>
@@ -333,6 +383,94 @@
             });
 
             $(".content-blog").css("min-height", "300px");
+
+            $(".form-edit").each(function() {
+                $(this).submit(function(e) {
+                    e.preventDefault()
+                    idForm = $(this).attr("id")
+                    hinhAnh = $(`#${idForm} textarea[name="image-edit"]`).val()
+                    tieuDe = $(`#${idForm} textarea[name="label-edit"]`).val()
+                    moTa = $(`#${idForm} textarea[name="desc-edit"]`).val()
+                    noiDung = $(`#${idForm} textarea[name="content-edit"]`).val()
+                    nguoiTao = $(`#${idForm} select[name="user-edit"]`).val()
+                    idBlog = $(this).data("blog")
+
+                    $.ajax({
+                            type: "POST",
+                            url: "templates/request.php",
+                            dataType: "json",
+                            data: {
+                                request: "update_blog",
+                                idBlog: idBlog,
+                                hinhAnh: hinhAnh,
+                                tieuDe: tieuDe,
+                                moTa: moTa,
+                                noiDung: noiDung,
+                                nguoiTao: nguoiTao,
+                            },
+                            success: function () {
+                                alert("Cập nhật tin tức thành công!")
+                                window.location.reload();
+                            },
+                            error: function (e) {
+                                alert("Đã xảy ra lỗi!")
+                            }
+                    })
+                })
+            })
+
+            $(".form-create").submit(function(e) {
+                e.preventDefault()
+                    hinhAnh = $(`textarea[name="image-create"]`).val()
+                    tieuDe = $(`textarea[name="label-create"]`).val()
+                    moTa = $(`textarea[name="desc-create"]`).val()
+                    noiDung = $(`textarea[name="content-create"]`).val()
+                    nguoiTao = $(`select[name="user-create"]`).val()
+
+                    $.ajax({
+                            type: "POST",
+                            url: "templates/request.php",
+                            dataType: "json",
+                            data: {
+                                request: "insert_blog",
+                                hinhAnh: hinhAnh,
+                                tieuDe: tieuDe,
+                                moTa: moTa,
+                                noiDung: noiDung,
+                                nguoiTao: nguoiTao,
+                            },
+                            success: function () {
+                                alert("Tạo mới tin tức thành công!")
+                                window.location.reload();
+                            },
+                            error: function (e) {
+                                alert("Đã xảy ra lỗi!")
+                            }
+                    })
+            })
+
+            $(".btn-delete").each(function() {
+            $(this).click(function() {
+                idBlog = $(this).data("blog")
+                $.ajax({
+                        type: "POST",
+                        url: "templates/request.php",
+                        dataType: "json",
+                        data: {
+                            request: "delete_blog",
+                            idBlog: idBlog,
+                        },
+                        success: function () {
+                            alert("Xóa tin tức thành công!")
+                            window.location.reload();
+                        },
+                        error: function (e) {
+                            alert("Đã xảy ra lỗi!")
+                            
+                        }
+                    })
+            })
+        })
         })
     </script>
 

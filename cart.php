@@ -50,6 +50,7 @@
     $voucherOrder = isset($_SESSION["order"]) ? $_SESSION["order"] : null;
     ?>
 
+    <?php include("templates/header.php")?>
 
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">

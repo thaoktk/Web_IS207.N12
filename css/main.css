@@ -5757,19 +5757,15 @@ i.star-rv {
   display: block;
   line-height: 42px;
 }
-.order_box .list li a span {
-  float: right;
-}
 .order_box .list li a .middle {
   float: none;
-  width: 50px;
+  width: 30px;
   text-align: right;
   display: inline-block;
-  margin-left: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  white-space: nowrap;
   color: #222222;
-}
-.order_box .list li:nth-child(4) a .middle {
-  margin-left: 48px;
 }
 .order_box .list_2 li a {
   text-transform: uppercase;
@@ -6217,6 +6213,10 @@ i.star-rv {
 
 .radion_btn input[type=radio]:checked ~ label {
   color: #000;
+}
+
+.product-buy-checkout {
+  white-space: normal;
 }
 
 /* Latest Blog Area css

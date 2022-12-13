@@ -78,6 +78,9 @@ session_start();
     if (isset($_GET['action']) && $_GET['action'] == 'logout') {
         unset($_SESSION['current-user']);
 		unset($_SESSION['access_token']);
+		unset($_SESSION['cart']);
+		unset($_SESSION["free-ship"]);
+        unset($_SESSION["order"]);
 		header("Location: login.php");
         
     } 

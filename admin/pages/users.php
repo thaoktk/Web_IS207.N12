@@ -54,120 +54,6 @@
     ?>
 
     <?php
-    $error = false;
-    if (isset($_POST['submit-edit']) && $_POST['submit-edit'] == 'Lưu') { 
-        $id = $_GET['idEdit'];
-
-        $resultEdit = mysqli_query($connect, "UPDATE `nguoidung` SET `Ho` = '" . $_POST['subname-edit'] . "', `Ten` = '" . $_POST['name-edit'] . "', `SDT` = '" . $_POST['phone-number-edit'] . "', `Email` = '" . $_POST['email-edit'] . "', `TaiKhoan` = '" . $_POST['account-edit'] . "', `MatKhau` = MD5('" . $_POST['pass-edit'] . "'), `MaQuyen` = '" . $_POST['privilege-edit'] . "', `TrangThai` = '" . $_POST['status-edit'] . "' WHERE `nguoidung`.`MaND` = $id");
-        if (!$resultEdit) {
-            $error = "Không thể cập nhật tài khoản";
-        }  mysqli_close($connect);
-        if ($error !== false) { ?>
-            <script>
-        $(document).ready(function(){
-        $('#edit-fail').modal('show')
-        });
-        </script>
-        <div class="container">
-            <div class="modal" id="edit-fail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Thất bại</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p><?php echo $error ?></p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="users.php" type="button" class="btn btn-default" >OK</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div>
-        <?php } else { ?>
-            <script>
-        $(document).ready(function(){
-        $('#edit-success').modal('show')
-        });
-        </script>
-        <div class="container">
-            <div class="modal" id="edit-success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Thành công</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Cập nhật thành công!</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="users.php" type="button" class="btn btn-default" >OK</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div>
-        <?php } } ?>
-   
-    <?php
-    $error = false;
-    if (isset($_GET['idDel'])) { 
-
-        $resultDelete = mysqli_query($connect, "DELETE FROM `nguoidung` WHERE `MaND` = " . $_GET['idDel']);
-        if (!$resultDelete) {
-            $error = "Không thể xóa tài khoản";
-        } 
-         mysqli_close($connect);
-        if ($error !== false) { ?>
-            <script>
-        $(document).ready(function(){
-        $('#del-fail').modal('show')
-        });
-        </script>
-        <div class="container">
-            <div class="modal" id="del-fail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Thất bại</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p><?php echo $error ?></p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="users.php" type="button" class="btn btn-default" >OK</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div>
-        <?php } else { ?>
-            <script>
-        $(document).ready(function(){
-        $('#del-success').modal('show')
-        });
-        </script>
-        <div class="container">
-            <div class="modal" id="del-success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Thành công</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Xóa thành công!</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="users.php" type="button" class="btn btn-default" >OK</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div>
-        <?php } } ?>
-
-    <?php
     $where = "";
     $search = isset($_GET['search']) ? $_GET['search'] : "";
     if ($search) {
@@ -275,8 +161,11 @@
                                 <td class='$styleActive'>$trangThai</td>
                                 <td>"?>
                                 <div>
+                                <?php 
+                                    $list_TenQuyen = mysqli_query($connect, "SELECT MaQuyen, TenQuyen FROM phanquyen");
+                                    ?>
                                     <a href='#edit<?=$row[0]?>' data-bs-toggle='modal'><button class='btn btn-sm btn-primary' type='button'>Sửa</button></a>
-                                    <a href="?idDel=<?=$row[0]?>" type="button" class='btn btn-sm btn-primary'>Xóa</a>
+                                    <a type="button" class='btn btn-sm btn-primary'>Xóa</a>
                                     <div class='modal fade' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
                                     <div class='modal-dialog modal-dialog-centered' role='document'>
                                         <div class='modal-content'>
@@ -285,7 +174,7 @@
                                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                                             </div>
                                             <div class='modal-body'>
-                                                <form action='?idEdit=<?=$row[0]?>' method='POST'>
+                                                <form id="user-edit-<?=$row[0]?>" class="form-edit" data-user="<?=$row[0]?>">
                                                     <div class='mb-4'>
                                                         <label>Họ</label>
                                                         <input type='text' value="<?=$row[1]?>" class='form-control' name='subname-edit'>
@@ -311,8 +200,15 @@
                                                         <input type='text' value="<?=$row[6]?>" class='form-control' name='pass-edit'>
                                                     </div>
                                                     <div class='mb-4'>
-                                                        <label>Mã quyền</label>
-                                                        <input type='number' value="<?=$row[7]?>" class='form-control' name='privilege-edit'>
+                                                        <label class="d-block">Mã quyền</label>
+                                                        <select name='privilege-edit' id="">
+                                                            <?php 
+                                                            while ($rowTenQuyen = mysqli_fetch_array($list_TenQuyen)) {
+                                                                $selected = $row[7] == $rowTenQuyen[0] ? "selected" : "";
+                                                                echo "<option value='$rowTenQuyen[0]' $selected >$rowTenQuyen[1]</option>";
+                                                            }
+                                                            ?>
+                                                        </select>
                                                     </div>
                                                     <div class='mb-4'>
                                                         <label>Trạng thái</label>
@@ -349,68 +245,8 @@
      
     <!-- End of Modal Content -->
 
-    <?php
-    $error = false;
-    if (isset($_POST['submit-create']) && $_POST['submit-create'] == 'Tạo') {
-        $result = mysqli_query($connect, "INSERT INTO `nguoidung` (`MaND`, `Ho`, `Ten`, `SDT`, `Email`, `TaiKhoan`, `MatKhau`, `MaQuyen`, `TrangThai`) VALUES (NULL, '" . $_POST['subname-create'] . "', '" . $_POST['name-create'] . "', '" . $_POST['phone-number-create'] . "', '" . $_POST['email-create'] . "', '" . $_POST['account-create'] . "', MD5('" . $_POST['pass-create'] . "'), '" . $_POST['privilege-create'] . "', '1');");
-
-        if (!$result) {
-            if (strpos(mysqli_error($connect), "Duplicate entry") !== true) {
-               $error = "Tài khoản đã tồn tại. Bạn vui lòng chọn tài khoản khác.";
-            }
-        }
-        mysqli_close($connect);
-        if ($error !== false) { ?>
-            <script>
-        $(document).ready(function(){
-        $('#create-fail').modal('show')
-        });
-        </script>
-        <div class="container">
-            <div class="modal" id="create-fail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Thát bại</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p><?php echo $error ?></p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="users.php" type="button" class="btn btn-default" >OK</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div>
-        <?php } else { ?>
-            <script>
-        $(document).ready(function(){
-        $('#create').modal('show')
-        });
-        </script>
-        <div class="container">
-            <div class="modal" id="create" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Thành công</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Tạo tài khoản thành công!</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="users.php" type="button" class="btn btn-default" >OK</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div>
-        <?php } } ?>
-                
-
     <!-- Modal Content -->
-    <div class="modal fade" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal fade modal-create" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -418,7 +254,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST">
+                    <form class="form-create">
                         <div class="mb-4">
                             <label>Họ</label>
                             <input type="text" required class="form-control" name="subname-create">
@@ -516,7 +352,48 @@
 
     <!-- Volt JS -->
     <script src="../assets/js/volt.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".form-edit").each(function() {
+                $(this).submit(function(e) {
+                    e.preventDefault()
+                    idForm = $(this).attr("id")
+                    ho = $(`#${idForm} input[name="subname-edit"]`).val()
+                    ten = $(`#${idForm} input[name="name-edit"]`).val()
+                    sdt = $(`#${idForm} input[name="phone-number-edit"]`).val()
+                    email = $(`#${idForm} input[name="email-edit"]`).val()
+                    taiKhoan = $(`#${idForm} input[name="account-edit"]`).val()
+                    matKhau = $(`#${idForm} input[name="pass-edit"]`).val()
+                    maQuyen = $(`#${idForm} select[name="privilege-edit"]`).val()
+                    idUser = $(this).data("user")
 
+                    $.ajax({
+                            type: "POST",
+                            url: "templates/request.php",
+                            dataType: "json",
+                            data: {
+                                request: "update_user",
+                                idUser: idUser,
+                                ho: ho,
+                                ten: ten,
+                                sdt: sdt,
+                                email: email,
+                                taiKhoan: taiKhoan,
+                                matKhau: matKhau,
+                                maQuyen: maQuyen,
+                            },
+                            success: function () {
+                                alert("Cập nhật thông tin người dùng thành công!")
+                                window.location.reload();
+                            },
+                            error: function (e) {
+                                alert("Đã xảy ra lỗi!")
+                            }
+                    })
+                })
+            })
+    })
+</script>
 
 </body>
 

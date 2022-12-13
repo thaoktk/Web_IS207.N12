@@ -56,6 +56,11 @@ $(document).ready(function () {
     }
 
 
+    tongCheckout = Number($("#total-checkout").text())
+    freeShipCheckout = Number($("#ship-checkout").text())
+    orderCheckout = Number($("#order-checkout").text())
+    $("#total-cost-checkout").text(tongCheckout - freeShipCheckout - orderCheckout)
+
     tong = Number($("#total-cost .cost").text())
     freeShip = Number($("#voucher-free-ship .ship").text())
     order = Number($("#voucher-order .order").text())
@@ -213,7 +218,6 @@ $(document).ready(function () {
 
     $(".btn-del-all").each(function () {
         $(this).click(function () {
-            thanhTien = Number($("#total-cost-voucher .total").text(0))
             $.ajax({
                 type: "POST",
                 url: "templates/request.php",
@@ -225,8 +229,6 @@ $(document).ready(function () {
                     alert("Xóa giỏ hàng thành công!")
                     window.location.reload()
                 },
-                error: function (e) {
-                }
             })
         })
     })
@@ -277,6 +279,28 @@ $(document).ready(function () {
                     },
                 })
             }
+        }
+    })
+
+    $(".btn-checkout").click(function () {
+        familyName = $("#first").val()
+        name = $("#last").val()
+        phoneNumber = $("#phone-number").val()
+        homeNumber = $("#home-number").val()
+
+        province = $("#province option:selected").text()
+        district = $("#district option:selected").text()
+        ward = $("#ward option:selected").text()
+        message = $("#message").val()
+
+        if (name.trim() === "" || familyName.trim() === "" || phoneNumber.trim() === "" || homeNumber.trim() === "") {
+            alert("Yêu cầu điền đầy đủ thông tin đơn hàng!")
+            return;
+        }
+
+        if (province === "Chọn Nơi" || district === "Chọn Nơi" || ward === "Chọn Nơi") {
+            alert("Yêu cầu điền đầy đủ thông tin đơn hàng!")
+            return;
         }
     })
 })

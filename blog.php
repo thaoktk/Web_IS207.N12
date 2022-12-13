@@ -105,7 +105,7 @@
                                 <div class='blog_info text-right'>
                                     <ul class='blog_meta list'>
                                         <li><a>$row[5]<i class='lnr lnr-user'></i></a></li>
-                                        <li><a class='d-flex align-items-center'>$row[7]<i class='lnr lnr-calendar-full'></i></a></li>
+                                        <li><a class='d-flex align-items-center'>$row[6]<i class='lnr lnr-calendar-full'></i></a></li>
                                         <li><a>1.2M Views<i class='lnr lnr-eye'></i></a></li>
                                         <li><a>$rowsCmt bình luận<i class='lnr lnr-bubble'></i></a></li>
                                     </ul>
@@ -188,7 +188,7 @@
                                             <a href='single-blog.php?idBlog=$row[0]'>
                                                 <h3>". substr($row[1], 0, 50) ."...</h3>
                                             </a>
-                                            <p>$row[7]</p>
+                                            <p>$row[6]</p>
                                         </div>
                                     </div>";
                              }

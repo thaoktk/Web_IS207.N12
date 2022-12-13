@@ -32,9 +32,22 @@
 
 <body>
 
-<?php
+    <?php
+    include "templates/connect.php"; 
+    include "templates/product.php";
     session_start();
-    include("./templates/header.php")?>
+    if (!isset($_SESSION["cart"])) {
+        $_SESSION["cart"] = array();
+    }
+
+    if (!empty($_SESSION["cart"])) {
+        $products = mysqli_query($connect, "SELECT * FROM `sanpham` WHERE `MaSP` IN (" . implode(",", array_keys($_SESSION["cart"])) . ")");
+    }
+
+    $total = 0;
+    ?>
+
+    <?php include("./templates/header.php") ?>
 
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
@@ -59,37 +72,29 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <h3>Nhập chi tiết đơn hàng</h3>
-                        <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                        <form class="row contact_form">
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="first" name="name">
-                                <span class="placeholder" data-placeholder="Tên"></span>
+                                <input type="text" class="form-control" id="last" name="family-name" required placeholder="Họ">
                             </div>
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="last" name="name">
-                                <span class="placeholder" data-placeholder="Họ"></span>
+                                <input type="text" class="form-control" id="first" name="name" required placeholder="Tên">
                             </div>
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="number" name="number">
-                                <span class="placeholder" data-placeholder="Số điện thoại"></span>
-                            </div>
-                            <div class="col-md-6 form-group p_star">
-                                <input type="email" class="form-control" id="email-bill" name="email">
-                                <span class="placeholder" data-placeholder="Email"></span>
+                                <input type="number" class="form-control" id="phone-number" name="number" placeholder="Số điện thoại">
                             </div>
                             <div class="col-md-12 form-group shipping_box">
                                 <p class="text-left">Địa chỉ</p>
                                 <select name="" id="province" class="shipping_select">
                                 </select>
                                 <select name="" id="district" class="shipping_select">
-                                    <option  value="">Chọn Quận</option>
+                                    <option disabled  value="">Chọn Quận</option>
                                 </select>
                                 <select name="" id="ward" class="shipping_select">
-                                    <option   value="">Chọn Phường</option>
+                                    <option  disabled value="">Chọn Phường</option>
                                 </select>
                             </div>
                             <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="add1" name="add1">
-                                <span class="placeholder" data-placeholder="Số nhà"></span>
+                                <input type="text" class="form-control" id="home-number" name="home-number" required placeholder="Số nhà">
                             </div>
                             <div class="col-md-12 form-group">
                                 <textarea class="form-control" name="message" id="message" rows="1" placeholder="Ghi chú thêm cho đơn hàng"></textarea>
@@ -99,40 +104,81 @@
                     <div class="col-lg-4">
                         <div class="order_box">
                             <h2>Đơn hàng của bạn</h2>
-                            <ul class="list">
-                                <li><a href="#">Sản phẩm <span>Giá</span></a></li>
-                                <li><a href="#">Iphone 14 Pro <span class="middle">x 01</span> <span class="last">$720.00</span></a></li>
-                                <li><a href="#">MacBook Air 2021 <span class="middle">x 01</span> <span class="last">$720.00</span></a></li>
-                                <li><a href="#">AirPods Pro 2 <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                            </ul>
-                            <ul class="list list_2">
-                                <li><a href="#">Tổng <span>$2160.00</span></a></li>
-                                <li><a href="#">Vận chuyển <span>Thường: $50.00</span></a></li>
-                                <li><a href="#">Thành tiền <span>$2210.00</span></a></li>
-                            </ul>
-                            <div class="payment_item">
-                                <div class="radion_btn">
-                                    <input type="radio" id="f-option5" name="selector">
-                                    <label for="f-option5">Tiền mặt</label>
-                                    <div class="check"></div>
-                                </div>
-                                <p>Thanh toán đơn hàng bằng tiền mặt, bạn sẽ kiểm hàng rồi thanh toán.</p>
+                            <?php
+                            if (!empty($products)) {
+                            ?>
+                            <div>
+                                <ul class="list">
+                                    <li><a href="#">Sản phẩm <span>Giá</span></a></li>
+                                    <?php
+                                    if (!empty($products)) {
+                                        while ($row = mysqli_fetch_array($products)) {
+                                            $total += $row[8] * $_SESSION["cart"][$row[0]];
+                                            echo "<li>
+                                            <a style='display: flex; border-bottom: 1px solid #ccc'>
+                                            <span class='product-buy-checkout'>$row[2]</span>
+                                            <span class='middle'>x ". $_SESSION['cart'][$row[0]] ."</span>
+                                             <span class='last'>". $row[8] ."</span>
+                                             <span> VNĐ</span>
+                                             </a>
+                                             </li>";
+                                        }
+                                    }
+                                    ?>
+                                </ul>
+                                <ul class="list list_2">
+                                    <li><a class="d-flex justify-content-between">
+                                        <span>Tổng</span> 
+                                        <div>
+                                            <span id="total-checkout"><?=$total?></span>
+                                            <span>VNĐ</span> 
+                                        </div>
+                                    </a></li>
+                                    <li><a class="d-flex justify-content-between">
+                                        <?php if (isset($_SESSION["free-ship"])) {?>
+                                            <span>Vận chuyển</span>
+                                            <?php if (isset($_SESSION["free-ship"])) {
+                                                $resultKMFreeShip = mysqli_query($connect, "SELECT GiaTriKM from khuyenmai WHERE CodeKM = '".$_SESSION["free-ship"]."'");
+                                                $resultKMFreeShip = $resultKMFreeShip->fetch_column();
+                                                ?>
+                                            <div>
+                                            <span id="ship-checkout"><?=$resultKMFreeShip?></span>
+                                            <span>VNĐ</span> 
+                                            </div>
+                                            <?php }?>
+                                            <?php }?>
+                                        </a></li>
+                                        <li><a class="d-flex justify-content-between">
+                                        <?php if (isset($_SESSION["order"])) {?>
+                                            <span>Đơn hàng</span>
+                                            <?php if (isset($_SESSION["order"])) {
+                                                $resultKMOrder = mysqli_query($connect, "SELECT GiaTriKM from khuyenmai WHERE CodeKM = '".$_SESSION["order"]."'");
+                                                $resultKMOrder = $resultKMOrder->fetch_column();
+                                                ?>
+                                            <div>
+                                            <span id="order-checkout"><?=$resultKMOrder?></span>
+                                            <span>VNĐ</span> 
+                                            </div>
+                                            <?php }?>
+                                            <?php }?>
+                                        </a></li>
+                                    <li><a class="d-flex justify-content-between">
+                                        <span>Thành tiền </span>
+                                        <?php if (isset($_SESSION["free-ship"]) || isset($_SESSION["order"])) {
+                                                ?>
+                                            <div>
+                                            <span id="total-cost-checkout">0</span>
+                                            <span>VNĐ</span> 
+                                            </div>
+                                            <?php }?>
+                                    </a></li>
+                                </ul>
+                                <a class="primary-btn btn-checkout">Thanh toán</a>
                             </div>
-                            <div class="payment_item active">
-                                <div class="radion_btn">
-                                    <input type="radio" id="f-option6" name="selector">
-                                    <label for="f-option6">Paypal </label>
-                                    <img src="img/product/card.jpg" alt="">
-                                    <div class="check"></div>
-                                </div>
-                                <p>Thanh toán qua thẻ ngân hàng, được kiểm hàng, phản hồi và hoàn tiền nếu có lỗi phát sinh.</p>
-                            </div>
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option4" name="selector">
-                                <label for="f-option4">Tôi đã đọc và đồng ý với </label>
-                                <a href="#">các chính sách và điều kiện*</a>
-                            </div>
-                            <a class="primary-btn" href="#">Thanh toán</a>
+
+                            <?php } else { ?>
+                                <h3 class="mt-5 text-center">Bạn chưa có sản phẩm nào trong giỏ hàng!</h3>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
