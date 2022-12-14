@@ -317,25 +317,25 @@
 						<div class="col-lg-12">
 							<div class="row clock-wrap">
 								<div class="col clockinner1 clockinner">
-									<h1 class="days">150</h1>
+									<h1 class="days"></h1>
 									<span class="smalltext">Ngày</span>
 								</div>
 								<div class="col clockinner clockinner1">
-									<h1 class="hours">23</h1>
+									<h1 class="hours"></h1>
 									<span class="smalltext">Giờ</span>
 								</div>
 								<div class="col clockinner clockinner1">
-									<h1 class="minutes">47</h1>
+									<h1 class="minutes"></h1>
 									<span class="smalltext">Phút</span>
 								</div>
 								<div class="col clockinner clockinner1">
-									<h1 class="seconds">59</h1>
+									<h1 class="seconds"></h1>
 									<span class="smalltext">Giây</span>
 								</div>
 							</div>
 						</div>
 					</div>
-					<a href="" class="primary-btn">Khám phá</a>
+					<a href="category.php" class="primary-btn">Khám phá</a>
 				</div>
 				<div class="col-lg-6 no-padding exclusive-right">
 					<div class="active-exclusive-product-slider">
@@ -486,7 +486,6 @@
 	<script src="js/jquery.nice-select.min.js"></script>
 	<script src="js/jquery.sticky.js"></script>
 	<script src="js/nouislider.min.js"></script>
-	<script src="js/countdown.js"></script>
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>

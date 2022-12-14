@@ -44,6 +44,7 @@ include("./templates/header.php")
 	$paramRom = "";
 	$paramColor = "";
 	$paramCategory = "";
+	$paramPrice = "";
 	$orderCondition = "";
 	$where = "";
 	$filter = "WHERE";
@@ -51,12 +52,14 @@ include("./templates/header.php")
 	$filterRam = "";
 	$filterRom = "";
 	$filterColor = "";
+	$filterPrice = "";
 	$search = isset($_GET['search']) ? $_GET['search'] : "";
 	$orderSort = isset($_GET['sort']) ? $_GET['sort'] : "";
 	$category = isset($_GET['category']) ? $_GET['category'] : "";
 	$ram = isset($_GET['ram']) ? $_GET['ram'] : "";
 	$rom = isset($_GET['rom']) ? $_GET['rom'] : "";
 	$color = isset($_GET['color']) ? $_GET['color'] : "";
+	$price = isset($_GET['price']) ? $_GET['price'] : "";
 
 	if ($search) {
 		$where = "WHERE TenSP LIKE '%$search%'";
@@ -70,6 +73,7 @@ include("./templates/header.php")
 		$paramRom .= "&sort=". $orderSort;
 		$paramColor .= "&sort=". $orderSort;
 		$paramCategory .= "&sort=". $orderSort;
+		$paramPrice .= "&sort=". $orderSort;
 	}
 	if ($category) {
 		if ($filter == "WHERE") {
@@ -82,6 +86,7 @@ include("./templates/header.php")
 		$paramRam .= "&sort=". $orderSort;
 		$paramRom .= "&category=". $category;
 		$paramColor .= "&category=". $category;
+		$paramPrice .= "&category=". $category;
 	}
 	if ($ram) {
 		if ($filter == "WHERE") {
@@ -94,6 +99,7 @@ include("./templates/header.php")
 		$paramRom .= "&ram=". $ram;
 		$paramColor .= "&ram=". $ram;
 		$paramCategory .= "&ram=". $ram;
+		$paramPrice .= "&ram=". $ram;
 	}
 	if ($rom) {
 		if ($filter == "WHERE") {
@@ -106,6 +112,7 @@ include("./templates/header.php")
 		$paramRam .= "&rom=". $rom;
 		$paramColor .= "&rom=". $rom;
 		$paramCategory .= "&rom=". $rom;
+		$paramPrice .= "&rom=". $rom;
 	}
 	if ($color) {
 		if ($filter == "WHERE") {
@@ -118,9 +125,27 @@ include("./templates/header.php")
 		$paramRam .= "&color=". $color;
 		$paramRom .= "&color=". $color;
 		$paramCategory .= "&color=". $color;
+		$paramPrice .= "&color=". $color;
 	}
 
-	if (!$category && !$ram && !$rom && !$color) {
+	if ($price) {
+		$ranges = explode("-", $price);
+		$from = $ranges[0];
+        $to = $ranges[1];
+		if ($filter == "WHERE") {
+			$filter .= " GiaTien BETWEEN $from AND $to";
+		} else {
+			$filter .= " and GiaTien BETWEEN $from AND $to";
+		}
+		$param .= "&price=". $price;
+		$paramSort .= "&price=". $price;
+		$paramRam .= "&price=". $price;
+		$paramRom .= "&price=". $price;
+		$paramCategory .= "&price=". $price;
+		$paramColor .= "&price=". $price;
+	}
+
+	if (!$category && !$ram && !$rom && !$color && !$price) {
 		$filter = '';
 	}
 
@@ -264,7 +289,7 @@ include("./templates/header.php")
 					</div>
 					<div class="common-filter">
 						<div class="head">Màu sắc</div>
-						<form action="#">
+						<form>
 							<ul>
 								<li class="filter-list">
 									<input
@@ -316,17 +341,40 @@ include("./templates/header.php")
 					</div>
 					<div class="common-filter">
 						<div class="head">Giá</div>
-						<div class="price-range-area">
-							<div id="price-range"></div>
-							<div class="value-wrapper d-flex flex-wrap">
-								<div class="price">Giá:</div>
-								<div id="lower-value"></div>
-								<span>VNĐ</span>
-								<div class="to">từ</div>
-								<div id="upper-value"></div>
-								<span>VNĐ</span>
-							</div>
-						</div>
+						<form action="#">
+							<ul>
+								<li class="filter-list d-flex align-items-baseline">
+								<input
+									<?php if (isset($_GET['price']) && $_GET['price'] == "0-10000000") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?price=0-10000000<?=$paramPrice?>" class="pixel-radio" type="radio" id="0-10000000" name="price"><label for="0-10000000">Dưới 10,000,000 VND</label>
+								</li>
+								<li class="filter-list d-flex align-items-baseline">
+								<input
+									<?php if (isset($_GET['price']) && $_GET['price'] == "10000000-30000000") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?price=10000000-30000000<?=$paramPrice?>" class="pixel-radio" type="radio" id="10000000-30000000" name="price"><label for="10000000-30000000">10,000,000 - 30,000,000 VND</label>
+								</li>
+								<li class="filter-list d-flex align-items-baseline">
+								<input
+									<?php if (isset($_GET['price']) && $_GET['price'] == "30000000-50000000") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?price=30000000-50000000<?=$paramPrice?>" class="pixel-radio" type="radio" id="30000000-50000000" name="price"><label for="30000000-50000000">30,000,000 - 50,000,000 VND</label>
+								</li>
+								<li class="filter-list d-flex align-items-baseline">
+								<input
+									<?php if (isset($_GET['price']) && $_GET['price'] == "50000000-70000000") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?price=50000000-70000000<?=$paramPrice?>" class="pixel-radio" type="radio" id="50000000-70000000" name="price"><label for="50000000-70000000">50,000,000 - 70,000,000 VND</label>
+								</li>
+								<li class="filter-list d-flex align-items-baseline">
+								<input
+									<?php if (isset($_GET['price']) && $_GET['price'] == "70000000-150000000") { ?> checked <?php }?> 
+									onchange="this.value && (window.location = this.value);" 
+								value="?price=70000000-300000000<?=$paramPrice?>" class="pixel-radio" type="radio" id="70000000-150000000" name="price"><label for="70000000-150000000">Trên 70,000,000 VND</label>
+								</li>
+							</ul>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -536,7 +584,6 @@ include("./templates/header.php")
 	<script src="js/nouislider.min.js"></script>
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
-	<!--gmaps Js-->
 	<script src="js/main.js"></script>
 	<script src="js/store/common.js"></script>
 	<script src="js/store/explore.js"></script>

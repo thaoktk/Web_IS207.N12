@@ -26,7 +26,7 @@
             $idSP = $_POST['idSP'];
             $idND = $_POST['idND'];
             $message = $_POST['message'];
-            $time = date_create()->format('Y-m-d H:i:s');
+            $time = date('Y-m-d H:i:s');
             $result = mysqli_query($connect, "INSERT INTO `binhluan` (`MaBL`, `MaSP`, `MaTin`, `MaND`, `BinhLuan`, `NgayLap`) VALUES (NULL, '$idSP', NULL, '$idND', '$message', '$time')");
             die (json_encode($result));
             break;
@@ -34,7 +34,7 @@
             $idBL = $_POST['idBL'];
             $idND = $_POST['idND'];
             $message = $_POST['message'];
-            $time = date_create()->format('Y-m-d H:i:s');
+            $time = date('Y-m-d H:i:s');
             $result = mysqli_query($connect, "INSERT INTO `traloibinhluan` (`MaTLBL`, `MaBL`, `MaND`, `BinhLuan`, `NgayLap`) VALUES (NULL, '$idBL', '$idND', '$message', '$time')");
             die (json_encode($result));
             break;
@@ -42,7 +42,7 @@
             $idBlog = $_POST['idBlog'];
             $idND = $_POST['idND'];
             $message = $_POST['message'];
-            $time = date_create()->format('Y-m-d H:i:s');
+            $time = date('Y-m-d H:i:s');
             $result = mysqli_query($connect, "INSERT INTO `binhluan` (`MaBL`, `MaSP`, `MaTin`, `MaND`, `BinhLuan`, `NgayLap`) VALUES (NULL, NULL, '$idBlog', '$idND', '$message', '$time')");
             die (json_encode($result));
             break;

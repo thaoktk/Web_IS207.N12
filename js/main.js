@@ -186,53 +186,44 @@ $(document).ready(function () {
   });
 
 
-  if (document.getElementById("js-countdown")) {
+  var endDate = new Date('Jan 1, 2023 00:00:00').getTime();
 
-    var countdown = new Date("October 17, 2018");
+  var countDownTimer = setInterval(() => {
 
-    function getRemainingTime(endtime) {
-      var milliseconds = Date.parse(endtime) - Date.parse(new Date());
-      var seconds = Math.floor(milliseconds / 1000 % 60);
-      var minutes = Math.floor(milliseconds / 1000 / 60 % 60);
-      var hours = Math.floor(milliseconds / (1000 * 60 * 60) % 24);
-      var days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+    var now = new Date().getTime();
 
-      return {
-        'total': milliseconds,
-        'seconds': seconds,
-        'minutes': minutes,
-        'hours': hours,
-        'days': days
-      };
+    var remainingTime = endDate - now;
+
+    const second = 1000;
+
+    const minute = second * 60;
+
+    const hour = minute * 60;
+
+    const day = hour * 24;
+
+    const daysLeft = Math.trunc(remainingTime / day);
+
+    const hoursLeft = Math.trunc((remainingTime % day) / hour);
+
+    const minutesLeft = Math.trunc((remainingTime % hour) / minute);
+
+    const secondsLeft = Math.trunc((remainingTime % minute) / second);
+
+    $(".days").html(daysLeft < 10 ? `0${daysLeft}` : daysLeft)
+    $(".hours").html(hoursLeft < 10 ? `0${hoursLeft}` : hoursLeft)
+    $(".minutes").html(minutesLeft < 10 ? `0${minutesLeft}` : minutesLeft)
+    $(".seconds").html(secondsLeft < 10 ? `0${secondsLeft}` : secondsLeft)
+
+    if (remainingTime <= 0) {
+      clearInterval(countDownTimer)
+      $(".days").html("0")
+      $(".hours").html("0")
+      $(".minutes").html("0")
+      $(".seconds").html("0")
     }
 
-    function initClock(id, endtime) {
-      var counter = document.getElementById(id);
-      var daysItem = counter.querySelector('.js-countdown-days');
-      var hoursItem = counter.querySelector('.js-countdown-hours');
-      var minutesItem = counter.querySelector('.js-countdown-minutes');
-      var secondsItem = counter.querySelector('.js-countdown-seconds');
-
-      function updateClock() {
-        var time = getRemainingTime(endtime);
-
-        daysItem.innerHTML = time.days;
-        hoursItem.innerHTML = ('0' + time.hours).slice(-2);
-        minutesItem.innerHTML = ('0' + time.minutes).slice(-2);
-        secondsItem.innerHTML = ('0' + time.seconds).slice(-2);
-
-        if (time.total <= 0) {
-          clearInterval(timeinterval);
-        }
-      }
-
-      updateClock();
-      var timeinterval = setInterval(updateClock, 1000);
-    }
-
-    initClock('js-countdown', countdown);
-
-  };
+  }, 1000);
 
 
 

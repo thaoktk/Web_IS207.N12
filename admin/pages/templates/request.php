@@ -90,7 +90,7 @@
             $moTa = $_POST['moTa'];
             $noiDung = $_POST['noiDung'];
             $nguoiTao = $_POST['nguoiTao'];
-            $time = date_create()->format('Y-m-d H:i:s');
+            $time = date('Y-m-d H:i:s');
             $result = mysqli_query($connect, "INSERT INTO `tintuc` (`MaTin`, `TieuDe`, `MoTaNgan`, `NoiDung`, `HinhAnh`, `NguoiTao`, `NgayDang`) VALUES (NULL, '$tieuDe', '$moTa', '$noiDung', '$hinhAnh', '$nguoiTao', '$time')");
             die (json_encode($result));
             break;
@@ -126,6 +126,30 @@
         case "delete_user":
             $idUser = $_POST['idUser'];
             $result = mysqli_query($connect, "DELETE FROM nguoidung WHERE MaND = $idUser");
+            die (json_encode($result));
+            break;
+        case "getDetailOrder":
+            $idOrder = $_POST['idOrder'];
+            $results = mysqli_query($connect, "SELECT * FROM chitietdonhang WHERE MaDH = $idOrder");
+            $finalResult = array();
+            while ($rowOrder = mysqli_fetch_array($results)) {
+                $resultSP = mysqli_query($connect, "SELECT * FROM sanpham WHERE MaSP = $rowOrder[1]");
+                $resultSP = $resultSP->fetch_row();
+                $finalResult[] = array(
+                    "hinhAnh" => $resultSP[10],
+                    "tenSP" => $resultSP[2],
+                    "gia" => $rowOrder[2],
+                    "sluong" => $rowOrder[3],
+                );
+            }
+
+            die (json_encode($finalResult));
+            break;
+
+        case "update_order":
+            $idOrder = $_POST['idOrder'];
+            $trangThai = $_POST['trangThai'];
+            $result = mysqli_query($connect,"UPDATE donhang SET TrangThai = '$trangThai' WHERE MaDH = $idOrder");
             die (json_encode($result));
             break;
     }
