@@ -34,7 +34,10 @@
 
 <?php 
 session_start();
-include("./templates/header.php")?>
+include "./templates/connect.php"; 
+$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+include("templates/header.php");
+?>
 
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">

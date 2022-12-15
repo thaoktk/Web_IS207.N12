@@ -28,8 +28,15 @@
                                 <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
                             </li>
                             <li class="nav-item"><a href="cart.php" class=" nav-cart"><span class="ti-bag"></span>
-                                    <div class="cart-qty"><?php $quantity = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
-                                    echo $quantity; ?></div>
+                                    <div class="cart-qty">
+                                    <?php 
+                                    // $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+                                    $resultQuantity = mysqli_query($connect, "SELECT Count(*) as count from giohang WHERE MaND = $idUser");
+                                    $resultQuantity = mysqli_fetch_assoc($resultQuantity);
+
+                                    echo $resultQuantity['count'];
+                                    ?>
+                                    </div>
                                 </a></li>
                             <li class="nav-item">
                                 <a href="<?php

@@ -36,7 +36,8 @@
     include "./templates/connect.php"; 
     session_start();
     $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
-
+    include("./templates/header.php");
+    
     $idBlog = isset($_GET['idBlog']) ? $_GET['idBlog'] : "";
     $result = mysqli_query($connect,"SELECT * FROM tintuc WHERE MaTin = $idBlog");
     $row = $result->fetch_row();
@@ -53,7 +54,6 @@
     $resultsComment = mysqli_query($connect,"SELECT * FROM binhluan WHERE MaTin = $idBlog");
     $rowsCmt = $resultsComment->num_rows;
     ?>
-<?php include("./templates/header.php")?>
 
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">

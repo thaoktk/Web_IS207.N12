@@ -47,26 +47,40 @@
             die (json_encode($result));
             break;
         case "update_cart":
-           $result = update_cart(true);
-            echo json_encode(array(
-            'status'=>$result,
-            'message'=>"Thêm sản phẩm thành công"
-            ));
-            break;
+            $idUser = $_POST['idUser'];
+            $idSP = $_POST['idSP'];
+            $quantity = $_POST['quantity'];
+            $resultTonTai = mysqli_query($connect, "SELECT * FROM giohang where MaND = $idUser and MaSP = $idSP");
+            if ($resultTonTai->num_rows != 0) {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Bạn đã thêm sản phẩm này vào giỏ hàng rồi!"
+                    ));
+                    break;
+            } else {
+                $resultGioHang = mysqli_query($connect, "INSERT INTO `giohang` (`MaND`, `MaSP`, `SoLuong`) VALUES ('$idUser', '$idSP', '$quantity')");
+                echo json_encode(array(
+                    'status'=>1,
+                    'message'=>"Thêm thành công sản phẩm vào giỏ hàng!"
+                    ));
+                    break;
+            }
         case "update_qty_product_cart":
+            $idUser = $_POST['idUser'];
             $idSP = $_POST['idSP'];
             $qty = $_POST['qty'];
-            $isIncrease = $_POST['isIncrease'];
-            $result = update_qty_product_cart($idSP, $qty, $isIncrease);
+            $result = mysqli_query($connect, "UPDATE giohang SET SoLuong = $qty WHERE MaSP = $idSP and MaND = $idUser");
             die (json_encode($result));
             break;
         case "delete_product_cart":
+            $idUser = $_POST['idUser'];
             $idSP = $_POST['idSP'];
-            $result = delete_product_cart($idSP);
+            $result = mysqli_query($connect, "DELETE FROM giohang WHERE MaND = $idUser and MaSP = $idSP");
             die (json_encode($result));
             break;
         case "delete_cart":
-            $result = delete_cart();
+            $idUser = $_POST['idUser'];
+            $result = mysqli_query($connect, "DELETE FROM giohang WHERE MaND = $idUser");
             unset($_SESSION["free-ship"]);
             unset($_SESSION["order"]);
             die (json_encode($result));
@@ -122,30 +136,24 @@
     }
 
 
-    function update_cart($add = false) {
-        $id = $_POST['idSP'];
-        $quantity = $_POST['quantity'];
-        if ($quantity == 0) {
-            unset($_SESSION["cart"][$id]);
-        } else {
-            if (!isset($_SESSION["cart"][$id])) {
-                $_SESSION["cart"][$id] = 0;
-            }
-            if ($add) {
-                $_SESSION["cart"][$id] += $quantity;
-            } else {
-                $_SESSION["cart"][$id] = $quantity;
-            }
-            //Kiểm tra số lượng sản phẩm tồn kho
-//            $addProduct = mysqli_query($con, "SELECT `quantity` FROM `product` WHERE `id` = " . $id);
-//            $addProduct = mysqli_fetch_assoc($addProduct);
-//            if ($_SESSION["cart"][$id] > $addProduct['quantity']) {
-//                $_SESSION["cart"][$id] = $addProduct['quantity'];
-//                $GLOBALS['changed_cart'] = true;
-//            }
-        }
-        return true;
-    }
+    // function update_cart($idUser, $add = false) {
+    //     // $id = $_POST['idSP'];
+    //     // $quantity = $_POST['quantity'];
+    //     // $result = mysqli_query($connect, "INSERT INTO `giohang` (`MaND`, `MaSP`, `SoLuong`) VALUES ('$idUser', '$id', '$quantity')");
+    //     if ($quantity == 0) {
+    //         unset($_SESSION["cart"][$id]);
+    //     } else {
+    //         if (!isset($_SESSION["cart"][$id])) {
+    //             $_SESSION["cart"][$id] = 0;
+    //         }
+    //         if ($add) {
+    //             $_SESSION["cart"][$id] += $quantity;
+    //         } else {
+    //             $_SESSION["cart"][$id] = $quantity;
+    //         }
+    //     }
+    //     return true;
+    // }
 
     function update_qty_product_cart($idSP, $qty = 1, $isIncrease) {
         if ($isIncrease == 1) {

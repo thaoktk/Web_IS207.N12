@@ -37,8 +37,8 @@
 <?php include("./templates/product.php")?>
 <?php 
 	session_start(); 
-	include("./templates/header.php");
 	$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+	include("./templates/header.php");
 ?>
 
 	<!-- start banner Area -->

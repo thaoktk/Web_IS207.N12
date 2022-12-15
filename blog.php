@@ -35,6 +35,8 @@
     <?php 
     include "./templates/connect.php"; 
     session_start();
+    $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+    include("templates/header.php");
 
     $param = "";
 	$where = "";
@@ -70,7 +72,6 @@
 
     // $connect->close();
     ?>
-    <?php include("./templates/header.php")?>
 
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">

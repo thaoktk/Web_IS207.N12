@@ -38,19 +38,30 @@
     include "templates/product.php";
     session_start();
     $total = 0;
-    if (!isset($_SESSION["cart"])) {
-        $_SESSION["cart"] = array();
-    }
+    $products = array();
+    $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
 
-    if (!empty($_SESSION["cart"])) {
-        $products = mysqli_query($connect, "SELECT * FROM `sanpham` WHERE `MaSP` IN (" . implode(",", array_keys($_SESSION["cart"])) . ")");
+    $resultGioHang = mysqli_query($connect, "SELECT * FROM giohang where MaND = $idUser");
+
+    while ($rowGioHang = mysqli_fetch_array($resultGioHang)) {
+        $resultSP = mysqli_query($connect, "SELECT * FROM sanpham where MaSP = $rowGioHang[1]");
+        $resultSP = mysqli_fetch_array($resultSP);
+
+        $products[] = array(
+            "maSP"=>$resultSP[0],
+            "hinhAnh"=>$resultSP[10],
+            "tenSP"=>$resultSP[2],
+            "gia"=>$resultSP[8],
+            "soLuong"=>$rowGioHang[2],
+            "soLuongSan"=>$resultSP[9],
+        );
     }
 
     $voucherFreeShip = isset($_SESSION["free-ship"]) ? $_SESSION["free-ship"] : null;
     $voucherOrder = isset($_SESSION["order"]) ? $_SESSION["order"] : null;
-    ?>
 
-    <?php include("templates/header.php")?>
+    include("templates/header.php");
+    ?>
 
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
@@ -94,35 +105,35 @@
                                 <?php
                                 if (!empty($products)) {
                                     $num = 1;
-                                    while ($row = mysqli_fetch_array($products)) {
-                                        $total += $row[8] * $_SESSION["cart"][$row[0]];
+                                    foreach ($products as $row) {
+                                        $total += $row['gia'] * $row['soLuong'];
                                         echo "<tr>
                                         <td>
                                             <div class='media'>
                                                 <div class='d-flex'>
-                                                    <img src='$row[10]' class='img-product' >
+                                                    <img src='". $row['hinhAnh'] ."' class='img-product' >
                                                 </div>
                                                 <div class='media-body'>
-                                                    <p>$row[2]</p>
+                                                    <p>". $row['tenSP'] ."</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <button data-id='$row[0]' class='btn-delete ml-3 genric-btn default-border small'>Xóa</button>
+                                            <button data-id='". $row['maSP'] ."' data-user='$idUser' class='btn-delete ml-3 genric-btn default-border small'>Xóa</button>
                                         </td>
                                         <td>
-                                            <h5 class='product-price' style='display: flex; gap: 3px'><span class='price'>$row[8]</span><span> VNĐ</span></h5>
+                                            <h5 class='product-price' style='display: flex; gap: 3px'><span class='price'>".$row['gia']."</span><span> VNĐ</span></h5>
                                         </td>
                                         <td>
                                             <div class='product_count'>
-                                                <input type='hidden' value='$row[9]' data-id='$row[0]' class='product-qty'/>
-                                                <input type='text' name='qty' data-id='$row[0]' value='". $_SESSION['cart'][$row[0]] ."' title='Số lượng mua:' class='input-text qty'>
-                                                <button class='increase items-count' data-id='$row[0]' type='button'><i class='lnr lnr-chevron-up'></i></button>
-                                                <button class='reduced items-count' data-id='$row[0]' type='button'><i class='lnr lnr-chevron-down'></i></button>
+                                                <input type='hidden' value='". $row['soLuongSan'] ."' data-id='". $row['maSP'] ."' class='product-qty'/>
+                                                <input type='text' name='qty' data-id='". $row['maSP'] ."' data-user='$idUser' value='". $row['soLuong'] ."' title='Số lượng mua:' class='input-text qty'>
+                                                <button class='increase items-count' data-id='". $row['maSP'] ."' data-user='$idUser' type='button'><i class='lnr lnr-chevron-up'></i></button>
+                                                <button class='reduced items-count' data-id='". $row['maSP'] ."' data-user='$idUser' type='button'><i class='lnr lnr-chevron-down'></i></button>
                                             </div>
                                         </td>
                                         <td>
-                                            <h5 class='product-cost' style='display: flex; gap: 3px'><span class='cost'>". (int)$row[8] * $_SESSION["cart"][$row[0]] ."</span><span> VNĐ</span></h5>
+                                            <h5 class='product-cost' style='display: flex; gap: 3px'><span class='cost'>". (int)$row["gia"] * $row['maSP'] ."</span><span> VNĐ</span></h5>
                                         </td>
                                     </tr>";
                                     }
@@ -132,7 +143,7 @@
                                 if (!empty($products)) { ?>
                                     <tr class="bottom_button">
                                         <td>
-                                            <a class="gray_btn btn btn-del-all">Xóa hết</a>
+                                            <a class="gray_btn btn btn-del-all" data-user='<?=$idUser?>'>Xóa hết</a>
                                         </td>
                                         <td>
                                         </td>

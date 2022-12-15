@@ -33,11 +33,12 @@
 <body id="category">
 <?php
 session_start();
-include("./templates/header.php")
+$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
 ?>
 <?php include "./templates/connect.php"; 
 	  include "./templates/product.php";
-	
+	  include("templates/header.php");
+	  
 	$param = "";
 	$paramSort = "";
 	$paramRam = "";
@@ -170,11 +171,10 @@ include("./templates/header.php")
 	$totalRows = $totalRecords->num_rows;
 	$totalPages = ceil($totalRows / $itemsPerPage);
 
-	$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+	// $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
 
 	$connect->close();
 	?>
-
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">

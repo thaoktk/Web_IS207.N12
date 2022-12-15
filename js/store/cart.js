@@ -64,13 +64,14 @@ $(document).ready(function () {
     tong = Number($("#total-cost .cost").text())
     freeShip = Number($("#voucher-free-ship .ship").text())
     order = Number($("#voucher-order .order").text())
-    thanhTien = Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+    Number($("#total-cost-voucher .total").text(tong - freeShip - order))
 
     // quantity and cost
     $(".increase").each(function () {
         $(this).click(function () {
             result = $(`.input-text.qty[data-id='${$(this).data("id")}']`);
             idSP = result.data("id")
+            idUser = result.data("user")
             qtyProduct = $(`.product-qty[data-id='${$(this).data("id")}']`).val()
             qty = result.val();
             qty++;
@@ -95,7 +96,10 @@ $(document).ready(function () {
             })
             $("#total-cost .cost").text(totalCost)
 
-            thanhTien = Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+            tong = Number($("#total-cost .cost").text())
+            freeShip = Number($("#voucher-free-ship .ship").text())
+            order = Number($("#voucher-order .order").text())
+            Number($("#total-cost-voucher .total").text(tong - freeShip - order))
 
             $.ajax({
                 type: "POST",
@@ -103,14 +107,10 @@ $(document).ready(function () {
                 dataType: "json",
                 data: {
                     request: "update_qty_product_cart",
+                    idUser: idUser,
                     idSP: idSP,
-                    qty: null,
-                    isIncrease: 1,
+                    qty: qty,
                 },
-                success: function () {
-                },
-                error: function (e) {
-                }
             })
         })
     })
@@ -119,6 +119,7 @@ $(document).ready(function () {
         $(this).click(function () {
             result = $(`.input-text.qty[data-id='${$(this).data("id")}']`);
             idSP = result.data("id")
+            idUser = result.data("user")
             qty = result.val();
             qty--;
             if (qty <= 0) {
@@ -135,7 +136,11 @@ $(document).ready(function () {
                 totalCost += cost
             })
             $("#total-cost .cost").text(totalCost)
-            thanhTien = Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+
+            tong = Number($("#total-cost .cost").text())
+            freeShip = Number($("#voucher-free-ship .ship").text())
+            order = Number($("#voucher-order .order").text())
+            Number($("#total-cost-voucher .total").text(tong - freeShip - order))
 
             if (qty > 0) {
                 $.ajax({
@@ -144,14 +149,10 @@ $(document).ready(function () {
                     dataType: "json",
                     data: {
                         request: "update_qty_product_cart",
+                        idUser: idUser,
                         idSP: idSP,
-                        qty: null,
-                        isIncrease: 0,
+                        qty: qty,
                     },
-                    success: function () {
-                    },
-                    error: function (e) {
-                    }
                 })
             }
         })
@@ -161,26 +162,28 @@ $(document).ready(function () {
         $(this).on("input", function () {
             val = $(this).val()
             idSP = $(this).data("id")
-            thanhTien = Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+            idUser = $(this).data("user")
 
             if (val <= 0) {
                 alert("Số lượng mua phải lớn hơn 0!")
                 return;
             } else {
+                tong = Number($("#total-cost .cost").text())
+                freeShip = Number($("#voucher-free-ship .ship").text())
+                order = Number($("#voucher-order .order").text())
+                Number($("#total-cost-voucher .total").text(tong - freeShip - order))
                 $.ajax({
                     type: "POST",
                     url: "templates/request.php",
                     dataType: "json",
                     data: {
                         request: "update_qty_product_cart",
+                        idUser: idUser,
                         idSP: idSP,
                         qty: val,
-                        isIncrease: 1,
                     },
                     success: function () {
                         window.location.reload()
-                    },
-                    error: function (e) {
                     }
                 })
             }
@@ -198,7 +201,12 @@ $(document).ready(function () {
             })
             $("#total-cost .cost").text(totalCost)
             idSP = $(this).data("id")
-            thanhTien = Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+            idUser = $(this).data("user")
+
+            tong = Number($("#total-cost .cost").text())
+            freeShip = Number($("#voucher-free-ship .ship").text())
+            order = Number($("#voucher-order .order").text())
+            Number($("#total-cost-voucher .total").text(tong - freeShip - order))
 
             $.ajax({
                 type: "POST",
@@ -207,6 +215,7 @@ $(document).ready(function () {
                 data: {
                     request: "delete_product_cart",
                     idSP: idSP,
+                    idUser: idUser
                 },
                 success: function () {
                 },
@@ -218,12 +227,14 @@ $(document).ready(function () {
 
     $(".btn-del-all").each(function () {
         $(this).click(function () {
+            idUser = $(this).data("user")
             $.ajax({
                 type: "POST",
                 url: "templates/request.php",
                 dataType: "json",
                 data: {
-                    request: "delete_cart"
+                    request: "delete_cart",
+                    idUser: idUser
                 },
                 success: function () {
                     alert("Xóa giỏ hàng thành công!")

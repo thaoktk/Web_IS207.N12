@@ -36,18 +36,32 @@
     include "templates/connect.php"; 
     include "templates/product.php";
     session_start();
-    if (!isset($_SESSION["cart"])) {
-        $_SESSION["cart"] = array();
-    }
-
-    if (!empty($_SESSION["cart"])) {
-        $products = mysqli_query($connect, "SELECT * FROM `sanpham` WHERE `MaSP` IN (" . implode(",", array_keys($_SESSION["cart"])) . ")");
-    }
-
     $total = 0;
-    ?>
+    $products = array();
+    $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
 
-    <?php include("./templates/header.php") ?>
+    $resultGioHang = mysqli_query($connect, "SELECT * FROM giohang where MaND = $idUser");
+
+    while ($rowGioHang = mysqli_fetch_array($resultGioHang)) {
+        $resultSP = mysqli_query($connect, "SELECT * FROM sanpham where MaSP = $rowGioHang[1]");
+        $resultSP = mysqli_fetch_array($resultSP);
+
+        $products[] = array(
+            "maSP"=>$resultSP[0],
+            "hinhAnh"=>$resultSP[10],
+            "tenSP"=>$resultSP[2],
+            "gia"=>$resultSP[8],
+            "soLuong"=>$rowGioHang[2],
+            "soLuongSan"=>$resultSP[9],
+        );
+    }
+
+    $voucherFreeShip = isset($_SESSION["free-ship"]) ? $_SESSION["free-ship"] : null;
+    $voucherOrder = isset($_SESSION["order"]) ? $_SESSION["order"] : null;
+
+    $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+    include("templates/header.php");
+    ?>
 
     <!-- Start Banner Area -->
     <section class="banner-area organic-breadcrumb">
@@ -112,13 +126,13 @@
                                     <li><a href="#">Sản phẩm <span>Giá</span></a></li>
                                     <?php
                                     if (!empty($products)) {
-                                        while ($row = mysqli_fetch_array($products)) {
-                                            $total += $row[8] * $_SESSION["cart"][$row[0]];
+                                        foreach ($products as $row) {
+                                            $total += $row['gia'] * $row['soLuong'];
                                             echo "<li>
                                             <a style='display: flex; border-bottom: 1px solid #ccc'>
-                                            <span class='product-buy-checkout'>$row[2]</span>
-                                            <span class='middle'>x ". $_SESSION['cart'][$row[0]] ."</span>
-                                             <span class='last'>". $row[8] ."</span>
+                                            <span class='product-buy-checkout'>". $row['tenSP'] ."</span>
+                                            <span class='middle'>x ". $row['soLuong'] ."</span>
+                                             <span class='last'>". $row["gia"] ."</span>
                                              <span> VNĐ</span>
                                              </a>
                                              </li>";

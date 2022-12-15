@@ -37,6 +37,7 @@
 	  include "./templates/product.php";
 	  session_start();
 	  $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+	  include("./templates/header.php");
 	  
 	  $idSP = isset($_GET['idSP']) ? $_GET['idSP'] : "";
 	  $result = mysqli_query($connect,"SELECT * FROM sanpham WHERE MaSP = $idSP");
@@ -47,7 +48,6 @@
 	  $comments = mysqli_query($connect, "SELECT * FROM binhluan WHERE MaSP = $idSP order by NgayLap desc");
 
  ?>
-<?php include("./templates/header.php")?>
 
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
@@ -103,7 +103,7 @@
 							<button class='reduced items-count' type='button'><i class='lnr lnr-chevron-down'></i></button>
 						</div>
 						<div class='card_area d-flex align-items-center'>
-							<a type='button' class='primary-btn add-to-cart text-white' data-product='$idSP'>Mua ngay</a>
+							<a type='button' class='primary-btn add-to-cart text-white' data-product='$idSP' data-user='$idUser'>Mua ngay</a>
 							<a class='icon_btn' data-product='$idSP' data-user='$idUser'><i class='lnr lnr lnr-heart'></i></a>
 						</div>
 					</div>";

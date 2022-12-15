@@ -32,8 +32,11 @@
 
 <body>
 
-<?php session_start();  ?>
-<?php include("./templates/header.php")?>
+<?php session_start();
+include "./templates/connect.php"; 
+$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+include("templates/header.php");
+?>
 
 
 	<!-- Start Banner Area -->

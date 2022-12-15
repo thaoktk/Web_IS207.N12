@@ -43,13 +43,14 @@ function hideMessage(id) {
 <body>
 
 <?php 
-include "./templates/product.php";
-include "./templates/connect.php";
-session_start(); 
+	include "templates/connect.php";
+	include "templates/product.php";
+	session_start(); 
+	$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+
 ?>
 
     <?php
-	include "./templates/connect.php";
 	if (isset($_POST['submit']) && $_POST['submit'] == 'Đổi mật khẩu') {
 
 		try {
@@ -78,7 +79,6 @@ session_start();
     if (isset($_GET['action']) && $_GET['action'] == 'logout') {
         unset($_SESSION['current-user']);
 		unset($_SESSION['access_token']);
-		unset($_SESSION['cart']);
 		unset($_SESSION["free-ship"]);
         unset($_SESSION["order"]);
 		header("Location: login.php");
@@ -87,7 +87,7 @@ session_start();
 	$user = $_SESSION['current-user'];
 	$favorites = mysqli_query($connect, "SELECT * FROM yeuthich WHERE MaND = '". $user['MaND'] ."'");
     ?>
-	<?php include("./templates/header.php")?>
+	<?php include("./templates/header.php"); ?>
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">

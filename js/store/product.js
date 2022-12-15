@@ -153,22 +153,24 @@ $(document).ready(function () {
     $(".add-to-cart").click(function () {
         quantity = parseInt($(".input-text.qty").val())
         idSP = parseInt($(this).data("product"))
+        idUser = parseInt($(this).data("user"))
 
         $.ajax({
             type: "POST",
             url: 'templates/request.php',
             data: {
                 request: "update_cart",
+                idUser: idUser,
                 idSP: idSP,
                 quantity: quantity
             },
-            success: function (response) {
-                response = JSON.parse(response);
-                if (response.status == 0) { //Có lỗi
+            success: function (data) {
+                response = JSON.parse(data)
+                if (response.status == 1) {
                     alert(response.message);
-                } else { //Mua thành công
+                    window.location.reload()
+                } else {
                     alert(response.message);
-                    window.location.reload();
                 }
             }
         });
