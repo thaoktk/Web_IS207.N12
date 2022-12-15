@@ -1,6 +1,8 @@
 <?php
     include "connect.php";
     session_start();
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $time = date('Y-m-d H:i:s', time());
 
     if(!isset($_POST['request']) && !isset($_GET['request'])) die(null);
 
@@ -26,7 +28,6 @@
             $idSP = $_POST['idSP'];
             $idND = $_POST['idND'];
             $message = $_POST['message'];
-            $time = date('Y-m-d H:i:s');
             $result = mysqli_query($connect, "INSERT INTO `binhluan` (`MaBL`, `MaSP`, `MaTin`, `MaND`, `BinhLuan`, `NgayLap`) VALUES (NULL, '$idSP', NULL, '$idND', '$message', '$time')");
             die (json_encode($result));
             break;
@@ -34,7 +35,6 @@
             $idBL = $_POST['idBL'];
             $idND = $_POST['idND'];
             $message = $_POST['message'];
-            $time = date('Y-m-d H:i:s');
             $result = mysqli_query($connect, "INSERT INTO `traloibinhluan` (`MaTLBL`, `MaBL`, `MaND`, `BinhLuan`, `NgayLap`) VALUES (NULL, '$idBL', '$idND', '$message', '$time')");
             die (json_encode($result));
             break;
@@ -42,7 +42,6 @@
             $idBlog = $_POST['idBlog'];
             $idND = $_POST['idND'];
             $message = $_POST['message'];
-            $time = date('Y-m-d H:i:s');
             $result = mysqli_query($connect, "INSERT INTO `binhluan` (`MaBL`, `MaSP`, `MaTin`, `MaND`, `BinhLuan`, `NgayLap`) VALUES (NULL, NULL, '$idBlog', '$idND', '$message', '$time')");
             die (json_encode($result));
             break;
@@ -133,51 +132,46 @@
                     ));
                 break;
             }
-    }
+            break;
+        case "insert_order":
+            unset($_SESSION["free-ship"]);
+            unset($_SESSION["order"]);
 
+            $idUser = $_POST['idUser'];
+            $hoTen = $_POST['hoTen'];
+            $sdt = $_POST['sdt'];
+            $diaChi = $_POST['diaChi'];
+            $ship = $_POST['ship'];
+            $giamGia = $_POST['giamGia'];
+            $ghiChu = $_POST['ghiChu'];
+            $tongTien = $_POST['tongTien'];
+            $result = mysqli_query($connect, "INSERT INTO `donhang` (`MaDH`, `MaND`, `NgayLap`, `HoTen`, `SDT`, `DiaChi`, `PhiVanChuyen`, `GiamGia`, `GhiChu`, `TongTien`, `TrangThai`) VALUES (NULL, '$idUser', '$time', '$hoTen', '$sdt', '$diaChi', '$ship', '$giamGia', '$ghiChu', '$tongTien', 'Chưa giao')");
+            die (json_encode($result));
+            break;
+        case "update_qty_voucher": 
+            $idVoucher = $_POST['idVoucher'];
+            $result = mysqli_query($connect, "UPDATE khuyenmai SET SoLuong = SoLuong - 1 WHERE MaKM = $idVoucher");
+            die (json_encode($result));
+            break;
+        case "insert_detail_order":
+            $idUser = $_POST['idUser'];
+            $resultOrderMax = mysqli_query($connect, "SELECT MAX(MaDH) as idOrder from donhang");
+            $resultOrderMax = mysqli_fetch_assoc($resultOrderMax);
+            $idOrder = $resultOrderMax['idOrder'];
 
-    // function update_cart($idUser, $add = false) {
-    //     // $id = $_POST['idSP'];
-    //     // $quantity = $_POST['quantity'];
-    //     // $result = mysqli_query($connect, "INSERT INTO `giohang` (`MaND`, `MaSP`, `SoLuong`) VALUES ('$idUser', '$id', '$quantity')");
-    //     if ($quantity == 0) {
-    //         unset($_SESSION["cart"][$id]);
-    //     } else {
-    //         if (!isset($_SESSION["cart"][$id])) {
-    //             $_SESSION["cart"][$id] = 0;
-    //         }
-    //         if ($add) {
-    //             $_SESSION["cart"][$id] += $quantity;
-    //         } else {
-    //             $_SESSION["cart"][$id] = $quantity;
-    //         }
-    //     }
-    //     return true;
-    // }
+            $resultOrder = mysqli_query($connect, "SELECT * from giohang where MaND = $idUser");
+            while ($row = mysqli_fetch_array($resultOrder)) {
+                $resultGiaTien = mysqli_query($connect, "SELECT GiaTien from sanpham where MaSP = $row[1]");
+                $resultGiaTien = $resultGiaTien->fetch_column();
 
-    function update_qty_product_cart($idSP, $qty = 1, $isIncrease) {
-        if ($isIncrease == 1) {
-            if ($qty) {
-                $_SESSION["cart"][$idSP] = $qty;
-            } else {
-                $_SESSION["cart"][$idSP] += 1;
+                $result = mysqli_query($connect, "INSERT INTO `chitietdonhang` (`MaDH`, `MaSP`, `GiaTien`, `SoLuong`) VALUES ('$idOrder', '$row[1]', '$resultGiaTien', '$row[2]')");
+                $resultUpdateSP = mysqli_query($connect, "UPDATE sanpham SET SoLuong = SoLuong - 1 WHERE MaSP = $row[1]");
             }
-        } else {
-            if ($_SESSION["cart"][$idSP] > 1) {
-                $_SESSION["cart"][$idSP] -= 1;
-            }
-        }
-        return true;
-    }
 
-    function delete_product_cart($idSP) {
-        unset($_SESSION["cart"][$idSP]);
-        return true;
-    }
+            $result = mysqli_query($connect, "DELETE FROM giohang WHERE MaND = $idUser");
 
-    function delete_cart() {
-        unset($_SESSION["cart"]);
-        return true;
+            die (json_encode($result));
+            break;
     }
     
     function add_voucher_freeShip($code) {

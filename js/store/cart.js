@@ -294,8 +294,14 @@ $(document).ready(function () {
     })
 
     $(".btn-checkout").click(function () {
-        familyName = $("#first").val()
-        name = $("#last").val()
+        idUser = $(this).data("user")
+        voucherShip = $(this).data("voucher-ship")
+        voucherOrder = $(this).data("voucher-order")
+        idKMShip = $(this).data("id-voucher-ship")
+        idKMOrder = $(this).data("id-voucher-order")
+
+        familyName = $("#last").val()
+        name = $("#first").val()
         phoneNumber = $("#phone-number").val()
         homeNumber = $("#home-number").val()
 
@@ -303,6 +309,8 @@ $(document).ready(function () {
         district = $("#district option:selected").text()
         ward = $("#ward option:selected").text()
         message = $("#message").val()
+
+        thanhTien = $("#total-cost-checkout") ? $("#total-cost-checkout").text() : $("#total-checkout").text()
 
         if (name.trim() === "" || familyName.trim() === "" || phoneNumber.trim() === "" || homeNumber.trim() === "") {
             alert("Yêu cầu điền đầy đủ thông tin đơn hàng!")
@@ -313,6 +321,71 @@ $(document).ready(function () {
             alert("Yêu cầu điền đầy đủ thông tin đơn hàng!")
             return;
         }
+
+        $.ajax({
+            type: "POST",
+            url: "templates/request.php",
+            dataType: "json",
+            data: {
+                request: "insert_order",
+                idUser: idUser,
+                hoTen: `${familyName} ${name}`,
+                sdt: phoneNumber,
+                diaChi: `${homeNumber}, ${ward} ${district} ${province}`,
+                ship: voucherShip,
+                giamGia: voucherOrder,
+                ghiChu: message,
+                tongTien: thanhTien
+            },
+            success: function (response) {
+                $.ajax({
+                    type: "POST",
+                    url: "templates/request.php",
+                    dataType: "json",
+                    data: {
+                        request: "insert_detail_order",
+                        idUser: idUser
+                    },
+                    success: function (response) {
+                    },
+                })
+
+                if (voucherShip !== 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "templates/request.php",
+                        dataType: "json",
+                        data: {
+                            request: "update_qty_voucher",
+                            idVoucher: idKMShip
+                        },
+                        success: function (response) {
+                        },
+                    })
+                }
+
+                if (voucherOrder !== 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "templates/request.php",
+                        dataType: "json",
+                        data: {
+                            request: "update_qty_voucher",
+                            idVoucher: idKMOrder
+                        },
+                        success: function (response) {
+                        },
+                    })
+                }
+
+                alert("Mua hàng thành công")
+                window.location.href = "confirmation.php"
+            },
+            error: function (e) {
+                console.log("🚀 ~ file: cart.js:389 ~ e", e)
+
+            }
+        })
     })
 })
 

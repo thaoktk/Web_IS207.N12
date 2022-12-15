@@ -36,6 +36,12 @@
 session_start();
 include "./templates/connect.php"; 
 $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+
+$resultOrder = mysqli_query($connect, "SELECT * FROM `donhang` WHERE MaND = $idUser order by NgayLap DESC limit 1");
+$resultOrder = $resultOrder->fetch_array();
+
+$resultSP = mysqli_query($connect, "SELECT * FROM `chitietdonhang` WHERE MaDH = $resultOrder[0]");
+
 include("templates/header.php");
 ?>
 
@@ -44,10 +50,10 @@ include("templates/header.php");
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Confirmation</h1>
+					<h1>Thông tin đơn hàng</h1>
 					<nav class="d-flex align-items-center">
-						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-						<a href="category.html">Confirmation</a>
+						<a href="index.php">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+						<a href="#">Đơn hàng</a>
 					</nav>
 				</div>
 			</div>
@@ -57,6 +63,9 @@ include("templates/header.php");
 
 	<!--================Order Details Area =================-->
 	<section class="order_details section_gap">
+		<?php
+		if ($resultOrder) {
+		?>
 		<div class="container">
 			<h3 class="title_confirmation">Cảm ơn bạn. Đơn hàng của bạn đang được chuyển đi.</h3>
 			<div class="row order_d_inner">
@@ -64,10 +73,20 @@ include("templates/header.php");
 					<div class="details_item">
 						<h4>Thông tin đơn hàng</h4>
 						<ul class="list">
-							<li><span class="mr-3">Mã đơn: </span> 60235</li>
-							<li><span class="mr-3">Ngày đặt: </span> 20/10/2022</li>
-							<li><span class="mr-3">Tổng tiền: </span> USD 2210</li>
-							<li><span class="mr-3">Thanh toán: </span> Qua thẻ</li>
+							<li><span class="mr-3">Mã đơn: </span><?=$resultOrder[0]?></li>
+							<li><span class="mr-3">Ngày đặt: </span><?=$resultOrder[2]?></li>
+							<li><span class="mr-3">Tổng tiền: </span><?=number_format($resultOrder[9])?> VNĐ</li>
+							<li><span class="mr-3">Thanh toán: </span> Trực tiếp</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Địa chỉ đơn hàng</h4>
+						<ul class="list">
+							<li><span class="mr-3">Người nhận: </span><?=$resultOrder[3]?></li>
+							<li><span class="mr-3">Số điện thoại: </span><?=$resultOrder[4]?></li>
+							<li><span class="mr-3">Địa chỉ: </span><?=$resultOrder[5]?></li>
 						</ul>
 					</div>
 				</div>
@@ -75,23 +94,14 @@ include("templates/header.php");
 					<div class="details_item">
 						<h4>Địa chỉ shop</h4>
 						<ul class="list">
-							<li><span class="mr-3">Đường: </span> Lê Quang Định</li>
-							<li><span class="mr-3">Phường: </span> 11</li>
-							<li><span class="mr-3">Quận: </span> Bình Thạnh</li>
-							<li><span class="mr-3">Thành phố: </span> Hồ Chí Minh</li>
+							<li><span class="mr-3">Số nhà: </span> 143 Hẻm 6</li>
+							<li><span class="mr-3">Đường: </span> Hàn Thuyên</li>
+							<li><span class="mr-3">Phường: </span> Linh Trung</li>
+							<li><span class="mr-3">Thành phố: </span> Thủ Đức</li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-lg-4">
-					<div class="details_item">
-						<h4>Shipping Address</h4>
-						<ul class="list">
-							<li><span class="mr-3">Địa chỉ: </span> 1, Nguyễn Ái Quốc</li>
-							<li><span class="mr-3">Thành phố: </span> Biên Hòa</li>
-							<li><span class="mr-3">Tỉnh: </span> Đồng Nai</li>
-						</ul>
-					</div>
-				</div>
+				
 			</div>
 			<div class="order_details_table">
 				<h2>Chi tiết đơn hàng</h2>
@@ -99,65 +109,57 @@ include("templates/header.php");
 					<table class="table">
 						<thead>
 							<tr>
+								<th scope="col">Hình ảnh</th>
 								<th scope="col">Sản phẩm</th>
 								<th scope="col">Số lượng</th>
 								<th scope="col">Giá tiền</th>
 							</tr>
 						</thead>
 						<tbody>
+							<?php
+							while ($row = mysqli_fetch_array($resultSP)) {
+								$resultChiTietSP = mysqli_query($connect, "SELECT * FROM `sanpham` WHERE MaSP = $row[1]");
+								$resultChiTietSP = $resultChiTietSP->fetch_array();
+								echo "<tr>
+								<td>
+									<img class='img-fluid' src='$resultChiTietSP[10]' style='width: 100px; height: 50px; object-fit: contain; background: white; padding: 3px'/>
+								</td>
+								<td>
+									<p>$resultChiTietSP[2]</p>
+								</td>
+								<td>
+									<h5>x $row[3]</h5>
+								</td>
+								<td>
+									<p>". number_format($row[2]) ." VNĐ</p>
+								</td>
+							</tr>";
+							}
+							?>
 							<tr>
 								<td>
-									<p>Iphone 14 Pro</p>
+									<h4>Giảm giá vận chuyển</h4>
 								</td>
 								<td>
-									<h5>x 01</h5>
-								</td>
-								<td>
-									<p>$720.00</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<p>MacBook Air 2020</p>
-								</td>
-								<td>
-									<h5>x 01</h5>
-								</td>
-								<td>
-									<p>$720.00</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<p>AirPods Pro</p>
-								</td>
-								<td>
-									<h5>x 01</h5>
-								</td>
-								<td>
-									<p>$720.00</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h4>Tổng</h4>
 								</td>
 								<td>
 									<h5></h5>
 								</td>
 								<td>
-									<p>$2160.00</p>
+									<p><?=number_format($resultOrder[6])?> VNĐ</p>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<h4>Vận chuyển</h4>
+									<h4>Giảm giá đơn hàng</h4>
+								</td>
+								<td>
 								</td>
 								<td>
 									<h5></h5>
 								</td>
 								<td>
-									<p>Thường: $50.00</p>
+									<p><?=number_format($resultOrder[7])?> VNĐ</p>
 								</td>
 							</tr>
 							<tr>
@@ -165,10 +167,12 @@ include("templates/header.php");
 									<h4>Thành tiền</h4>
 								</td>
 								<td>
+								</td>
+								<td>
 									<h5></h5>
 								</td>
 								<td>
-									<p>$2210.00</p>
+									<p><?=number_format($resultOrder[9])?> VNĐ</p>
 								</td>
 							</tr>
 						</tbody>
@@ -176,6 +180,12 @@ include("templates/header.php");
 				</div>
 			</div>
 		</div>
+		<?php } else {?>
+			<div>
+				<p class="text-center">Bạn chưa đặt hàng! Hãy chọn mua và quay lại sau nhé</p>
+				<a class="mt-5 gray_btn btn" href="category.php">Tiếp tục shopping</a>
+			</div>
+		<?php }?>		
 	</section>
 	<!--================End Order Details Area =================-->
 

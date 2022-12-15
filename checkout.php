@@ -59,7 +59,25 @@
     $voucherFreeShip = isset($_SESSION["free-ship"]) ? $_SESSION["free-ship"] : null;
     $voucherOrder = isset($_SESSION["order"]) ? $_SESSION["order"] : null;
 
-    $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
+    $resultKMOrder = 0;
+    $resultKMFreeShip = 0;
+    $idKMFreeShip = '';
+    $idKMOrder = '';
+
+    if (isset($_SESSION["order"])) {
+        $KMOrder = mysqli_query($connect, "SELECT MaKM, GiaTriKM from khuyenmai WHERE CodeKM = '".$_SESSION["order"]."'");
+        $KMOrder = $KMOrder->fetch_row();
+        $resultKMOrder = $KMOrder[1];
+        $idKMOrder = $KMOrder[0];
+    }
+
+    if (isset($_SESSION["free-ship"])) {
+        $KMFreeShip = mysqli_query($connect, "SELECT MaKM, GiaTriKM from khuyenmai WHERE CodeKM = '".$_SESSION["free-ship"]."'");
+        $KMFreeShip = $KMFreeShip->fetch_row();
+        $resultKMFreeShip = $KMFreeShip[1];
+        $idKMFreeShip = $KMFreeShip[0];
+    }
+    
     include("templates/header.php");
     ?>
 
@@ -151,10 +169,7 @@
                                     <li><a class="d-flex justify-content-between">
                                         <?php if (isset($_SESSION["free-ship"])) {?>
                                             <span>Vận chuyển</span>
-                                            <?php if (isset($_SESSION["free-ship"])) {
-                                                $resultKMFreeShip = mysqli_query($connect, "SELECT GiaTriKM from khuyenmai WHERE CodeKM = '".$_SESSION["free-ship"]."'");
-                                                $resultKMFreeShip = $resultKMFreeShip->fetch_column();
-                                                ?>
+                                            <?php if (isset($_SESSION["free-ship"])) {?>
                                             <div>
                                             <span id="ship-checkout"><?=$resultKMFreeShip?></span>
                                             <span>VNĐ</span> 
@@ -165,10 +180,7 @@
                                         <li><a class="d-flex justify-content-between">
                                         <?php if (isset($_SESSION["order"])) {?>
                                             <span>Đơn hàng</span>
-                                            <?php if (isset($_SESSION["order"])) {
-                                                $resultKMOrder = mysqli_query($connect, "SELECT GiaTriKM from khuyenmai WHERE CodeKM = '".$_SESSION["order"]."'");
-                                                $resultKMOrder = $resultKMOrder->fetch_column();
-                                                ?>
+                                            <?php if (isset($_SESSION["order"])) {?>
                                             <div>
                                             <span id="order-checkout"><?=$resultKMOrder?></span>
                                             <span>VNĐ</span> 
@@ -187,7 +199,16 @@
                                             <?php }?>
                                     </a></li>
                                 </ul>
-                                <a class="primary-btn btn-checkout">Thanh toán</a>
+                                <a 
+                                class="primary-btn btn-checkout" 
+                                data-user='<?=$idUser?>' 
+                                data-voucher-ship='<?=$resultKMFreeShip?>'
+                                data-voucher-order='<?=$resultKMOrder?>'
+                                data-id-voucher-ship='<?=$idKMFreeShip?>'
+                                data-id-voucher-order='<?=$idKMOrder?>'
+                                >
+                                Thanh toán
+                                </a>
                             </div>
 
                             <?php } else { ?>
