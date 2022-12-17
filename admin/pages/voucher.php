@@ -358,12 +358,21 @@
         });
 
         $(".form-edit").each(function() {
-            $(this).submit(function() {
+            $(this).submit(function(e) {
+                e.preventDefault()
                 idForm = $(this).attr("id")
                 loaiKM = $(`#${idForm} select[name="type-voucher-edit"]`).val()
                 giaTri = $(`#${idForm} input[name="price-edit"]`).val()
                 sluong = $(`#${idForm} input[name="qty-edit"]`).val()
                 idKM = $(this).data("voucher")
+
+                if (loaiKM == 1) {
+                    if (Number(giaTri) > 50000) {
+                        alert("Giá trị của khuyến mãi vận chuyển không được lớn hơn 50,000 đồng!")
+                        return;
+                    }
+                }
+
                 $.ajax({
                         type: "POST",
                         url: "templates/request.php",
@@ -387,10 +396,24 @@
         })
 
         $(".form-create").submit(function(e) {
+            e.preventDefault()
             loaiKM = $(`select[name="type-voucher-create"]`).val()
             giaTri = $(`input[name="price-create"]`).val()
             sluong = $(`input[name="qty-create"]`).val()
             code = $(`input[name="code-create"]`).val()
+
+            if (loaiKM == 1) {
+                if (Number(giaTri) > 50000) {
+                    alert("Giá trị của khuyến mãi vận chuyển không được lớn hơn 50,000 đồng!")
+                    return;
+                }
+            } else {
+                if (Number(giaTri) > 500000) {
+                    alert("Giá trị của khuyến mãi đơn hàng không được lớn hơn 500,000 đồng!")
+                    return;
+                }
+            }
+
             $.ajax({
                         type: "POST",
                         url: "templates/request.php",

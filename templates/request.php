@@ -94,20 +94,12 @@
                     ));
                 break;
             }
-            if (!isset($_SESSION["free-ship"]) || empty($_SESSION["free-ship"])) {
-                $result = add_voucher_freeShip($code);
+            $result = add_voucher_freeShip($code);
                 echo json_encode(array(
                     'status'=>$result,
                     'message'=>"Dùng mã vận chuyển thành công!"
                     ));
                 break;
-            } else {
-                echo json_encode(array(
-                    'status'=>0,
-                    'message'=>"Bạn đã sử dụng mã vận chuyển rồi, không thể tiếp tục dùng nữa!"
-                    ));
-                break;
-            }
         case "add_voucher_order":
             $code = $_POST['code'];
             $resultKM = mysqli_query($connect, "SELECT CodeKM from khuyenmai WHERE CodeKM = '$code' and MaLoaiKM = '2'");
@@ -118,20 +110,12 @@
                     ));
                 break;
             }
-            if (!isset($_SESSION["order"]) || empty($_SESSION["order"])) {
-                $result = add_voucher_order($code);
+            $result = add_voucher_order($code);
                 echo json_encode(array(
                     'status'=>$result,
                     'message'=>"Dùng mã đơn hàng thành công!"
                     ));
-                break;
-            } else {
-                echo json_encode(array(
-                    'status'=>0,
-                    'message'=>"Bạn đã sử dụng mã đơn hàng rồi, không thể tiếp tục dùng nữa!"
-                    ));
-                break;
-            }
+                    
             break;
         case "insert_order":
             unset($_SESSION["free-ship"]);
@@ -165,12 +149,91 @@
                 $resultGiaTien = $resultGiaTien->fetch_column();
 
                 $result = mysqli_query($connect, "INSERT INTO `chitietdonhang` (`MaDH`, `MaSP`, `GiaTien`, `SoLuong`) VALUES ('$idOrder', '$row[1]', '$resultGiaTien', '$row[2]')");
-                $resultUpdateSP = mysqli_query($connect, "UPDATE sanpham SET SoLuong = SoLuong - 1 WHERE MaSP = $row[1]");
+                $resultUpdateSP = mysqli_query($connect, "UPDATE sanpham SET SoLuong = SoLuong - $row[2] WHERE MaSP = $row[1]");
             }
 
             $result = mysqli_query($connect, "DELETE FROM giohang WHERE MaND = $idUser");
 
             die (json_encode($result));
+            break;
+        case "insert_review": 
+            $idUser = $_POST['idUser'];
+            $idSP = $_POST['idSP'];
+            $soSao = $_POST['soSao'];
+            $noiDung = $_POST['noiDung'];
+            $resultCheckDaDanhGia = mysqli_query($connect, "SELECT * FROM danhgia WHERE MaND = $idUser and MaSP = $idSP");
+            if ($resultCheckDaDanhGia->num_rows != 0) {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Bạn đã đánh giá cho sản phẩm này rồi!"
+                    ));
+                break;
+            }
+
+            $resultCheckDonHang = mysqli_query($connect, "SELECT * FROM donhang WHERE MaND = $idUser");
+            if ($resultCheckDonHang->num_rows == 0) {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Bạn chưa mua sản phẩm này, không thể đánh giá!"
+                    ));
+                break;
+            }
+
+            $resultCheckBuyProduct = mysqli_query($connect, "SELECT * FROM chitietdonhang WHERE MaSP = $idSP and MaDH in (SELECT MaDH from donhang WHERE MaND = $idUser)");
+            if ($resultCheckBuyProduct->num_rows == 0) {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Bạn chưa mua sản phẩm này, không thể đánh giá!"
+                    ));
+                break;
+            }
+
+            while ($rowDonHang = mysqli_fetch_array($resultCheckDonHang)) {
+                $resultSPDonHang = mysqli_query($connect, "SELECT * FROM chitietdonhang WHERE MaDH = $rowDonHang[0]");
+                while ($rowSPDonHang = mysqli_fetch_array($resultSPDonHang)) {
+                    if ($rowSPDonHang[1] == $idSP) {
+                        if ($rowDonHang[10] != "Đã giao") {
+                            echo json_encode(array(
+                                'status'=>0,
+                                'message'=>"Đơn hàng của bạn vẫn đang được vận chuyển, chưa thể đánh giá!"
+                                ));
+                            break;
+                        }
+
+                        $SPReview = mysqli_query($connect, "SELECT * FROM sanpham WHERE MaSP = $rowSPDonHang[1]");
+                        $SPReview = $SPReview->fetch_array();
+                        $tongSaoCu = (float)$SPReview[14] * (int)$SPReview[15];
+                        $tongSaoMoi = ((float)$tongSaoCu + (int)$soSao) / ((int)$SPReview[15] + 1);
+                        $resultUpdateReview = mysqli_query($connect, "UPDATE sanpham SET SoDanhGia = SoDanhGia + 1, SoSao = '$tongSaoMoi' WHERE MaSP = $rowSPDonHang[1]");
+                        $resultInsertReview = mysqli_query($connect, "INSERT INTO `danhgia` (`MaSP`, `MaND`, `SoSao`, `NoiDung`, `NgayLap`) VALUES ('$idSP', '$idUser', '$soSao', '$noiDung', '$time')");
+                        echo json_encode(array(
+                            'status'=>1,
+                            'message'=>"Thêm đánh giá thành công!"
+                            ));
+                        break;
+                    }
+                }
+            }
+            break;
+        case "change_pass":
+            $idUser = $_POST['idUser'];
+            $passOld = $_POST['passOld'];
+            $passNew = $_POST['passNew'];
+            $userResult = mysqli_query($connect, "Select * from `nguoidung` WHERE (`MaND` = '$idUser' AND `MatKhau` = '" . md5($passOld) . "')");
+            if ($userResult->num_rows == 0) {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Mật khẩu cũ không đúng!"
+                    ));
+                    break;
+            } else {
+                $result = mysqli_query($connect, "UPDATE `nguoidung` SET MatKhau = '". md5($passNew) ."' WHERE (`MaND` = '$idUser' AND `MatKhau` = '" . md5($passOld) . "');");
+                echo json_encode(array(
+                    'status'=>1,
+                    'message'=>"Đổi mật khẩu thành công!"
+                    ));
+                    break;
+            }
             break;
     }
     

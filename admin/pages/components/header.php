@@ -16,7 +16,7 @@
         <div class="d-flex align-items-center">
         <a href="sign-in.php"
               class="btn btn-secondary btn-sm d-inline-flex align-items-center">
-              Sign Out
+              Đăng xuất
             </a>
         </div>
         <div class="collapse-close d-md-none">
@@ -33,10 +33,11 @@
       <ul class="nav flex-column pt-3 pt-md-0">
         <li class="nav-item">
           <a href="dashboard.php" class="nav-link d-flex align-items-center">
+            <img src="../../img/phone/logo.png" alt="" style="width: 30px; height: 30px; object-fit: contain">
           <span class="mt-1 ms-1 sidebar-text">3TN Store</span>
           </a>
         </li>
-        <li class="nav-item  active ">
+        <li <?php if($_SERVER['SCRIPT_NAME']=="/doan/admin/pages/dashboard.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>>
           <a href="dashboard.php" class="nav-link">
             <span class="sidebar-icon">
               <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -71,27 +72,27 @@
           </span>
           <div class="multi-level collapse " role="list" id="submenu-app" aria-expanded="false">
             <ul class="flex-column nav">
-              <li class="nav-item ">
+              <li  <?php if($_SERVER['SCRIPT_NAME']=="/doan/admin/pages/product.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>>
                 <a class="nav-link" href="product.php">
                   <span class="sidebar-text">Sản phẩm</span>
                 </a>
               </li>
-              <li class="nav-item ">
+              <li  <?php if($_SERVER['SCRIPT_NAME']=="/doan/admin/pages/order.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>>
                 <a class="nav-link" href="order.php">
                   <span class="sidebar-text">Đơn hàng</span>
                 </a>
               </li>
-              <li class="nav-item ">
+              <li  <?php if($_SERVER['SCRIPT_NAME']=="/doan/admin/pages/users.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>>
                 <a class="nav-link" href="users.php">
                   <span class="sidebar-text">Người dùng</span>
                 </a>
               </li>
-              <li class="nav-item ">
+              <li  <?php if($_SERVER['SCRIPT_NAME']=="/doan/admin/pages/voucher.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>>
                 <a class="nav-link" href="voucher.php">
                   <span class="sidebar-text">Khuyến mãi</span>
                 </a>
               </li>
-              <li class="nav-item ">
+              <li  <?php if($_SERVER['SCRIPT_NAME']=="/doan/admin/pages/blog.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>>
                 <a class="nav-link" href="blog.php">
                   <span class="sidebar-text">Blog</span>
                 </a>

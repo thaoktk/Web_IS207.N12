@@ -57,14 +57,16 @@ $(document).ready(function () {
 
 
     tongCheckout = Number($("#total-checkout").text())
+    shipCheckout = Number($("#not-free-ship-checkout").text())
     freeShipCheckout = Number($("#ship-checkout").text())
     orderCheckout = Number($("#order-checkout").text())
-    $("#total-cost-checkout").text(tongCheckout - freeShipCheckout - orderCheckout)
+    $("#total-cost-checkout").text(tongCheckout + shipCheckout - freeShipCheckout - orderCheckout)
 
     tong = Number($("#total-cost .cost").text())
+    shipCod = Number($("#ship-cod .cost").text())
     freeShip = Number($("#voucher-free-ship .ship").text())
     order = Number($("#voucher-order .order").text())
-    Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+    Number($("#total-cost-voucher .total").text(tong + shipCod - freeShip - order))
 
     // quantity and cost
     $(".increase").each(function () {
@@ -97,9 +99,10 @@ $(document).ready(function () {
             $("#total-cost .cost").text(totalCost)
 
             tong = Number($("#total-cost .cost").text())
+            shipCod = Number($("#ship-cod .cost").text())
             freeShip = Number($("#voucher-free-ship .ship").text())
             order = Number($("#voucher-order .order").text())
-            Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+            Number($("#total-cost-voucher .total").text(tong + shipCod - freeShip - order))
 
             $.ajax({
                 type: "POST",
@@ -138,9 +141,10 @@ $(document).ready(function () {
             $("#total-cost .cost").text(totalCost)
 
             tong = Number($("#total-cost .cost").text())
+            shipCod = Number($("#ship-cod .cost").text())
             freeShip = Number($("#voucher-free-ship .ship").text())
             order = Number($("#voucher-order .order").text())
-            Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+            Number($("#total-cost-voucher .total").text(tong + shipCod - freeShip - order))
 
             if (qty > 0) {
                 $.ajax({
@@ -169,9 +173,10 @@ $(document).ready(function () {
                 return;
             } else {
                 tong = Number($("#total-cost .cost").text())
+                shipCod = Number($("#ship-cod .cost").text())
                 freeShip = Number($("#voucher-free-ship .ship").text())
                 order = Number($("#voucher-order .order").text())
-                Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+                Number($("#total-cost-voucher .total").text(tong + shipCod - freeShip - order))
                 $.ajax({
                     type: "POST",
                     url: "templates/request.php",
@@ -204,9 +209,10 @@ $(document).ready(function () {
             idUser = $(this).data("user")
 
             tong = Number($("#total-cost .cost").text())
+            shipCod = Number($("#ship-cod .cost").text())
             freeShip = Number($("#voucher-free-ship .ship").text())
             order = Number($("#voucher-order .order").text())
-            Number($("#total-cost-voucher .total").text(tong - freeShip - order))
+            Number($("#total-cost-voucher .total").text(tong + shipCod - freeShip - order))
 
             $.ajax({
                 type: "POST",
@@ -310,7 +316,7 @@ $(document).ready(function () {
         ward = $("#ward option:selected").text()
         message = $("#message").val()
 
-        thanhTien = $("#total-cost-checkout") ? $("#total-cost-checkout").text() : $("#total-checkout").text()
+        thanhTien = $("#total-cost-checkout").text()
 
         if (name.trim() === "" || familyName.trim() === "" || phoneNumber.trim() === "" || homeNumber.trim() === "") {
             alert("Yêu cầu điền đầy đủ thông tin đơn hàng!")
@@ -331,7 +337,7 @@ $(document).ready(function () {
                 idUser: idUser,
                 hoTen: `${familyName} ${name}`,
                 sdt: phoneNumber,
-                diaChi: `${homeNumber}, ${ward} ${district} ${province}`,
+                diaChi: `${homeNumber}, ${ward}, ${district}, ${province}`,
                 ship: voucherShip,
                 giamGia: voucherOrder,
                 ghiChu: message,

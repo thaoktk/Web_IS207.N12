@@ -102,6 +102,11 @@ $(document).ready(function () {
         e.preventDefault();
         idND = parseInt($(this).data("user"))
         cmt = $(".cmt-input").val()
+
+        if (cmt.trim() == "") {
+            alert("Hãy nhập bình luận!")
+            return;
+        }
         if (idND) {
             if (cmt.trim() !== "") {
                 if ($(".cmt-input").attr("placeholder") == "Trả lời bình luận") {
@@ -174,5 +179,51 @@ $(document).ready(function () {
                 }
             }
         });
+    })
+
+    $("#review-btn").click(function (e) {
+        e.preventDefault()
+        idUser = $(this).data("user")
+        idSP = $(this).data("product")
+        noiDung = $(".content-review").val()
+        count = 0;
+
+        $(".rating").each(function () {
+            color = $(this).css("color")
+
+            if (color == "rgb(255, 165, 0)") {
+                count++
+            }
+        })
+
+        if (count == 0) {
+            alert("Hãy chọn số sao bạn muốn đánh giá!")
+            return;
+        }
+
+        if (idUser) {
+            $.ajax({
+                type: "POST",
+                url: 'templates/request.php',
+                data: {
+                    request: "insert_review",
+                    idUser: idUser,
+                    idSP: idSP,
+                    noiDung: noiDung,
+                    soSao: count,
+                },
+                success: function (data) {
+                    response = JSON.parse(data)
+                    if (response.status == 1) {
+                        alert(response.message);
+                        window.location.reload()
+                    } else {
+                        alert(response.message);
+                    }
+                }
+            });
+        } else {
+            alert("Bạn phải đăng nhập mới được đánh giá!")
+        }
     })
 })

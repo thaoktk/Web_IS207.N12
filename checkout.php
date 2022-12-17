@@ -167,8 +167,15 @@
                                         </div>
                                     </a></li>
                                     <li><a class="d-flex justify-content-between">
+                                        <span>Tiền vận chuyển</span> 
+                                        <div>
+                                            <span id="not-free-ship-checkout">50000</span>
+                                            <span>VNĐ</span> 
+                                        </div>
+                                    </a></li>
+                                    <li><a class="d-flex justify-content-between">
                                         <?php if (isset($_SESSION["free-ship"])) {?>
-                                            <span>Vận chuyển</span>
+                                            <span>Giảm giá vận chuyển</span>
                                             <?php if (isset($_SESSION["free-ship"])) {?>
                                             <div>
                                             <span id="ship-checkout"><?=$resultKMFreeShip?></span>
@@ -179,7 +186,7 @@
                                         </a></li>
                                         <li><a class="d-flex justify-content-between">
                                         <?php if (isset($_SESSION["order"])) {?>
-                                            <span>Đơn hàng</span>
+                                            <span>Giảm giá đơn hàng</span>
                                             <?php if (isset($_SESSION["order"])) {?>
                                             <div>
                                             <span id="order-checkout"><?=$resultKMOrder?></span>
@@ -190,13 +197,10 @@
                                         </a></li>
                                     <li><a class="d-flex justify-content-between">
                                         <span>Thành tiền </span>
-                                        <?php if (isset($_SESSION["free-ship"]) || isset($_SESSION["order"])) {
-                                                ?>
-                                            <div>
+                                        <div>
                                             <span id="total-cost-checkout">0</span>
                                             <span>VNĐ</span> 
                                             </div>
-                                            <?php }?>
                                     </a></li>
                                 </ul>
                                 <a 

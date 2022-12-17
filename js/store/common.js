@@ -6,21 +6,6 @@ $(document).ready(function () {
         password = $("#password").val()
     })
 
-    // active menu navbar
-    const activePage = window.location.pathname;
-    $(".menu_nav .nav-item .nav-link").each(function () {
-        if (activePage.includes($(this).attr("href"))) {
-            $(".menu_nav .nav-item.active").removeClass("active")
-            $(this).parent().addClass("active")
-        }
-    })
-
-    $(".navbar-right .nav-item a").each(function () {
-        if (activePage.includes($(this).attr("href"))) {
-            $(".menu_nav .nav-item.active").removeClass("active")
-        }
-    })
-
     $(".add-fav-btn").click(function () {
         idSP = parseInt($(this).data("product"))
         idND = parseInt($(this).data("user"))

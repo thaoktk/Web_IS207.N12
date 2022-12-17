@@ -15,7 +15,7 @@
 		.owl-nav {
 			position: absolute;
 			right: 0;
-			bottom: -150px;
+			bottom: -30px;
 
 			// @media (max-width: 1920px) {
 			// 	right: -115px;
@@ -73,10 +73,29 @@
 
 	.banner-img {
 		@media (max-width: 991px) {
-			display: none;
+			// display: none;
+			display: flex;
+			justify-content: center;
+			img {
+				margin-top: 0 !important;
+				width: 400px !important;
+				height: 400px !important;
+			}
+		}
+
+		@media (max-width: 768px) {
+			// display: none;
+			display: flex;
+			justify-content: center;
+			img {
+				margin-top: 0 !important;
+				width: 250px !important;
+				height: 250px !important;
+			}
 		}
 
 		img {
+			margin-top: 40px;
 			width: 600px;
 			height: 600px;
 			object-fit: contain;

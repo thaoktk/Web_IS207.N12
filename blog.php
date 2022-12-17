@@ -107,7 +107,6 @@
                                     <ul class='blog_meta list'>
                                         <li><a>$row[5]<i class='lnr lnr-user'></i></a></li>
                                         <li><a class='d-flex align-items-center'>$row[6]<i class='lnr lnr-calendar-full'></i></a></li>
-                                        <li><a>1.2M Views<i class='lnr lnr-eye'></i></a></li>
                                         <li><a>$rowsCmt bình luận<i class='lnr lnr-bubble'></i></a></li>
                                     </ul>
                                 </div>
@@ -168,7 +167,7 @@
                         </aside>
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/09/08/thumbs/800x531/142774.jpg" width="100" height="100" style="object-fit:cover;" alt="">
-                            <h4>Tươi Phạm</h4>
+                            <h4>Phạm Thị Tươi</h4>
                             <p>Admin</p>
                             <div class="social_icon">
                                 <a href="#"><i class="fa fa-facebook"></i></a>

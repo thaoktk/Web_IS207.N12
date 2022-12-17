@@ -176,18 +176,18 @@
                                     </td>
                                     <td>
                                         <h5>Tổng tiền</h5>
+                                        <h5 class="mt-4">Tiền vận chuyển</h5>
                                         <?php if (isset($_SESSION["free-ship"])) {?>
                                         <h5 class="mt-4">Giảm giá vận chuyển</h5>
                                         <?php }?>
                                         <?php if (isset($_SESSION["order"])) {?>
                                         <h5 class="mt-4">Giảm giá đơn hàng</h5>
                                         <?php }?>
-                                        <?php if (isset($_SESSION["free-ship"]) || isset($_SESSION["order"])) {?>
                                         <h5 class="mt-4">Thành tiền</h5>
-                                        <?php }?>
                                     </td>
                                     <td>
                                         <h5 id="total-cost" style="display: flex; gap: 3px"><span class="cost"><?=$total?></span> VNĐ</h5>
+                                        <h5 class="mt-4" id="ship-cod" style="display: flex; gap: 3px"><span class="cost">50000</span> VNĐ</h5>
                                         <?php if (isset($_SESSION["free-ship"])) {
                                             $resultKMFreeShip = mysqli_query($connect, "SELECT GiaTriKM from khuyenmai WHERE CodeKM = '".$_SESSION["free-ship"]."'");
                                             $resultKMFreeShip = $resultKMFreeShip->fetch_column();
@@ -200,10 +200,7 @@
                                             ?>
                                         <h5 class="mt-4" style="display: flex; gap: 3px" id="voucher-order"><span class="order"><?=$resultKMOrder?></span> VNĐ</h5>
                                         <?php }?>
-                                        <?php if (isset($_SESSION["free-ship"]) || isset($_SESSION["order"])) {
-                                            ?>
                                         <h5 class="mt-4" style="display: flex; gap: 3px" id="total-cost-voucher"><span class="total">0</span> VNĐ</h5>
-                                        <?php }?>
                                     </td>
                                 </tr>
                                 <tr class="out_button_area">

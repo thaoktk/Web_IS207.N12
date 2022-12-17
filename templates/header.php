@@ -14,14 +14,14 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
-                            <li class="nav-item active"><a class="nav-link" href="index.php">Trang chủ</a></li>
-                            <li class="nav-item">
+                            <li <?php if($_SERVER['SCRIPT_NAME']=="/doan/index.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>><a class="nav-link" href="index.php">Trang chủ</a></li>
+                            <li <?php if($_SERVER['SCRIPT_NAME']=="/doan/category.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>>
                                 <a href="category.php" class="nav-link">Shop</a>
                             </li>
-                            <li class="nav-item">
+                            <li <?php if($_SERVER['SCRIPT_NAME']=="/doan/blog.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>>
                                 <a href="blog.php" class="nav-link">Tin tức</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.php">Liên hệ</a></li>
+                            <li <?php if($_SERVER['SCRIPT_NAME']=="/doan/contact.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>><a class="nav-link" href="contact.php">Liên hệ</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right d-flex flex-row align-items-center justify-content-between">
                             <li class="nav-item">
@@ -30,11 +30,13 @@
                             <li class="nav-item"><a href="cart.php" class=" nav-cart"><span class="ti-bag"></span>
                                     <div class="cart-qty">
                                     <?php 
-                                    // $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
-                                    $resultQuantity = mysqli_query($connect, "SELECT Count(*) as count from giohang WHERE MaND = $idUser");
-                                    $resultQuantity = mysqli_fetch_assoc($resultQuantity);
-
-                                    echo $resultQuantity['count'];
+                                    $count = 0;
+                                    if (isset($idUser) || !empty($idUser)) {
+                                        $resultQuantity = mysqli_query($connect, "SELECT Count(*) as count from giohang WHERE MaND = $idUser");
+                                        $resultQuantity = mysqli_fetch_assoc($resultQuantity);
+                                        $count = $resultQuantity['count'];
+                                    }
+                                    echo $count;
                                     ?>
                                     </div>
                                 </a></li>

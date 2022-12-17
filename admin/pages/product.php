@@ -125,7 +125,7 @@
                                 <th class="border-0 rounded-start">Mã SP</th>
                                 <th class="border-0">Tên loại SP</th>
                                 <th class="border-0">Ảnh</th>
-                                <th class="border-0">Tên SP</th>
+                                <th class="border-0">Tên sản phẩm</th>
                                 <th class="border-0">Tên Series</th>
                                 <th class="border-0">Giá tiền</th>
                                 <th class="border-0">SL</th>
@@ -177,7 +177,7 @@
                                             <div class='modal-body'>
                                             <form id="product-edit-<?=$row[0]?>" class="form-edit" data-product="<?=$row[0]?>">
                                                     <div class='mb-4'>
-                                                        <label class="d-block">Tên loại SP</label>
+                                                        <label class="d-block">Tên loại sản phẩm</label>
                                                         <select name="type-edit" id="">
                                                             <?php 
                                                             while ($rowTenLSP = mysqli_fetch_array($list_TenLSP)) {
@@ -188,7 +188,7 @@
                                                         </select>
                                                     </div>
                                                     <div class='mb-4'>
-                                                        <label>Tên SP</label>
+                                                        <label>Tên sản phẩm</label>
                                                         <input type='text' value="<?=$row[2]?>" class='form-control' name='name-edit' required>
                                                     </div>
                                                     <div class='mb-4'>
@@ -311,7 +311,7 @@
                 <div class='modal-body'>
                 <form class="form-create">
                         <div class='mb-4'>
-                            <label class="d-block">Loại SP</label>
+                            <label class="d-block">Loại sản phẩm</label>
                             <select name="type-create" id="">
                             <?php 
                             while ($rowTenLSp = mysqli_fetch_array($list_TenLSP)) {
@@ -321,7 +321,7 @@
                             </select>
                         </div>
                         <div class='mb-4'>
-                            <label>Tên SP</label>
+                            <label>Tên sản phẩm</label>
                             <input type='text' class='form-control' name='name-create' required>
                         </div>
                         <div class='mb-4'>

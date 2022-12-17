@@ -195,7 +195,7 @@
 						<div class="col-lg-6">
 							<div class="review_box">
 								<h4>Để lại bình luận</h4>
-								<form class="row contact_form" method="POST" >
+								<form class="row contact_form">
 									<div class="col-md-12">
 										<div class="form-group">
 											<textarea class="form-control cmt-input" name="message-comment" required rows="1" placeholder="Bình luận"></textarea>
@@ -267,14 +267,14 @@
 									</div>
 									<p id="rating-text"></p>
 								</div>
-								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+								<form class="row contact_form">
 									<div class="col-md-12">
 										<div class="form-group">
-											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Đánh giá" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Đánh giá'"></textarea></textarea>
+											<textarea required class="form-control content-review" rows="1" placeholder="Đánh giá" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Đánh giá'"></textarea></textarea>
 										</div>
 									</div>
 									<div class="col-md-12 text-right">
-										<button type="submit" value="submit" class="primary-btn">Gửi ngay</button>
+										<button type="submit" value="submit" class="primary-btn" id="review-btn" data-user='<?=$idUser?>' data-product='<?=$idSP?>'>Gửi ngay</button>
 									</div>
 								</form>
 							</div>

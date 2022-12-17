@@ -179,6 +179,10 @@ include("templates/header.php");
 					</table>
 				</div>
 			</div>
+
+			<div class="mt-5 checkout_btn_inner d-flex align-items-center justify-content-center">
+				<a class="gray_btn btn" href="index.php">Quay về trang chủ</a>
+			</div>
 		</div>
 		<?php } else {?>
 			<div>

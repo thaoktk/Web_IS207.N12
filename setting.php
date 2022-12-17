@@ -31,7 +31,10 @@
 </head>
 <script>
 function hideMessage(id) {
-	document.getElementById(id).style.display = "none";
+	element = document.getElementById(id);
+	if (element) {
+		element.style.display = "none";
+	}
 };
  setTimeout(() => {
     hideMessage("success-mes")
@@ -46,34 +49,11 @@ function hideMessage(id) {
 	include "templates/connect.php";
 	include "templates/product.php";
 	session_start(); 
-	$idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
-
+	$user = $_SESSION['current-user'];
+	$idUser = $user['MaND'];
+	$favorites = mysqli_query($connect, "SELECT * FROM yeuthich WHERE MaND = '". $user['MaND'] ."'");
+	$orders = mysqli_query($connect, "SELECT * FROM donhang WHERE MaND = '". $user['MaND'] ."'");
 ?>
-
-    <?php
-	if (isset($_POST['submit']) && $_POST['submit'] == 'Đổi mật khẩu') {
-
-		try {
-            $userResult = mysqli_query($connect, "Select * from `nguoidung` WHERE (`MaND` = '" . $_POST['id'] . "' AND `MatKhau` = '" . md5($_POST['password-old']) . "')");
-            if ($userResult->num_rows > 0) {
-                $result = mysqli_query($connect, "UPDATE `nguoidung` SET MatKhau = '". md5($_POST['password-new']) ."' WHERE (`MaND` = '" . $_POST['id'] . "' AND `MatKhau` = '" . md5($_POST['password-old']) . "');");
-                echo "<div id='success-mes' class='mt-5 w-100'>
-                <h1 class='text-center'>Thông báo</h1>
-                <h4 class='mt-4 text-center text-success'>Đổi mật khẩu thành công</h4>
-                </div>";
-            } else {
-                echo "<div id='error-mes' class='mt-5 w-100'>
-                <h1 class='text-center'>Thông báo</h1>
-                <h4 class='mt-4 text-center text-danger'>Mật khẩu cũ không đúng</h4>
-                </div>";
-             }
-        } catch (exception $e) {
-            echo "<div id='error-mes' class='mt-5 w-100'>
-            <h1 class='text-center'>Thông báo</h1>
-            <h4 class='mt-4 text-center'>$e</h4>
-            </div>";
-        }
-	} ?>
 
     <?php
     if (isset($_GET['action']) && $_GET['action'] == 'logout') {
@@ -84,10 +64,10 @@ function hideMessage(id) {
 		header("Location: login.php");
         
     } 
-	$user = $_SESSION['current-user'];
-	$favorites = mysqli_query($connect, "SELECT * FROM yeuthich WHERE MaND = '". $user['MaND'] ."'");
+
     ?>
-	<?php include("./templates/header.php"); ?>
+	<?php 
+	include("templates/header.php"); ?>
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
@@ -121,21 +101,23 @@ function hideMessage(id) {
 				<li class="nav-item">
 					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Yêu thích</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="profile" aria-selected="false">Đơn hàng</a>
+				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 					<?php if ($user['TaiKhoan'] !== NULL) { ?>
-					<form class="row login_form d-flex flex-column align-items-center" action="" method="post">
-                        <input type="hidden" name="id" value="<?=$user['MaND']?>">
+					<form class="row login_form d-flex flex-column align-items-center" id="form-change-pass" data-user='<?=$idUser?>'>
+                        
 						<div class="col-md-6 form-group">
-							<input type="password" required class="form-control" name="password-old" placeholder="Mật khẩu cũ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu cũ'">
+							<input type="password" required class="form-control pass-old" name="password-old" placeholder="Mật khẩu cũ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu cũ'">
 						</div>
 						<div class="col-md-6 mt-4 form-group">
-							<input type="password" required class="form-control" name="password-new" placeholder="Mật khẩu mới" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu mới'">
+							<input type="password" required class="form-control pass-new" name="password-new" placeholder="Mật khẩu mới" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu mới'">
 						</div>
 						<div class="mt-4 col-md-16 form-group">
 							<input type="submit" value="Đổi mật khẩu" name="submit" class="primary-btn"/>
-							<a href="#" class="text-center">Quên mật khẩu?</a>
 						</div>
 					</form>
 					<hr>
@@ -158,25 +140,21 @@ function hideMessage(id) {
 							$product = mysqli_query($connect, "SELECT * FROM sanpham WHERE MaSP = '$rowFav[0]'");
 							
 							while ($rowProduct = $product->fetch_row()) {
-								$rating = addStar($rowProduct[13], $rowProduct[12]);
+								$rating = addStar($rowProduct[15], $rowProduct[14]);
 								echo "<div class='col-lg-4 col-md-6' title='$rowProduct[2]'>
 										<div class='single-product'>
-											<img class='img-fluid' src='". $rowProduct[8] ."' alt=''>
+											<img class='img-fluid' src='". $rowProduct[10] ."' alt=''>
 											<div class='product-details'>
 												<h6 class='title'>". $rowProduct[2] ."</h6>
 												<div class='price'>
-													<h6>". number_format(($rowProduct[6])) ." VNĐ</h6>
-													<h6 class='l-through'>". number_format(($rowProduct[5])) ." VNĐ</h6>
+													<h6>". number_format(($rowProduct[8])) ." VNĐ</h6>
+													<h6 class='l-through'>". number_format(($rowProduct[7])) ." VNĐ</h6>
 												</div>
 												<div class='mt-2 d-flex align-items-center'>
 													<div>". $rating ."</div>
-													<span class='ml-2'>". $rowProduct[13] ." đánh giá</span>
+													<span class='ml-2'>". $rowProduct[15] ." đánh giá</span>
 												</div>
 												<div class='prd-bottom'>
-													<a href='cart.php' class='social-info'>
-														<span class='ti-bag'></span>
-														<p class='hover-text'>Mua ngay</p>
-													</a>
 													<a class='social-info delete-fav' data-product='$rowProduct[0]' data-user='". $user['MaND'] ."'>
 														<span class='fa fa-trash'></span>
 														<p class='hover-text'>Xóa</p>
@@ -192,6 +170,81 @@ function hideMessage(id) {
 								}
 						}
 						?>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">
+					<div class="table-responsive">
+						<?php 
+						while($rowOrder=$orders->fetch_row()) {
+							$detailOrder = mysqli_query($connect, "SELECT * FROM chitietdonhang WHERE MaDH = '$rowOrder[0]'");
+							$tr = "";
+							while ($rowDetail = $detailOrder->fetch_row()) {
+								$detailSP = mysqli_query($connect, "SELECT * FROM sanpham WHERE MaSP = '$rowDetail[1]'");
+								$detailSP = $detailSP->fetch_array();
+								$tr .= "
+								<tr>
+									<td>
+										<a href='single-product.php?idSP=$detailSP[0]'>
+											<img class='img-fluid' src='$detailSP[10]' style='width: 100px; height: 50px; object-fit: contain; background: white; padding: 3px'/>
+										</a>
+									</td>
+									<td>
+										<a href='single-product.php?idSP=$detailSP[0]' style='color: black'>
+											<p>$detailSP[2]</p>
+										</a>
+									</td>
+									<td>
+										<h5>x $rowDetail[3]</h5>
+									</td>
+									<td>
+										<p>". number_format($rowDetail[2]) ." VNĐ</p>
+									</td>
+								</tr>
+								";
+							}
+							echo "
+							<div style='background: #eee; padding: 10px; margin-bottom: 20px'>
+								<div class='row order_d_inner' style='margin: 0'>
+									<div class='col-lg-4'>
+										<div class='details_item'>
+											<ul class='list'>
+												<li><span class='mr-3'>Mã đơn: $rowOrder[0]</span></li>
+												<li><span class='mr-3'>Ngày đặt: $rowOrder[2]</span></li>
+												<li><span>Giảm giá vận chuyển: $rowOrder[6]</span> VNĐ</li>
+												<li><span>Giảm giá đơn hàng: $rowOrder[7]</span> VNĐ</li>
+												<li><span>Tổng tiền: ". number_format($rowOrder[9]) ."</span> VNĐ</li>
+											</ul>
+										</div>
+									</div>
+									<div class='col-lg-4'>
+										<div class='details_item'>
+											<ul class='list'>
+												<li><span class='mr-3'>Người đặt: $rowOrder[3]</span></li>
+												<li><span class='mr-3'>Số điện thoại: $rowOrder[4]</span></li>
+												<li><span>Địa chỉ: $rowOrder[5]</span></li>
+												<li><span>Tình trạng: $rowOrder[10]</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class='table-responsive'>
+									<table class='table'>
+											<thead>
+												<tr>
+													<th scope='col' class='text-center'>Hình ảnh</th>
+													<th scope='col' class='text-center'>Sản phẩm</th>
+													<th scope='col' class='text-center'>Số lượng</th>
+													<th scope='col' class='text-center'>Giá tiền</th>
+												</tr>
+											</thead>
+										<tbody>
+											$tr
+										</tbody>
+									</table>
+								</div>
+							</div>
+							";
+						}?>
 					</div>
 				</div>
 			</div>
@@ -254,6 +307,33 @@ function hideMessage(id) {
 					},
 					error: function(e) {
 						alert("Đã xảy ra lỗi!")
+					}
+				})
+			})
+
+			$("#form-change-pass").submit(function(e) {
+				e.preventDefault()
+				idUser = $(this).data("user")
+				passOld = $(".pass-old").val()
+				passNew = $(".pass-new").val()
+
+				$.ajax({
+					type: "POST",
+					url: "templates/request.php",
+					dataType: "json",
+					data: {
+						request: "change_pass",
+						idUser: idUser,
+						passOld: passOld,
+						passNew: passNew,
+					},
+					success: function(data) {
+						if (data.status == 1) {
+							alert(data.message);
+							window.location.reload()
+						} else {
+							alert(data.message);
+						}
 					}
 				})
 			})
