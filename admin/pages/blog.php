@@ -360,8 +360,6 @@
                         success: function(data) {
                             $(".detail-blog").html(data)
                             $('#modal-detail-blog').modal('show')
-                        },
-                        error: function (e) {
                         }
                     })
                 })
@@ -409,11 +407,20 @@
                                 nguoiTao: nguoiTao,
                             },
                             success: function () {
-                                alert("Cập nhật tin tức thành công!")
-                                window.location.reload();
+                                Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công',
+                                text: 'Cập nhật tin tức thành công!',
+                                }).then(function() {
+                                window.location.reload()
+                            })
                             },
                             error: function (e) {
-                                alert("Đã xảy ra lỗi!")
+                                Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                             }
                     })
                 })
@@ -440,11 +447,20 @@
                                 nguoiTao: nguoiTao,
                             },
                             success: function () {
-                                alert("Tạo mới tin tức thành công!")
-                                window.location.reload();
+                                Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công',
+                                text: 'Tạo mới tin tức thành công!',
+                                }).then(function() {
+                                window.location.reload()
+                            })
                             },
                             error: function (e) {
-                                alert("Đã xảy ra lỗi!")
+                                Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                             }
                     })
             })
@@ -461,12 +477,20 @@
                             idBlog: idBlog,
                         },
                         success: function () {
-                            alert("Xóa tin tức thành công!")
-                            window.location.reload();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công',
+                                text: 'Xóa tin tức thành công!',
+                                }).then(function() {
+                                window.location.reload()
+                            })
                         },
                         error: function (e) {
-                            alert("Đã xảy ra lỗi!")
-                            
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                         }
                     })
             })

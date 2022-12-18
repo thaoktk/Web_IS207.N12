@@ -49,8 +49,9 @@
     $rowNextPost = $resultNextPost->fetch_row();
 
     $comments = mysqli_query($connect, "SELECT * FROM binhluan WHERE MaTin = $idBlog order by NgayLap desc");
-    $time = date_create()->format('Y-m-d H:i:s');
-    $resultsPopular = mysqli_query($connect,"SELECT * FROM tintuc WHERE NgayDang <= '$time' and MaTin != $idBlog limit 4");
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $time = date('Y-m-d H:i:s', time());
+    $resultsPopular = mysqli_query($connect,"SELECT * FROM tintuc WHERE MaTin != $idBlog and NguoiTao = 'Phạm Thị Tươi' order by NgayDang desc limit 4");
     $resultsComment = mysqli_query($connect,"SELECT * FROM binhluan WHERE MaTin = $idBlog");
     $rowsCmt = $resultsComment->num_rows;
     ?>

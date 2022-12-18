@@ -313,11 +313,20 @@
                                     trangThai: trangThai,
                                 },
                                 success: function () {
-                                    alert("Cập nhật thông tin đơn hàng thành công!")
-                                    window.location.reload();
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Thành công',
+                                        text: 'Cập nhật đơn hàng thành công!',
+                                        }).then(function() {
+                                        window.location.reload()
+                                    })
                                 },
                                 error: function (e) {
-                                    alert("Đã xảy ra lỗi!")
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Lỗi',
+                                        text: 'Đã xảy ra lỗi!',
+                                        })
                                 }
                         })
                     })

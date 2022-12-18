@@ -493,7 +493,20 @@
                 idSP = $(this).data("product")
 
                 if (Number(giaGoc) < Number(giaTien)) {
-                    alert("Giá gốc không được nhỏ hơn giá tiền của sản phẩm!")
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Giá gốc không được nhỏ hơn giá tiền của sản phẩm!',
+                        })
+                    return;
+                }
+
+                if (Number(giaGoc) <= 0 || Number(giaTien) <= 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Giá phải lớn hơn hoặc bằng 0!',
+                        })
                     return;
                 }
                 $.ajax({
@@ -520,11 +533,20 @@
                             rom: rom,
                         },
                         success: function () {
-                            alert("Cập nhật sản phẩm thành công!")
-                            window.location.reload();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công',
+                                text: 'Cập nhật sản phẩm thành công!',
+                                }).then(function() {
+                                window.location.reload()
+                            })
                         },
                         error: function (e) {
-                            alert("Đã xảy ra lỗi!")
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                         }
                 })
             })
@@ -545,6 +567,24 @@
             hot = $(`select[name="hot-create"]`).val()
             ram = $(`select[name="ram-create"]`).val()
             rom = $(`select[name="rom-create"]`).val()
+
+            if (Number(giaGoc) < Number(giaTien)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Giá gốc không được nhỏ hơn giá tiền của sản phẩm!',
+                        })
+                    return;
+                }
+
+            if (Number(giaGoc) <= 0 || Number(giaTien) <= 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Giá phải lớn hơn hoặc bằng 0!',
+                    })
+                return;
+            }
             $.ajax({
                     type: "POST",
                     url: "templates/request.php",
@@ -566,11 +606,20 @@
                         rom: rom,
                     },
                     success: function () {
-                        alert("Tạo mới sản phẩm thành công!")
-                        window.location.reload();
+                        Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công',
+                                text: 'Tạo mới sản phẩm thành công!',
+                                }).then(function() {
+                                window.location.reload()
+                            })
                     },
                     error: function (e) {
-                        alert("Đã xảy ra lỗi!")
+                        Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                     }
             })
         })
@@ -587,12 +636,20 @@
                             idSP: idSP,
                         },
                         success: function () {
-                            alert("Xóa sản phẩm thành công!")
-                            window.location.reload();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công',
+                                text: 'Xóa sản phẩm thành công!',
+                                }).then(function() {
+                                window.location.reload()
+                            })
                         },
                         error: function (e) {
-                            alert("Đã xảy ra lỗi!")
-                            
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                         }
                     })
             })

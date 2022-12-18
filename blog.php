@@ -67,10 +67,9 @@
     $totalRows = $totalRecords->num_rows;
 	$totalPages = ceil($totalRows / $itemsPerPage);
 
-    $time = date_create()->format('Y-m-d H:i:s');
-    $resultsPopular = mysqli_query($connect,"SELECT * FROM tintuc WHERE NgayDang <= '$time' limit 4");
-
-    // $connect->close();
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $time = date('Y-m-d H:i:s', time());
+    $resultsPopular = mysqli_query($connect,"SELECT * FROM tintuc WHERE NguoiTao = 'Phạm Thị Tươi' order by NgayDang desc limit 4");
     ?>
 
     <!-- Start Banner Area -->
@@ -193,10 +192,6 @@
                                     </div>";
                              }
                             ?>
-                            <div class="br"></div>
-                        </aside>
-                        <aside class="single_sidebar_widget ads_widget">
-                            <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""></a>
                         </aside>
                     </div>
                 </div>
@@ -205,7 +200,9 @@
     </section>
     <!--================Blog Area =================-->
 
-    <?php include("./templates/footer.php")?>
+    <?php
+    $connect->close();
+    include("./templates/footer.php")?>
 
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>

@@ -74,19 +74,7 @@
 	?>
 	<?php
 	include "./templates/connect.php";
-	
-	if (isset($_POST['submit']) && $_POST['submit'] == 'Đăng nhập') {
-		$result = mysqli_query($connect, "SELECT MaND, Ho, Ten, SDT, Email, TaiKhoan, MaQuyen from `nguoidung` WHERE TaiKhoan = '". $_POST['username'] ."' and MatKhau = MD5('". $_POST['password'] ."');");
-		$user = mysqli_fetch_assoc($result);
-		$_SESSION['current-user'] = $user;
-
-		if ($result->num_rows == 0) {
-			echo "<div class='mt-5 w-100' id='login-fail'>
-			<h1 class='text-center'>Thông báo</h1>
-			<h4 class='mt-4 text-center'>Thông tin đăng nhập không chính xác!</h4>
-		</div>";
-			}
-	} ?>
+	 ?>
 		<?php if (empty($_SESSION['current-user'])) { ?>
 				<!-- Start Banner Area -->
 
@@ -107,7 +95,7 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Đăng nhập vào trang web</h3>
-						<form class="row login_form" action="" method="post" id="login">
+						<form class="row login_form" id="login">
 							<div class="col-md-12 form-group">
 								<input type="text" required class="form-control" id="username" name="username" placeholder="Tên đăng nhập" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tên đăng nhập'">
 							</div>
@@ -116,7 +104,6 @@
 							</div>
 							<div class="mt-4 col-md-12 form-group">
 								<input type="submit" value="Đăng nhập" name="submit" class="primary-btn"/>
-								<a href="#">Quên mật khẩu?</a>
 							</div>
 						</form>
 						<hr>
@@ -145,8 +132,8 @@
 	}?>
 	<!--================End Login Box Area =================-->
 
-
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/jquery.ajaxchimp.min.js"></script>
@@ -160,12 +147,31 @@
 	<script src="js/main.js"></script>
 	<script>
 		$(document).ready(function() {
-			loginFail = $("#login-fail")
-			if (loginFail) {
-				setTimeout(() => {
-					loginFail.remove()
-				}, 5000)
-			}
+			$("#login").submit(function(e) {
+				e.preventDefault()
+
+				username = $("#username").val()
+				password = $("#password").val()
+
+				$.ajax({
+                        type: "POST",
+                        url: "templates/request.php",
+                        dataType: "json",
+                        data: {
+                            request: "login",
+                            username: username,
+                            password: password,
+                        },
+                        success: function (data) {
+							if (data.status == 1) {
+								alert(data.message);
+								window.location.reload()
+							} else {
+								alert(data.message);
+							}
+                        }
+                    })
+			})
 		})
 	</script>
 </body>

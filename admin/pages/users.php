@@ -166,7 +166,7 @@
                                     ?>
                                     <a href='#edit<?=$row[0]?>' data-bs-toggle='modal'><button class='btn btn-sm btn-primary' type='button'>Sửa</button></a>
                                     <a data-user="<?=$row[0]?>" type="button" class='btn btn-sm btn-primary btn-delete'>Xóa</a>
-                                    <div class='modal fade' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
+                                    <div class='modal fade modal-edit' id='edit<?=$row[0]?>' tabindex='-1' role='dialog' aria-labelledby='modal-default' aria-hidden='true'>
                                     <div class='modal-dialog modal-dialog-centered' role='document'>
                                         <div class='modal-content'>
                                             <div class='modal-header'>
@@ -369,6 +369,14 @@
     <script src="../assets/js/volt.js"></script>
 <script>
     $(document).ready(function() {
+        $(".modal-edit").on('hidden.bs.modal', function () {
+            $(this).find("form").trigger("reset");
+        });
+
+        $(".modal-create").on('hidden.bs.modal', function () {
+            $(this).find("form").trigger("reset");
+        });
+
         $(".form-edit").each(function() {
                 $(this).submit(function(e) {
                     e.preventDefault()
@@ -400,11 +408,20 @@
                                 trangThai: trangThai
                             },
                             success: function () {
-                                alert("Cập nhật thông tin người dùng thành công!")
-                                window.location.reload();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Thành công',
+                                    text: 'Cập nhật thông tin người dùng thành công!',
+                                    }).then(function() {
+                                    window.location.reload()
+                                })
                             },
                             error: function (e) {
-                                alert("Đã xảy ra lỗi!")
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Lỗi',
+                                    text: 'Đã xảy ra lỗi!',
+                                    })
                             }
                     })
                 })
@@ -437,11 +454,20 @@
                                 trangThai: trangThai
                             },
                             success: function () {
-                                alert("Tạo mới người dùng thành công!")
-                                window.location.reload();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Thành công',
+                                    text: 'Tạo mới người dùng thành công!',
+                                    }).then(function() {
+                                    window.location.reload()
+                                })
                             },
                             error: function (e) {
-                                alert("Đã xảy ra lỗi!")
+                                Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                             }
                     })
             })
@@ -458,11 +484,20 @@
                                 idUser: idUser,
                             },
                             success: function () {
-                                alert("Xóa người dùng thành công!")
-                                window.location.reload();
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Thành công',
+                                    text: 'Xóa người dùng thành công!',
+                                    }).then(function() {
+                                    window.location.reload()
+                                })
                             },
                             error: function (e) {
-                                alert("Đã xảy ra lỗi!")
+                                Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                             }
                         })
                 })

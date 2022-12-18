@@ -235,6 +235,26 @@
                     break;
             }
             break;
+        case "login":
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $result = mysqli_query($connect, "SELECT MaND, Ho, Ten, SDT, Email, TaiKhoan, MaQuyen from `nguoidung` WHERE TaiKhoan = '". $_POST['username'] ."' and MatKhau = MD5('". $_POST['password'] ."');");
+            $user = mysqli_fetch_assoc($result);
+            $_SESSION['current-user'] = $user;
+            if ($result->num_rows == 0) {
+                echo json_encode(array(
+                    'status'=>0,
+                    'message'=>"Thông tin đăng nhập không chính xác!"
+                    ));
+                    break;
+            } else {
+                echo json_encode(array(
+                    'status'=>1,
+                    'message'=>"Đăng nhập thành công!"
+                    ));
+                    break;
+            }
+            break;
     }
     
     function add_voucher_freeShip($code) {

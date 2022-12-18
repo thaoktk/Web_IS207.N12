@@ -173,6 +173,11 @@ function hideMessage(id) {
 					</div>
 				</div>
 				<div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">
+					<?php
+						if ($orders->num_rows == 0) {
+							echo "<div class='text-center'>Bạn chưa có đơn hàng nào!</div>";
+						}
+					?>
 					<div class="table-responsive">
 						<?php 
 						while($rowOrder=$orders->fetch_row()) {

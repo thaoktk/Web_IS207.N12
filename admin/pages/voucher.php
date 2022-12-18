@@ -368,7 +368,20 @@
 
                 if (loaiKM == 1) {
                     if (Number(giaTri) > 50000) {
-                        alert("Giá trị của khuyến mãi vận chuyển không được lớn hơn 50,000 đồng!")
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: 'Giá trị của khuyến mãi vận chuyển không được lớn hơn 50,000 đồng!',
+                            })
+                        return;
+                    }
+                } else {
+                    if (Number(giaTri) > 500000) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: 'Giá trị của khuyến mãi đơn hàng không được lớn hơn 500,000 đồng!',
+                            })
                         return;
                     }
                 }
@@ -385,11 +398,20 @@
                             sluong: sluong
                         },
                         success: function () {
-                            alert("Cập nhật khuyến mãi thành công!")
-                            window.location.reload();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công',
+                                text: 'Cập nhật khuyến mãi thành công!',
+                                }).then(function() {
+                                window.location.reload()
+                            })
                         },
                         error: function (e) {
-                            alert("Đã xảy ra lỗi!")
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                         }
                     })
             })
@@ -404,12 +426,20 @@
 
             if (loaiKM == 1) {
                 if (Number(giaTri) > 50000) {
-                    alert("Giá trị của khuyến mãi vận chuyển không được lớn hơn 50,000 đồng!")
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Giá trị của khuyến mãi vận chuyển không được lớn hơn 50,000 đồng!',
+                        })
                     return;
                 }
             } else {
                 if (Number(giaTri) > 500000) {
-                    alert("Giá trị của khuyến mãi đơn hàng không được lớn hơn 500,000 đồng!")
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Giá trị của khuyến mãi đơn hàng không được lớn hơn 500,000 đồng!',
+                        })
                     return;
                 }
             }
@@ -426,11 +456,20 @@
                             sluong: sluong
                         },
                         success: function () {
-                            alert("Tạo khuyến mãi mới thành công!")
-                            window.location.reload();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công',
+                                text: 'Tạo khuyến mãi mới thành công!',
+                                }).then(function() {
+                                window.location.reload()
+                            })
                         },
                         error: function (e) {
-                            alert("Đã xảy ra lỗi!")
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                         }
                     })
         })
@@ -447,12 +486,20 @@
                             idKM: idKM,
                         },
                         success: function () {
-                            alert("Xóa khuyến mãi thành công!")
-                            window.location.reload();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công',
+                                text: 'Xóa khuyến mãi thành công!',
+                                }).then(function() {
+                                window.location.reload()
+                            })
                         },
                         error: function (e) {
-                            alert("Đã xảy ra lỗi!")
-                            
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Đã xảy ra lỗi!',
+                                })
                         }
                     })
             })

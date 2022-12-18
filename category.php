@@ -586,7 +586,6 @@ $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] :
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/store/common.js"></script>
-	<script src="js/store/explore.js"></script>
 </body>
 
 </html>
