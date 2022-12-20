@@ -501,6 +501,15 @@
                     return;
                 }
 
+                if (Number(sluong) < 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Só lượng không được nhỏ hơn 0!',
+                        })
+                    return;
+                }
+
                 if (Number(giaGoc) <= 0 || Number(giaTien) <= 0) {
                     Swal.fire({
                         icon: 'error',
@@ -576,6 +585,15 @@
                         })
                     return;
                 }
+
+            if (Number(sluong) < 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Só lượng không được nhỏ hơn 0!',
+                    })
+                return;
+            }
 
             if (Number(giaGoc) <= 0 || Number(giaTien) <= 0) {
                 Swal.fire({
