@@ -76,7 +76,7 @@ include("templates/header.php");
 							<li><span class="mr-3">Mã đơn: </span><?=$resultOrder[0]?></li>
 							<li><span class="mr-3">Ngày đặt: </span><?=$resultOrder[2]?></li>
 							<li><span class="mr-3">Tổng tiền: </span><?=number_format($resultOrder[9])?> VNĐ</li>
-							<li><span class="mr-3">Thanh toán: </span> Trực tiếp</li>
+							<li><span class="mr-3">Tiền vận chuyển: </span> 50,000 VNĐ</li>
 						</ul>
 					</div>
 				</div>
@@ -87,6 +87,7 @@ include("templates/header.php");
 							<li><span class="mr-3">Người nhận: </span><?=$resultOrder[3]?></li>
 							<li><span class="mr-3">Số điện thoại: </span><?=$resultOrder[4]?></li>
 							<li><span class="mr-3">Địa chỉ: </span><?=$resultOrder[5]?></li>
+							<li><span class="mr-3">Thanh toán: </span> Trực tiếp</li>
 						</ul>
 					</div>
 				</div>
