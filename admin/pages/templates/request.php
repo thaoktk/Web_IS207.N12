@@ -108,8 +108,7 @@
             $taiKhoan = $_POST['taiKhoan'];
             $matKhau = $_POST['matKhau'];
             $maQuyen = $_POST['maQuyen'];
-            $trangThai = $_POST['trangThai'];
-            $result = mysqli_query($connect,"UPDATE nguoidung SET Ho = '$ho', Ten = '$ten', SDT = '$sdt', Email = '$email', TaiKhoan = '$taiKhoan', MatKhau = '". md5($matKhau) ."', MaQuyen = $maQuyen, TrangThai = '$trangThai' WHERE MaND = $idUser");
+            $result = mysqli_query($connect,"UPDATE nguoidung SET Ho = '$ho', Ten = '$ten', SDT = '$sdt', Email = '$email', TaiKhoan = '$taiKhoan', MatKhau = '". md5($matKhau) ."', MaQuyen = $maQuyen WHERE MaND = $idUser");
             die (json_encode($result));
             break;
         case "insert_user":
@@ -120,8 +119,7 @@
             $taiKhoan = $_POST['taiKhoan'];
             $matKhau = $_POST['matKhau'];
             $maQuyen = $_POST['maQuyen'];
-            $trangThai = $_POST['trangThai'];
-            $result = mysqli_query($connect, "INSERT INTO `nguoidung` (`MaND`, `Ho`, `Ten`, `SDT`, `Email`, `TaiKhoan`, `MatKhau`, `MaQuyen`, `TrangThai`) VALUES (NULL, '$ho', '$ten', '$sdt', '$email', '$taiKhoan', '". md5($matKhau) ."', $maQuyen, $trangThai)");
+            $result = mysqli_query($connect, "INSERT INTO `nguoidung` (`MaND`, `Ho`, `Ten`, `SDT`, `Email`, `TaiKhoan`, `MatKhau`, `MaQuyen`) VALUES (NULL, '$ho', '$ten', '$sdt', '$email', '$taiKhoan', '". md5($matKhau) ."', $maQuyen)");
             die (json_encode($result));
         case "delete_user":
             $idUser = $_POST['idUser'];

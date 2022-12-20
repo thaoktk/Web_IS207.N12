@@ -132,23 +132,12 @@
                                 <th class="border-0">Email</th>
                                 <th class="border-0">Tài khoản</th>
                                 <th class="border-0">Mã quyền</th>
-                                <th class="border-0">Trạng thái</th>
                                 <th class="border-0 rounded-end">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                             while ($row = mysqli_fetch_array($result)) {
-                                $trangThai = "";
-                                $styleActive = "";
-                                if ($row[8] == 1) {
-                                    $trangThai = "Kích hoạt";
-                                    $styleActive = "text-success";
-                                } else {
-                                    $trangThai = "Block";
-                                    $styleActive = "text-danger";
-                                }
-
                                 echo "
                                 <tr>
                                 <td>$row[0]</td>
@@ -158,7 +147,6 @@
                                 <td>$row[4]</td>
                                 <td>$row[5]</td>
                                 <td>$row[7]</td>
-                                <td class='$styleActive'>$trangThai</td>
                                 <td>"?>
                                 <div>
                                 <?php 
@@ -208,13 +196,6 @@
                                                                 echo "<option value='$rowTenQuyen[0]' $selected >$rowTenQuyen[1]</option>";
                                                             }
                                                             ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class='mb-4'>
-                                                        <label class="d-block">Trạng thái</label>
-                                                        <select name='status-edit' id="">
-                                                            <option value="0" <?php if ($row[8] == '0') {echo "selected";} ?>>Block</option>
-                                                            <option value="1" <?php  if ($row[8] == '1') {echo "selected";} ?>>Kích hoạt</option>
                                                         </select>
                                                     </div>
                                                     <div class='mb-4'>
@@ -293,13 +274,6 @@
                                     echo "<option value='$rowTenQuyen[0]'>$rowTenQuyen[1]</option>";
                                 }
                                 ?>
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label class="d-block">Trạng thái</label>
-                            <select name='status-create' id="">
-                                <option value="0">Block</option>
-                                <option value="1">Kích hoạt</option>
                             </select>
                         </div>
                         <div class="mb-4">
@@ -388,7 +362,6 @@
                     taiKhoan = $(`#${idForm} input[name="account-edit"]`).val()
                     matKhau = $(`#${idForm} input[name="pass-edit"]`).val()
                     maQuyen = $(`#${idForm} select[name="privilege-edit"]`).val()
-                    trangThai = $(`#${idForm} select[name="status-edit"]`).val()
                     idUser = $(this).data("user")
 
                     $.ajax({
@@ -405,7 +378,6 @@
                                 taiKhoan: taiKhoan,
                                 matKhau: matKhau,
                                 maQuyen: maQuyen,
-                                trangThai: trangThai
                             },
                             success: function () {
                                 Swal.fire({
@@ -436,7 +408,6 @@
                     taiKhoan = $(`input[name="account-create"]`).val()
                     matKhau = $(`input[name="pass-create"]`).val()
                     maQuyen = $(`select[name="privilege-create"]`).val()
-                    trangThai = $(`select[name="status-create"]`).val()
 
                     $.ajax({
                             type: "POST",
@@ -450,8 +421,7 @@
                                 email: email,
                                 taiKhoan: taiKhoan,
                                 matKhau: matKhau,
-                                maQuyen: maQuyen,
-                                trangThai: trangThai
+                                maQuyen: maQuyen
                             },
                             success: function () {
                                 Swal.fire({
