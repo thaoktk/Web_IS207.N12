@@ -49,7 +49,7 @@
 					<div class="active-banner-slider owl-carousel">
 						<!-- single-slide -->
 						<div class="row single-slide align-items-center d-flex">
-							<div class="col-md-5 col-6 order-md-1 order-2">
+							<div class="col-md-5 col-12 order-md-1 order-2">
 								<div class="banner-content">
 									<h1>Bộ sưu tập Iphone 14 mới</h1>
 									<p>Một bước tiến nhảy vọt. Khẳng định lại vị thế. Nâng tầm giá trị sống.</p>
@@ -67,7 +67,7 @@
 						</div>
 						<!-- single-slide -->
 						<div class="row single-slide">
-							<div class="col-md-5 col-6 order-md-1 order-2">
+							<div class="col-md-5 col-12 order-md-1 order-2">
 								<div class="banner-content">
 									<h1>Bộ sưu tập Iphone 14 mới</h1>
 									<p>Một bước tiến nhảy vọt. Khẳng định lại vị thế. Nâng tầm giá trị sống.</p>
