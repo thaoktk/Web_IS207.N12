@@ -366,6 +366,15 @@
                 sluong = $(`#${idForm} input[name="qty-edit"]`).val()
                 idKM = $(this).data("voucher")
 
+                if (Number(sluong) < 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Só lượng không được nhỏ hơn 0!',
+                        })
+                    return;
+                }
+
                 if (loaiKM == 1) {
                     if (Number(giaTri) > 50000) {
                         Swal.fire({
@@ -423,6 +432,15 @@
             giaTri = $(`input[name="price-create"]`).val()
             sluong = $(`input[name="qty-create"]`).val()
             code = $(`input[name="code-create"]`).val()
+
+            if (Number(sluong) < 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Só lượng không được nhỏ hơn 0!',
+                    })
+                return;
+            }
 
             if (loaiKM == 1) {
                 if (Number(giaTri) > 50000) {
