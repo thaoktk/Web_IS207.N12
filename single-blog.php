@@ -88,7 +88,7 @@
                             <div class="blog_info text-right">
                                 <ul class="blog_meta list">
                                     <li><a href="#"><?=$row[5]?><i class="lnr lnr-user"></i></a></li>
-                                    <li><a href="#" class='d-flex align-items-center'><?=$row[6]?><i class="lnr lnr-calendar-full"></i></a></li>
+                                    <li><a href="#" class='d-flex align-items-center justify-content-end'><?=$row[6]?><i class="lnr lnr-calendar-full"></i></a></li>
                                     <li><a href="#"><?=$rowsCmt?> bình luận<i class="lnr lnr-bubble"></i></a></li>
                                 </ul>
                             </div>
