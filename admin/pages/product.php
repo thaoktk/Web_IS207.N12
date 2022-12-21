@@ -62,12 +62,13 @@
     ?>
     <?php 
   session_start(); 
-  $currentUserAdmin = $_SESSION['admin-user'];
-//   if (!empty($currentUserAdmin)) {
-//     header("Location: ../../login.php");
-// }
+  $currentUserAdmin = isset($_SESSION['admin-user']) ? $_SESSION['admin-user'] : null;
+  if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    unset($_SESSION['admin-user']);
+    header("Location: sign-in.php");
+    } 
 
-  if ($currentUserAdmin['MaQuyen'] == 1) { ?>
+    if (isset($currentUserAdmin) && $currentUserAdmin['MaQuyen'] == 1) { ?>
 
     <?php include "./components/header.php" ?>
 
