@@ -168,7 +168,7 @@
                                                     </div>
                                                     <div class='desc'>
                                                         <h5>$resultUserReplyCmt[1] $resultUserReplyCmt[2] $admin</h5>
-                                                        <p class='date'>$rowReplyCmt[5]</p>
+                                                        <p class='date'>$rowReplyCmt[4]</p>
                                                         <p class='comment'>
                                                             $rowReplyCmt[3]
                                                         </p>

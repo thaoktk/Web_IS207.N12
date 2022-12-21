@@ -177,7 +177,7 @@
 													</div>
 													<div class='media-body'>
 														<h4>$resultUserReplyCmt[1] $resultUserReplyCmt[2] $admin</h4>
-														<h5>$rowReplyCmt[5]</h5>
+														<h5>$rowReplyCmt[4]</h5>
 													</div>
 													</div>
 												<p>$rowReplyCmt[3]</p>
