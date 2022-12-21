@@ -138,6 +138,7 @@
                         <tbody>
                             <?php 
                             while ($row = mysqli_fetch_array($result)) {
+                                $quyen = $row[7] == 1 ? "Admin" : "Khách hàng";
                                 echo "
                                 <tr>
                                 <td>$row[0]</td>
@@ -146,7 +147,7 @@
                                 <td>$row[3]</td>
                                 <td>$row[4]</td>
                                 <td>$row[5]</td>
-                                <td>$row[7]</td>
+                                <td>$quyen</td>
                                 <td>"?>
                                 <div>
                                 <?php 
