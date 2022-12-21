@@ -22,6 +22,7 @@
                                 <a href="blog.php" class="nav-link">Tin tức</a>
                             </li>
                             <li <?php if($_SERVER['SCRIPT_NAME']=="/doan/contact.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>><a class="nav-link" href="contact.php">Liên hệ</a></li>
+                            <li <?php if($_SERVER['SCRIPT_NAME']=="/doan/about.php") { ?>  class="nav-item active" <?php } else { ?> class="nav-item"<?php }?>><a class="nav-link" href="about.php">Giới thiệu</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right d-flex flex-row align-items-center justify-content-between">
                             <li class="nav-item">
