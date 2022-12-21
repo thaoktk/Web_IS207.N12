@@ -52,7 +52,7 @@
 	<?php
 	if (isset($_POST['submit']) && $_POST['submit'] == 'Tạo') {
 		try {
-			$result = mysqli_query($connect, "INSERT INTO `nguoidung` (`MaND`, `Ho`, `Ten`, `SDT`, `Email`, `TaiKhoan`, `MatKhau`, `MaQuyen`, `TrangThai`) VALUES (NULL, '" . $_POST['subname'] . "', '" . $_POST['name'] . "', '" . $_POST['phone-number'] . "', '" . $_POST['email'] . "', '" . $_POST['username'] . "', MD5('" . $_POST['password'] . "'), '3', '1');");
+			$result = mysqli_query($connect, "INSERT INTO `nguoidung` (`MaND`, `Ho`, `Ten`, `SDT`, `Email`, `TaiKhoan`, `MatKhau`, `MaQuyen`) VALUES (NULL, '" . $_POST['subname'] . "', '" . $_POST['name'] . "', '" . $_POST['phone-number'] . "', '" . $_POST['email'] . "', '" . $_POST['username'] . "', MD5('" . $_POST['password'] . "'), '3');");
 			echo "<div class='mt-5 w-100'>
 					<h1 class='text-center'>Thông báo</h1>
 					<h4 class='mt-4 text-center'>Đăng kí tài khoản thành công</h4>
