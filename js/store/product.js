@@ -35,7 +35,7 @@ $(document).ready(function () {
 
     $(".input-text.qty").on("input", function () {
         val = $(this).val()
-        if (Number(val) < 0) {
+        if (Number(val) <= 0) {
             alert("Số lượng mua không được nhỏ hơn 0!")
             $(this).val("1")
             return;
