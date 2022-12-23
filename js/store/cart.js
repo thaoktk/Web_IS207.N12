@@ -167,32 +167,39 @@ $(document).ready(function () {
             val = $(this).val()
             idSP = $(this).data("id")
             idUser = $(this).data("user")
+            qtyProduct = $(`.product-qty[data-id='${$(this).data("id")}']`).val()
 
             if (val <= 0) {
                 alert("Số lượng mua phải lớn hơn 0!")
                 $(this).val("1")
                 return;
-            } else {
-                tong = Number($("#total-cost .cost").text())
-                shipCod = Number($("#ship-cod .cost").text())
-                freeShip = Number($("#voucher-free-ship .ship").text())
-                order = Number($("#voucher-order .order").text())
-                Number($("#total-cost-voucher .total").text(tong + shipCod - freeShip - order))
-                $.ajax({
-                    type: "POST",
-                    url: "templates/request.php",
-                    dataType: "json",
-                    data: {
-                        request: "update_qty_product_cart",
-                        idUser: idUser,
-                        idSP: idSP,
-                        qty: val,
-                    },
-                    success: function () {
-                        window.location.reload()
-                    }
-                })
             }
+
+            if (val > qtyProduct) {
+                alert("Số lượng mua không được quá số lượng có sẵn!")
+                $(this).val("1")
+                return;
+            }
+
+            tong = Number($("#total-cost .cost").text())
+            shipCod = Number($("#ship-cod .cost").text())
+            freeShip = Number($("#voucher-free-ship .ship").text())
+            order = Number($("#voucher-order .order").text())
+            Number($("#total-cost-voucher .total").text(tong + shipCod - freeShip - order))
+            $.ajax({
+                type: "POST",
+                url: "templates/request.php",
+                dataType: "json",
+                data: {
+                    request: "update_qty_product_cart",
+                    idUser: idUser,
+                    idSP: idSP,
+                    qty: val,
+                },
+                success: function () {
+                    window.location.reload()
+                }
+            })
         })
     })
 
