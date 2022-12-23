@@ -33,8 +33,13 @@ $(document).ready(function () {
         $(".input-text.qty").val(value)
     })
 
-    $(".input-text.qty").change(function () {
-
+    $(".input-text.qty").on("input", function () {
+        val = $(this).val()
+        if (Number(val) < 0) {
+            alert("Số lượng mua không được nhỏ hơn 0!")
+            $(this).val("1")
+            return;
+        }
     })
 
     $("#st1").click(function () {

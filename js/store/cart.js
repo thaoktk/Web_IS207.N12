@@ -170,6 +170,7 @@ $(document).ready(function () {
 
             if (val <= 0) {
                 alert("Số lượng mua phải lớn hơn 0!")
+                $(this).val("1")
                 return;
             } else {
                 tong = Number($("#total-cost .cost").text())
