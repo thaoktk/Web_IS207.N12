@@ -244,8 +244,8 @@ $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] :
 						</li>
 						<li class="main-nav-list"><a data-toggle="collapse" href="#officeProduct" aria-expanded="false" aria-controls="officeProduct"><span class="lnr lnr-arrow-right"></span>Phụ kiện Laptop</a>
 							<ul class="collapse" id="officeProduct" data-toggle="collapse" aria-expanded="false" aria-controls="officeProduct">
-								<li class="main-nav-list child"><a href="?category=Chuột Apple">Chuột Apple</a></li>
-								<li class="main-nav-list child"><a href="?category=Bàn phím Magic">Bàn phím Magic</a></li>
+								<li class="main-nav-list child"><a href="?category=Chuột Apple<?=$paramCategory?>">Chuột Apple</a></li>
+								<li class="main-nav-list child"><a href="?category=Bàn phím Magic<?=$paramCategory?>">Bàn phím Magic</a></li>
 							</ul>
 						</li>
 					</ul>
