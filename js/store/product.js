@@ -18,7 +18,7 @@ $(document).ready(function () {
         }
 
         if (value > 5) {
-            alert("Bạn không được mua quá 10 sản phẩm cho 1 đơn!")
+            alert("Bạn không được mua quá 5 sản phẩm cho 1 đơn!")
             return;
         }
         $(".input-text.qty").val(value)

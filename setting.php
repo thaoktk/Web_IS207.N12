@@ -53,6 +53,7 @@ function hideMessage(id) {
 	$idUser = $user['MaND'];
 	$favorites = mysqli_query($connect, "SELECT * FROM yeuthich WHERE MaND = '". $user['MaND'] ."'");
 	$orders = mysqli_query($connect, "SELECT * FROM donhang WHERE MaND = '". $user['MaND'] ."'");
+	$reviews = mysqli_query($connect, "SELECT * FROM danhgia WHERE MaND = '". $user['MaND'] ."'");
 ?>
 
     <?php
@@ -102,7 +103,10 @@ function hideMessage(id) {
 					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Yêu thích</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="profile" aria-selected="false">Đơn hàng</a>
+					<a class="nav-link" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false">Đơn hàng</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Đánh giá</a>
 				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
@@ -155,6 +159,10 @@ function hideMessage(id) {
 													<span class='ml-2'>". $rowProduct[15] ." đánh giá</span>
 												</div>
 												<div class='prd-bottom'>
+													<a class='social-info btn-buy-again' data-quantity='$rowProduct[9]' data-product='$rowProduct[0]' data-user='". $user['MaND'] ."'>
+														<span class='fa fa-shopping-cart'></span>
+														<p class='hover-text'>Mua ngay</p>
+													</a>
 													<a class='social-info delete-fav' data-product='$rowProduct[0]' data-user='". $user['MaND'] ."'>
 														<span class='fa fa-trash'></span>
 														<p class='hover-text'>Xóa</p>
@@ -198,11 +206,14 @@ function hideMessage(id) {
 											<p>$detailSP[2]</p>
 										</a>
 									</td>
-									<td>
+									<td class='text-center'>
 										<h5>x $rowDetail[3]</h5>
 									</td>
-									<td>
+									<td class='text-center'>
 										<p>". number_format($rowDetail[2]) ." VNĐ</p>
+									</td>
+									<td class='d-flex justify-content-center'>
+										<button data-product='". $rowDetail[1] ."' data-user='$idUser' data-quantity='$detailSP[9]' class='btn-buy-again ml-3 genric-btn btn default-border small'>Mua lại</button>
 									</td>
 								</tr>
 								";
@@ -236,10 +247,11 @@ function hideMessage(id) {
 									<table class='table'>
 											<thead>
 												<tr>
-													<th scope='col' class='text-center'>Hình ảnh</th>
-													<th scope='col' class='text-center'>Sản phẩm</th>
+													<th scope='col'>Hình ảnh</th>
+													<th scope='col'>Sản phẩm</th>
 													<th scope='col' class='text-center'>Số lượng</th>
 													<th scope='col' class='text-center'>Giá tiền</th>
+													<th scope='col' class='text-center'>Thao tác</th>
 												</tr>
 											</thead>
 										<tbody>
@@ -249,6 +261,48 @@ function hideMessage(id) {
 								</div>
 							</div>
 							";
+						}?>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+					<?php
+						if ($reviews->num_rows == 0) {
+							echo "<div class='text-center'>Bạn chưa có đánh giá nào!</div>";
+						}
+					?>
+					<div class="table-responsive d-flex align-items-center justify-content-center flex-wrap">
+						<?php 
+						while($rowReview=$reviews->fetch_row()) {
+							$SPReview = mysqli_query($connect, "SELECT * FROM sanpham WHERE MaSP = '$rowReview[0]'");
+							while ($rowProductReview = $SPReview->fetch_row()) {
+								$rating = addStar(1, $rowReview[2]);
+								echo "<div class='col-lg-4 col-md-6' title='$rowProductReview[2]'>
+										<div class='single-product'>
+											<img class='img-fluid' src='". $rowProductReview[10] ."' alt=''>
+											<div class='product-details'>
+												<h6 class='title'>". $rowProductReview[2] ."</h6>
+												<div class='price'>
+													<h6>". number_format(($rowProductReview[8])) ." VNĐ</h6>
+													<h6 class='l-through'>". number_format(($rowProductReview[7])) ." VNĐ</h6>
+												</div>
+												<div class='mt-2 d-flex align-items-center'>
+													<div>". $rating ."</div>
+													<span class='ml-2'>Đã đánh giá $rowReview[2] sao</span>
+												</div>
+												<div class='prd-bottom'>
+													<a class='social-info btn-buy-again' data-quantity='$rowProductReview[9]' data-product='$rowProductReview[0]' data-user='". $user['MaND'] ."'>
+														<span class='fa fa-shopping-cart'></span>
+														<p class='hover-text'>Mua lại</p>
+													</a>
+													<a href='single-product.php?idSP=$rowProductReview[0]' class='social-info'>
+														<span class='lnr lnr-move'></span>
+														<p class='hover-text'>Chi tiết</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>";
+								}
 						}?>
 					</div>
 				</div>
@@ -340,6 +394,39 @@ function hideMessage(id) {
 							alert(data.message);
 						}
 					}
+				})
+			})
+
+			$(".btn-buy-again").each(function() {
+				$(this).click(function() {
+					idSP = $(this).data("product")
+					idUser = $(this).data("user")
+					quantity = $(this).data("quantity")
+
+					if (quantity < 1) {
+						alert("Sản phẩm này đã hết hàng, không thể mua!")
+						return;
+					}
+
+					$.ajax({
+						type: "POST",
+						url: 'templates/request.php',
+						data: {
+							request: "update_cart",
+							idUser: idUser,
+							idSP: idSP,
+							quantity: 1
+						},
+						success: function (data) {
+							response = JSON.parse(data)
+							if (response.status == 1) {
+								alert(response.message);
+								window.location.reload()
+							} else {
+								alert(response.message);
+							}
+						}
+					});
 				})
 			})
     });  

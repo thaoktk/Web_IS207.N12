@@ -232,6 +232,7 @@ $(document).ready(function () {
                     idUser: idUser
                 },
                 success: function () {
+                    window.location.reload()
                 },
                 error: function (e) {
                 }
