@@ -270,7 +270,7 @@ function hideMessage(id) {
 							echo "<div class='text-center'>Bạn chưa có đánh giá nào!</div>";
 						}
 					?>
-					<div class="table-responsive d-flex align-items-center justify-content-center flex-wrap">
+					<div class="table-responsive d-flex align-items-center justify-content-start flex-wrap">
 						<?php 
 						while($rowReview=$reviews->fetch_row()) {
 							$SPReview = mysqli_query($connect, "SELECT * FROM sanpham WHERE MaSP = '$rowReview[0]'");

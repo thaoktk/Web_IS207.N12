@@ -181,6 +181,12 @@ $(document).ready(function () {
                 return;
             }
 
+            if (val > 5) {
+                alert("Bạn không được mua quá 5 sản phẩm cho 1 đơn!")
+                $(this).val("1")
+                return;
+            }
+
             tong = Number($("#total-cost .cost").text())
             shipCod = Number($("#ship-cod .cost").text())
             freeShip = Number($("#voucher-free-ship .ship").text())

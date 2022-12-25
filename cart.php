@@ -41,20 +41,26 @@
     $products = array();
     $idUser = isset($_SESSION['current-user']) ? $_SESSION['current-user']['MaND'] : null;
 
-    $resultGioHang = mysqli_query($connect, "SELECT * FROM giohang where MaND = $idUser");
+    $resultGioHang = "";
 
-    while ($rowGioHang = mysqli_fetch_array($resultGioHang)) {
-        $resultSP = mysqli_query($connect, "SELECT * FROM sanpham where MaSP = $rowGioHang[1]");
-        $resultSP = mysqli_fetch_array($resultSP);
+    if ($idUser != null) {
+        $resultGioHang = mysqli_query($connect, "SELECT * FROM giohang where MaND = $idUser");
+    }
 
-        $products[] = array(
-            "maSP"=>$resultSP[0],
-            "hinhAnh"=>$resultSP[10],
-            "tenSP"=>$resultSP[2],
-            "gia"=>$resultSP[8],
-            "soLuong"=>$rowGioHang[2],
-            "soLuongSan"=>$resultSP[9],
-        );
+    if ($resultGioHang != "") {
+        while ($rowGioHang = mysqli_fetch_array($resultGioHang)) {
+            $resultSP = mysqli_query($connect, "SELECT * FROM sanpham where MaSP = $rowGioHang[1]");
+            $resultSP = mysqli_fetch_array($resultSP);
+    
+            $products[] = array(
+                "maSP"=>$resultSP[0],
+                "hinhAnh"=>$resultSP[10],
+                "tenSP"=>$resultSP[2],
+                "gia"=>$resultSP[8],
+                "soLuong"=>$rowGioHang[2],
+                "soLuongSan"=>$resultSP[9],
+            );
+        }
     }
 
     $voucherFreeShip = isset($_SESSION["free-ship"]) ? $_SESSION["free-ship"] : null;

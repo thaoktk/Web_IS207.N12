@@ -47,6 +47,12 @@ $(document).ready(function () {
             $(this).val("1")
             return;
         }
+
+        if (Number(val) > 5) {
+            alert("Bạn không được mua quá 5 sản phẩm cho 1 đơn!")
+            $(this).val("1")
+            return;
+        }
     })
 
     $("#st1").click(function () {
@@ -172,25 +178,30 @@ $(document).ready(function () {
         idSP = parseInt($(this).data("product"))
         idUser = parseInt($(this).data("user"))
 
-        $.ajax({
-            type: "POST",
-            url: 'templates/request.php',
-            data: {
-                request: "update_cart",
-                idUser: idUser,
-                idSP: idSP,
-                quantity: quantity
-            },
-            success: function (data) {
-                response = JSON.parse(data)
-                if (response.status == 1) {
-                    alert(response.message);
-                    window.location.reload()
-                } else {
-                    alert(response.message);
+        if (idUser) {
+            $.ajax({
+                type: "POST",
+                url: 'templates/request.php',
+                data: {
+                    request: "update_cart",
+                    idUser: idUser,
+                    idSP: idSP,
+                    quantity: quantity
+                },
+                success: function (data) {
+                    response = JSON.parse(data)
+                    if (response.status == 1) {
+                        alert(response.message);
+                        window.location.reload()
+                    } else {
+                        alert(response.message);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            alert("Bạn phải đăng nhập mới được thêm vào giỏ hàng!")
+            return;
+        }
     })
 
     $("#review-btn").click(function (e) {
@@ -236,6 +247,7 @@ $(document).ready(function () {
             });
         } else {
             alert("Bạn phải đăng nhập mới được đánh giá!")
+            return;
         }
     })
 })
