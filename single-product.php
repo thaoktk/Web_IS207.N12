@@ -384,7 +384,6 @@
 			</div>
 		</div>
 	</section>
-	<!-- End related-product Area -->
 
 	<?php include("./templates/footer.php")?>
 	<?php $connect->close(); ?>
